@@ -3,84 +3,143 @@ title: 'Quickstart'
 description: 'Start building awesome documentation in under 5 minutes'
 ---
 
-## Setup your development
+## Base Endpoint for all API calls
 
-Learn how to update your docs locally and and deploy them to the public.
+Right now, the API is only available on the **`https://api.worqhat.com`** domain. This is the only
+official domain that is applicable for all API Calls to the Application.
 
-### Edit and preview
+The WorqHat API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. The API key you use to authenticate the request determines whether the request you are sending as a user is based on which Organization as all our Billings are rerouted to the Organization you are using the API keys for.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
+The WorqHat API doesn't support bulk updates. You can work on only one object per request. The
+WorqHat API differs for every account as we release new versions and tailor functionality. These docs are customized to your version of the API.
 
-### Deploy your changes
-
-<AccordionGroup>
-
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
-
-</AccordionGroup>
-
-## Update your docs
-
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
+<Card title="API Reference" icon="link" href="/api-reference">
+  Click here to view the API Reference for the WorqHat API and its Endpoints.
 </Card>
 
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
+
+If you're using a version of the API that is older than the latest version, you may see older endpoints and outdated response schemas. We recommend that you use the latest version of the API whenever possible. We release new versions of the API frequently, so you may need to update your API integration periodically. We also send out email notifications about new versions of the API. You can subscribe to these notifications in your WorqHat account settings.
+
+#### Base URL for all API calls
+````bash URL Endpoint
+https://api.worqhat.com/
+````
+<Card title="No Code Applications" icon="link" href="https://worqhat.com">
+  **Not a Developer** Use WorqHat's No-Code Workspace options to get started
+  with
+  WorqHat and to do more with
+  your WorqHat apps - without a single line of Code
 </Card>
 
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
+## Authentication
+
+You can get your Organization's API Key and your API Key from the Workspace Admin Panel. You can
+find the API Tokens screen under the Workspace Settings or by visiting the Developers Portal. You
+can also find the API Tokens screen
+by visiting the following URL:
+
+````bash Organization Dashboard
+https://$workspace.worqhat.app/workspace/developers
+````
+
+> $workspace is the name of your Workspace. You can find the name of your Workspace in the URL of your Workspace. For example, if your Workspace URL is https://myworkspace.worqhat.app, then your Workspace name is **myworkspace**.
+
+<Card title="Visit Dashboard" icon="link" href="https://app.worqhat.com">
+  You can also visit and choose between your Workspaces from the Accounts Dashboard.
 </Card>
 
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
+In case you are not the Admin/Leader/Developer of the Workspace, you will not be able to access
+the API
+Tokens screen. In such a case, please contact your Workspace Admin/Leader/Developer to get the
+API Keys or request them to add you as a Developer to the Workspace.
 
-</CardGroup>
+You can copy the API Keys from the API Tokens screen and use them in your API Calls. You can also
+generate new API Keys from the API Tokens screen. You can also delete the API Keys from the API
+Tokens screen. Please note that deleting the API Keys will revoke access to the API for the
+respective API Keys.
+
+## Creating API Keys
+
+In order to use the WorqHat API, you must first obtain an API key and the ORG Key. We offer a
+genenrous free tier that gets reset every month. You can also upgrade to a paid plan to get more
+API calls and more features.
+
+This key serves
+as a unique identifier that allows you to access WorqHat's API services. To generate an API key, follow the steps below:
+
+1. Go to the [WorqHat API](https://worqhat.com) website and click on the **Get Started** button.
+2. Join the WorqHat community by entering your email address and clicking on the **Join Now**
+button. You can also sign up using your Google or Microsoft account.
+3. Once you've signed up, you'll be redirected to the dashboard. Click on the **Create a
+Workspace** button on the left-hand side of the screen.
+4. Add a name for your workspace and click on the **Create Workspace** button. We use workspaces
+to organize your projects and keep them separate from each other. This allows you to manage your projects more efficiently.
+5. Once you've created a workspace, you'll be redirected to the Workspace Signin page. Sign in to
+your workspace using your email address and password that you have set up during the signup process.
+6. After signing in, you'll be redirected to the dashboard. Click on the **Try Now** button on
+the **Build Your Own Applications with our API** card.
+7. You'll be redirected to the API page. You can find your API key and ORG key on the right-hand
+side of the screen. Click on the **Copy** button to copy the keys to your clipboard.
+8. Also, make sure to add your Domain name to the **Allowed Domains** section. This will allow
+you to make API calls from your domain. For example, if you're making API calls from a website
+hosted on `https://example.com`, you'll need to add `example.com` to the **Allowed Domains** section.
+
+Here's an example of what the API key & ORG key looks like:
+
+
+<CodeGroup>
+
+  ```bash API Key
+  var myHeaders = new Headers();
+  myHeaders.append("x-org-key",
+  "U2FsdGVkX1+DMFucNFhZT7b3KTDTPLvjKkfWV0XY+jK2tA44wGn+M+KTC1V/eAOX");
+  ```
+  ```bash ORG Key
+  var myHeaders = new Headers();
+  myHeaders.append("x-api-key",
+  "U2FsdGVkX1/hx889OFajtqRp5TdESHHakovIb3Qq52kqqy/zFhA9MlNSjghXMUzbOHEr9QhoOAJKmKXKA6Ol8A==");
+  ```
+</CodeGroup>
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.tella.tv/video/clizvoigw00k30fi4gq6i1bn9/embed?
+b=0&title=1&a=1&loop=1&autoPlay=true&t=0&muted=1"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+If you're an Existing Customer but do not have access to the API Tokens screen, please contact
+our Support Assistance. You can visit https://support.worqhat.com or reach out to us at
+support@worqhat.com, and we will set you up with an Account. This is possible as we are slowly
+rolling out the API to our customers, so
+you may not have access to the Workspace Admin Panel yet. We are trying to make this process as
+seamless as possible.
+
+In order to use WorqHat's API, you will need to authenticate every request. We rely on
+``x-api-key`` and ``x-org-key`` tokens to authenticate API requests.
+
+````bash
+curl
+  --location --request GET 'https://api.worqhat.com/$endpoint' \
+    --header 'x-api-key: $YOUR_API_KEY' \
+    --header 'x-org-key: $YOUR_ORG_KEY' \
+````
+
+Tokens are scoped to an admin's permission settings and your workspace. Only workspace admins
+can enable API Access for the members of the workspace. Once the access has been enabled, you can
+generate API tokens in your workspace.
+
+Security is of utmost importance when working with API keys. Your API keys carry many privileges,
+so it's crucial to keep them secure. As part of our security measures, we require you to
+whitelist your Apps before you can use the API keys. However, once your Apps are whitelisted,
+you can use these API keys anywhere, including in your client-side code. We only serve valid
+requests from the endpoints listed in your App's whitelist. If you don't have any endpoints
+listed, requests to the API will fail.
+
+To ensure that your requests are authenticated and authorized to access our API, you must send both the ``x-api-key`` and ``x-org-key`` with every request that you send. Additionally, you have the option to set a per-request key, which is often useful for Connect applications that use multiple API keys during the lifetime of a process. Methods on the returned object reuse the same API key.
+
+Finally, it's important to note that all API requests must be made over HTTPS. Calls made over plain HTTP will fail, and API requests without authentication will also fail. By following these best practices, you can help keep your API requests secure and prevent unauthorized access to your data.

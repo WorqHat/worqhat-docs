@@ -1,59 +1,241 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "WorqHat Developers",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/worqHat-logo.png",
+    "light": "/logo/worqHat-logo.png"
   },
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#12A7D3",
     "light": "#81D7F7",
-    "dark": "#004E7A"
+    "dark": "#1b0a66"
   },
   "topbarLinks": [
     {
-      "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+      "name": "WorqHat",
+      "url": "https://worqhat.com"
+    },
+    {
+      "name": "Contact",
+      "url": "https://worqhat.com/contact-us"
+    }
+  ],
+  "topAnchor": {
+    "name": "Home",
+    "icon": "building"
+  },
+  "anchors": [
+    {
+      "name": "Changelogs",
+      "icon": "code-compare",
+      "url": "https://updates.worqhat.com/"
+    },
+    {
+      "name": "Community",
+      "icon": "screen-users",
+      "url": "https://discord.com/invite/KHh9mguKBx"
+    },
+    {
+      "name": "Academy",
+      "icon": "pencil",
+      "url": "https://learn.worqhat.com"
+    },
+    {
+      "name": "API Reference",
+      "icon": "clouds",
+      "url": "api-reference/authentication"
+    },
+    {
+      "name": "Blog",
+      "icon": "blog",
+      "url": "https://blog.worqhat.com"
+    },
+    {
+      "name": "Contact us",
+      "icon": "envelope",
+      "url": "https://worqhat.com/contact-us"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.worqhat.com"
   },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Learner Academy",
+      "url": "learner-academy"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
-    },
-    {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "Getting Started",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "introduction",
+        "quickstart",
+        "worqhat-ai",
+        "rate-limits"
+      ]
+    },
+    {
+      "group": "AI Models",
+      "pages": [
+        {
+          "group": "Text Generation AI",
+          "pages": [
+            "ai-models/text-generation-ai/aicon-v2-textgen",
+            "ai-models/text-generation-ai/aicon-v3-textgen",
+            "ai-models/text-generation-ai/aicon-v2-large-beta",
+            "ai-models/text-generation-ai/aicon-v2-2023-alpha"
+          ]
+        },
+        {
+          "group": "AI for Search",
+          "pages": [
+            "ai-models/ai-for-search/search-v2",
+            "ai-models/ai-for-search/search-v3"
+          ]
+        },
+        {
+          "group": "Image Generation",
+          "pages": [
+            "ai-models/image-generation/imagecon-v2",
+            "ai-models/image-generation/imagecon-v3",
+            "ai-models/image-generation/image-image-v2",
+            "ai-models/image-generation/image-image-v3",
+            "ai-models/image-generation/image-upscale"
+          ]
+        },
+        {
+          "group": "Image Analysis",
+          "pages": [
+            "ai-models/image-analysis/image-analysis-v2",
+            "ai-models/image-analysis/face-analysis",
+            "ai-models/image-analysis/face-comparison-v2"
+          ]
+        },
+        {
+          "group": "Text Extraction",
+          "pages": [
+            "ai-models/text-extraction/pdf-extraction",
+            "ai-models/text-extraction/web-extraction",
+            "ai-models/text-extraction/image-extraction"
+          ]
+        },
+        "ai-models/speech-extraction",
+        {
+          "group": "Content Moderation",
+          "pages": [
+            "ai-models/content-moderation/text-content-moderation",
+            "ai-models/content-moderation/image-moderation"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/authentication",
+        {
+          "group": "Text Generation AI",
+          "pages": [
+            "api-reference/text-generation-ai/aicon-v2-textgen",
+            "api-reference/text-generation-ai/aicon-v3-textgen",
+            "api-reference/text-generation-ai/aicon-v2-large-beta",
+            "api-reference/text-generation-ai/aicon-v2-2023-alpha",
+            "api-reference/text-generation-ai/aicon-train-datasets",
+            "api-reference/text-generation-ai/aicon-view-datasets",
+            "api-reference/text-generation-ai/aicon-delete-datasets"
+          ]
+        },
+        {
+          "group": "AI for Search",
+          "pages": [
+            "api-reference/ai-for-search/search-v2",
+            "api-reference/ai-for-search/search-v3",
+            "api-reference/ai-for-search/search-train-datasets",
+            "api-reference/ai-for-search/search-view-datasets",
+            "api-reference/ai-for-search/search-delete-datasets"
+          ]
+        },
+        {
+          "group": "Image Generation",
+          "pages": [
+            "api-reference/image-generation/imagecon-v2",
+            "api-reference/image-generation/imagecon-v3",
+            "api-reference/image-generation/image-image-v2",
+            "api-reference/image-generation/image-image-v3",
+            "api-reference/image-generation/image-upscale"
+          ]
+        },
+        {
+          "group": "Image Analysis",
+          "pages": [
+            "api-reference/image-analysis/image-analysis-v2",
+            "api-reference/image-analysis/face-analysis",
+            "api-reference/image-analysis/face-comparison-v2"
+          ]
+        },
+        {
+          "group": "Text Extraction",
+          "pages": [
+            "api-reference/text-extraction/pdf-extraction",
+            "api-reference/text-extraction/web-extraction",
+            "api-reference/text-extraction/image-extraction"
+          ]
+        },
+        "api-reference/speech-extraction",
+        {
+          "group": "Content Moderation",
+          "pages": [
+            "api-reference/content-moderation/text-content-moderation",
+            "api-reference/content-moderation/image-moderation"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Learner Academy",
+      "pages": [
+        "learner-academy/introduction",
+        {
+          "group": "About LLM Academy",
+          "pages": [
+            "learner-academy/about/welcome"
+          ]
+        },
+        {
+          "group": "Projects",
+          "pages": [
+            "learner-academy/projects/natural-language-code-translator-with-worqhat-ai"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Policies",
+      "pages": [
+        "policies/terms-of-service",
+        "policies/privacy-policy",
+        "policies/acceptable-use-policy",
+        "policies/data-usage-policy",
+        "policies/bugs-disclosure-policy"
       ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/worqhat",
+    "instagram": "https://instagram.com/worqhat",
+    "github": "https://github.com/worqhat",
+    "linkedin": "https://www.linkedin.com/company/worqhat"
   },
-  "backgroundImage": "/background.png"
+  "backgroundImage": "/images/gradient.png",
+  "openapi": "/openapi.yaml",
+  "integrations": {
+    "intercom": "or2gpwjd"
+  }
 }

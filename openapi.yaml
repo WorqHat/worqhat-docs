@@ -1,0 +1,2556 @@
+openapi: 3.0.3
+info:
+  title: WorqHat AI API Endpoints
+  description: API for interacting with WorqHat AI Services
+  version: 3.0.0
+
+servers:
+  - url: https://api.worqhat.com
+    description: Production server
+
+paths:
+  /authentication:
+    post:
+      summary: This endpoint is to check your API request and test if it is working by authenticating the user.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/speech-text:
+    post:
+      summary: Our Speech Extraction API endpoint is used to extract text from audio files.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextConversionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/moderation:
+    post:
+      summary: Moderates text content.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text_content:
+                  type: string
+              required:
+                - text_content
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModerationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/v2/image-moderation:
+    post:
+      summary: Moderates text content.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+              required:
+                - image
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModerationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/v2/web-extract:
+    post:
+      summary: Extract content from a web page.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url_path:
+                  type: string
+                  description: The URL of the web page to extract content from.
+                headline:
+                  type: boolean
+                  description: Flag indicating whether to extract headlines from the web page. (Optional)
+                inline_code:
+                  type: boolean
+                  description: Flag indicating whether to extract inline code snippets from the web page. (Optional)
+                code_blocks:
+                  type: boolean
+                  description: Flag indicating whether to extract code blocks from the web page. (Optional)
+                references:
+                  type: boolean
+                  description: Flag indicating whether to extract references from the web page. (Optional)
+                tables:
+                  type: boolean
+                  description: Flag indicating whether to extract tables from the web page. (Optional)
+              required:
+                - url_path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebExtractResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/v2/pdf-extract:
+    post:
+      summary: Extract text or structured data from a PDF file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PDFExtractRequest"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PDFExtractResponse"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/v2/image-text-detection:
+    post:
+      summary: Perform text detection and bounding on an image.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the response
+                  status:
+                    type: string
+                    description: The status of the response
+                  timestamp:
+                    type: integer
+                    description: The timestamp of the response
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImageDetectedText'
+                    description: The detected text content
+                  processing_count:
+                    type: integer
+                    description: The number of images processed
+
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/content/v2:
+    post:
+      summary: Get AI Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI.
+                preserve_history:
+                  type: boolean
+                  description: Whether you want to preserve the history of the conversation or not.
+                history_object:
+                  type: object
+                  description: The history object that you want to pass to the model. This is
+                    only required if preserve_history is set to true. Pass the Questions and
+                    Answers as Key Value Pairs to help the model understand.
+                  example:
+                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
+                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
+                training_data:
+                  type: string
+                  description: The training data you want to pass to the AI.
+                randomness:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                  description: The randomness factor that you want to pass to the model. This is
+                    only required if you want to set the randomness factor. Default is 0.4. You can
+                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
+                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
+                    results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV2Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/content/v3:
+    post:
+      summary: Get AI Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI.
+                preserve_history:
+                  type: boolean
+                  description: Whether you want to preserve the history of the conversation or not.
+                history_object:
+                  type: object
+                  description: The history object that you want to pass to the model. This is
+                    only required if preserve_history is set to true. Pass the Questions and
+                    Answers as Key Value Pairs to help the model understand.
+                  example:
+                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
+                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
+                training_data:
+                  type: string
+                  description: The training data you want to pass to the AI.
+                randomness:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                  description: The randomness factor that you want to pass to the model. This is
+                    only required if you want to set the randomness factor. Default is 0.4. You can
+                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
+                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
+                    results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV3Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/generate/v2:
+    post:
+      summary: Create Images from Text V2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                height:
+                  type: number
+                  description: Height of the image to be generated. You can only choose between
+                    512 and 768. All other values will be ignored.
+                  enum:
+                    - 512
+                    - 768
+                width:
+                  type: number
+                  description: Width of the image to be generated. You can only choose between
+                    512 and 768. All other values will be ignored.
+                  enum:
+                    - 512
+                    - 768
+                prompt:
+                  type: array
+                  description: The prompt to be used to generate the image.
+                  items:
+                    type: string
+                image_style:
+                  type: string
+                  description: The image style to be used to generate the image.
+                output_type:
+                  type: string
+                  description: The output type of the image to be generated.
+                  enum:
+                    - url
+                    - blob
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageGenerationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/generate/v3:
+    post:
+      summary: Create Images from Text V3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                height:
+                  type: number
+                  description: Height of the image to be generated. You can only choose between
+                    512 and 768. All other values will be ignored.
+                  enum:
+                    - 512
+                    - 768
+                width:
+                  type: number
+                  description: Width of the image to be generated. You can only choose between
+                    512 and 768. All other values will be ignored.
+                  enum:
+                    - 512
+                    - 768
+                prompt:
+                  type: array
+                  description: The prompt to be used to generate the image.
+                  items:
+                    type: string
+                image_style:
+                  type: string
+                  description: The image style to be used to generate the image.
+                output_type:
+                  type: string
+                  description: The output type of the image to be generated.
+                  enum:
+                    - url
+                    - blob
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageGenerationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/upscale/v3:
+    post:
+      summary: Upscale Image Processes V3
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                baseFile:
+                  type: string
+                  format: binary
+                  description: The file object of the image you want to upscale.
+                scale:
+                  type: number
+                  description: The scale to which you want to upscale the image. The default value is 2.
+                  default: 2
+                output_type:
+                  type: string
+                  description: The output type of the image. Choose from URL or blob. The default value is URL.
+                  enum:
+                    - URL
+                    - blob
+                  default: URL
+              required:
+                - baseFile
+                - scale
+                - output_type
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageUpscaleResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/modify/v2:
+    post:
+      summary: Modify Image V2
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The file object of the existing image you want to modify.
+                modifications:
+                  type: string
+                  description: The modifications you want to make to the image. Leave this field empty to generate a random image.
+                outputType:
+                  type: string
+                  description: The output type of the image. Choose from URL or blob. The default value is URL.
+                  enum:
+                    - URL
+                    - blob
+                  default: URL
+                similarity:
+                  type: number
+                  description: The similarity of the image to the original image. The default value is 50.
+                  default: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModificationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/modify/v3:
+    post:
+      summary: Modify Image V2
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The file object of the existing image you want to modify.
+                modifications:
+                  type: string
+                  description: The modifications you want to make to the image. Leave this field empty to generate a random image.
+                outputType:
+                  type: string
+                  description: The output type of the image. Choose from URL or blob. The default value is URL.
+                  enum:
+                    - URL
+                    - blob
+                  default: URL
+                similarity:
+                  type: number
+                  description: The similarity of the image to the original image. The default value is 50.
+                  default: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageModificationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/v2/face-detection:
+    post:
+      summary: Modify Image V2
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The image file for face detection
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaceDetectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/v2/image-analysis:
+    post:
+      summary: Perform image analysis and identify objects in an image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageAnalysisResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/images/v2/facial-comparison:
+    post:
+      summary: Perform facial comparison
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                source_image:
+                  type: string
+                  format: binary
+                  description: The source image for comparison
+                target_image:
+                  type: string
+                  format: binary
+                  description: The target image for comparison
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageComparisonResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    OrgKeyAuth:
+      type: apiKey
+      in: header
+      name: x-org-key
+  schemas:
+    ImageComparisonResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "3497939b-9e7b-442c-ae00-cb75cc02a64d"
+        status:
+          type: string
+          example: "success"
+        timestamp:
+          type: integer
+          example: 1687857228707
+        content:
+          type: object
+          properties:
+            matched_faces_count:
+              type: integer
+              example: 1
+            unmatched_faces_count:
+              type: integer
+              example: 1
+            matched_faces:
+              type: array
+              items:
+                $ref: "#/components/schemas/MatchedFace"
+              example:
+                - similarity: 98.82299041748047
+                  quality:
+                    brightness: 88.67324829101562
+                    sharpness: 16.49492073059082
+                  confidence: 99.98194885253906
+            unmatched_faces:
+              type: array
+              items:
+                $ref: "#/components/schemas/UnmatchedFace"
+              example:
+                - confidence: 99.99944305419922
+                  quality:
+                    brightness: 89.44940185546875
+                    sharpness: 83.14741516113281
+        processing_count:
+          type: integer
+          example: 1
+
+    MatchedFace:
+      type: object
+      properties:
+        similarity:
+          type: number
+          format: float
+          example: 98.82299041748047
+        quality:
+          $ref: "#/components/schemas/FaceQuality"
+        confidence:
+          type: number
+          format: float
+          example: 99.98194885253906
+
+    UnmatchedFace:
+      type: object
+      properties:
+        confidence:
+          type: number
+          format: float
+          example: 99.99944305419922
+        quality:
+          $ref: "#/components/schemas/FaceQuality"
+
+    FaceQuality:
+      type: object
+      properties:
+        brightness:
+          type: number
+          format: float
+          example: 88.67324829101562
+        sharpness:
+          type: number
+          format: float
+          example: 16.49492073059082
+
+    ImageAnalysisResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        timestamp:
+          type: integer
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysisResult'
+        processing_count:
+          type: integer
+      example:
+        id: acfc8a48-9a5c-46ed-b61f-52ee55378f0b
+        status: success
+        timestamp: 1687843381217
+        content:
+          - name: Nature
+            confidence: 99.94298553466797
+            instances: [ ]
+            parents:
+              - Outdoors
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Outdoors
+            confidence: 99.94298553466797
+            instances: [ ]
+            parents: [ ]
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Scenery
+            confidence: 99.94298553466797
+            instances: [ ]
+            parents:
+              - Nature
+              - Outdoors
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: City
+            confidence: 77.48106384277344
+            instances: [ ]
+            parents: [ ]
+            aliases:
+              - Town
+            categories:
+              - Buildings and Architecture
+          - name: Art
+            confidence: 57.89506912231445
+            instances: [ ]
+            parents: [ ]
+            aliases: [ ]
+            categories:
+              - Hobbies and Interests
+          - name: Landscape
+            confidence: 57.87334442138672
+            instances: [ ]
+            parents:
+              - Nature
+              - Outdoors
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Snow
+            confidence: 57.720420837402344
+            instances: [ ]
+            parents:
+              - Nature
+              - Outdoors
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Sky
+            confidence: 57.71390151977539
+            instances: [ ]
+            parents:
+              - Nature
+              - Outdoors
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Painting
+            confidence: 57.25644302368164
+            instances: [ ]
+            parents:
+              - Art
+            aliases: [ ]
+            categories:
+              - Furniture and Furnishings
+          - name: Water
+            confidence: 57.0668830871582
+            instances: [ ]
+            parents: [ ]
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+          - name: Modern Art
+            confidence: 56.81368637084961
+            instances: [ ]
+            parents:
+              - Art
+            aliases: [ ]
+            categories:
+              - Hobbies and Interests
+          - name: Sea
+            confidence: 56.093788146972656
+            instances: [ ]
+            parents:
+              - Nature
+              - Outdoors
+              - Water
+            aliases:
+              - Ocean
+            categories:
+              - Nature and Outdoors
+          - name: Architecture
+            confidence: 55.79709243774414
+            instances: [ ]
+            parents: [ ]
+            aliases: [ ]
+            categories:
+              - Buildings and Architecture
+          - name: Building
+            confidence: 55.79709243774414
+            instances: [ ]
+            parents:
+              - Architecture
+            aliases: [ ]
+            categories:
+              - Buildings and Architecture
+          - name: Spire
+            confidence: 55.79709243774414
+            instances: [ ]
+            parents:
+              - Architecture
+              - Building
+              - Tower
+            aliases:
+              - Steeple
+            categories:
+              - Buildings and Architecture
+          - name: Tower
+            confidence: 55.79709243774414
+            instances: [ ]
+            parents:
+              - Architecture
+              - Building
+            aliases: [ ]
+            categories:
+              - Buildings and Architecture
+          - name: Panoramic
+            confidence: 55.304954528808594
+            instances: [ ]
+            parents:
+              - Landscape
+              - Nature
+              - Outdoors
+              - Scenery
+            aliases: [ ]
+            categories:
+              - Nature and Outdoors
+        processing_count: 1
+
+    AnalysisResult:
+      type: object
+      properties:
+        name:
+          type: string
+        confidence:
+          type: number
+        instances:
+          type: array
+          items:
+            type: object
+        parents:
+          type: array
+          items:
+            type: string
+        aliases:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+
+    FaceDetectionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the face detection process.
+        status:
+          type: string
+          description: The status of the face detection process.
+        timestamp:
+          type: integer
+          description: The timestamp when the face detection request was processed.
+        analysed_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FaceData'
+          description: The analyzed data of the detected faces in the image.
+        processing_count:
+          type: integer
+          description: The number of times the image has been processed for face detection.
+      example:
+        id: "2968b2d5-5eae-40ba-8aac-935521a84b77"
+        status: "success"
+        timestamp: 1687839745335
+        analysed_data:
+          - bounding_box:
+              width: 0.10777401179075241
+              height: 0.13282546401023865
+              left: 0.17654450237751007
+              top: 0.3921668529510498
+            age_range:
+              low: 20
+              high: 28
+            smile:
+              value: false
+              confidence: 93.70523071289062
+            eyeglasses:
+              value: true
+              confidence: 99.99999237060547
+            sunglasses:
+              value: false
+              confidence: 99.95690155029297
+            gender:
+              value: "Male"
+              confidence: 99.96484375
+            beard:
+              value: false
+              confidence: 62.05418014526367
+            mustache:
+              value: false
+              confidence: 97.35452270507812
+            eyes_open:
+              value: true
+              confidence: 98.76431274414062
+            mouth_open:
+              value: true
+              confidence: 84.85880279541016
+            emotions:
+              - type: "SURPRISED"
+                confidence: 92.99723815917969
+              - type: "CALM"
+                confidence: 23.0799503326416
+              - type: "FEAR"
+                confidence: 7.924409866333008
+              - type: "CONFUSED"
+                confidence: 4.7363104820251465
+              - type: "SAD"
+                confidence: 2.6062285900115967
+              - type: "ANGRY"
+                confidence: 1.7453320026397705
+              - type: "HAPPY"
+                confidence: 1.4428735971450806
+              - type: "DISGUSTED"
+                confidence: 1.3754680156707764
+            landmarks:
+              - type: "eyeLeft"
+                x: 0.21465006470680237
+                y: 0.437491774559021
+              - type: "eyeRight"
+                x: 0.25979283452033997
+                y: 0.4359549283981323
+              - type: "mouthLeft"
+                x: 0.22244024276733398
+                y: 0.48688557744026184
+              - type: "mouthRight"
+                x: 0.2600334584712982
+                y: 0.4855155050754547
+              - type: "nose"
+                x: 0.2459861785173416
+                y: 0.4550646245479584
+              - type: "leftEyeBrowLeft"
+                x: 0.19446563720703125
+                y: 0.4297780692577362
+              - type: "leftEyeBrowRight"
+                x: 0.22514291107654572
+                y: 0.4198493957519531
+              - type: "leftEyeBrowUp"
+                x: 0.21060246229171753
+                y: 0.4192149043083191
+              - type: "rightEyeBrowLeft"
+                x: 0.25112780928611755
+                y: 0.4189653992652893
+              - type: "rightEyeBrowRight"
+                x: 0.2729511260986328
+                y: 0.42690983414649963
+              - type: "rightEyeBrowUp"
+                x: 0.2628464102745056
+                y: 0.41738104820251465
+              - type: "leftEyeLeft"
+                x: 0.2056843489408493
+                y: 0.43866878747940063
+              - type: "leftEyeRight"
+                x: 0.2234984040260315
+                y: 0.43773695826530457
+              - type: "leftEyeUp"
+                x: 0.21461336314678192
+                y: 0.4346442222595215
+              - type: "leftEyeDown"
+                x: 0.21498507261276245
+                y: 0.439727783203125
+              - type: "rightEyeLeft"
+                x: 0.250782310962677
+                y: 0.4368106424808502
+              - type: "rightEyeRight"
+                x: 0.2668272852897644
+                y: 0.43646448850631714
+              - type: "rightEyeUp"
+                x: 0.25996148586273193
+                y: 0.43306758999824524
+              - type: "rightEyeDown"
+                x: 0.25965967774391174
+                y: 0.4381241202354431
+              - type: "noseLeft"
+                x: 0.23344972729682922
+                y: 0.4658816158771515
+              - type: "noseRight"
+                x: 0.25016430020332336
+                y: 0.46519964933395386
+              - type: "mouthUp"
+                x: 0.2432977706193924
+                y: 0.47654277086257935
+              - type: "mouthDown"
+                x: 0.24340258538722992
+                y: 0.4926367402076721
+              - type: "leftPupil"
+                x: 0.21465006470680237
+                y: 0.437491774559021
+              - type: "rightPupil"
+                x: 0.25979283452033997
+                y: 0.4359549283981323
+              - type: "upperJawlineLeft"
+                x: 0.1773587167263031
+                y: 0.45201900601387024
+              - type: "midJawlineLeft"
+                x: 0.19171585142612457
+                y: 0.5035356879234314
+              - type: "chinBottom"
+                x: 0.24220940470695496
+                y: 0.5216568112373352
+              - type: "midJawlineRight"
+                x: 0.2716551721096039
+                y: 0.500251829624176
+              - type: "upperJawlineRight"
+                x: 0.27593758702278137
+                y: 0.4482903778553009
+            pose:
+              roll: 0.020759621381878853
+              yaw: 0.12492620903205872
+              pitch: -0.23875144135951996
+            quality:
+              brightness: 0.85
+              sharpness: 0.92
+            confidence: 0.97
+        processing_count: 3
+
+    FaceData:
+      type: object
+      properties:
+        bounding_box:
+          type: object
+          properties:
+            width:
+              type: number
+              description: The width of the face bounding box as a fraction of the overall image width.
+            height:
+              type: number
+              description: The height of the face bounding box as a fraction of the overall image height.
+            left:
+              type: number
+              description: The left coordinate of the face bounding box as a fraction of the overall image width.
+            top:
+              type: number
+              description: The top coordinate of the face bounding box as a fraction of the overall image height.
+        age_range:
+          type: object
+          properties:
+            low:
+              type: integer
+              description: The estimated lower age of the detected person.
+            high:
+              type: integer
+              description: The estimated upper age of the detected person.
+        smile:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person is smiling or not.
+            confidence:
+              type: number
+              description: The confidence score of the smile detection.
+        eyeglasses:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person is wearing eyeglasses or not.
+            confidence:
+              type: number
+              description: The confidence score of the eyeglasses detection.
+        sunglasses:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person is wearing sunglasses or not.
+            confidence:
+              type: number
+              description: The confidence score of the sunglasses detection.
+        gender:
+          type: object
+          properties:
+            value:
+              type: string
+              description: The gender of the detected person.
+            confidence:
+              type: number
+              description: The confidence score of the gender detection.
+        beard:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person has a beard or not.
+            confidence:
+              type: number
+              description: The confidence score of the beard detection.
+        mustache:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person has a mustache or not.
+            confidence:
+              type: number
+              description: The confidence score of the mustache detection.
+        eyes_open:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person's eyes are open or not.
+            confidence:
+              type: number
+              description: The confidence score of the eyes open detection.
+        mouth_open:
+          type: object
+          properties:
+            value:
+              type: boolean
+              description: Indicates whether the person's mouth is open or not.
+            confidence:
+              type: number
+              description: The confidence score of the mouth open detection.
+        emotions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Emotion'
+          description: The detected emotions and their confidence scores.
+        landmarks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Landmark'
+          description: The facial landmarks and their positions on the face.
+        pose:
+          type: object
+          properties:
+            roll:
+              type: number
+              description: >
+                The roll angle of the detected face.
+                Positive values indicate clockwise rotation, while negative values indicate counterclockwise rotation.
+                The roll angle represents the amount of rotation around the vertical axis passing through the center of the face.
+            yaw:
+              type: number
+              description: >
+                The yaw angle of the detected face.
+                Positive values indicate the face turning right, while negative values indicate the face turning left.
+                The yaw angle represents the amount of rotation around the vertical axis passing through the neck.
+            pitch:
+              type: number
+              description: >
+                The pitch angle of the detected face.
+                Positive values indicate the face tilting upwards, while negative values indicate the face tilting downwards.
+                The pitch angle represents the amount of rotation around the horizontal axis passing through the center of the face.
+        quality:
+          type: object
+          properties:
+            brightness:
+              type: number
+              description: The brightness score of the detected face.
+            sharpness:
+              type: number
+              description: The sharpness score of the detected face.
+        confidence:
+          type: number
+          description: The confidence score of the face detection.
+
+    Emotion:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of emotion detected.
+        confidence:
+          type: number
+          description: The confidence score of the emotion detection.
+
+    Landmark:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of facial landmark.
+        x:
+          type: number
+          description: The x-coordinate of the facial landmark as a fraction of the overall image width.
+        y:
+          type: number
+          description: The y-coordinate of the facial landmark as a fraction of the overall image height.
+
+    ImageModificationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the image modification process.
+        status:
+          type: string
+          description: The status of the image modification process.
+        timestamp:
+          type: integer
+          description: The timestamp when the image modification request was processed.
+        content:
+          oneOf:
+            - type: string
+            - type: object
+          description: The output URL or blob of the modified image.
+        processing_count:
+          type: integer
+          description: The number of times the image has been processed to achieve the desired output.
+      example:
+        id: "80d94394-c1dc-41d6-a73e-9ff1ba5c9741"
+        status: "success"
+        timestamp: 1687808116950
+        content: "https://worqhat.s3.amazonaws.com/outputs/1687808088811.png"
+        processing_count: 1
+
+    ImageUpscaleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the image upscale process.
+        status:
+          type: string
+          description: The status of the image upscale process.
+        timestamp:
+          type: integer
+          description: The timestamp when the image upscale request was processed.
+        content:
+          oneOf:
+            - type: string
+            - type: object
+          description: The output URL or blob of the upscaled image.
+        processing_count:
+          type: integer
+          description: The number of times the image has been processed to come to the desired output.
+      example:
+        id: "80d94394-c1dc-41d6-a73e-9ff1ba5c9741"
+        status: "success"
+        timestamp: 1687808116950
+        content: "https://worqhat.s3.amazonaws.com/outputs/1687808088811.png"
+        processing_count: 1
+
+    ImageGenerationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the image generation process.
+        status:
+          type: string
+          description: The status of the image generation process.
+        timestamp:
+          type: integer
+          description: The timestamp when the image generation request was processed.
+        content:
+          oneOf:
+            - type: string
+              description: URL format
+            - type: string
+              description: Base64 format
+          description: The output of the image generation process.
+        processing_count:
+          type: integer
+          description: The number of times the image has been processed to generate the output.
+      example:
+        id: "e24ecea4-df19-41ac-8261-1f9f4f241bfe"
+        status: "success"
+        timestamp: 1687805059532
+        content: "https://worqhat.s3.amazonaws.com/outputs/1687805044148.png"
+        processing_count: 1
+
+    AIContentV2Response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the response.
+        status:
+          type: string
+          description: The status of the response.
+        timestamp:
+          type: integer
+          description: The timestamp when the response was generated.
+        content:
+          type: string
+          description: The content of the response.
+        processing_count:
+          type: integer
+          description: The number of times the response has been processed.
+      example:
+        id: "1468dd39-aa8a-495e-9b87-7cf474cdf352"
+        status: success
+        timestamp: 1687798163795
+        content: "Hello! I'm an AI, so I don't have feelings, but I'm here and ready to assist you. How can I help you today?"
+        processing_count: 93
+
+    AIContentV3Response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the response.
+        status:
+          type: string
+          description: The status of the response.
+        timestamp:
+          type: integer
+          description: The timestamp when the response was generated.
+        content:
+          type: string
+          description: The content of the response.
+        processing_count:
+          type: integer
+          description: The number of times the response has been processed.
+      example:
+        id: "1468dd39-aa8a-495e-9b87-7cf474cdf352"
+        status: success
+        timestamp: 1687798163795
+        content: "Hello! I'm an AI, so I don't have feelings, but I'm here and ready to assist you. How can I help you today?"
+        processing_count: 93
+
+    ImageDetectedText:
+      type: object
+      properties:
+        confidence:
+          type: number
+          description: The confidence level of the detected text
+        detected_text:
+          type: string
+          description: The detected text
+        geometry:
+          $ref: '#/components/schemas/ImageTextGeometry'
+        id:
+          type: integer
+          description: The ID of the detected text
+        parent_id:
+          type: integer
+          description: The ID of the parent text (if applicable)
+        type:
+          type: string
+          description: The type of the detected text
+      example:
+        - id: "0d43b414-2a7a-425f-9f2d-4bd8d07a164d"
+          status: success
+          timestamp: 1683408470311
+          content:
+            - confidence: 90.54900360107422
+              detected_text: "IT'S"
+              geometry:
+                bounding_box:
+                  height: 0.10317354649305344
+                  left: 0.6677391529083252
+                  top: 0.17569075524806976
+                  width: 0.15113449096679688
+                polygon:
+                  - x: 0.6677391529083252
+                    y: 0.17569075524806976
+                  - x: 0.8188736438751221
+                    y: 0.17574213445186615
+                  - x: 0.8188582062721252
+                    y: 0.278915673494339
+                  - x: 0.6677237153053284
+                    y: 0.2788642942905426
+              id: 0
+              type: LINE
+            - confidence: 59.411651611328125
+              detected_text: "I"
+              geometry:
+                bounding_box:
+                  height: 0.05955825746059418
+                  left: 0.2763049304485321
+                  top: 0.394121915102005
+                  width: 0.026684552431106567
+                polygon:
+                  - x: 0.2763049304485321
+                    y: 0.394121915102005
+                  - x: 0.30298948287963867
+                    y: 0.3932435214519501
+                  - x: 0.30385109782218933
+                    y: 0.45280176401138306
+                  - x: 0.27716654539108276
+                    y: 0.453680157661438
+              id: 1
+              type: LINE
+            - confidence: 92.76634979248047
+              detected_text: "MONDAY"
+              geometry:
+                bounding_box:
+                  height: 0.15580485785007477
+                  left: 0.30405032682418823
+                  top: 0.15534435284137726
+                  width: 0.26672941493988037
+                polygon:
+                  - x: 0.30405032682418823
+                    y: 0.15534435284137726
+                  - x: 0.5707797403335571
+                    y: 0.15536674892997742
+                  - x: 0.5707595348358154
+                    y: 0.3111492099761963
+                  - x: 0.3040300908088684
+                    y: 0.3111268138885498
+              id: 2
+              type: LINE
+          processing_count: 1
+
+    ImageTextGeometry:
+      type: object
+      properties:
+        bounding_box:
+          $ref: '#/components/schemas/ImageTextBoundingBox'
+        polygon:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageTextPoint'
+          description: The polygon coordinates of the geometry
+
+    ImageTextBoundingBox:
+      type: object
+      properties:
+        height:
+          type: number
+          description: The height of the bounding box
+        left:
+          type: number
+          description: The left coordinate of the bounding box
+        top:
+          type: number
+          description: The top coordinate of the bounding box
+        width:
+          type: number
+          description: The width of the bounding box
+
+    ImageTextPoint:
+      type: object
+      properties:
+        x:
+          type: number
+          description: The X coordinate of the point
+        y:
+          type: number
+          description: The Y coordinate of the point
+
+    PDFExtractRequest:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: The PDF file to extract content from.
+        output_format:
+          type: string
+          enum:
+            - text
+            - json
+          default: text
+          description: The desired output format. Defaults to "text".
+      required:
+        - file
+      example:
+        file: [ PDF binary data ]
+        output_format: text
+
+    PDFExtractResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the extraction process.
+        status:
+          type: string
+          description: The status of the extraction process.
+        timestamp:
+          type: integer
+          description: The timestamp when the extraction request was processed.
+        content:
+          oneOf:
+            - $ref: "#/components/schemas/PdfTextExtractContent"
+            - $ref: "#/components/schemas/PdfJsonExtractContent"
+          description: The extracted content from the PDF.
+        processing_count:
+          type: integer
+          description: The number of times the content has been processed to create the final content.
+      example:
+        value:
+          id: "15b01f2c-125c-4824-9b89-9b140be9e7f0"
+          status: success
+          timestamp: 1687776023750
+          content:
+            - type: PAGE
+              position:
+                bounding_box:
+                  width: 1
+                  height: 1
+                  left: 0
+                  top: 0
+                polygon:
+                  - x: 0.000002764723831205629
+                    y: 0
+                  - x: 1
+                    y: 0.000004283267116989009
+                  - x: 1
+                    y: 1
+                  - x: 0
+                    y: 1
+              id: "d0d1ac22-3958-45ed-8bc6-c76eb637f5cc"
+              dependencies:
+                - type: CHILD
+                  ids:
+                    - "720f5d2c-c59d-4648-9722-0d6f7de4cbe3"
+                    - "bf135402-4ff0-4ae7-8c72-a0cec3559a91"
+            - type: LINE
+              position:
+                bounding_box:
+                  width: 0.6681150794029236
+                  height: 0.014788508415222168
+                  left: 0.15100932121276855
+                  top: 0.08366494625806808
+                polygon:
+                  - x: 0.15103518962860107
+                    y: 0.08366494625806808
+                  - x: 0.8191244006156921
+                    y: 0.08457615226507187
+                  - x: 0.8191033601760864
+                    y: 0.09845345467329025
+                  - x: 0.15100932121276855
+                    y: 0.09754297882318497
+              score: 80.1580581665039
+              id: "720f5d2c-c59d-4648-9722-0d6f7de4cbe3"
+              dependencies:
+                - type: CHILD
+                  ids:
+                    - "3723328f-8b27-4b6f-8c98-d79bb6ffde62"
+                    - "e73f4be1-e8f3-464a-8647-56a281facd0c"
+              content: "Est et lorem vero dolor gubergren lorem. Dolor ut conseletur labore amet et dolor sed erat"
+
+    PdfTextExtractContent:
+      type: object
+      properties:
+        text_content:
+          type: string
+          description: The extracted text content from the PDF.
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/PdfTag"
+          description: Additional tags associated with the extracted content.
+
+    PdfJsonExtractContent:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: "#/components/schemas/PdfStructuredData"
+      description: The extracted structured data from the PDF.
+
+    PdfTag:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the tag.
+        value:
+          type: string
+          description: The value associated with the tag.
+        data:
+          type: object
+          additionalProperties: true
+          description: Additional data associated with the tag.
+
+    PdfStructuredData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the extracted element.
+        position:
+          type: object
+          properties:
+            BoundingBox:
+              $ref: "#/components/schemas/PdfBoundingBox"
+            Polygon:
+              type: array
+              items:
+                $ref: "#/components/schemas/PdfPoint"
+          description: The position of the extracted element.
+        id:
+          type: string
+          description: The unique identifier associated with the extracted element.
+        dependencies:
+          type: array
+          items:
+            $ref: "#/components/schemas/PdfDependency"
+          description: Dependencies of the extracted element.
+        score:
+          type: number
+          description: The score or confidence level of the extracted element.
+        content:
+          type: string
+          description: The extracted content of the element.
+
+    PdfBoundingBox:
+      type: object
+      properties:
+        Width:
+          type: number
+          description: The width of the bounding box.
+        Height:
+          type: number
+          description: The height of the bounding box.
+        Left:
+          type: number
+          description: The left coordinate of the bounding box.
+        Top:
+          type: number
+          description: The top coordinate of the bounding box.
+
+    PdfPoint:
+      type: object
+      properties:
+        x:
+          type: number
+          description: The X coordinate of the point.
+        y:
+          type: number
+          description: The Y coordinate of the point.
+
+    PdfDependency:
+      type: object
+      properties:
+        Type:
+          type: string
+          description: The type of dependency.
+        Ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers of the dependent elements.
+
+
+    WebExtractResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the extraction process.
+        status:
+          type: string
+          description: The status of the extraction process.
+        timestamp:
+          type: integer
+          description: The timestamp when the extraction request was processed.
+        content:
+          type: object
+          properties:
+            text_content:
+              type: string
+              description: The extracted text content from the web page.
+            tags:
+              type: array
+              description: The extracted tags from the web page.
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the tag.
+                  value:
+                    type: string
+                    description: The value associated with the tag.
+                  data:
+                    type: object
+                    description: Additional data associated with the tag.
+        processing_count:
+          type: integer
+          description: The number of times the content has been processed to generate the final result.
+      example:
+        id: "77d4d87d-6e7e-4556-a4c2-aab535cfb5b4"
+        status: "success"
+        timestamp: 1683173445143
+        content:
+          text_content: |
+            WorqHat
+
+            🎉 Our Conversational Language Model WorqBot is now live for Beta use! Try out Now.🤖
+
+            Resources
+
+            APIs
+
+            Connect your app to WorqHat
+
+            Documentations
+
+            Learn how to use our products
+
+            Changelogs
+
+            Check what's new
+
+            Careers
+
+            Find your dream role
+
+            Community
+
+            Connect with other developers, designers, and entrepreneurs
+
+            Security
+
+            Our Security Principles and Practices
+
+            Blog
+
+            Interviews, tutorials, Updates and more
+
+            Status
+
+            Outage updates and announcements
+
+            Green Initiatives
+
+            Partnerships to make the World Greener
+
+            Contact Us
+
+
+
+            Enterprise WorqHat Playground
+
+            Join Waitlist
+
+            Careers
+            - Documentation
+            - Changelog
+            - Blogs
+            - Security
+
+            Subscribe to our newsletter
+
+            Stay up to date with the latest news and updates from WorqHat.
+
+
+            Join us!
+            - LinkedIn >
+            - Instagram
+            - Facebook
+            - Twitter
+            - GitHub
+
+            © 2023. Winlysis Pvt. Ltd., India All rights reserved.
+
+            - Terms & Conditions
+            - Privacy Policy
+            - Statu
+          tags:
+            - name: language
+              value: en
+              data: { }
+            - name: thumbnail
+              value: "/resources/WorqHat TM Logo.png"
+              data: { }
+            - name: current_date
+              value: "2023-01-01"
+              data: { }
+            - name: title
+              span:
+                - "0"
+                - "7"
+              span_text: WorqHat
+              value: WorqHat
+              data: { }
+            - name: link
+              span:
+                - "45"
+                - "52"
+              span_text: WorqBot
+              value: "//playground.worqhat.app/worqbot"
+              data: { }
+            - name: image
+              span:
+                - "94"
+                - "94"
+              value: "/resources/WorqHat TM Logo.png"
+              data:
+                alt: WorqHat Logo
+            - name: control
+              span:
+                - "94"
+                - "105"
+              span_text: " Resources "
+              value: " Resources "
+              data: { }
+            - name: subheading
+              span:
+                - "12016"
+                - "12042"
+              span_text: "Future-proof your business"
+              value: "Future-proof your business"
+              data: { }
+            - name: link
+              span:
+                - "12224"
+                - "12238"
+              span_text: "Join Waitlist "
+              value: "https://join.worqhat.com/waitlist"
+              data: { }
+            - name: image
+              span:
+                - "12295"
+                - "12295"
+              value: "/resources/integrations/logo-dropbox-40.svg"
+              data:
+                alt: Dropbox Icon
+        processing_count: 2152
+
+    ImageModerationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the moderation analysis process.
+        status:
+          type: string
+          description: The status of the moderation analysis process.
+        timestamp:
+          type: integer
+          description: The timestamp when the moderation analysis request was processed.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageModerationCategory'
+        processing_count:
+          type: integer
+          description: The number of times the content has been processed to generate the final analysis results.
+      example:
+        id: "0dfefbaf-41e6-43ae-83d1-c9751e3fe561"
+        status: "success"
+        timestamp: 1687754028548
+        content:
+          - Confidence: 96.70862579345703
+            Name: "Female Swimwear Or Underwear"
+            ParentName: "Suggestive"
+          - Confidence: 96.70862579345703
+            Name: "Suggestive"
+            ParentName: ""
+          - Confidence: 96.14669036865234
+            Name: "Revealing Clothes"
+            ParentName: "Suggestive"
+        processing_count: 1
+
+    ImageModerationCategory:
+      type: object
+      properties:
+        Confidence:
+          type: number
+          description: The confidence level of the moderation analysis result.
+        Name:
+          type: string
+          description: The name of the moderation category.
+        ParentName:
+          type: string
+          description: The parent category of the moderation category.
+
+    ModerationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the moderation request.
+        status:
+          type: string
+          description: The status of the moderation process.
+        timestamp:
+          type: integer
+          description: The timestamp when the moderation request was processed.
+        content:
+          type: object
+          properties:
+            sexual:
+              type: string
+              format: float
+              description: The score for sexual content moderation.
+            hate:
+              type: string
+              format: float
+              description: The score for hate speech content moderation.
+            violence:
+              type: string
+              format: float
+              description: The score for violence content moderation.
+            self-harm:
+              type: string
+              format: float
+              description: The score for self-harm content moderation.
+            "sexual/minors":
+              type: string
+              format: float
+              description: The score for sexual content involving minors moderation.
+            "hate/threatening":
+              type: string
+              format: float
+              description: The score for threatening hate speech content moderation.
+            "violence/graphic":
+              type: string
+              format: float
+              description: The score for graphic violence content moderation.
+          description: |
+            The object containing the moderation results for different categories.
+            The scores represent the likelihood of each category present in the content.
+      example:
+        id: "78f34ff3-08d5-4000-93f2-237ab46a3013"
+        status: "success"
+        timestamp: 1687729008633
+        content:
+          sexual: "5.2880e-7"
+          hate: "0.0000031912"
+          violence: "0.097897"
+          self-harm: "0.070380"
+          "sexual/minors": "4.9098e-7"
+          "hate/threatening": "2.4003e-8"
+          "violence/graphic": "0.0000020674"
+
+    TextConversionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier associated with the conversion process.
+        status:
+          type: string
+          description: The status of the conversion process.
+        timestamp:
+          type: integer
+          description: The timestamp when the conversion request was processed.
+        content:
+          type: string
+          description: The converted text from the speech.
+        processing_count:
+          type: integer
+          description: The number of times the content has been processed to create the final content.
+      example:
+        id: "d94612c2-e572-479b-894e-8254705c2983"
+        status: "success"
+        timestamp: 1683211582017
+        content: "I have a silky smooth voice, and today I will tell you about the exercise regimen of the common sloth."
+        processing_count: 20
+
+    AuthenticationResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the authentication process.
+        message:
+          type: string
+          description: A message regarding the authentication status.
+        organization_name:
+          type: string
+          description: The name of the authenticated organization.
+        user_name:
+          type: string
+          description: The name of the authenticated user.
+        user_email:
+          type: string
+          format: email
+          description: The email of the authenticated user.
+        timestamp:
+          type: integer
+          description: The timestamp when the authentication request was processed.
+        id:
+          type: string
+          description: The Request ID associated with the authentication process.
+      example:
+        status: "success"
+        message: "User Authenticated Successfully"
+        organization_name: "Sample Organization Inc."
+        user_name: "John Doe"
+        user_email: "john@worqhat.com"
+        timestamp: 1687753142003
+        id: "a1146b58-a6fd-46a1-944c-3b1aad50d14b"
+
+    Error400Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "400"
+        message: "Bad Request"
+
+    Error401Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "401"
+        message: "Invalid API Key or Organization Key"
+
+    Error406Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "406"
+        message: "Unable to process the request."
+
+    Error404Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "404"
+        message: "Not Found"
+
+    Error500Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "500"
+        message: "Internal Server Error"
