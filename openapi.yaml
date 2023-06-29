@@ -1725,6 +1725,76 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/ai/content/v2-large/answering:
+    post:
+      summary: Get an answer from the self trained content model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question to be answered
+                self_train:
+                  type: boolean
+                  description: Whether to use custom training data or a pre-trained model
+                randomness:
+                  type: number
+                  description: The randomness factor for generating responses
+                  minimum: 0
+                  maximum: 1
+                datasetId:
+                  type: string
+                  description: The ID of the pre-trained model dataset (required if self_train is false)
+                trainingData:
+                  type: array
+                  description: Array of training data (required if self_train is true)
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV2Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
 components:
   securitySchemes:
     ApiKeyAuth:

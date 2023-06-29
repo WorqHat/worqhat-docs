@@ -62,6 +62,13 @@ suggestions, generating outlines, or even drafting entire paragraphs or articles
 - **E-commerce Product Descriptions**: AI-powered APIs can generate compelling and accurate
 product descriptions by analyzing product features, specifications, and customer reviews. This assists e-commerce platforms in creating engaging content that drives conversions.
 
+<Warning>
+    Please make sure that you train and store the model before you make a request to the API with
+    the ``DatasetID``. If you have not trained and stored the model, you will not be able to make a
+    request to the API and you will receive an error. You can pass your data to the model
+    directly as well. Visit our ``API Reference`` to learn more.
+</Warning>
+
 ## How to use AiCon V2 Large Model (Beta)
 
 You can use the following Endpoints on any Codebase, including client side codebases as long as
@@ -86,7 +93,7 @@ the Training Data field. The model will process the data and cache it so that it
 future requests. This will help you save time and costs on processing.
 
 <Card title="Train, View and Delete Datasets" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/image-analysis/face-comparison-v2">
+      href="/api-reference/text-generation-ai/aicon-train-datasets">
   Visit the API Reference to learn how to implement AiCon V2 Large Model in your projects. Get
   access
   to
