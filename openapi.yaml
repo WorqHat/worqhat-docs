@@ -1521,6 +1521,209 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/ai/search/v3:
+    post:
+      summary: Our latest AI model that can be used to Search Content based on Meaning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI. It can be a single word or a
+                    sentence.
+                training_data:
+                  type: string
+                  description: The ID of the dataset you want to search in. If you do not pass
+                    this, the request will return an error.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the response
+                    example: 37459abe-8f5a-40ec-b7fa-9a98b3234b69
+                  status:
+                    type: string
+                    description: The status of the response, indicating the success or failure
+                    example: success
+                  timestamp:
+                    type: integer
+                    description: The timestamp of the response in milliseconds
+                    example: 1688042667451
+                  data:
+                    type: array
+                    description: An array of results from the server
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          description: The results object containing various data
+                          example:
+                            Username: grey07
+                            Identifier: 2070
+                            "One-time password": 04ap67
+                            "Recovery code": lg2070
+                            "First name": Laura
+                            "Last name": Grey
+                            Department: Depot
+                            Location: London
+                            id: 823e060a-61f6-4476-bb3e-61588998a2b2
+                        distance:
+                          type: number
+                          description: The distance value
+                          example: 0.2097
+                  processing_count:
+                    type: integer
+                    description: The count of processing
+                    example: 1510
+                  time_taken:
+                    type: number
+                    description: The time taken for processing in seconds
+                    example: 2.8471360206604004
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/search/v2:
+    post:
+      summary: Our latest AI model that can be used to Search Content based on Text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the Model. It can only understand words
+                    and not sentences.
+                training_data:
+                  type: string
+                  description: The ID of the dataset you want to search in. If you do not pass
+                    this, the request will return an error.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the response
+                    example: 37459abe-8f5a-40ec-b7fa-9a98b3234b69
+                  status:
+                    type: string
+                    description: The status of the response, indicating the success or failure
+                    example: success
+                  timestamp:
+                    type: integer
+                    description: The timestamp of the response in milliseconds
+                    example: 1688042667451
+                  data:
+                    type: array
+                    description: An array of results from the server
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          description: The results object containing various data
+                          example:
+                            Username: grey07
+                            Identifier: 2070
+                            "One-time password": 04ap67
+                            "Recovery code": lg2070
+                            "First name": Laura
+                            "Last name": Grey
+                            Department: Depot
+                            Location: London
+                            id: 823e060a-61f6-4476-bb3e-61588998a2b2
+                  processing_count:
+                    type: integer
+                    description: The count of processing
+                    example: 1510
+                  time_taken:
+                    type: number
+                    description: The time taken for processing in seconds
+                    example: 2.8471360206604004
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
 
 components:
   securitySchemes:
