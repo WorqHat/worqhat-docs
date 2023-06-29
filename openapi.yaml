@@ -1073,6 +1073,68 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/ai/train-models/delete-datasets/{datasetId}:
+    delete:
+      summary: Delete Dataset
+      description: Deletes a dataset from the server.
+      parameters:
+        - in: path
+          name: datasetId
+          description: ID of the dataset to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  timestamp:
+                    type: integer
+                    example: 1624954636000
+                  state:
+                    type: string
+                    example: Dataset has been deleted successfully from our records
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
 components:
   securitySchemes:
     ApiKeyAuth:
