@@ -1135,6 +1135,104 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/list-datasets:
+    get:
+      summary: List Datasets
+      description: Retrieves a list of datasets.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: f4a774cc-2a12-4a3b-8b14-9027d9e716d1
+                    description: The unique identifier for the response.
+                  status:
+                    type: string
+                    example: success
+                    description: The status of the response.
+                  timestamp:
+                    type: integer
+                    example: 1624954636000
+                    description: The timestamp of the response in milliseconds.
+                  datasets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dataset_id:
+                          type: string
+                          example: dataset123
+                          description: The ID of the dataset.
+                        dataset_name:
+                          type: string
+                          example: Dataset 1
+                          description: The name of the dataset.
+                        dataset_description:
+                          type: string
+                          example: This is dataset 1
+                          description: The description of the dataset.
+                        training_for:
+                          type: string
+                          example: Search Models
+                          description: The purpose of the dataset. It is usually either for
+                            ``Search Models`` or ``Generative Models``.
+                        type:
+                          type: string
+                          example: Self
+                          description: The type of the dataset when trained. It holds values as
+                            ``Self`` for datasets available to the User and ``Org`` for datasets
+                            available to the members of the Organization.
+                        dataset_timestamp:
+                          type: object
+                          properties:
+                            _seconds:
+                              type: integer
+                              example: 1624954636
+                              description: The timestamp of the dataset creation in seconds.
+                            _clock_hash:
+                              type: integer
+                              example: 1634954636579
+                              description: The clock hash of the dataset. Used for making sure
+                                all the Machine Learning are in sync with the dataset.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
 components:
   securitySchemes:
     ApiKeyAuth:
