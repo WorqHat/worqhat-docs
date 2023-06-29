@@ -39,12 +39,12 @@
     {
       "name": "Academy",
       "icon": "pencil",
-      "url": "https://learn.worqhat.com"
+      "url": "https://docs.worqhat.com/learner-academy/introduction"
     },
     {
       "name": "API Reference",
       "icon": "clouds",
-      "url": "api-reference/authentication"
+      "url": "https://docs.worqhat.com/api-reference/authentication"
     },
     {
       "name": "Blog",

@@ -1073,7 +1073,7 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
-  /api/ai/train-models/delete-datasets/{datasetId}:
+  /api/delete-datasets/{datasetId}:
     delete:
       summary: Delete Dataset
       description: Deletes a dataset from the server.
