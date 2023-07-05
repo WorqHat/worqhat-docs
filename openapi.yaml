@@ -1266,6 +1266,7 @@ paths:
                   type: array
                   items:
                     type: string
+                    format: binary
                   description: Training file(s) to be uploaded. We only support .csv files for
                     training Search Models. You can upload multiple files at once by passing
                     multiple files in the array.
