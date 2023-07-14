@@ -463,7 +463,161 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/ai/content/aicon-12b:
+    post:
+      summary: Get AI Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI.
+                preserve_history:
+                  type: boolean
+                  description: Whether you want to preserve the history of the conversation or not.
+                history_object:
+                  type: object
+                  description: The history object that you want to pass to the model. This is
+                    only required if preserve_history is set to true. Pass the Questions and
+                    Answers as Key Value Pairs to help the model understand.
+                  example:
+                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
+                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
+                training_data:
+                  type: string
+                  description: The training data you want to pass to the AI.
+                randomness:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                  description: The randomness factor that you want to pass to the model. This is
+                    only required if you want to set the randomness factor. Default is 0.4. You can
+                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
+                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
+                    results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV2Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
   /api/ai/content/v3:
+    post:
+      summary: Get AI Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI.
+                preserve_history:
+                  type: boolean
+                  description: Whether you want to preserve the history of the conversation or not.
+                history_object:
+                  type: object
+                  description: The history object that you want to pass to the model. This is
+                    only required if preserve_history is set to true. Pass the Questions and
+                    Answers as Key Value Pairs to help the model understand.
+                  example:
+                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
+                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
+                training_data:
+                  type: string
+                  description: The training data you want to pass to the AI.
+                randomness:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                  description: The randomness factor that you want to pass to the model. This is
+                    only required if you want to set the randomness factor. Default is 0.4. You can
+                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
+                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
+                    results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV3Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/content/aicon-25b:
     post:
       summary: Get AI Content
       requestBody:
@@ -1265,7 +1419,7 @@ paths:
                 training_file:
                   type: array
                   items:
-                    type: string
+                    type: file
                   description: Training file(s) to be uploaded. We only support .csv files for
                     training Search Models. You can upload multiple files at once by passing
                     multiple files in the array.
@@ -1467,7 +1621,178 @@ paths:
         - ApiKeyAuth: [ ]
           OrgKeyAuth: [ ]
 
+  /api/ai/content/aicon-12b-large/train-datasets:
+    post:
+      summary: Create or add trained data to the Generative Model dataset
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                training_stage:
+                  type: string
+                  enum:
+                    - new
+                    - existing
+                existing_datasetId:
+                  type: string
+                  description: ID of the existing dataset (required if training_stage is "existing")
+                dataset_name:
+                  type: string
+                  description: Name of the dataset
+                dataset_description:
+                  type: string
+                  description: Description of the dataset
+                dataset_type:
+                  type: string
+                  enum:
+                    - Self
+                    - org
+                  description: Type of the dataset
+                training_file:
+                  type: array
+                  items:
+                    type: string
+                  description: Training file(s) to be uploaded. We only support .pdf, .txt, .json
+                    and .csv files for training Generative Models. You can upload multiple files at
+                    once by passing multiple files in the array.
+                  example:
+                    - /C:/Users/ghosh/Downloads/username-password-recovery-code.csv
+                    - /path/to/file
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the response
+                    example: 3a2a5f62-a039-4487-9763-2ce4e315d819
+                  status:
+                    type: string
+                    description: The status of the response, indicating the success or failure
+                    example: success
+                  timestamp:
+                    type: integer
+                    description: The timestamp of the response in milliseconds
+                    example: 1688038961322
+                  training:
+                    type: object
+                    properties:
+                      dataset_id:
+                        type: string
+                        description: The ID of the dataset
+                        example: e193cb4a-1cb1-4e1e-a8cf-93870f14e1c2
+                      dataset_name:
+                        type: string
+                        description: The name of the dataset
+                        example: Search Dataset
+                      dataset_description:
+                        type: string
+                        description: The description of the dataset
+                        example: This is a sample dataset
+                      dataset_timestamp:
+                        type: string
+                        format: date-time
+                        description: The timestamp when the dataset was created
+                        example: '2023-06-29T11:42:41.322Z'
+                      word_count:
+                        type: integer
+                        description: The number of words in the dataset
+                        example: 150
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
   /api/ai/content/v2/new/alpha:
+    post:
+      summary: Our latest AI model that can be used to generate content and has data upto 2023
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask the AI.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV2Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/content/aicon-12b/new/alpha:
     post:
       summary: Our latest AI model that can be used to generate content and has data upto 2023
       requestBody:
@@ -1726,6 +2051,76 @@ paths:
           OrgKeyAuth: [ ]
 
   /api/ai/content/v2-large/answering:
+    post:
+      summary: Get an answer from the self trained content model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question to be answered
+                self_train:
+                  type: boolean
+                  description: Whether to use custom training data or a pre-trained model
+                randomness:
+                  type: number
+                  description: The randomness factor for generating responses
+                  minimum: 0
+                  maximum: 1
+                datasetId:
+                  type: string
+                  description: The ID of the pre-trained model dataset (required if self_train is false)
+                trainingData:
+                  type: array
+                  description: Array of training data (required if self_train is true)
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AIContentV2Response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized - Invalid API Key or Organization Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable - Invalid Content Type or Content not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+      security:
+        - ApiKeyAuth: [ ]
+          OrgKeyAuth: [ ]
+
+  /api/ai/content/aicon-12b-large/answering:
     post:
       summary: Get an answer from the self trained content model
       requestBody:
