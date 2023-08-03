@@ -242,5 +242,10 @@
     "amplitude": {
         "apiKey": "57bf92c744f94ba67f70c09d0070accc"
     }
+  },
+  "api": {
+    "auth": {
+      "method": "bearer"
+    }
   }
 }

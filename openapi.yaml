@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: WorqHat AI API Endpoints
   description: API for interacting with WorqHat AI Services
@@ -44,8 +44,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
+
 
   /api/ai/speech-text:
     post:
@@ -92,8 +92,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/moderation:
     post:
@@ -141,8 +140,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/v2/image-moderation:
     post:
@@ -197,8 +195,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/v2/web-extract:
     post:
@@ -261,8 +258,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/v2/pdf-extract:
     post:
@@ -310,8 +306,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/v2/image-text-detection:
     post:
@@ -383,8 +378,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/v2:
     post:
@@ -460,8 +454,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/aicon-12b:
     post:
@@ -537,8 +530,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/v3:
     post:
@@ -614,8 +606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/aicon-25b:
     post:
@@ -691,8 +682,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/generate/v2:
     post:
@@ -770,8 +760,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/generate/v3:
     post:
@@ -849,8 +838,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/upscale/v3:
     post:
@@ -919,8 +907,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/modify/v2:
     post:
@@ -988,8 +975,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/modify/v3:
     post:
@@ -1057,8 +1043,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/v2/face-detection:
     post:
@@ -1112,8 +1097,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/v2/image-analysis:
     post:
@@ -1165,8 +1149,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/images/v2/facial-comparison:
     post:
@@ -1224,8 +1207,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/delete-datasets/{datasetId}:
     delete:
@@ -1286,8 +1268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/list-datasets:
     get:
@@ -1384,8 +1365,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/search/train-datasets:
     post:
@@ -1501,8 +1481,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/v2-large/train-datasets:
     post:
@@ -1618,8 +1597,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/aicon-12b-large/train-datasets:
     post:
@@ -1735,8 +1713,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/v2/new/alpha:
     post:
@@ -1789,8 +1766,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/aicon-12b/new/alpha:
     post:
@@ -1843,8 +1819,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/search/v3:
     post:
@@ -1947,8 +1922,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/search/v2:
     post:
@@ -2047,8 +2021,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/v2-large/answering:
     post:
@@ -2117,8 +2090,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
   /api/ai/content/aicon-12b-large/answering:
     post:
@@ -2187,19 +2159,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
       security:
-        - ApiKeyAuth: [ ]
-          OrgKeyAuth: [ ]
+        - bearerAuth: [ ]
 
 components:
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: x-api-key
-    OrgKeyAuth:
-      type: apiKey
-      in: header
-      name: x-org-key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: TOKEN
+
   schemas:
     ImageComparisonResponse:
       type: object
