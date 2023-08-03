@@ -1376,14 +1376,9 @@ paths:
             schema:
               type: object
               properties:
-                training_stage:
-                  type: string
-                  enum:
-                    - new
-                    - existing
                 existing_datasetId:
                   type: string
-                  description: ID of the existing dataset (required if training_stage is "existing")
+                  description: This field is optional. If you want to retrain an already trained model, you must provide the ID of the existing dataset.
                 dataset_name:
                   type: string
                   description: Name of the dataset
@@ -1395,7 +1390,7 @@ paths:
                   enum:
                     - Self
                     - org
-                  description: Type of the dataset
+                  description: Type of the dataset. Org means all Admins and Developers can access it while Self means only you can access it.
                 training_file:
                   type: array
                   items:
@@ -1406,6 +1401,10 @@ paths:
                   example:
                     - /C:/Users/ghosh/Downloads/username-password-recovery-code.csv
                     - /path/to/file
+                json_data:
+                  type: string
+                  description: You can also pass a stringfied JSON content as Training Data
+
       responses:
         '200':
           description: Successful response
@@ -2036,17 +2035,11 @@ paths:
                 question:
                   type: string
                   description: The question to be answered
-                self_train:
-                  type: boolean
-                  description: Whether to use custom training data or a pre-trained model
                 randomness:
                   type: number
                   description: The randomness factor for generating responses
                   minimum: 0
                   maximum: 1
-                datasetId:
-                  type: string
-                  description: The ID of the pre-trained model dataset (required if self_train is false)
                 trainingData:
                   type: array
                   description: Array of training data (required if self_train is true)
