@@ -1,0 +1,727 @@
+---
+title: "Mock Interview Simulator with WorqHat AI"
+description: "Create your own Mock Interview Simulator using the power of WorqHat AI"
+---
+
+Hey there, fam! Welcome to WorqHat, where we're about to try out another exciting project that will take your programming skills to the next level.
+
+In this course, we'll be diving into the fascinating world of AI and Machine Learning. We'll be learning how to leverage the power of WorqHat AI to build a Mock Interview Simulator.
+
+The app is built with Next.js and Tailwind CSS. It uses WorqHat's Speech-to-Text API to transcribe the audio from the webcam. It then uses WorqHat's Content Generation API to generate feedback for the Interviewee using AiCon V2 Text Models. The feedback is then displayed on the screen. This project can be further modified to create the mock interview simulator of your dreams by adding your own questions and difficulty levels.
+
+Imagine being able to answer to different questions and get feedback on your answers. This is what we'll be building in this course. We'll be using WorqHat's AI APIs to build a mock interview simulator that will help you prepare for your next interview.
+
+This project is significant because it will not only equip you with the knowledge and skills to build AI-based projects but also give you a fundamental understanding of how to leverage the latest APIs provided by WorqHat. Trust me, this is going to be a cool and game-changing experience!
+
+Now, let's take a sneak peek into the world of the one and only AI Interview Assistant, a project that will change the way you prepare for your interviews. Get ready to be amazed!
+
+<Frame caption="Project Outcome">
+  <img src="/images/interview-assist-1.png" />
+</Frame>
+
+But don't take my word for it, you gotta try it out for yourself. We've got a live AI Interview Assistant on this
+[website](https://ai-interview-assist.vercel.app), that's already causing a stir. People can't get enough of it! So, before you even start this course, go check it out and see what all the fuss is about. So, are you ready to step up and take on the challenge? Let's do this!
+
+<Card title="View Live Project" icon="browser" iconType="duotone" color="#ea5a0c"
+      href="https://ai-interview-assist.vercel.app">
+</Card>
+
+### What you'll learn
+
+We will:
+1. Cover some super cool basic understanding of AI, WorqHatAI, and AiCon models (Text Generation
+Models).
+2. We will set up the development environment with WorqHatAI, NodeJS, and NextJS
+3. We will write text completion models in NodeJS using amazing WorqHat AiCon V2 models and Speech to Text Endpoints from WorqHat AI API.
+4. We will build a responsive front-end app in NextJS and back-end that uses WorqHat AI API and
+interacts
+with front-end, then we will run it locally.
+
+### Prerequisites
+
+Learning new technologies becomes easier when you have some prior knowledge. Before diving into WorqHatAI and AI model development, we recommend brushing up on the following areas:
+
+1. Programming Knowledge: Having a basic understanding of programming is essential to start experimenting with advanced languages. While not mandatory, knowledge of the JavaScript programming language is considered a plus.
+2. Critical Thinking: To grasp the complex and abstract concepts involved in WorqHat APIs and AI
+development, solid critical thinking skills are beneficial. Developing your ability to analyze, evaluate, and solve problems will greatly aid your learning process.
+
+However, don't worry if you don't possess all the prerequisite knowledge beforehand. You can still learn API and AI model development without prior expertise. It's just that having some background knowledge will make your learning experience smoother and more enjoyable.
+
+### House Rules
+To ensure a productive learning environment, we kindly request that you adhere to the following house rules:
+
+* **Complete Assignments**: It's important to complete your assignments thoroughly and in a timely manner. Engaging with the course material actively will enhance your understanding and proficiency.
+
+* **Join Discord Server**: We highly encourage you to join our Discord server, where you can
+connect with fellow learners, ask relevant questions, and engage in discussions. The server
+provides a supportive community that fosters learning and collaboration. [WorqHat's Discord community](https://discord.com/invite/KHh9mguKBx)
+
+<CardGroup cols={2}>
+  <Card title="Join Discord Community" icon="discord" color="#5865F2"
+        href="https://discord.com/invite/KHh9mguKBx">
+  </Card>
+</CardGroup>
+
+* **Maintain a Positive Attitude**: A positive mindset goes a long way in learning. Stay happy, open-minded, and optimistic throughout your journey. Embrace challenges as opportunities for growth and be supportive of your fellow learners.
+
+We are excited to have you on this learning adventure with us! Let's create an enriching and empowering environment where we can learn and grow together.
+
+## AI, WorqHatAI, and AiCon Models
+
+In the realm of artificial intelligence (AI) and machine learning, machines strive to simulate human intelligence, while machine learning focuses on enabling machines to learn and improve autonomously without explicit programming. In this context, WorqHat emerges as a groundbreaking no-code platform builder, harnessing the potential of Generative AI to create custom apps, workflows, and automation solutions tailored to businesses of all sizes.
+
+WorqHat empowers solopreneurs, startups, and medium-sized enterprises by automating complex workflows, fostering seamless team collaboration, and enhancing overall productivity. By automating time-consuming tasks, WorqHat allows businesses to thrive and focus on core operations.
+
+At the heart of WorqHat lies the advanced deep learning model known as AiCon (AI Content Optimization Network). This remarkable language model has undergone extensive training on vast volumes of data, enabling it to comprehend natural language with unparalleled precision and exceptional speed. The result? Faster and more streamlined platform building processes.
+
+The WorqHatAI API serves as a powerful tool, providing developers with access to WorqHat's cutting-edge AI models and the ability to train their own models. WorqHat's AiCon models are generative language models developed to generate coherent text based on substantial data inputs. AiCon V2, the fastest language model offered by WorqHat, boasts self-training capabilities and can handle requests involving up to 100,000 words in a single go. For tasks requiring logical thinking and increased creativity, AiCon V3, a larger and more advanced model, comes into play.
+
+To utilize WorqHat's API, developers must obtain an API key . These keys serve as access credentials and are essential for writing NodeJS programs that interact with WorqHat's API.
+
+Before diving into writing your first program using NodeJS and the WorqHat API, let's take a moment to understand the concept of an API key and how you can generate one to facilitate seamless integration with WorqHat's powerful services.
+
+## WorqHat API Key
+
+In order to use the WorqHat API, you must first obtain an API key. We offer a
+generous free tier that gets reset every month. You can also upgrade to a paid plan to get more
+API calls and more features.
+
+This key serves
+as a unique identifier that allows you to access WorqHat's API services. To generate an API key, follow the steps below:
+
+1. Go to the [WorqHat API](https://worqhat.com) website and click on the **Get Started** button.
+2. Join the WorqHat community by entering your email address and clicking on the **Join Now**
+button. You can also sign up using your Google or Microsoft account.
+3. Once you've signed up, you'll be redirected to the dashboard. Click on the **Create a
+Workspace** button on the left-hand side of the screen.
+4. Add a name for your workspace and click on the **Create Workspace** button. We use workspaces
+to organize your projects and keep them separate from each other. This allows you to manage your projects more efficiently.
+5. Once you've created a workspace, you'll be redirected to the Workspace Signin page. Sign in to
+your workspace using your email address and password that you have set up during the signup process.
+6. After signing in, you'll be redirected to the dashboard. Click on the **Try Now** button on
+the **Build Your Own Applications with our API** card.
+7. You'll be redirected to the API page. You can find your API key Section on the right-hand
+side of the screen. Create a new key and Click on the **Copy** button to copy the keys to your clipboard.
+8. Also, make sure to add your Domain name to the **Allowed Domains** section. This will allow
+you to make API calls from your domain. For example, if you're making API calls from a website
+hosted on `https://example.com`, you'll need to add `https://example.com` to the **Allowed Domains** section.
+
+Here's an example of what the API key looks like:
+
+<CodeGroup>
+
+  ```bash API Key
+  var myHeaders = new Headers();
+  myHeaders.append("x-org-key",
+  "U2FsdGVkX1+DMFucNFhZT7b3KTDTPLvjKkfWV0XY+jK2tA44wGn+M+KTC1V/eAOX");
+  ```
+</CodeGroup>
+
+<iframe className="mt-6 w-full h-[400px]" src="https://www.tella.
+tv/video/clizvoigw00k30fi4gq6i1bn9/embed?
+b=0&title=1&a=1&loop=1&autoPlay=true&t=0&muted=1"></iframe>
+
+
+## Quick Start with WorqHatAI API
+
+Now that you have your API key and ORG key, you can start using the WorqHat API. In this section,
+we'll walk you through the process of writing your first NodeJS program using the WorqHat API.\
+
+<Check>You can skip this step if you have already worked with WorqHat APIs before.</Check>
+
+### Step 1: Create a NodeJS App
+
+1. First of all, install NodeJs in your system. Head over to https://nodejs.org/en/download and
+follow the instructions to install it.
+2. Head over to your terminal and create a new directory for your NodeJs app:
+
+```bash [Terminal]
+  mkdir my-nodejs-app
+```
+
+3. Navigate to the newly created directory:
+
+  ```bash [Terminal]
+  cd my-nodejs-app
+  ```
+
+4. Initialize a new NodeJs app and accept the default options:
+
+  ```bash [Terminal]
+  npm init -y
+  ```
+
+### Step 2: Install Dependencies
+
+1. Install the `request` package. The `request` package allows you to make HTTP requests from your NodeJs app:
+
+  ```bash [Terminal]
+  npm install request
+  ```
+
+2. Install the `dotenv` package. The `dotenv` package allows you to load environment variables
+from a `.env` file. This is useful when you want to keep your API keys and other sensitive information out of your codebase:
+
+  ```bash [Terminal]
+  npm install dotenv
+  ```
+
+### Step 3: Create the files
+
+1. Create a new file called `index.js` and `.env` in the root directory of your NodeJs app:
+
+  ```bash [Terminal]
+  touch index.js .env
+  ```
+
+<iframe className="mt-6 w-full h-[400px]"
+        src="https://www.tella.tv/video/clizx2ezq02090fl3fhxg8qm5/embed?b=0&title=1&a=1&loop=1&autoPlay=true&t=0&muted=1"></iframe>
+
+2. After running the Commands, the directory structure should look like this:
+<Frame caption="Directory Structure">
+  <img src="/images/text-code-fs.png" />
+</Frame>
+
+Now, let’s move on to the coding part.
+
+### Step 4: Write the code
+
+1. Open the `.env` file and add the following code:
+
+  ```bash .env
+  WORQHAT_API_KEY=YOUR_API_KEY_GOES_HERE
+  ```
+
+2. Open the `index.js` file and add the following code. We are going to write a simple program
+that will make a POST request to the WorqHat API with the Question/Command and print the
+response to the console:
+
+```javascript index.js
+// Import the Request library to make requests to the WorqHat API
+const request = require("request");
+// Load the WorqHat AI API key from a file named ".env"
+require("dotenv").config();
+// Store the WorqHat API & ORG key in a variable for later use
+const worqhatApiKey = process.env.WORQHAT_API_KEY;
+const worqhatOrgKey = process.env.WORQHAT_ORG_KEY;
+
+// Set the URL for the API request
+const url = "https://api.worqhat.com/api/ai/content/v2";
+
+// Set the required headers for the API request
+const headers = {
+    "Authorization": `Bearer process.env.WORQHAT_API_KEY`,
+    "Content-Type": "application/json",
+};
+
+// Prepare the request body in JSON format
+const raw = JSON.stringify({
+    question: "Hi, tell me about you", // The question or command for the AI model
+    preserve_history: false, // Whether to preserve conversation history for the model. Set to false for one-off questions. Visit documentation for more info.
+    randomness: 0.4, // Level of randomness for AI model response (0 to 1)
+});
+
+// Configure the options for the API request
+const requestOptions = {
+    url: url,
+    method: "POST",
+    headers: headers,
+    body: raw,
+};
+
+// Send the API request
+request(requestOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+        console.log(body); // Print the response body if the request is successful
+    } else {
+        console.log("Error:", error); // Print the error message if the request fails
+    }
+});
+```
+
+### Step 5: Let's break down the code and understand what's going on
+
+1. First, we import the `request` package to make HTTP requests from our NodeJs app:
+
+```javascript index.js
+const request = require("request");
+```
+
+2. Next, we import the `dotenv` package to load environment variables from a `.env` file:
+
+```javascript index.js
+require("dotenv").config();
+```
+
+3. Next, we store the WorqHat API key in variables for later use:
+
+```javascript index.js
+const worqhatApiKey = process.env.WORQHAT_API_KEY;
+```
+
+4. Next, we set the URL for the API request:
+
+```javascript index.js
+const url = "https://api.worqhat.com/api/ai/content/v2";
+```
+
+5. Next, we set the required headers for the API request:
+
+```javascript index.js
+const headers = {
+    "Authorization": `Bearer process.env.WORQHAT_API_KEY`,
+   "Content-Type": "application/json",
+};
+```
+
+6. Next, we prepare the request body in JSON format. This is where we specify the question or
+command for the AI model and send the request to the API to get the response:
+
+```javascript index.js
+const raw = JSON.stringify({
+   question: "Hi, tell me about you", // The question or command for the AI model
+   preserve_history: false, // Whether to preserve conversation history for the model. Set to false for one-off questions. Visit documentation for more info.
+   randomness: 0.4, // Level of randomness for AI model response (0 to 1)
+});
+```
+
+This block of code is where the magic happens. We are sending a ``POST`` request to the WorqHat API,
+and we are passing the ``question/command`` to the API. The API will then process the question/command
+and return the ``response``.
+
+* **question**: The question or command for the AI model (required)
+* **preserve_history**: Whether to preserve conversation history for the model. Set to false for
+one-off questions. You can also pass in custom training data and conversation history in the for
+of Key-Value Pairs. Visit [documentation](https://devs.worqhat.com/WorqHatAPIs/AiText/aiconV2#sample-code) for more info.
+* **randomness**: Level of randomness for AI model response (0 to 1). The higher the randomness, the
+more varied the response will be.
+
+7. Next, we configure the options for the API request:
+
+```javascript index.js
+const requestOptions = {
+   url: url,
+   method: "POST",
+   headers: headers,
+   body: raw,
+};
+```
+
+This is where we specify the URL, HTTP method, headers, and request body that we have prepared
+and send the request to the WorqHat API  to process the question/command and return the response.
+
+8. Finally, we send the API request:
+
+```javascript index.js
+request(requestOptions, (error, response, body) => {
+   if (!error && response.statusCode === 200) {
+       console.log(body); // Print the response body if the request is successful
+   } else {
+       console.log("Error:", error); // Print the error message if the request fails
+   }
+});
+```
+
+This is where we send the API request to the WorqHat API and get the response. We are using the
+`request` package to send the request. We are also checking if the request is successful or not
+and printing the response body or error message accordingly.
+
+### Step 6: Run the code
+
+Now that we have written the code, let's run it and see what happens. To run the code, open the
+terminal and run the following command:
+
+```bash Terminal
+node index.js
+```
+
+You should see the following output in the terminal:
+
+```bash Terminal
+{
+  "id": "1d9affa3-deac-49ee-87e7-a8d0397826fb",
+  "status": "success",
+  "timestamp": 1683057609614,
+  "content": "I was built by WorqHat, a Generative AI Based No-Code Platform Builder based on the Advanced LLM Model AiCon. It's a predictive technology that is designed to make building applications faster and easier. Is there anything you need help with?",
+  "processing_count": 58
+}
+```
+
+This is the response from the WorqHat API. The response contains the following information:
+
+| Field | Description | Example |
+| --- | --- | --- |
+| ``id`` | The unique ID of the response | 1d9affa3-deac-49ee-87e7-a8d0397826fb |
+| ``status`` | The status of the response | success |
+| ``timestamp`` | The timestamp of the response | 1683057609614 |
+| ``content`` | The response from the AI model | I was built by WorqHat, a Generative AI Based No-Code Platform Builder based on the Advanced LLM Model AiCon. It's a predictive technology that is designed to make building applications faster and easier. Is there anything you need help with? |
+| ``processing_count`` | The number of times the question/command was processed by the AI model | 58 |
+
+
+<Check>Note: This code is using the super powerful AiCon V2 model from the WorqHat AI API, which is
+  famous
+  for
+  generating some seriously impressive text. However, it's important to use the API in a responsible
+  and ethical way, and be mindful of the model's limitations to avoid any misuse.</Check>
+
+## Let’s Start Building
+
+Now that you have learned how to use the WorqHat AI API, it's time to start building your own
+application. Today we will be building a simple AI Interview Bot that will ask you some questions
+and based on your answers you can get feedbacks on your answers. Let's get started!
+
+
+### Some interesting features
+
+These are some interesting features you can add to the product to make it more interesting. We have already added some of these features to the product, rest, show us your creativity.
+
+Great! Let's get started building the key features for the AI Interview Bot:
+
+1. **Question Bank:** The application will have a predefined set of interview questions stored in a question bank. These questions will cover various aspects, such as technical skills, problem-solving, behavioral, and situational questions.
+
+2. **User Input Handling:** The bot will be able to receive and process user input. It should be capable of understanding and interpreting the user's responses to the interview questions.
+
+3. **Natural Language Processing (NLP):** The AI Interview Bot will leverage NLP techniques to comprehend the user's answers. NLP algorithms will allow the bot to identify keywords, sentiment, and context within the responses.
+
+4. **Feedback Generation:** Based on the user's answers, the bot will provide constructive feedback on their responses. The feedback should highlight areas of strength and areas that need improvement in their answers.
+
+5. **Scoring System:** The application may incorporate a scoring system to evaluate the user's performance in each question. This scoring can be based on factors like relevance, clarity, and depth of the response.
+
+6. **Adaptive Difficulty:** Depending on the user's performance in previous questions, the bot may adjust the difficulty level of subsequent questions. This adaptive difficulty approach ensures that the user is presented with appropriate challenges throughout the interview.
+
+7. **Error Handling:** The bot should be able to handle unexpected responses or errors gracefully. It can provide polite error messages and ask the user to rephrase their answer if it doesn't understand the input.
+
+8. **Persistent User Data:** The application may include a feature to store and track user progress and performance over time. This allows users to review their past interviews and monitor their improvement.
+
+9. **User-Friendly Interface:** The bot can have a simple and intuitive user interface to make the interview experience pleasant for the users. It could be a web-based application or integrated into a messaging platform.
+
+10. **Customization:** To enhance the user experience, the application might allow users to customize certain aspects, such as choosing the type of interview (technical, behavioral, etc.), setting the interview duration, or selecting specific topics they want to focus on.
+
+
+Remember, building an AI Interview Bot involves various technologies, including Advanced Context and Voice Processing and you can use WorqHat's AI Processing
+APIs to build all of the complex functionalities. Let's get started!
+
+### Example Industry Use Cases
+
+This AI Interview Bot can find valuable applications in various industries. Here are some example use cases:
+
+1. **Human Resources and Recruitment:** Companies can use the AI Interview Bot as a preliminary screening tool to assess candidates' skills and suitability for a particular role. It can help HR teams filter through a large pool of applicants and identify potential candidates for further evaluation.
+
+2. **Education and Training:** Educational institutions and training organizations can leverage the AI Interview Bot to simulate interview scenarios for students or trainees. It can provide personalized feedback to help them improve their interview skills.
+
+3. **Career Counseling:** Career counselors and coaches can use the AI Interview Bot to assist individuals seeking career advice. By conducting mock interviews and analyzing responses, the bot can offer insights into areas for improvement and suggest suitable career paths.
+
+4. **Skill Assessment and Development:** The AI Interview Bot can be utilized by companies or individuals to assess and develop specific skills. For example, it could conduct technical interviews for software developers or evaluate communication skills for customer-facing roles.
+
+5. **Performance Appraisals:** In corporate settings, the bot can support performance appraisal processes. Employees can receive feedback on their interview responses, helping them understand areas where they excel and areas that need improvement.
+
+6. **Language Learning:** Language learners can practice their conversational skills with the AI Interview Bot. It can assess their language proficiency and provide feedback to enhance their speaking abilities.
+
+7. **Government Selection Processes:** Government agencies can use the AI Interview Bot to streamline the selection process for various positions. It can ensure fairness and objectivity in evaluating candidates.
+
+8. **Entrepreneurship and Startups:** Aspiring entrepreneurs can use the AI Interview Bot to practice pitching their ideas. The bot can evaluate the clarity and persuasiveness of their presentations.
+
+9. **Personal Development and Confidence Building:** Individuals seeking to boost their confidence in social interactions can engage with the AI Interview Bot to gain experience and receive constructive feedback.
+
+10. **Customer Service Training:** Companies with customer service teams can train their employees by conducting mock interviews that simulate real-life customer interactions. The bot can assess the effectiveness of responses in handling various customer scenarios.
+
+11. **Medical Residency Interviews:** Aspiring medical professionals can practice residency interview questions with the AI Interview Bot to prepare for their medical residency interviews.
+
+These are just a few examples, but the potential applications are vast, and the AI Interview Bot can be tailored to meet specific industry needs. The flexibility of the technology allows it to be adapted for different contexts and requirements. You have some other application on your mind. Please share it with us. You can reach out to us on our social media handles or email us at [support@worqhat.com] and we would be more than glad to set you up with some additional resources to help you build your application.
+
+You can also Ping us on our [Discord](https://discord.com/invite/KHh9mguKBx) channel and we would be more than happy to help you out.
+
+### Project Setup
+
+Now that you have learned about the AI Interview Bot, it's time to start building your own application. We
+will be using the WorqHat AI API to build the AI Interview Bot. The API is available for free and you
+can use it to build your own application. You can also use the API to build other applications such
+as chatbots, virtual assistants, and more.
+
+Here is a brief overview of all the Files and the Underlying Code that you will be working with:
+
+To get started with the project, you need to download the project files from the GitHub repository.
+You can download the files as a zip file or You can also clone & create this repo locally with the following command:
+
+```shell
+npx create-next-app ai-interview --example "https://github.com/WorqHat/AI-Interview-assist"
+```
+
+Once you have downloaded the project files, you can open the project in your favorite code editor.
+
+### Project Structure
+
+The project contains the following files and folders:
+
+```markdown
+AI-Interview-assist
+├─ app
+│  ├─ fonts
+│  │  └─ JetBrainsMono-Regular.ttf
+│  ├─ favicon.ico
+│  ├─ layout.tsx
+│  ├─ opengraph-image.tsx
+│  ├─ page.tsx
+│  └─ sitemap.ts
+├─ components
+│  └─ Gradient.js
+├─ pages
+│  ├─ api
+│  │  └─ transcribe.ts
+│  ├─ _app.tsx
+│  └─ try-interview.tsx
+├─ public
+│  ├─ ffmpeg
+│  │  └─ dist
+│  │     ├─ ffmpeg-core.js
+│  │     ├─ ffmpeg-core.wasm
+│  │     └─ ffmpeg-core.worker.js
+│  ├─ interviewers
+│  │  ├─ BehavioralSarah.mp4
+│  │  ├─ DemoInterviewMale.mp4
+│  │  ├─ JohnTechnical.mp4
+│  │  ├─ RichardBehavioral.mp4
+│  │  ├─ RichardTechnical.mp4
+│  │  └─ SarahTechnical.mp4
+│  ├─ placeholders
+│  │  ├─ John.webp
+│  │  ├─ Richard.webp
+│  │  └─ Sarah.webp
+│  ├─ JetBrainsMono-Regular.ttf
+│  ├─ WorqHat TM Logo.png
+│  └─ apple-touch-icon.png
+├─ styles
+│  └─ globals.css
+├─ LICENSE
+├─ README.md
+├─ next-env.d.ts
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ tailwind.config.js
+└─ tsconfig.json
+
+```
+
+Let's take a look at each of these files and folders in detail.
+
+#### app
+
+The ``app`` folder contains the following files:
+
+- ``fonts``: This folder contains the font file used in the project. You can use this font in your
+  project by importing it in your CSS file.
+
+- ``favicon.ico``: This file contains the favicon for the project. You can replace this file with your own favicon.
+
+- ``layout.tsx``: This file contains the layout for the project. You can modify this file to change
+  the layout of the project.
+
+- ``opengraph-image.tsx``: This file contains the Open Graph image for the project. You can replace
+  this file with your own Open Graph image generator code.
+
+- ``page.tsx``: This file contains the page for the project. You can modify this file to change the
+  page of the project.
+
+- ``sitemap.ts``: This file contains the sitemap for the project. You can modify this file to change
+    the sitemap of the project.
+
+#### components
+
+The ``components`` folder contains the following files:
+
+- ``Gradient.js``: This file contains the gradient component for the project. You can modify this
+  file to change the gradient of the project. [Stripe Gradient Animation](https://whatamesh.vercel.app/) - [@jordienr](https://twitter.com/jordienr) released a Mesh Gradient that uses WebGL and animates a beautiful gradient
+
+#### pages
+
+The ``pages`` folder contains the following files:
+
+- ``api``: This folder contains the API for the project. You can modify this file to change the API
+  of the project. We have used the [ffmpeg](https://ffmpeg.org/) library to convert the video to
+    audio. You can use any other library to convert the video to audio. Then we have used the [WorqHat Speech-to-Text AI API](https://docs.worqhat.com/api-reference/speech-extraction) – WorqHat's Speech-to-Text API to transcribe Interview audio to text. The API filters out all the filler words and gives you the transcript of the interview. You can use this API to build your own voice based applications as well. We have done this in the ``transcribe.ts`` file.
+
+- ``_app.tsx``: This file contains the app for the project. You can modify this file to change the
+  app of the project. We have used the [Next.js](https://nextjs.org/) framework to build the app.
+
+- ``try-interview.tsx``: This file contains the all the code for the project. You can modify this
+  file to change the code of the project. We have used [WorqHat Content Generation API](https://docs.worqhat.com/api-reference/text-generation-ai/aicon-v2-textgen) – WorqHat's Content Generation API to generate feedback for the Interviewee using AiCon V2 Text Models. You can use this API to build your own text based applications as well. We have done this in the ``try-interview.tsx`` file. This AI API generates feedback for the Interviewee based on the transcript of the interview. With its advanced Content and Context capabilities it can take into account the Questions, any additional thoughts if necessary and even the Interviewer's personality to generate feedback for the Interviewee.
+
+#### public
+
+The ``public`` folder contains the following files:
+
+- ``ffmpeg``: This folder contains the ffmpeg library for the project. You can modify this file to
+  change the ffmpeg library of the project. We have used the [ffmpeg](https://ffmpeg.org/) library
+    to convert the video to audio. You can use any other library to convert the video to audio.
+
+- ``interviewers``: This folder contains the interviewers for the project. You can modify this file
+    to change the interviewers of the project. We have used the [WorqHat Speech-to-Text AI API](https://docs.worqhat.com/api-reference/speech-extraction) – WorqHat's Speech-to-Text API to transcribe Interview audio to text. The API filters out all the filler words and gives you the transcript of the interview. You can use this API to build your own voice based applications as well. We have done this in the ``transcribe.ts`` file.
+
+- ``placeholders``: This folder contains the placeholders for the project. You can modify this file
+    to change the Interviewer placeholders of the project.
+
+- ``JetBrainsMono-Regular.ttf``: This file contains the font file used in the project. You can use
+  this font in your project by importing it in your CSS file.
+
+- ``WorqHat TM Logo.png``: This file contains the logo for the project. You can replace this file
+    with your own logo.
+
+- ``apple-touch-icon.png``: This file contains the icon for the project. You can replace this file
+    with your own icon.
+
+#### styles
+
+The ``styles`` folder contains the following files:
+
+- ``globals.css``: This file contains the global CSS for the project. You can modify this file to
+  change the global CSS of the project.
+
+#### LICENSE
+
+The ``LICENSE`` file contains the license for the project. You can modify this file to change the
+license of the project.
+
+#### README.md
+
+The ``README.md`` file contains the README for the project. You can modify this file to change the
+README of the project.
+
+#### next.config.js
+
+The ``next.config.js`` file contains the Next.js configuration for the project. You can modify this
+file to change the Next.js configuration of the project.
+
+#### package.json
+
+The ``package.json`` file contains the package.json for the project. You can modify this file to
+change the package.json of the project.
+
+#### tsconfig.json
+
+The ``tsconfig.json`` file contains the TypeScript configuration for the project. You can modify
+this file to change the TypeScript configuration of the project.
+
+We have provided a detailed explaination of the code in every file in the project. You can read the
+comments in the code to understand the code better.
+
+<Card title="Github Repository" icon="github" href="https://github.com/WorqHat/AI-Interview-assist">
+  You can use this GitHub repository as a reference to check your code against the reference code.
+</Card>
+
+
+### Step 3: Run the project
+
+Now that you have understood the code, you can run the project. To run the project, you need to
+install the dependencies first. To install the dependencies, run the following command in the
+terminal:
+
+```bash
+npm install
+```
+
+After installing the dependencies, you can run the project by running the following command in the
+terminal:
+
+```bash
+npm run dev
+```
+
+This will start the development server and open the project in your default browser. You can also
+open the project in your browser by going to [http://localhost:3000](http://localhost:3000).
+
+### Step 4: Modify the project
+
+Now that you have understood the code and run the project, you can modify the project. You can
+modify the project by modifying the code in the ``pages`` folder. You can also modify the project by
+modifying the code in the ``public`` folder. You can also modify the project by modifying the code
+in the ``styles`` folder. You can also modify the project by modifying the code in the ``LICENSE``
+file. You can also modify the project by modifying the code in the ``README.md`` file. You can also
+modify the project by modifying the code in the ``next.config.js`` file. You can also modify the
+project by modifying the code in the ``package.json`` file. You can also modify the project by
+modifying the code in the ``tsconfig.json`` file.
+
+
+## Congratulations!
+
+Congratulations! You have successfully completed the project. You can now test the project by
+refreshing the page or by rerunning ``npm run dev`` button in the top right corner of the page. You
+can
+also share the
+project with your friends and family to showcase your skills and accomplishments.
+
+
+You can go ahead and deploy the project on [Vercel](https://vercel.com) or [Netlify]
+(https://netlify.com). However, you will need to create an account on these platforms to deploy the
+project. You can also deploy the project on [GitHub Pages](https://pages.github.com) for free.
+
+After completing the project, you can submit it to the ``WorqHat team`` for review. We'll provide you
+with feedback and suggestions to help you improve your project. You can also share your project on
+social media to showcase your skills and accomplishments. After the project is reviewed, you'll
+receive a certificate of completion from WorqHat. You can add this certificate to your portfolio to
+demonstrate your skills and knowledge to potential employers. To submit your project, please follow
+the steps provided in the **Project Submission** section below.
+
+## Reference Code
+
+You can also find the code on [GitHub](https://github.com/WorqHat/AI-Interview-assist).
+
+<Card title="Github Repository" icon="github" href="https://github.com/WorqHat/AI-Interview-assist">
+  You can use this GitHub repository as a reference to check your code against the reference code.
+</Card>
+
+<iframe className="mt-6 w-full h-[400px]" src="https://stackblitz.com/github/WorqHat/AI-Interview-assist?embed=1&hideNavigation=1&theme=dark&view=editor"></iframe>
+
+## Project Submission
+
+Once you've completed the project, you can submit it to the WorqHat team for review. We'll provide you with feedback and suggestions to help you improve your project. You can also share your project on social media to showcase your skills and accomplishments.
+
+After the project is reviewed, you'll receive a certificate of completion from WorqHat. You can add this certificate to your portfolio to demonstrate your skills and knowledge to potential employers.
+
+To submit your project, please follow the steps below:
+
+1. Create a GitHub repository for your project.
+2. Upload your project files to the repository.
+3. Add a ``worqhat.json`` file to the root of the repository that includes the following
+information:
+
+  ```json [worqhat.json]
+  {
+     "name": "Your Name",
+     "deploymentUrl": "Your Project Deployment URL (If Deployed to Vercel)",
+     "authorEmail": "Your Email",
+     "repository": "Your Project Repository",
+     "feedback": "Your Feedback",
+     "tags": [
+        "Your Project Tags"
+     ]
+  }
+  ```
+
+4. Use the link to submit your GitHub repository to the WorqHat team for review. Visit the
+[WorqHat Submission Page](https://github.com/WorqHat/AI-Code-Generator) to submit your project.
+
+5. Once your project is certified, you will receive a certification badge that you can add to your
+project's README.md file and to your resume's and LinkedIn profile's certifications.
+
+## Project Feedback
+
+We'd love to hear your feedback on the project. Please take a moment to fill out the feedback in
+the ``worqhat.json`` file. You can also DM us your Feedbacks on the ``#feedbacks`` channel on
+discord [WorqHat's Discord community](https://discord.com/invite/KHh9mguKBx) or via email to [support@worqhat.com](mailto:support@worqhat.com). Your feedback will
+help us improve the project and make it more enjoyable for future learners.
+
+Do stay connected with us on our Social Channels, and we will keep you updated with our latest projects and courses.
+
+<CardGroup cols={4}>
+  <Card title="LinkedIn" icon="linkedin" color="#0077b5" href="https://www.linkedin.
+  com/company/worqhat">
+  </Card>
+  <Card title="Instagram" icon="instagram" color="#0285c7" href="https://www.instagram.com/worqhat">
+  </Card>
+  <Card title="Twitter" icon="twitter" color="#00acee" href="https://www.twitter.com/worqhat">
+  </Card>
+  <Card title="Discord" icon="discord" color="#5865F2" href="https://discord.com/invite/KHh9mguKBx">
+  </Card>
+</CardGroup>
