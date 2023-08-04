@@ -427,7 +427,9 @@ This AI Interview Bot can find valuable applications in various industries. Here
 
 11. **Medical Residency Interviews:** Aspiring medical professionals can practice residency interview questions with the AI Interview Bot to prepare for their medical residency interviews.
 
-These are just a few examples, but the potential applications are vast, and the AI Interview Bot can be tailored to meet specific industry needs. The flexibility of the technology allows it to be adapted for different contexts and requirements. You have some other application on your mind. Please share it with us. You can reach out to us on our social media handles or email us at [support@worqhat.com](mailto:support@worqhat.com] and we would be more than glad to set you up with some additional resources to help you build your application.
+These are just a few examples, but the potential applications are vast, and the AI Interview Bot can be tailored to meet specific industry needs. The flexibility of the technology allows it to be adapted for different contexts and requirements. You have some other application on your mind. Please share it with us. You can reach out to us on our social media handles or email us at [support@worqhat.com] and we would be more than glad to set you up with some additional resources to help you build your application.
+
+You can also Ping us on our [Discord](https://discord.com/invite/KHh9mguKBx) channel and we would be more than happy to help you out.
 
 ### Project Setup
 
@@ -438,7 +440,202 @@ as chatbots, virtual assistants, and more.
 
 Here is a brief overview of all the Files and the Underlying Code that you will be working with:
 
+To get started with the project, you need to download the project files from the GitHub repository.
+You can download the files as a zip file or You can also clone & create this repo locally with the following command:
 
+```shell
+npx create-next-app ai-interview --example "https://github.com/WorqHat/AI-Interview-assist"
+```
+
+Once you have downloaded the project files, you can open the project in your favorite code editor.
+
+### Project Structure
+
+The project contains the following files and folders:
+
+```markdown
+AI-Interview-assist
+├─ app
+│  ├─ fonts
+│  │  └─ JetBrainsMono-Regular.ttf
+│  ├─ favicon.ico
+│  ├─ layout.tsx
+│  ├─ opengraph-image.tsx
+│  ├─ page.tsx
+│  └─ sitemap.ts
+├─ components
+│  └─ Gradient.js
+├─ pages
+│  ├─ api
+│  │  └─ transcribe.ts
+│  ├─ _app.tsx
+│  └─ try-interview.tsx
+├─ public
+│  ├─ ffmpeg
+│  │  └─ dist
+│  │     ├─ ffmpeg-core.js
+│  │     ├─ ffmpeg-core.wasm
+│  │     └─ ffmpeg-core.worker.js
+│  ├─ interviewers
+│  │  ├─ BehavioralSarah.mp4
+│  │  ├─ DemoInterviewMale.mp4
+│  │  ├─ JohnTechnical.mp4
+│  │  ├─ RichardBehavioral.mp4
+│  │  ├─ RichardTechnical.mp4
+│  │  └─ SarahTechnical.mp4
+│  ├─ placeholders
+│  │  ├─ John.webp
+│  │  ├─ Richard.webp
+│  │  └─ Sarah.webp
+│  ├─ JetBrainsMono-Regular.ttf
+│  ├─ WorqHat TM Logo.png
+│  └─ apple-touch-icon.png
+├─ styles
+│  └─ globals.css
+├─ LICENSE
+├─ README.md
+├─ next-env.d.ts
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ tailwind.config.js
+└─ tsconfig.json
+
+```
+
+Let's take a look at each of these files and folders in detail.
+
+#### app
+
+The ``app`` folder contains the following files:
+
+- ``fonts``: This folder contains the font file used in the project. You can use this font in your
+  project by importing it in your CSS file.
+
+- ``favicon.ico``: This file contains the favicon for the project. You can replace this file with your own favicon.
+
+- ``layout.tsx``: This file contains the layout for the project. You can modify this file to change
+  the layout of the project.
+
+- ``opengraph-image.tsx``: This file contains the Open Graph image for the project. You can replace
+  this file with your own Open Graph image generator code.
+
+- ``page.tsx``: This file contains the page for the project. You can modify this file to change the
+  page of the project.
+
+- ``sitemap.ts``: This file contains the sitemap for the project. You can modify this file to change
+    the sitemap of the project.
+
+#### components
+
+The ``components`` folder contains the following files:
+
+- ``Gradient.js``: This file contains the gradient component for the project. You can modify this
+  file to change the gradient of the project. [Stripe Gradient Animation](https://whatamesh.vercel.app/) - [@jordienr](https://twitter.com/jordienr) released a Mesh Gradient that uses WebGL and animates a beautiful gradient
+
+#### pages
+
+The ``pages`` folder contains the following files:
+
+- ``api``: This folder contains the API for the project. You can modify this file to change the API
+  of the project. We have used the [ffmpeg](https://ffmpeg.org/) library to convert the video to
+    audio. You can use any other library to convert the video to audio. Then we have used the [WorqHat Speech-to-Text AI API](https://docs.worqhat.com/api-reference/speech-extraction) – WorqHat's Speech-to-Text API to transcribe Interview audio to text. The API filters out all the filler words and gives you the transcript of the interview. You can use this API to build your own voice based applications as well. We have done this in the ``transcribe.ts`` file.
+
+- ``_app.tsx``: This file contains the app for the project. You can modify this file to change the
+  app of the project. We have used the [Next.js](https://nextjs.org/) framework to build the app.
+
+- ``try-interview.tsx``: This file contains the all the code for the project. You can modify this
+  file to change the code of the project. We have used [WorqHat Content Generation API](https://docs.worqhat.com/api-reference/text-generation-ai/aicon-v2-textgen) – WorqHat's Content Generation API to generate feedback for the Interviewee using AiCon V2 Text Models. You can use this API to build your own text based applications as well. We have done this in the ``try-interview.tsx`` file. This AI API generates feedback for the Interviewee based on the transcript of the interview. With its advanced Content and Context capabilities it can take into account the Questions, any additional thoughts if necessary and even the Interviewer's personality to generate feedback for the Interviewee.
+
+#### public
+
+The ``public`` folder contains the following files:
+
+- ``ffmpeg``: This folder contains the ffmpeg library for the project. You can modify this file to
+  change the ffmpeg library of the project. We have used the [ffmpeg](https://ffmpeg.org/) library
+    to convert the video to audio. You can use any other library to convert the video to audio.
+
+- ``interviewers``: This folder contains the interviewers for the project. You can modify this file
+    to change the interviewers of the project. We have used the [WorqHat Speech-to-Text AI API](https://docs.worqhat.com/api-reference/speech-extraction) – WorqHat's Speech-to-Text API to transcribe Interview audio to text. The API filters out all the filler words and gives you the transcript of the interview. You can use this API to build your own voice based applications as well. We have done this in the ``transcribe.ts`` file.
+
+- ``placeholders``: This folder contains the placeholders for the project. You can modify this file
+    to change the Interviewer placeholders of the project.
+
+- ``JetBrainsMono-Regular.ttf``: This file contains the font file used in the project. You can use
+  this font in your project by importing it in your CSS file.
+
+- ``WorqHat TM Logo.png``: This file contains the logo for the project. You can replace this file
+    with your own logo.
+
+- ``apple-touch-icon.png``: This file contains the icon for the project. You can replace this file
+    with your own icon.
+
+#### styles
+
+The ``styles`` folder contains the following files:
+
+- ``globals.css``: This file contains the global CSS for the project. You can modify this file to
+  change the global CSS of the project.
+
+#### LICENSE
+
+The ``LICENSE`` file contains the license for the project. You can modify this file to change the
+license of the project.
+
+#### README.md
+
+The ``README.md`` file contains the README for the project. You can modify this file to change the
+README of the project.
+
+#### next.config.js
+
+The ``next.config.js`` file contains the Next.js configuration for the project. You can modify this
+file to change the Next.js configuration of the project.
+
+#### package.json
+
+The ``package.json`` file contains the package.json for the project. You can modify this file to
+change the package.json of the project.
+
+#### tsconfig.json
+
+The ``tsconfig.json`` file contains the TypeScript configuration for the project. You can modify
+this file to change the TypeScript configuration of the project.
+
+We have provided a detailed explaination of the code in every file in the project. You can read the
+comments in the code to understand the code better.
+
+### Step 3: Run the project
+
+Now that you have understood the code, you can run the project. To run the project, you need to
+install the dependencies first. To install the dependencies, run the following command in the
+terminal:
+
+```bash
+npm install
+```
+
+After installing the dependencies, you can run the project by running the following command in the
+terminal:
+
+```bash
+npm run dev
+```
+
+This will start the development server and open the project in your default browser. You can also
+open the project in your browser by going to [http://localhost:3000](http://localhost:3000).
+
+### Step 4: Modify the project
+
+Now that you have understood the code and run the project, you can modify the project. You can
+modify the project by modifying the code in the ``pages`` folder. You can also modify the project by
+modifying the code in the ``public`` folder. You can also modify the project by modifying the code
+in the ``styles`` folder. You can also modify the project by modifying the code in the ``LICENSE``
+file. You can also modify the project by modifying the code in the ``README.md`` file. You can also
+modify the project by modifying the code in the ``next.config.js`` file. You can also modify the
+project by modifying the code in the ``package.json`` file. You can also modify the project by
+modifying the code in the ``tsconfig.json`` file.
 
 
 ## Congratulations!
