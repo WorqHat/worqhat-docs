@@ -66,23 +66,6 @@ provides a supportive community that fosters learning and collaboration. [WorqHa
 
 We are excited to have you on this learning adventure with us! Let's create an enriching and empowering environment where we can learn and grow together.
 
-## Unleash the Power of WorqHat AI
-
-This is the Video Tutorial for the Entire Project. You can choose to follow it directly from
-here, or you can follow the written tutorial below. The Video has been broken into 2 parts for
-your convenience and to make it easier to follow.
-
-
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/S-kAtHuWYA4"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
-
 ## AI, WorqHatAI, and AiCon Models
 
 In the realm of artificial intelligence (AI) and machine learning, machines strive to simulate human intelligence, while machine learning focuses on enabling machines to learn and improve autonomously without explicit programming. In this context, WorqHat emerges as a groundbreaking no-code platform builder, harnessing the potential of Generative AI to create custom apps, workflows, and automation solutions tailored to businesses of all sizes.
@@ -93,13 +76,13 @@ At the heart of WorqHat lies the advanced deep learning model known as AiCon (AI
 
 The WorqHatAI API serves as a powerful tool, providing developers with access to WorqHat's cutting-edge AI models and the ability to train their own models. WorqHat's AiCon models are generative language models developed to generate coherent text based on substantial data inputs. AiCon V2, the fastest language model offered by WorqHat, boasts self-training capabilities and can handle requests involving up to 100,000 words in a single go. For tasks requiring logical thinking and increased creativity, AiCon V3, a larger and more advanced model, comes into play.
 
-To utilize WorqHat's API, developers must obtain an API key and an ORG key. These keys serve as access credentials and are essential for writing NodeJS programs that interact with WorqHat's API.
+To utilize WorqHat's API, developers must obtain an API key . These keys serve as access credentials and are essential for writing NodeJS programs that interact with WorqHat's API.
 
 Before diving into writing your first program using NodeJS and the WorqHat API, let's take a moment to understand the concept of an API key and how you can generate one to facilitate seamless integration with WorqHat's powerful services.
 
 ## WorqHat API Key
 
-In order to use the WorqHat API, you must first obtain an API key and the ORG Key. We offer a
+In order to use the WorqHat API, you must first obtain an API key. We offer a
 generous free tier that gets reset every month. You can also upgrade to a paid plan to get more
 API calls and more features.
 
@@ -117,13 +100,13 @@ to organize your projects and keep them separate from each other. This allows yo
 your workspace using your email address and password that you have set up during the signup process.
 6. After signing in, you'll be redirected to the dashboard. Click on the **Try Now** button on
 the **Build Your Own Applications with our API** card.
-7. You'll be redirected to the API page. You can find your API key and ORG key on the right-hand
-side of the screen. Click on the **Copy** button to copy the keys to your clipboard.
+7. You'll be redirected to the API page. You can find your API key Section on the right-hand
+side of the screen. Create a new key and Click on the **Copy** button to copy the keys to your clipboard.
 8. Also, make sure to add your Domain name to the **Allowed Domains** section. This will allow
 you to make API calls from your domain. For example, if you're making API calls from a website
-hosted on `https://example.com`, you'll need to add `example.com` to the **Allowed Domains** section.
+hosted on `https://example.com`, you'll need to add `https://example.com` to the **Allowed Domains** section.
 
-Here's an example of what the API key & ORG key looks like:
+Here's an example of what the API key looks like:
 
 <CodeGroup>
 
@@ -131,11 +114,6 @@ Here's an example of what the API key & ORG key looks like:
   var myHeaders = new Headers();
   myHeaders.append("x-org-key",
   "U2FsdGVkX1+DMFucNFhZT7b3KTDTPLvjKkfWV0XY+jK2tA44wGn+M+KTC1V/eAOX");
-  ```
-  ```bash ORG Key
-  var myHeaders = new Headers();
-  myHeaders.append("x-api-key",
-  "U2FsdGVkX1/hx889OFajtqRp5TdESHHakovIb3Qq52kqqy/zFhA9MlNSjghXMUzbOHEr9QhoOAJKmKXKA6Ol8A==");
   ```
 </CodeGroup>
 
@@ -147,7 +125,9 @@ b=0&title=1&a=1&loop=1&autoPlay=true&t=0&muted=1"></iframe>
 ## Quick Start with WorqHatAI API
 
 Now that you have your API key and ORG key, you can start using the WorqHat API. In this section,
-we'll walk you through the process of writing your first NodeJS program using the WorqHat API.
+we'll walk you through the process of writing your first NodeJS program using the WorqHat API.\
+
+<Check>You can skip this step if you have already worked with WorqHat APIs before.</Check>
 
 ### Step 1: Create a NodeJS App
 
@@ -210,7 +190,6 @@ Now, let’s move on to the coding part.
 
   ```bash .env
   WORQHAT_API_KEY=YOUR_API_KEY_GOES_HERE
-  WORQHAT_ORG_KEY=YOUR_ORG_KEY_GOES_HERE
   ```
 
 2. Open the `index.js` file and add the following code. We are going to write a simple program
@@ -231,8 +210,7 @@ const url = "https://api.worqhat.com/api/ai/content/v2";
 
 // Set the required headers for the API request
 const headers = {
-    "x-api-key": worqhatApiKey, // Replace with your API key
-    "x-org-key": worqhatOrgKey, // Replace with your ORG key
+    "Authorization": `Bearer process.env.WORQHAT_API_KEY`,
     "Content-Type": "application/json",
 };
 
@@ -275,11 +253,10 @@ const request = require("request");
 require("dotenv").config();
 ```
 
-3. Next, we store the WorqHat API key and ORG key in variables for later use:
+3. Next, we store the WorqHat API key in variables for later use:
 
 ```javascript index.js
 const worqhatApiKey = process.env.WORQHAT_API_KEY;
-const worqhatOrgKey = process.env.WORQHAT_ORG_KEY;
 ```
 
 4. Next, we set the URL for the API request:
@@ -292,8 +269,7 @@ const url = "https://api.worqhat.com/api/ai/content/v2";
 
 ```javascript index.js
 const headers = {
-   "x-api-key": worqhatApiKey, // Replace with your API key
-   "x-org-key": worqhatOrgKey, // Replace with your ORG key
+    "Authorization": `Bearer process.env.WORQHAT_API_KEY`,
    "Content-Type": "application/json",
 };
 ```
@@ -391,705 +367,79 @@ This is the response from the WorqHat API. The response contains the following i
 ## Let’s Start Building
 
 Now that you have learned how to use the WorqHat AI API, it's time to start building your own
-application. Today we will be building a simple AI Code Generator application using the WorqHat AI
-API. The application will generate code for you based on your requirements.
+application. Today we will be building a simple AI Interview Bot that will ask you some questions
+and based on your answers you can get feedbacks on your answers. Let's get started!
 
 
-### Key Features of the Application
+### Some interesting features
 
-* Generate code for you based on your requirements
-* Generate code for multiple programming languages
-* Responsive user experience for anyone to convert their codes in an instant.
-* Converting the natural language to any programming language.
+These are some interesting features you can add to the product to make it more interesting. We have already added some of these features to the product, rest, show us your creativity.
 
-<Latex>Example input: Add 2+3</Latex>
-<Latex>Example output in Python: sum = 2 + 3</Latex>
+Great! Let's get started building the key features for the AI Interview Bot:
 
-### Setup your Development Environment
+1. **Question Bank:** The application will have a predefined set of interview questions stored in a question bank. These questions will cover various aspects, such as technical skills, problem-solving, behavioral, and situational questions.
 
-Before diving into building our code translator project, it's essential to set up our development environment. By following these steps, we'll ensure that we have the necessary tools and configurations in place:
+2. **User Input Handling:** The bot will be able to receive and process user input. It should be capable of understanding and interpreting the user's responses to the interview questions.
 
-1. Install Node.js and npm
+3. **Natural Language Processing (NLP):** The AI Interview Bot will leverage NLP techniques to comprehend the user's answers. NLP algorithms will allow the bot to identify keywords, sentiment, and context within the responses.
 
-Node.js is a JavaScript runtime environment that allows you to run JavaScript code outside of a browser. It's used to build server-side applications and command-line tools. npm is a package manager for Node.js that allows you to install and manage third-party packages.
+4. **Feedback Generation:** Based on the user's answers, the bot will provide constructive feedback on their responses. The feedback should highlight areas of strength and areas that need improvement in their answers.
 
-To install Node.js and npm, follow the instructions for your operating system:
+5. **Scoring System:** The application may incorporate a scoring system to evaluate the user's performance in each question. This scoring can be based on factors like relevance, clarity, and depth of the response.
 
- * [Windows](https://nodejs.org/en/download/)
- * [macOS](https://nodejs.org/en/download/)
- * [Linux](https://nodejs.org/en/download/)
+6. **Adaptive Difficulty:** Depending on the user's performance in previous questions, the bot may adjust the difficulty level of subsequent questions. This adaptive difficulty approach ensures that the user is presented with appropriate challenges throughout the interview.
 
-2. Install NextJS: NextJS is a popular framework for building React applications. Install it globally on your machine by running the following command in your terminal:
+7. **Error Handling:** The bot should be able to handle unexpected responses or errors gracefully. It can provide polite error messages and ask the user to rephrase their answer if it doesn't understand the input.
 
-```bash Terminal
-npm install -g next
-```
+8. **Persistent User Data:** The application may include a feature to store and track user progress and performance over time. This allows users to review their past interviews and monitor their improvement.
 
-3. Create a New NextJS Project: Use the following command to create a new NextJS project in your desired directory:
+9. **User-Friendly Interface:** The bot can have a simple and intuitive user interface to make the interview experience pleasant for the users. It could be a web-based application or integrated into a messaging platform.
 
-```bash Terminal
-npx create-next-app my-code-translator
-```
+10. **Customization:** To enhance the user experience, the application might allow users to customize certain aspects, such as choosing the type of interview (technical, behavioral, etc.), setting the interview duration, or selecting specific topics they want to focus on.
 
-4. Navigate to the Project Directory: Move into the newly created project directory using the following command:
 
-```bash Terminal
-cd my-code-translator
-```
+Remember, building an AI Interview Bot involves various technologies, including Advanced Context and Voice Processing and you can use WorqHat's AI Processing
+APIs to build all of the complex functionalities. Let's get started!
 
-5. Obtain WorqHat API & ORG Key: If you haven't already, generate your ``API key`` and ``ORG key`` from WorqHat's website. These keys will be used to authenticate and access the WorqHat AI engine.
+### Example Industry Use Cases
 
-6. Configure API & ORG Keys: Open the project in your favorite code editor. Create a File Named .
-env. Add the following lines to the file, replacing YOUR_API_KEY and YOUR_ORG_KEY with your
-actual API key and ORG key, respectively:
+This AI Interview Bot can find valuable applications in various industries. Here are some example use cases:
 
-```bash .env
-WORQHAT_API_KEY=YOUR_WORQHAT_API_KEY
-WORQHAT_ORG_KEY=YOUR_WORQHAT_ORG_KEY
-```
+1. **Human Resources and Recruitment:** Companies can use the AI Interview Bot as a preliminary screening tool to assess candidates' skills and suitability for a particular role. It can help HR teams filter through a large pool of applicants and identify potential candidates for further evaluation.
 
-7. Install Dependencies: Install the dependencies for the project using the following command.
-We will add the dependencies as we go along. As of now, we will be installing the basic
-dependencies needed to run the project.
+2. **Education and Training:** Educational institutions and training organizations can leverage the AI Interview Bot to simulate interview scenarios for students or trainees. It can provide personalized feedback to help them improve their interview skills.
 
-```bash Terminal
-npm install
-```
+3. **Career Counseling:** Career counselors and coaches can use the AI Interview Bot to assist individuals seeking career advice. By conducting mock interviews and analyzing responses, the bot can offer insights into areas for improvement and suggest suitable career paths.
 
-8. Run the Project: Run the project using the following command:
+4. **Skill Assessment and Development:** The AI Interview Bot can be utilized by companies or individuals to assess and develop specific skills. For example, it could conduct technical interviews for software developers or evaluate communication skills for customer-facing roles.
 
-```bash Terminal
-npm run dev
-```
+5. **Performance Appraisals:** In corporate settings, the bot can support performance appraisal processes. Employees can receive feedback on their interview responses, helping them understand areas where they excel and areas that need improvement.
 
-9. Open the Project in Your Browser: Open the project in your browser by navigating to
-http://localhost:3000. You should see the default NextJS welcome page, indicating that your development environment is successfully set up.
+6. **Language Learning:** Language learners can practice their conversational skills with the AI Interview Bot. It can assess their language proficiency and provide feedback to enhance their speaking abilities.
 
-This is What you should see:
+7. **Government Selection Processes:** Government agencies can use the AI Interview Bot to streamline the selection process for various positions. It can ensure fairness and objectivity in evaluating candidates.
 
-<Frame caption="NextJS Welcome Terminal">
-  <img src="/images/text-code-nextjs-template.png" />
-</Frame>
-<br />
-<Check>With your development environment configured, we are now ready to learn and build our code
-  translator using NextJS and the power of WorqHat AI. Get ready for an exciting journey of
-  exploration and creation!.</Check>
+8. **Entrepreneurship and Startups:** Aspiring entrepreneurs can use the AI Interview Bot to practice pitching their ideas. The bot can evaluate the clarity and persuasiveness of their presentations.
 
+9. **Personal Development and Confidence Building:** Individuals seeking to boost their confidence in social interactions can engage with the AI Interview Bot to gain experience and receive constructive feedback.
 
-The project is now ready to be built. This is the basic setup for the project. We will be adding
-more dependencies as we go along. The file structure of the project will be looking like this:
+10. **Customer Service Training:** Companies with customer service teams can train their employees by conducting mock interviews that simulate real-life customer interactions. The bot can assess the effectiveness of responses in handling various customer scenarios.
 
-<Frame caption="File Structure for the Project">
-  <img src="/images//text-code-fs2.png" />
-</Frame>
+11. **Medical Residency Interviews:** Aspiring medical professionals can practice residency interview questions with the AI Interview Bot to prepare for their medical residency interviews.
 
+These are just a few examples, but the potential applications are vast, and the AI Interview Bot can be tailored to meet specific industry needs. The flexibility of the technology allows it to be adapted for different contexts and requirements. You have some other application on your mind. Please share it with us. You can reach out to us on our social media handles or email us at [support@worqhat.com](mailto:support@worqhat.com] and we would be more than glad to set you up with some additional resources to help you build your application.
 
-Well done! You've successfully set up your development environment. Now let's start building our
-code translator application.
+### Project Setup
 
-### Building the Code Translator Application
+Now that you have learned about the AI Interview Bot, it's time to start building your own application. We
+will be using the WorqHat AI API to build the AI Interview Bot. The API is available for free and you
+can use it to build your own application. You can also use the API to build other applications such
+as chatbots, virtual assistants, and more.
 
-A brief summary of what we will be doing to create our application.
+Here is a brief overview of all the Files and the Underlying Code that you will be working with:
 
-This code serves as the foundation for building a text-to-code generator application using Next.js and the WorqHat AI engine. The application allows users to input natural language queries and receive corresponding code snippets in their chosen programming language.
 
-The code begins by importing the necessary dependencies, including React's ``useState``, Next.js modules, and other required libraries.
 
-The main component, ``HomePage``, is defined, which acts as the entry point for the home page of the application. It includes the necessary metadata and the ``Home`` component.
-
-The ``Home`` component handles the user interface and logic for generating code from natural language input. It utilizes the ``useState`` hook to manage the component's state, including the ``selected language``, ``entered text``, ``generated code``, and ``loading status``.
-
-The component dynamically imports the Editor component using Next.js' dynamic function, ensuring it is only loaded on the client-side.
-
-Two important functions, ``createPrompt`` and ``fetchAIResponse``, are defined to facilitate the generation of code from natural language. The ``createPrompt`` function generates a prompt based on the selected language and user input, while the ``fetchAIResponse`` function performs an asynchronous HTTP request to the WorqHat AI API, passing the prompt and receiving the AI-generated code response.
-
-The user interface is rendered using ``JSX``, which includes input fields for the question and
-language selection, a button to trigger code generation, and an embedded code editor ``(Monaco
-Editor)`` to display the generated code. The UI elements are styled using CSS classes of
-``TailwindCSS``.
-
-The code also handles events, such as the button click event to initiate code generation, and updates the component's state accordingly.
-
-We will be covering all the necessary ``structure``, ``logic``, and ``user interface components`` to build a
-text-to-code generator application. By leveraging the ``WorqHat AI engine`` and ``Next.js``, users can input natural language queries and obtain corresponding code snippets, enhancing their programming experience and facilitating better collaboration and comprehension.
-
-### Let's Create the Frontend of the Application
-
-Next.js is a powerful framework for building React applications with server-side rendering capabilities. In this tutorial, we will walk through the process of setting up the entry point for a Next.js application and customizing the initial HTML document. We will also focus on the index.js file, which serves as the main starting point for our application.
-
-The first step in building our application is to create the home page design and layout. We will be using ``TailwindCSS`` to style our application. TailwindCSS is a utility-first CSS framework that allows you to rapidly build custom user interfaces. It provides a set of pre-defined CSS classes that can be used to style HTML elements.
-
-#### Step 1: Removing Unnecessary Files
-
-Before we begin, let's remove any unnecessary files from our project. In this case, we can safely remove the "apis" directory since we won't be using it in this tutorial
-
-#### Step 2: Understanding the ``_app.js`` File
-
-The _app.js file serves as the entry point for our Next.js application. It acts as a wrapper component for all other components in the application and allows us to define global styles. Let's take a closer look at the code:
-
-```javascript _app.js
-import '../styles/globals.css';
-
-function App({ Component, pageProps }) {
-   return <Component {...pageProps} />;
-}
-
-export default App;
-```
-
-- We import the global styles defined in the "globals.css" file. These styles will be applied
-globally throughout our application.
-- The `App` component is a functional component that receives two parameters: `Component` and `pageProps`.
-- Inside the `App` component, we render the `Component` using JSX syntax, spreading the `pageProps` as
-props to the `Component`. This ensures that the initial props for the page component are passed down correctly.
-
-#### Step 3: Understanding the ``_document.js`` File
-
-The _document.js file allows us to customize the initial HTML document that is sent to the browser. Let's understand the code:
-
-```javascript _document.js
-export default function Document() {
-   return (
-      <Html lang="en">
-         <Head />
-         <body>
-            <Main />
-            <NextScript />
-         </body>
-      </Html>
-   );
-}
-```
-
-- We import specific components from the ``next/document`` module: ``Html``, ``Head``, ``Main``, and ``NextScript``.
-These components are provided by Next.js and are used to define the structure and content of the HTML document.
-- The ``Document`` function is a React functional component that returns JSX code.
-- The JSX code represents the structure and content of the HTML document.
-- The ``<Html>`` component is the root element of the document and includes an optional `lang`
-attribute set to "en" to specify the language as English.
-
-The ``<body>`` element is where the main content of the page resides. Inside the ``<body>``, we have two components: ``<Main>`` and ``<NextScript>``.
-The ``<Main>`` component acts as a placeholder for the main content of the page.
-The ``<NextScript>`` component includes the necessary Next.js scripts and other resources.
-
-#### Step 4: Starting from Scratch in ``index.js``
-
-To begin, we need to import the necessary modules. In our case, we will use the next/image module to include images and the next/font/google module to configure custom fonts. Add the following lines at the beginning of the index.js file:
-
-```javascript index.js
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-```
-
-#### Step 5: Configuring Custom Fonts
-
-Next, we will configure a custom font for our application using the Inter font from Google Fonts. We will assign it to the inter constant. Update your code as follows:
-
-```javascript index.js
-const inter = Inter({ subsets: ['latin'] });
-```
-
-#### Step 6: Building the Homepage Component
-
-Now, let's define the homePage component, which will represent our homepage. Replace the existing code in the index.js file with the following:
-
-```javascript index.js
-function homePage() {
-   return (
-           <main>
-              This is the sample code.
-           </main>
-   );
-}
-
-export default homePage;
-```
-
-In this code, we define the ``homePage`` function as a React functional component. It returns JSX code representing the main content of the homepage. The ``<main>`` element contains the text "This is the sample code."
-
-To view the changes you've made in the code on the actual webpage, follow these simple steps:
-
-- Save the changes you've made to the code.
-- Ensure that your Next.js application is up and running. If not, start the development server by
-executing the appropriate command, such as npm run dev or yarn dev.
-- Open a web browser and navigate to the URL where your Next.js application is hosted. Typically,
-this would be http://localhost:3000.
-- Once the page loads, you will see the updated content displayed on the screen. In this case,
-the text "This is the sample code" will be shown within a `<main>` element.
-
-#### Step 7: Let's add the background styling to the homepage
-
-Now, let's add some styling to the homepage. We will use standard CSS to style the background of
-the page. Update your code in ``body tag`` as follows:
-
-```css globals.css
-html, body {
-   margin: 0;
-   padding: 0;
-   height: 100%;
-}
-
-body {
-   background: linear-gradient(135deg, #efb0b0, #e6b1f1, #9aa6ef) no-repeat;
-   background-size: cover;
-}
-```
-
-The provided CSS code sets the `html` and `body` elements to have no margin or padding, and a height of 100% to occupy the full viewport height. The `body` element is styled with a linear gradient background that starts in the top-left corner and moves to the bottom-right corner. The `background-size` property is set to `cover` to ensure the background image covers the entire background area, creating a visually appealing full-screen background effect for the webpage.
-
-#### Step 8: Adding the Homepage Components
-
-We will now add the components that will be displayed on the homepage. We will create a new
-function called ``HomeComponents`` that will return the JSX code for the components. Update
-your code as follows:
-
-```javascript [index.js]
-function HomeComponents(){
-   return (
-           <div className="text-black">
-              <h1 className="text-4xl md:text-5xl text-center mt-8 font-bold">Text to Code Generator</h1>
-              <div className="text-center mt-8 text-xl md:text-2xl font-semibold">
-                 Generate Code from Natural Language using WorqHat AI in a Click!
-              </div>
-
-              <div className="container">
-                 <div className="mb-6">
-                    <input type="text" id="textbox1" placeholder="Enter your Question here"
-                           className="block mx-auto w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500">
-                    </input>
-                 </div>
-                 <select id="language" className="mx-auto mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4">
-                    <option value="">Select language</option>
-                    <option value="c++">C++</option>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="c#">C#</option>
-                    <option value="ruby">Ruby</option>
-                    <option value="go">Go</option>
-                    <option value="swift">Swift</option>
-                    <option value="php">PHP</option>
-                    <option value="typescript">TypeScript</option>
-                    <option value="kotlin">Kotlin</option>
-                    <option value="rust">Rust</option>
-                    <option value="matlab">MATLAB</option>
-                    <option value="r">R</option>
-                    <option value="perl">Perl</option>
-                    <option value="scala">Scala</option>
-                    <option value="objective-c">Objective-C</option>
-                    <option value="groovy">Groovy</option>
-                    <option value="lua">Lua</option>
-                    <option value="bash">Bash</option>
-                    <option value="powershell">PowerShell</option>
-                 </select>
-
-                 <div className="w-full text-center">
-                    <button id="generateButton"
-                            className="mx-auto text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xl px-5 py-2.5 text-center mr-2 mb-2">
-                       Generate Code
-                    </button>
-                 </div>
-              </div>
-           </div>
-   );
-}
-```
-
-In this code, we define the ``HomeComponents`` function as a React functional component. It returns JSX code representing the components that will be displayed on the homepage. The ``<div>`` element contains the following components:
-
-- ``<h1>`` element containing the text "Text to Code Generator"
-- ``<div>`` element containing the text "Generate Code from Natural Language using WorqHat AI in a Click!"
-- ``<div>`` element containing the following components:
-- ``<input>`` element for entering the question
-- ``<select>`` element for selecting the programming language
-- ``<button>`` element for generating the code
-- ``<div>`` element for displaying the generated code
-
-We need to style the container properly as well. We will use CSS to style the container. Update
-your code in ``globals.css`` as follows:
-
-```css globals.css
-.container {
-    color: black;
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 70px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-```
-
-The provided CSS code sets the ``.container`` class to have a black text color, a maximum width of 90%, a top margin of 70px, and a padding of 20px. The background color is set to #f5f5f5, and the border radius is set to 8px. The box shadow is set to 0 0 10px rgba(0, 0, 0, 0.2) to create a shadow effect for the container.
-
-Now we will add the ``HomeComponents`` function to the ``homePage`` function. Update your code as follows:
-
-```javascript index.js
-function homePage(){
-    return(
-        <main>
-            <HomeComponents></HomeComponents>
-        </main>
-    )
-}
-```
-#### Step 9: Adding the Code Editor
-
-We will now add the code editor component to the homepage. We will create a new function called
-``CodeEditor`` that will return the JSX code for the code editor. We will be using [Monaco Editor](https://microsoft.github.io/monaco-editor/) for the code editor. Update your code as follows:
-
-First we need to install the ``@monaco-editor/react`` package. Run the following command in the terminal:
-
-```bash
-npm install @monaco-editor/react
-```
-
-```javascript index.js
-import dynamic from 'next/dynamic';
-const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false});
-```
-
-The ``Editor`` component is imported from the ``@monaco-editor/react`` package. The ``dynamic`` function is used to import the component dynamically. The ``ssr`` option is set to false to prevent the component from being rendered on the server.
-
-Now we will create the ``CodeEditor`` inside the HomeComponents. Update your code as follows:
-
-```javascript index.js
-<div className="edit">
-    <Editor
-        height="400px"
-        language="javascript"
-        theme="vs-dark"
-        defaultValue="// Generated code will appear here"
-        defaultLanguage="javascript"
-        value="// Generated code will appear here"
-        options={{
-            readOnly: true,
-            wordWrap: "wordWrapRow", // Enable word wrapping at a specific column
-            wordWrapRow: 10,
-        }}
-    />
-    <br />
-</div>
-```
-
-Add this after the ``<button>`` element in the ``HomeComponents`` function. The ``<div>`` element contains the ``<Editor>`` component. The ``<Editor>`` component has the properties to render the code that is being written.
-
-The ``<div>`` element contains the ``<Editor>``
-component. The ``<Editor>`` component has the properties to render the code that is being written.
-
-Now that we are halfway through the project, at this stage, your Project should be looking
-something like this:
-
-
-<Frame caption="Your Application Halfway">
-  <img src="/images/text-code-halfway.png" />
-</Frame>
-
-
-#### Step 10: Lets work on Handling the button clicks
-
-We will now add the code to handle the button clicks. We will create a new function called
-``handleGenerateCodeClick`` that will handle the button clicks. Update your code as follows:
-
-```javascript index.js
-  const handleGenerateCodeClick = async () => {
-
-    const language = document.getElementById('language').value;
-    const questionText = document.getElementById('textbox1').value;
-};
-```
-
-The ``handleGenerateCodeClick`` function is defined as an asynchronous function. It gets the
-value of the ``language`` and ``questionText`` variables from the ``<select>`` and ``<input>``
-elements respectively. We will use these variables to generate the code. Now there are a few
-things we need to add as a functionality as well:
-
-- We need to create a Function that will call the API and get the response.
-- We need to create a Function that will create the Command that needs to be sent to the API.
-- We need to display the code response from the API.
-- We need to add a loader to show that the code is being generated.
-
-#### Step 11: Creating the Fetch Request
-
-We will now create a new function called ``fetchAIResponse`` that will call the API and get the
-response. Update your code as follows:
-
-```javascript index.js
-async function fetchAIResponse(selectedLanguage, question) {
-    const API_ENDPOINT = 'https://api.worqhat.com/api/ai/content/v2';
-
-    const API_KEY = process.env.WORQHAT_API_KEY;
-    const ORG_KEY = process.env.WORQHAT_ORG_KEY;
-
-    console.log(API_KEY);
-
-    const prompt = "This is the command that will be sent to the API"
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': API_KEY,
-            'x-org-key': ORG_KEY,
-        },
-        body: JSON.stringify({
-            question: prompt,
-            randomness: 0.4,
-        }),
-    };
-
-    const response = await fetch(API_ENDPOINT, requestOptions);
-    return await response.json();
-}
-```
-
-The ``fetchAIResponse`` function is defined as an asynchronous function. It gets the value of
-the ``selectedLanguage`` and ``question`` variables from the ``<select>`` and ``<input>`` that
-we will be passing as parameters to the function. We will use these variables to generate the
-code. The ``fetchAIResponse`` function will return the response from the API.
-
-Now we have to add the variables to the environment variables. Create a new file called
-``.env`` in the root directory of the project. Add the following code to the file:
-
-```bash .env
-WORQHAT_API_KEY=YOUR_WORQHAT_API_KEY
-WORQHAT_ORG_KEY=YOUR_WORQHAT_ORG_KEY
-```
-
-In order to get the API keys, you will need to create an account on [WorqHat](https://worqhat.com). Once you have created an account, you will be able to get the API keys from the [API Keys](https://app.worqhat.com/api-keys) page.
-
-Now to access the API keys in the code, we will need to add it to the ``next,config.js`` file.
-Update your code as follows:
-
-```javascript next.config.js
-/** @type {import('next').NextConfig} */
-require('dotenv').config();
-
-module.exports = {
-    reactStrictMode: true,
-    env: {
-        WORQHAT_API_KEY: process.env.WORQHAT_API_KEY,
-        WORQHAT_ORG_KEY: process.env.WORQHAT_ORG_KEY,
-    },
-};
-```
-
-This code is a Next.js configuration file that demonstrates how to use environment variables in a Next.js application. It loads environment variables from a `.env` file using the `dotenv` package. The `nextConfig` object contains Next.js configuration options, and `reactStrictMode` is set to `true` to enable strict mode for React. The `env` object exposes environment variables `WORQHAT_API_KEY` and `WORQHAT_ORG_KEY`, which are assigned values from the corresponding environment variables in the `.env` file. This approach helps keep sensitive information secure and allows for flexible configuration across different environments.
-
-#### Step 12: Creating the function to create the ``Command``
-
-We will now create a new function called ``createPrompt`` that will create the Command that
-needs to be sent to the API. Update your code as follows:
-
-```javascript index.js
-const createPrompt = (inputLanguage, inputCode) => {
-  return endent`
-  You are an expert programmer in all programming languages. Translate the natural language to "${inputLanguage}" code. Do not include \\\\.
-
-      Example translating from natural language to JavaScript:
-
-      Natural language:
-      Print the numbers 0 to 9.
-
-  JavaScript code:
-      for (let i = 0; i < 10; i++) {
-          console.log(i);
-      }
-
-  Natural language:
-      ${inputCode}
-
-      ${inputLanguage} code (no \\\\):
-  `;
-};
-```
-
-The ``createPrompt`` function is defined as a function. It gets the value of the ``inputLanguage`` and ``inputCode`` variables from the ``<select>`` and ``<input>`` that we will be passing as parameters to the function. We will use these variables to generate the code. The ``createPrompt`` function will return the Command that needs to be sent to the API.
-
-We have used ``endent`` to format the Command. ``endent`` is a JavaScript template literal tag
-that strips leading whitespace from multi-line strings. It is used to format the Command in a
-readable way. We have created the Command in such a way that it will be easy for the AI to
-generate the code.
-
-Now we will update the ``fetchAIResponse`` function to call the ``createPrompt`` function. Update
-your code as follows:
-
-```javascript index.js
-async function fetchAIResponse(selectedLanguage, question) {
-    const API_ENDPOINT = 'https://api.worqhat.com/api/ai/content/v2';
-
-    const API_KEY = process.env.WORQHAT_API_KEY;
-    const ORG_KEY = process.env.WORQHAT_ORG_KEY;
-
-    console.log(API_KEY);
-
-    const prompt = createPrompt(selectedLanguage, question);
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': API_KEY,
-            'x-org-key': ORG_KEY,
-        },
-        body: JSON.stringify({
-            question: prompt,
-            randomness: 0.4,
-        }),
-    };
-
-    const response = await fetch(API_ENDPOINT, requestOptions);
-    return await response.json();
-}
-```
-
-#### Step 13: Running the function once the user clicks on the ``Generate Code`` button
-
-We will now update the ``generateCode`` function to call the ``fetchAIResponse`` function. Update
-your code as follows:
-
-```javascript index.js
-const handleGenerateCodeClick = async () => {
-
-    const language = document.getElementById('language').value;
-    const questionText = document.getElementById('textbox1').value;
-
-    let responseData = await fetchAIResponse(language, questionText);
-    if (responseData?.status == 'success') {
-        console.log(responseData);
-    } else {
-        console.log('Error');
-    }
-};
-```
-
-This code snippet sends a request to an AI service by calling the `fetchAIResponse()` function with the `language` and `questionText` parameters. It then waits for the response using the `await` keyword.
-
-If the `responseData` object exists and its `status` property is equal to `'success'`, the code block inside the `if` statement is executed. In this case, the code logs the `responseData` object to the console using `console.log()`. This is useful for debugging and inspecting the response data received from the AI service.
-
-If the `responseData` object does not meet the success condition, meaning the API call was not successful, the code block inside the `else` statement is executed. In this case, the code simply logs the string `'Error'` to the console.
-
-We also need to Print this code into the ``code-editor`` that we have created earlier. You need to update the ``handleGenerateCodeClick`` function as follows:
-
-We first need to import the ``useState`` hook from ``react``. The ``useState`` hook is a function that allows you to create state variables inside a React component. It accepts an initial value as an argument and returns an array containing the state variable and a function to update the state variable. We will use the `useState()` hook to create a state variable called `generatedCode` and a function called `setGeneratedCode()` to update the state variable.
-
-```javascript index.js
-import React, { useState } from 'react';
-```
-
-```javascript [index.js]
-const [generatedCode, setGeneratedCode] = useState('');
-const [selectedLanguage,setSelectedLanguage] = useState('');
-
-const handleGenerateCodeClick = async () => {
-
-    const language = document.getElementById('language').value;
-    const questionText = document.getElementById('textbox1').value;
-
-    let responseData = await fetchAIResponse(language, questionText);
-    if (responseData?.status == 'success') {
-
-        let responseCode = responseData?.content || '';
-        if (responseCode.includes('```')) {
-            responseCode = responseCode.split('```')[1];
-            setGeneratedCode(responseCode);
-        } else {
-            setGeneratedCode(`${responseCode}`);
-        }
-
-    } else {
-        setGeneratedCode('Sorry, we could not generate code for your question. Please try again.');
-    }
-};
-```
-
-We have updated the ``handleGenerateCodeClick`` function to set the ``generatedCode`` state
-variable to the code generated by the AI service. We have also updated the
-``handleGenerateCodeClick`` function to set the ``selectedLanguage`` state variable to the
-language selected by the user. We are passing these variables to the ``code-editor`` component
-as props.
-
-The ``code-editor`` component will be updated to accept these props and display the generated
-code in the editor. Update the ``code-editor`` component as follows:
-
-```javascript [code-editor.js]
-<div className="edit">
-    <Editor
-        height="400px"
-        language={selectedLanguage}
-        theme="vs-dark"
-        defaultValue="// Generated code will appear here"
-        defaultLanguage="javascript"
-        value={setGeneratedCode}
-        options={{
-            readOnly: true,
-            wordWrap: "wordWrapRow", // Enable word wrapping at a specific column
-            wordWrapRow: 10,
-        }}
-    />
-    <br />
-</div>
-```
-
-We have updated the ``code-editor`` component to accept the ``selectedLanguage`` and
-``generatedCode`` props. We have also updated the ``code-editor`` component to display the
-generated code in the editor.
-
-Now we can add the Loading indicator to the ``Generate Code`` button. This will help the user
-know that the code is being generated. Update the ``handleGenerateCodeClick`` function as follows:
-
-```javascript [index.js]
-const [generatedCode, setGeneratedCode] = useState('');
-const [selectedLanguage,setSelectedLanguage] = useState('');
-const [loading, setLoading] = useState(false);
-
-const handleGenerateCodeClick = async () => {
-
-    const language = document.getElementById('language').value;
-    const questionText = document.getElementById('textbox1').value;
-
-    setLoading(true);
-    setSelectedLanguage(language)
-
-
-    let responseData = await fetchAIResponse(language, questionText);
-    if (responseData?.status == 'success') {
-
-        let responseCode = responseData?.content || '';
-        if (responseCode.includes('```')) {
-            responseCode = responseCode.split('```')[1];
-            setGeneratedCode(responseCode);
-            setLoading(false);
-        } else {
-            setGeneratedCode(`${responseCode}`);
-            setLoading(false);
-        }
-
-    } else {
-        setGeneratedCode('Sorry, we could not generate code for your question. Please try again.');
-        setLoading(false);
-    }
-};
-```
-
-We have updated the ``handleGenerateCodeClick`` function to set the ``loading`` state variable
-to ``true`` when the user clicks on the ``Generate Code`` button. We have also updated the
-``handleGenerateCodeClick`` function to set the ``loading`` state variable to ``false`` when
-the code is generated or an error occurs.
-
-We have also updated the ``Generate Code`` button to display the Loading indicator when the
-``loading`` state variable is ``true``. Update the ``Generate Code`` button as follows:
-
-```javascript [index.js]
-<button id="generateButton" className="mx-auto text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xl px-5 py-2.5 text-center mr-2 mb-2" onClick={handleGenerateCodeClick}>
-    {loading ? `Writing your Code ....` : 'Generate Code'}
-</button>
-```
-
-We have updated the ``Generate Code`` button to display the Loading indicator (`Writing your Code ....`) when the
-``loading`` state variable is ``true``. We have also updated the ``Generate Code`` button to
-display the ``Generate Code`` text when the ``loading`` state variable is ``false``
 
 ## Congratulations!
 
