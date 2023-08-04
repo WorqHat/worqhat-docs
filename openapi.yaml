@@ -1378,7 +1378,7 @@ paths:
               properties:
                 existing_datasetId:
                   type: string
-                  description: This field is optional. If you want to retrain an already trained model, you must provide the ID of the existing dataset.
+                  description: This field is optional. If you want to retrain an already trained model, you must provide the ID of the existing dataset. Leave Blank if this is a new dataset
                 dataset_name:
                   type: string
                   description: Name of the dataset
@@ -1390,20 +1390,19 @@ paths:
                   enum:
                     - Self
                     - org
-                  description: Type of the dataset. Org means all Admins and Developers can access it while Self means only you can access it.
+                  description: Type of the dataset. Select self if you want to have the access to the Trained Dataset Model only for yourself. Select Org if you want to allow all the developers and admins of the organizations have access to the trained dataset.
                 training_file:
                   type: array
                   items:
-                    type: file
-                  description: Training file(s) to be uploaded. We only support .csv files for
-                    training Search Models. You can upload multiple files at once by passing
-                    multiple files in the array.
+                    type: string
+                  description: Training file(s) to be uploaded. We only support .pdf, .txt, .json
+                    and .csv files for training Generative Models. You can upload multiple files at
+                    once by passing multiple files in the array.
                   example:
                     - /C:/Users/ghosh/Downloads/username-password-recovery-code.csv
                     - /path/to/file
-                json_data:
-                  type: string
-                  description: You can also pass a stringfied JSON content as Training Data
+
+
 
       responses:
         '200':
@@ -1491,11 +1490,6 @@ paths:
             schema:
               type: object
               properties:
-                training_stage:
-                  type: string
-                  enum:
-                    - new
-                    - existing
                 existing_datasetId:
                   type: string
                   description: ID of the existing dataset (required if training_stage is "existing")
@@ -1504,7 +1498,7 @@ paths:
                   description: Name of the dataset
                 dataset_description:
                   type: string
-                  description: Description of the dataset
+                  description: Type of the dataset. Select self if you want to have the access to the Trained Dataset Model only for yourself. Select Org if you want to allow all the developers and admins of the organizations have access to the trained dataset.
                 dataset_type:
                   type: string
                   enum:
@@ -1521,6 +1515,7 @@ paths:
                   example:
                     - /C:/Users/ghosh/Downloads/username-password-recovery-code.csv
                     - /path/to/file
+
       responses:
         '200':
           description: Successful response
