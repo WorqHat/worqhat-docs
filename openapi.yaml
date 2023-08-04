@@ -43,8 +43,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
 
   /api/ai/speech-text:
@@ -91,8 +90,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/moderation:
     post:
@@ -139,8 +137,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/v2/image-moderation:
     post:
@@ -194,8 +191,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/v2/web-extract:
     post:
@@ -257,8 +253,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/v2/pdf-extract:
     post:
@@ -305,8 +300,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/v2/image-text-detection:
     post:
@@ -377,8 +371,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/v2:
     post:
@@ -453,8 +446,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/aicon-12b:
     post:
@@ -529,8 +521,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/v3:
     post:
@@ -605,8 +596,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/aicon-25b:
     post:
@@ -681,8 +671,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/generate/v2:
     post:
@@ -759,8 +748,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/generate/v3:
     post:
@@ -837,8 +825,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/upscale/v3:
     post:
@@ -906,8 +893,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/modify/v2:
     post:
@@ -974,8 +960,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/modify/v3:
     post:
@@ -1042,8 +1027,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/v2/face-detection:
     post:
@@ -1096,8 +1080,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/v2/image-analysis:
     post:
@@ -1148,8 +1131,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/images/v2/facial-comparison:
     post:
@@ -1206,8 +1188,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/delete-datasets/{datasetId}:
     delete:
@@ -1267,8 +1248,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/list-datasets:
     get:
@@ -1364,8 +1344,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/search/train-datasets:
     post:
@@ -1478,8 +1457,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/v2-large/train-datasets:
     post:
@@ -1590,8 +1568,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/aicon-12b-large/train-datasets:
     post:
@@ -1706,8 +1683,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/v2/new/alpha:
     post:
@@ -1759,8 +1735,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/aicon-12b/new/alpha:
     post:
@@ -1812,8 +1787,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/search/v3:
     post:
@@ -1915,8 +1889,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/search/v2:
     post:
@@ -2014,8 +1987,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/v2-large/answering:
     post:
@@ -2077,8 +2049,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
   /api/ai/content/aicon-12b-large/answering:
     post:
@@ -2146,8 +2117,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-      security:
-        - bearerAuth: [ ]
+
 
 components:
   securitySchemes:
