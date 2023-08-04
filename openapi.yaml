@@ -409,6 +409,7 @@ paths:
                     set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
                     randomness. We recommend setting it to anything between 0.0 and 0.5 for best
                     results.
+
       responses:
         '200':
           description: Success
@@ -2118,13 +2119,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: TOKEN
 
   schemas:
     ImageComparisonResponse:
