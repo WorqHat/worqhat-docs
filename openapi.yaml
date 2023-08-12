@@ -1808,6 +1808,10 @@ paths:
                   type: string
                   description: The ID of the dataset you want to search in. If you do not pass
                     this, the request will return an error.
+                search_count:
+                  type: integer
+                  default: 3
+                  description: The number of responses you want the Search AI Model to respond with. This Search Model returns only 3 results by default but you can set the value to be higher than the default value.
       responses:
         '200':
           description: Success
