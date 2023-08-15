@@ -3,6 +3,15 @@ info:
   title: WorqHat AI API Endpoints
   description: API for interacting with WorqHat AI Services
   version: 3.0.0
+  contact:
+    email: support@worqhat.ai
+    url: https://www.worqhat.com/contact-us
+
+tags:
+ - name: Authentication
+   description: Endpoints related to user authentication
+ - name: AI
+   description: Endpoints related to AI Access
 
 servers:
   - url: https://api.worqhat.com
@@ -12,6 +21,10 @@ paths:
   /authentication:
     post:
       summary: This endpoint is to check your API request and test if it is working by authenticating the user.
+      description: This endpoint is to check your API request and test if it is working by authenticating the user.
+      operationId: authenticateUsers
+      tags:
+        - Authentication
       responses:
         '200':
           description: OK
@@ -44,11 +57,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-
-
   /api/ai/speech-text:
     post:
       summary: Our Speech Extraction API endpoint is used to extract text from audio files.
+      description: Our Speech Extraction API endpoint is used to extract text from audio files.
+      operationId: extractSpeech
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -95,6 +110,10 @@ paths:
   /api/ai/moderation:
     post:
       summary: Moderates text content.
+      description: Moderates text content.
+      operationId: moderationContent
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -141,7 +160,11 @@ paths:
 
   /api/ai/images/v2/image-moderation:
     post:
-      summary: Moderates text content.
+      summary: Moderates Image content.
+      description: Moderates Image content.
+      operationId: moderationImage
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -196,6 +219,10 @@ paths:
   /api/ai/v2/web-extract:
     post:
       summary: Extract content from a web page.
+      description: Extract Content from a web page.
+      operationId: webPageExtraction
+      tags:
+        - AI
       requestBody:
         content:
           application/json:
@@ -258,6 +285,10 @@ paths:
   /api/ai/v2/pdf-extract:
     post:
       summary: Extract text or structured data from a PDF file
+      description: Extract text or structured content from a PDF File.
+      operationId: pdfContentExtraction
+      tags:
+        - AI
       requestBody:
         content:
           multipart/form-data:
@@ -304,7 +335,11 @@ paths:
 
   /api/ai/images/v2/image-text-detection:
     post:
-      summary: Perform text detection and bounding on an image.
+      summary: Perform text detection and creates bounded regions around texts in images.
+      description: Performs text detection and creates bounded regions around texts in images.
+      operationId: textExtractionfromImages
+      tags:
+        - AI
       requestBody:
         content:
           multipart/form-data:
@@ -375,7 +410,11 @@ paths:
 
   /api/ai/content/v2:
     post:
-      summary: Get AI Content
+      summary: Create AI Based Content from AIConV2 Model
+      description: Create AI Based Content from AiConV2 Model.
+      operationId: aiConV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -410,81 +449,6 @@ paths:
                     randomness. We recommend setting it to anything between 0.0 and 0.5 for best
                     results.
 
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AIContentV2Response"
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized - Invalid API Key or Organization Key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable - Invalid Content Type or Content not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
-
-  /api/ai/content/aicon-12b:
-    post:
-      summary: Get AI Content
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The question you want to ask the AI.
-                preserve_history:
-                  type: boolean
-                  description: Whether you want to preserve the history of the conversation or not.
-                history_object:
-                  type: object
-                  description: The history object that you want to pass to the model. This is
-                    only required if preserve_history is set to true. Pass the Questions and
-                    Answers as Key Value Pairs to help the model understand.
-                  example:
-                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
-                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
-                training_data:
-                  type: string
-                  description: The training data you want to pass to the AI.
-                randomness:
-                  type: number
-                  minimum: 0.0
-                  maximum: 1.0
-                  description: The randomness factor that you want to pass to the model. This is
-                    only required if you want to set the randomness factor. Default is 0.4. You can
-                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
-                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
-                    results.
       responses:
         '200':
           description: Success
@@ -526,82 +490,11 @@ paths:
 
   /api/ai/content/v3:
     post:
-      summary: Get AI Content
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The question you want to ask the AI.
-                preserve_history:
-                  type: boolean
-                  description: Whether you want to preserve the history of the conversation or not.
-                history_object:
-                  type: object
-                  description: The history object that you want to pass to the model. This is
-                    only required if preserve_history is set to true. Pass the Questions and
-                    Answers as Key Value Pairs to help the model understand.
-                  example:
-                    "Hi, who are you?": "My name is WorqBot, nice to meet you!"
-                    "How can you help me?": "I can assist you with various tasks and provide information on a wide range of topics."
-                training_data:
-                  type: string
-                  description: The training data you want to pass to the AI.
-                randomness:
-                  type: number
-                  minimum: 0.0
-                  maximum: 1.0
-                  description: The randomness factor that you want to pass to the model. This is
-                    only required if you want to set the randomness factor. Default is 0.4. You can
-                    set it to 0.0 to disable randomness and set it to 1.0 to enable maximum
-                    randomness. We recommend setting it to anything between 0.0 and 0.5 for best
-                    results.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AIContentV3Response"
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized - Invalid API Key or Organization Key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable - Invalid Content Type or Content not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
-
-  /api/ai/content/aicon-25b:
-    post:
-      summary: Get AI Content
+      summary: Create AI Based Content from AiConV3 Model. Our most creative, powerful and advanced model.
+      description: Create AI Based Content from AiConV3 Model. Our most creative, powerful and advanced model.
+      operationId: aiConV3
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -677,6 +570,10 @@ paths:
   /api/ai/images/generate/v2:
     post:
       summary: Create Images from Text V2
+      description: Create Images from Text V2
+      operationId: imageConV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -753,7 +650,11 @@ paths:
 
   /api/ai/images/generate/v3:
     post:
-      summary: Create Images from Text V3
+      summary: Create Images from Text V3. It is the 1024x1024 model that automatically upscales the longer side to 1024px.
+      description: Create Images from Text V3. It is the 1024x1024 model that automatically upscales the longer side to 1024px.
+      operationId: imageConV3
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -764,14 +665,14 @@ paths:
                 height:
                   type: number
                   description: Height of the image to be generated. You can only choose between
-                    512 and 768. All other values will be ignored.
+                    512 and 768. All other values will be ignored.(In this model, we automatically upscale your image to provide a better image quality.)
                   enum:
                     - 512
                     - 768
                 width:
                   type: number
                   description: Width of the image to be generated. You can only choose between
-                    512 and 768. All other values will be ignored.
+                    512 and 768. All other values will be ignored. (In this model, we automatically upscale your image to provide a better image quality.)
                   enum:
                     - 512
                     - 768
@@ -830,7 +731,11 @@ paths:
 
   /api/ai/images/upscale/v3:
     post:
-      summary: Upscale Image Processes V3
+      summary: Uses the V3 Image Gen Model to automatically upscale the image and pixels to its best values. Upsclaes upto 4x time to 1048px
+      description: Uses the V3 Image Gen Model to automatically upscale the image and pixels to its best values. Upscales upto 4x times to 1048px
+      operationId: upscaleImageV3
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -899,6 +804,10 @@ paths:
   /api/ai/images/modify/v2:
     post:
       summary: Modify Image V2
+      description: Uses the V2 Image Model to modify existing images.
+      operationId: modifyImageV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -965,7 +874,11 @@ paths:
 
   /api/ai/images/modify/v3:
     post:
-      summary: Modify Image V2
+      summary: Modify Image V3
+      description: Uses the V3 Image Model to modify existing images.
+      operationId: modifyImageV3
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1032,7 +945,11 @@ paths:
 
   /api/ai/images/v2/face-detection:
     post:
-      summary: Modify Image V2
+      summary: Uses the V2 Image Model to detect faces from an Image and draw bounding boxes.
+      description: Uses the V2 Image Model to detect faces from an Image and draw bounding boxes.
+      operationId: faceDetectionV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1085,7 +1002,11 @@ paths:
 
   /api/ai/images/v2/image-analysis:
     post:
-      summary: Perform image analysis and identify objects in an image
+      summary: Perform image analysis and identifies the scene, the different objects and activities in the scene and also understands the colour contrasting of the image.
+      description:  Perform image analysis and identifies the scene, the different objects and activities in the scene and also understands the colour contrasting of the image.
+      operationId: imageAnalysisV2
+      tags:
+        - AI
       requestBody:
         content:
           multipart/form-data:
@@ -1136,7 +1057,11 @@ paths:
 
   /api/ai/images/v2/facial-comparison:
     post:
-      summary: Perform facial comparison
+      summary: Compare the features of two different faces and identify whether they are similar or not. You can also pass in a group photo and find out a specific face from that image.
+      description:  Compare the features of two different faces and identify whether they are similar or not. You can also pass in a group photo and find out a specific face from that image.
+      operationId: facialComparisonV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1193,8 +1118,11 @@ paths:
 
   /api/delete-datasets/{datasetId}:
     delete:
-      summary: Delete Dataset
+      summary: Delete a trained Dataset from the server
       description: Deletes a dataset from the server.
+      operationId: datasetDelete
+      tags:
+        - AI
       parameters:
         - in: path
           name: datasetId
@@ -1253,8 +1181,11 @@ paths:
 
   /api/list-datasets:
     get:
-      summary: List Datasets
-      description: Retrieves a list of datasets.
+      summary: Retrieves a list of pretrained datasets
+      description: Retrieves a list of pretrained datasets
+      operationId: datasetList
+      tags:
+        - AI
       responses:
         '200':
           description: Successful response
@@ -1349,7 +1280,11 @@ paths:
 
   /api/ai/search/train-datasets:
     post:
-      summary: Create or add trained data to a search dataset
+      summary: Create or add trained data to a search dataset for both Search V2 and Search V3
+      description: Create or add trained data to a search dataset for both Search V2 and Search V3
+      operationId: trainSearchDataset
+      tags:
+        - AI
       requestBody:
         content:
           multipart/form-data:
@@ -1462,7 +1397,11 @@ paths:
 
   /api/ai/content/v2-large/train-datasets:
     post:
-      summary: Create or add trained data to the Generative Model dataset
+      summary: Create or add trained data to the Generative QnA Model dataset
+      description: Create or add trained data to a Generative QnA Model dataset
+      operationId: trainAIDataset
+      tags:
+        - AI
       requestBody:
         content:
           multipart/form-data:
@@ -1571,176 +1510,13 @@ paths:
                 $ref: '#/components/schemas/Error500Response'
 
 
-  /api/ai/content/aicon-12b-large/train-datasets:
-    post:
-      summary: Create or add trained data to the Generative Model dataset
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                training_stage:
-                  type: string
-                  enum:
-                    - new
-                    - existing
-                existing_datasetId:
-                  type: string
-                  description: ID of the existing dataset (required if training_stage is "existing")
-                dataset_name:
-                  type: string
-                  description: Name of the dataset
-                dataset_description:
-                  type: string
-                  description: Description of the dataset
-                dataset_type:
-                  type: string
-                  enum:
-                    - Self
-                    - org
-                  description: Type of the dataset
-                training_file:
-                  type: array
-                  items:
-                    type: string
-                  description: Training file(s) to be uploaded. We only support .pdf, .txt, .json
-                    and .csv files for training Generative Models. You can upload multiple files at
-                    once by passing multiple files in the array.
-                  example:
-                    - /C:/Users/ghosh/Downloads/username-password-recovery-code.csv
-                    - /path/to/file
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: The ID of the response
-                    example: 3a2a5f62-a039-4487-9763-2ce4e315d819
-                  status:
-                    type: string
-                    description: The status of the response, indicating the success or failure
-                    example: success
-                  timestamp:
-                    type: integer
-                    description: The timestamp of the response in milliseconds
-                    example: 1688038961322
-                  training:
-                    type: object
-                    properties:
-                      dataset_id:
-                        type: string
-                        description: The ID of the dataset
-                        example: e193cb4a-1cb1-4e1e-a8cf-93870f14e1c2
-                      dataset_name:
-                        type: string
-                        description: The name of the dataset
-                        example: Search Dataset
-                      dataset_description:
-                        type: string
-                        description: The description of the dataset
-                        example: This is a sample dataset
-                      dataset_timestamp:
-                        type: string
-                        format: date-time
-                        description: The timestamp when the dataset was created
-                        example: '2023-06-29T11:42:41.322Z'
-                      word_count:
-                        type: integer
-                        description: The number of words in the dataset
-                        example: 150
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized - Invalid API Key or Organization Key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable - Invalid Content Type or Content not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
-
   /api/ai/content/v2/new/alpha:
     post:
-      summary: Our latest AI model that can be used to generate content and has data upto 2023
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The question you want to ask the AI.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AIContentV2Response"
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized - Invalid API Key or Organization Key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable - Invalid Content Type or Content not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
-
-  /api/ai/content/aicon-12b/new/alpha:
-    post:
-      summary: Our latest AI model that can be used to generate content and has data upto 2023
+      summary: Our latest AI model that can be used to generate content and has data upto July 2023. However, this is only an information based model and cannot take in long imaginative inputs.
+      description: Our latest AI model that can be used to generate content and has data upto July 2023. However, this is only an information based model and cannot take in long imaginative inputs.
+      operationId: alphaContentModel
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1792,7 +1568,11 @@ paths:
 
   /api/ai/search/v3:
     post:
-      summary: Our latest AI model that can be used to Search Content based on Meaning
+      summary: Our latest Search Based AI model that can be used to Search Content based on Meaning and Context of the Query.
+      description: Our latest Search Based AI model that can be used to Search Content based on Meaning and Context of the Query.
+      operationId: searchV3
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1898,7 +1678,11 @@ paths:
 
   /api/ai/search/v2:
     post:
-      summary: Our latest AI model that can be used to Search Content based on Text
+      summary: Our lighter Search Based AI model that can be used to Search Content based on the Text alone but can take into account synonyms and errors.
+      description: Our lighter Search Based AI model that can be used to Search Content based on the Text alone but can take into account synonyms and errors.
+      operationId: searchV2
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -1996,7 +1780,11 @@ paths:
 
   /api/ai/content/v2-large/answering:
     post:
-      summary: Get an answer from the self trained content model
+      summary: Get an answer from the fine-tuned Content Models
+      description: Get an answer from the fine-tuned Content Models
+      operationId: aiConV2Self
+      tags:
+        - AI
       requestBody:
         required: true
         content:
@@ -2013,10 +1801,8 @@ paths:
                   minimum: 0
                   maximum: 1
                 trainingData:
-                  type: array
-                  description: Array of training data (required if self_train is true)
-                  items:
-                    type: string
+                  type: "string"
+                  description: The Id of the Fine-Tuned Training Models.
       responses:
         '200':
           description: Success
@@ -2055,76 +1841,73 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-
-  /api/ai/content/aicon-12b-large/answering:
-    post:
-      summary: Get an answer from the self trained content model
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The question to be answered
-                self_train:
-                  type: boolean
-                  description: Whether to use custom training data or a pre-trained model
-                randomness:
-                  type: number
-                  description: The randomness factor for generating responses
-                  minimum: 0
-                  maximum: 1
-                datasetId:
-                  type: string
-                  description: The ID of the pre-trained model dataset (required if self_train is false)
-                trainingData:
-                  type: array
-                  description: Array of training data (required if self_train is true)
-                  items:
-                    type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AIContentV2Response"
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized - Invalid API Key or Organization Key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable - Invalid Content Type or Content not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
-
+components:
   schemas:
+    Error400Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "400"
+        message: "Bad Request"
+
+    Error401Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "401"
+        message: "Invalid API Key or Organization Key"
+
+    Error406Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "406"
+        message: "Unable to process the request."
+
+    Error404Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "404"
+        message: "Not Found"
+
+    Error500Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+      example:
+        status: "500"
+        message: "Internal Server Error"
+
     ImageComparisonResponse:
       type: object
       properties:
@@ -2807,9 +2590,7 @@ paths:
         content:
           oneOf:
             - type: string
-              description: URL format
-            - type: string
-              description: Base64 format
+            - type: object
           description: The output of the image generation process.
         processing_count:
           type: integer
@@ -2892,68 +2673,68 @@ paths:
           type: string
           description: The type of the detected text
       example:
-        - id: "0d43b414-2a7a-425f-9f2d-4bd8d07a164d"
-          status: success
-          timestamp: 1683408470311
-          content:
-            - confidence: 90.54900360107422
-              detected_text: "IT'S"
-              geometry:
-                bounding_box:
-                  height: 0.10317354649305344
-                  left: 0.6677391529083252
-                  top: 0.17569075524806976
-                  width: 0.15113449096679688
-                polygon:
-                  - x: 0.6677391529083252
-                    y: 0.17569075524806976
-                  - x: 0.8188736438751221
-                    y: 0.17574213445186615
-                  - x: 0.8188582062721252
-                    y: 0.278915673494339
-                  - x: 0.6677237153053284
-                    y: 0.2788642942905426
-              id: 0
-              type: LINE
-            - confidence: 59.411651611328125
-              detected_text: "I"
-              geometry:
-                bounding_box:
-                  height: 0.05955825746059418
-                  left: 0.2763049304485321
-                  top: 0.394121915102005
-                  width: 0.026684552431106567
-                polygon:
-                  - x: 0.2763049304485321
-                    y: 0.394121915102005
-                  - x: 0.30298948287963867
-                    y: 0.3932435214519501
-                  - x: 0.30385109782218933
-                    y: 0.45280176401138306
-                  - x: 0.27716654539108276
-                    y: 0.453680157661438
-              id: 1
-              type: LINE
-            - confidence: 92.76634979248047
-              detected_text: "MONDAY"
-              geometry:
-                bounding_box:
-                  height: 0.15580485785007477
-                  left: 0.30405032682418823
-                  top: 0.15534435284137726
-                  width: 0.26672941493988037
-                polygon:
-                  - x: 0.30405032682418823
-                    y: 0.15534435284137726
-                  - x: 0.5707797403335571
-                    y: 0.15536674892997742
-                  - x: 0.5707595348358154
-                    y: 0.3111492099761963
-                  - x: 0.3040300908088684
-                    y: 0.3111268138885498
-              id: 2
-              type: LINE
-          processing_count: 1
+        id: "0d43b414-2a7a-425f-9f2d-4bd8d07a164d"
+        status: success
+        timestamp: 1683408470311
+        content:
+          - confidence: 90.54900360107422
+            detected_text: "IT'S"
+            geometry:
+              bounding_box:
+                height: 0.10317354649305344
+                left: 0.6677391529083252
+                top: 0.17569075524806976
+                width: 0.15113449096679688
+              polygon:
+                - x: 0.6677391529083252
+                  y: 0.17569075524806976
+                - x: 0.8188736438751221
+                  y: 0.17574213445186615
+                - x: 0.8188582062721252
+                  y: 0.278915673494339
+                - x: 0.6677237153053284
+                  y: 0.2788642942905426
+            id: 0
+            type: LINE
+          - confidence: 59.411651611328125
+            detected_text: "I"
+            geometry:
+              bounding_box:
+                height: 0.05955825746059418
+                left: 0.2763049304485321
+                top: 0.394121915102005
+                width: 0.026684552431106567
+              polygon:
+                - x: 0.2763049304485321
+                  y: 0.394121915102005
+                - x: 0.30298948287963867
+                  y: 0.3932435214519501
+                - x: 0.30385109782218933
+                  y: 0.45280176401138306
+                - x: 0.27716654539108276
+                  y: 0.453680157661438
+            id: 1
+            type: LINE
+          - confidence: 92.76634979248047
+            detected_text: "MONDAY"
+            geometry:
+              bounding_box:
+                height: 0.15580485785007477
+                left: 0.30405032682418823
+                top: 0.15534435284137726
+                width: 0.26672941493988037
+              polygon:
+                - x: 0.30405032682418823
+                  y: 0.15534435284137726
+                - x: 0.5707797403335571
+                  y: 0.15536674892997742
+                - x: 0.5707595348358154
+                  y: 0.3111492099761963
+                - x: 0.3040300908088684
+                  y: 0.3111268138885498
+            id: 2
+            type: LINE
+        processing_count: 1
 
     ImageTextGeometry:
       type: object
@@ -3009,7 +2790,7 @@ paths:
       required:
         - file
       example:
-        file: [ PDF binary data ]
+        file: PDF binary data
         output_format: text
 
     PDFExtractResponse:
@@ -3187,7 +2968,6 @@ paths:
           items:
             type: string
           description: The unique identifiers of the dependent elements.
-
 
     WebExtractResponse:
       type: object
@@ -3530,68 +3310,3 @@ paths:
         user_email: "john@worqhat.com"
         timestamp: 1687753142003
         id: "a1146b58-a6fd-46a1-944c-3b1aad50d14b"
-
-    Error400Response:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code indicating the error.
-        message:
-          type: string
-          description: A message describing the error.
-      example:
-        status: "400"
-        message: "Bad Request"
-
-    Error401Response:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code indicating the error.
-        message:
-          type: string
-          description: A message describing the error.
-      example:
-        status: "401"
-        message: "Invalid API Key or Organization Key"
-
-    Error406Response:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code indicating the error.
-        message:
-          type: string
-          description: A message describing the error.
-      example:
-        status: "406"
-        message: "Unable to process the request."
-
-    Error404Response:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code indicating the error.
-        message:
-          type: string
-          description: A message describing the error.
-      example:
-        status: "404"
-        message: "Not Found"
-
-    Error500Response:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code indicating the error.
-        message:
-          type: string
-          description: A message describing the error.
-      example:
-        status: "500"
-        message: "Internal Server Error"
