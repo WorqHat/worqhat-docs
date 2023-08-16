@@ -1800,7 +1800,7 @@ paths:
                   description: The randomness factor for generating responses
                   minimum: 0
                   maximum: 1
-                trainingData:
+                datasetId:
                   type: "string"
                   description: The Id of the Fine-Tuned Training Models.
       responses:
