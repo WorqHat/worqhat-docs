@@ -349,6 +349,13 @@ paths:
                 image:
                   type: string
                   format: binary
+                output_type:
+                  type: string
+                  description: The output type of the image. Choose from `json` or `text`. The default value is `json`.
+                  enum:
+                    - json
+                    - text
+                  default: json
       responses:
         '200':
           description: Success
@@ -425,6 +432,12 @@ paths:
                 question:
                   type: string
                   description: The question you want to ask the AI.
+                stream_data:
+                  type: boolean
+                  description: Whether you want to stream the data or not. If you set this to true,
+                    you will get a response as soon as the AI has something to say. If you set
+                    this to false, you will get a response only when the AI has finished processing
+                    the data.
                 preserve_history:
                   type: boolean
                   description: Whether you want to preserve the history of the conversation or not.
@@ -505,6 +518,12 @@ paths:
                 question:
                   type: string
                   description: The question you want to ask the AI.
+                stream_data:
+                  type: boolean
+                  description: Whether you want to stream the data or not. If you set this to true,
+                    you will get a response as soon as the AI has something to say. If you set
+                    this to false, you will get a response only when the AI has finished processing
+                    the data.
                 preserve_history:
                   type: boolean
                   description: Whether you want to preserve the history of the conversation or not.
@@ -581,20 +600,14 @@ paths:
             schema:
               type: object
               properties:
-                height:
-                  type: number
-                  description: Height of the image to be generated. You can only choose between
-                    512 and 768. All other values will be ignored.
+                orientation:
+                  type: string
+                  description: The orientation of the image to be generated. Choose from `square` ,`landscape` or `portrait`. The default value is `square`.
                   enum:
-                    - 512
-                    - 768
-                width:
-                  type: number
-                  description: Width of the image to be generated. You can only choose between
-                    512 and 768. All other values will be ignored.
-                  enum:
-                    - 512
-                    - 768
+                    - square
+                    - landscape
+                    - portrait
+                  default: square
                 prompt:
                   type: array
                   description: The prompt to be used to generate the image.
@@ -743,7 +756,7 @@ paths:
             schema:
               type: object
               properties:
-                baseFile:
+                existing_image:
                   type: string
                   format: binary
                   description: The file object of the image you want to upscale.
@@ -1527,6 +1540,12 @@ paths:
                 question:
                   type: string
                   description: The question you want to ask the AI.
+                stream_data:
+                  type: boolean
+                  description: Whether you want to stream the data or not. If you set this to true,
+                    you will get a response as soon as the AI has something to say. If you set
+                    this to false, you will get a response only when the AI has finished processing
+                    the data.
       responses:
         '200':
           description: Success
@@ -1800,9 +1819,20 @@ paths:
                   description: The randomness factor for generating responses
                   minimum: 0
                   maximum: 1
+                stream_data:
+                  type: boolean
+                  description: Whether you want to stream the data or not. If you set this to true,
+                    you will get a response as soon as the AI has something to say. If you set
+                    this to false, you will get a response only when the AI has finished processing
+                    the data.
                 datasetId:
                   type: "string"
                   description: The Id of the Fine-Tuned Training Models.
+                instructions:
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: The instructions to be passed to the AI Model. You can pass in custom instructions to the models like if you want it answer in a specific language, or you want it to answer in a specific tone. You can pass in multiple instructions at once by passing in an array of instructions.
       responses:
         '200':
           description: Success
