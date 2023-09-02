@@ -1,9 +1,7 @@
 ---
 title: 'AiCon V2 2023 (Nightly Alpha)'
-description: 'Creative Content Generation AI'
+description: 'Creative Content Generation AI based on Upto Date Data'
 ---
-
-AiCon’s impressive conversational abilities are rooted in years of research and development. Like many advanced language models, such as BERT and GPT-3, AiCon is based on the Transformer neural network architecture, which was made publicly available in 2017. This architecture allows for the creation of models that can read multiple words (such as a sentence or paragraph) and understand the relationships between those words, thereby predicting what words will come next.
 
 What sets this model apart from our other existing models is its ability to understand the context of a conversation and generate responses that are more natural and human-like. This is achieved by training the model on a massive dataset of conversations, which allows it to learn the many nuances of language and how they are used in conversation.
 
@@ -11,26 +9,37 @@ With this new model, we are training the Model on the most recent conversations 
 
 However, the Alpha Nightly channel is our most recent API Release, and is currently in active development. This channel is not recommended for production use, and is subject to change at any time.
 
-<Warning>
-  This API is currently in active development and is subject to change at any time. It is suggested
-  to have a fallback plan in place in case of any issues or errors with the API.
-  Like our Previous Versions, this is the Smaller Version of the AiCon V2 API, which has a word
-  limit of 20,000 words per request.
-</Warning>
+   The Alpha version of AiCon V2 is designed to generate current data-based content. It utilizes data up to 2023, making it relatively up to date and more accurate than previous versions of AiCon. The Alpha Channel of AiCon V2 is mostly dependent on the data up to May 2023.
 
-## How to use AiCon V2 2023 Model (Alpha)
+   ### Configuration
 
-You can use the following Endpoints on any Codebase, including client side codebases as long as
-you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just
-send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+   | Parameter  | Type     | Description                                      | Default    |
+   | ---------- | -------- | ------------------------------------------------ | ---------- |
+   | question   | `string`   | The question to generate content for.            | `undefined`  |
 
-Visit the API Reference to learn how to implement AiCon V2 2023 Model in your projects. Get access to Sample
-Code, API Endpoints and run it right within the browser to test it out.
+   ### Example
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/text-generation-ai/aicon-v2-2023-alpha">
-  Visit the API Reference to learn how to implement AiCon V2 2023 Model in your projects. Get
-  access
-  to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+   ```javascript
+   const worqhat = require('worqhat');
+
+   var config = new worqhat.Configuration({
+     apiKey: "your-api-key",
+     debug: true,
+   });
+
+   worqhat.initializeApp(config);
+
+   async function generateAlphaContent() {
+     try {
+       var result = await worqhat.contentGeneration.alpha({
+         question: "Your question here",
+       })
+       console.log(result);
+
+     } catch (error) {
+       console.error(error);
+     }
+   }
+
+   generateAlphaContent();
+   ```
