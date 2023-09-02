@@ -1,0 +1,60 @@
+---
+title: 'ImageCon V3 Beta'
+description: 'Text to Image Generation API V3 (ImageCon V3) for more realistic images.'
+---
+
+Version 3 Advanced Image Generation AI focused on more creative capabilities and complex realistic images. It is the larger image model with squares of max 1024px and rectangles of max 1344px on the longest side. It is slower and suitable for more complex use cases where more details are required. Read more at https://docs.worqhat.com/ai-models/image-generation/imagecon-v3
+
+### Parameters
+
+ Parameter | Type | Description | Default |
+-----------|------|-------------|---------|
+ orientation | String | The orientation of the image. Options: `Landscape`, `Portrait`, `Square`. | `Square` |
+ image_style | String | The style of the image. | `default` |
+ output_type | String | The output type of the image. Options: `url`, `blob`. `url` returns the Cloud Hosted Link to the Image, `blob` returns the Base64 Image. | `url` |
+ prompt | Array | The prompts for the image generation. This is a required parameter. | - |
+
+### Example
+
+```js
+const worqhat = require('worqhat');
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function generateImage() {
+  try {
+    var result = await worqhat.imageGeneration.v3({
+      orientation: "Landscape",
+      image_style: "default",
+      output_type: "url",
+      prompt: ["Your prompt here"]
+    })
+    console.log(result);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+generateImage();
+```
+
+<Check>The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution, so you don't have to go through the Upscaling Process every time after creating an image.</Check>
+
+<Frame caption="Generate Images from Text using Image Gen Model V3">
+  <img src="/images/1690642747120.png" />
+</Frame>
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692730250299.png" />
+</Frame>
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692730537659.png" />
+</Frame>
+

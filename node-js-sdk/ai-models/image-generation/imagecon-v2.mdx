@@ -1,0 +1,58 @@
+---
+title: 'ImageCon V2'
+description: 'Text to Image Generation API V2 (ImageCon V2) is a powerful tool that allows you to
+generate images from text.'
+---
+
+ImageCon V2 is a powerful AI model that generates images based on provided parameters. It is a smaller image model that can generate squares of up to 512px and rectangles of up to 768px on the longest side. It is faster and suitable for most use cases.
+
+For more details, visit the https://docs.worqhat.com/ai-models/image-generation/imagecon-v2.
+
+### Parameters
+
+ Parameter | Type | Description | Default |
+---|---|---|---|
+orientation | `String` | The orientation of the image. Options: `Landscape`, `Portrait`, `Square`. | `Square` |
+image_style | `String` | The style of the image. | "default" |
+output_type | `String` | The output type of the image. Options: `url`, `blob`. `url` returns the Cloud Hosted Link to the Image, `blob` returns the Base64 Image. | `url` |
+prompt | `Array`  | The prompts for the image generation. This is a required parameter. | - |
+
+### Example
+
+ ```javascript
+ const worqhat = require('worqhat');
+
+ var config = new worqhat.Configuration({
+   apiKey: "your-api-key",
+   debug: true,
+ });
+
+ worqhat.initializeApp(config);
+
+ async function generateImage() {
+   try {
+     var result = await worqhat.imageGeneration.v2({
+       orientation: "Square",
+       image_style: "default",
+       output_type: "url",
+       prompt: ["Your prompt here"]
+     })
+     console.log(result);
+
+   } catch (error) {
+     console.error(error);
+   }
+ }
+
+ generateImage();
+ ```
+
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1690642342420.png" />
+</Frame>
+
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692024029415.png" />
+</Frame>

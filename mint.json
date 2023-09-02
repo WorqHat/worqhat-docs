@@ -216,7 +216,6 @@
     {
       "group": "AI Models",
       "pages": [
-        "node-js-sdk/initialization",
         {
           "group": "Text Generation AI",
           "pages": [
@@ -238,6 +237,16 @@
           "pages": [
             "node-js-sdk/ai-models/model-management/view-datasets",
             "node-js-sdk/ai-models/model-management/delete-datasets"
+          ]
+        },
+        {
+          "group": "Image Generation",
+          "pages": [
+            "node-js-sdk/ai-models/image-generation/imagecon-v2",
+            "node-js-sdk/ai-models/image-generation/imagecon-v3",
+            "node-js-sdk/ai-models/image-generation/image-image-v2",
+            "node-js-sdk/ai-models/image-generation/image-image-v3",
+            "node-js-sdk/ai-models/image-generation/image-upscale"
           ]
         }
       ]
