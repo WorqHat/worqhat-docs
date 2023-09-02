@@ -248,7 +248,15 @@
             "node-js-sdk/ai-models/image-generation/image-image-v3",
             "node-js-sdk/ai-models/image-generation/image-upscale"
           ]
-        }
+        },
+        {
+          "group": "Image Analysis",
+          "pages": [
+            "node-js-sdk/ai-models/image-analysis/image-analysis-v2",
+            "node-js-sdk/ai-models/image-analysis/face-analysis",
+            "node-js-sdk/ai-models/image-analysis/face-comparison-v2"
+          ]
+                }
       ]
     },
     {

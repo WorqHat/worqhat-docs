@@ -1,0 +1,46 @@
+---
+title: "Analyze Images with AI"
+description: "Detecting and Identifying Objects, Activities and Colors in an Image"
+---
+
+The ImageCon V2 Models utilize advanced machine learning algorithms to analyze the contents of images and detect a diverse set of labels associated with them. Through extensive training, these models have learned to identify specific objects, scenes, actions, and concepts present in an image. By leveraging these models, users can gain valuable insights into the various elements and themes depicted in a photograph.
+
+When an image is processed using the ImageCon V2 Models, they can detect a wide range of labels, numbering in the thousands. These labels encompass objects such as "Palm Tree," scenes like "Beach," actions such as "Running," and concepts like "Outdoors." By accurately detecting and associating these labels with the image, the models provide information about the prominent elements and overall context within the image.
+
+Moreover, the ImageCon V2 Models offer additional capabilities to retrieve valuable information about different properties of an image. These properties include attributes like the color of the foreground and background, as well as the overall sharpness, brightness, and contrast of the image. This comprehensive feature enables users to gain a deeper understanding of the visual characteristics and qualities exhibited by the analyzed image.
+
+The powerful label detection and property analysis provided by the ImageCon V2 Models enable users to extract meaningful information from images. This opens up a wide range of applications in various domains, including content categorization, image search, visual recommendation systems, and image enhancement. By leveraging the advanced capabilities of these models, users can unlock valuable insights and optimize their workflows related to image analysis and understanding.
+
+Read more at https://docs.worqhat.com/ai-models/image-analysis/image-analysis-v2
+
+### Parameters
+
+| Parameter | Type               | Description                                                                                                                           |
+| --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| image     | `File` or `string` | The existing image to be upscaled. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+
+### Examples
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function analyseImage() {
+  try {
+    var result = await worqhat.analyseImages.analyse({
+      image: "./path-to-your-image.png",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+analyseImage();
+```
