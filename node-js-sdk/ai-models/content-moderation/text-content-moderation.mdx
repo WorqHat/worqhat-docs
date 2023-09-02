@@ -1,0 +1,42 @@
+---
+title: "Text and Content Moderation AI"
+description: "Content Moderation AI is a powerful tool that can be used to detect and filter out inappropriate content from your website or app."
+---
+
+Introducing the new Moderation AI endpoint by WorqHat, powered by the advanced AiCon V2 model. This powerful tool is designed to support developers in safeguarding their applications by offering fast and accurate content moderation.
+
+With Moderation AI, developers can ensure that their platforms remain free from inappropriate content, such as sexual, violent, hateful, and self-harm promoting material that violates WorqHat's content policy. Leveraging LLM-based classifiers, the system efficiently identifies and filters out such content, providing a secure environment for users.
+
+Content Moderation AI Models. A powerful AI Model that can be used to detect and filter out inappropriate content from your website or app. Read more at https://docs.worqhat.com/ai-models/content-moderation/text-content-moderation
+
+### Configuration
+
+| Parameter    | Type     | Description                       | Default |
+| ------------ | -------- | --------------------------------- | ------- |
+| text_content | `string` | The text content to be moderated. | -       |
+
+### Example
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function moderateContent() {
+  try {
+    var result = await worqhat.moderation.content({
+      text_content: "Your text content here",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+moderateContent();
+```

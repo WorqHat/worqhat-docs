@@ -1,0 +1,40 @@
+---
+title: "Image Moderation AI (Powered by ImageCon V2)"
+description: "Moderate images for adult content, violence, spoof, medical content, etc."
+---
+
+The Image Moderation API developed by WorqHat, powered by the advanced ImageCon V2 model, offers a robust solution for detecting and filtering inappropriate, unwanted, or offensive content in images. This API is highly versatile and can be effectively utilized in various applications, including social media platforms, broadcast media, advertising, and e-commerce. Its primary goal is to ensure a safer user experience, provide brand safety assurances to advertisers, and ensure compliance with local and global regulations.
+
+Image Moderation AI Models. A powerful AI Model that can be used to detect and filter out inappropriate content from your website or app. Read more at https://docs.worqhat.com/ai-models/content-moderation/image-moderation
+
+### Parameters
+
+| Parameter | Type               | Description                                                                                                                           |
+| --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| image     | `File` or `string` | The existing image to be upscaled. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+
+### Example
+
+```js
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function moderateImage() {
+  try {
+    var result = await worqhat.moderation.image({
+      image: "./path-to-your-image.png",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+moderateImage();
+```
