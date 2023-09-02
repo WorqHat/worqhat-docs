@@ -1,0 +1,47 @@
+---
+title: "Web Extraction AI"
+description: "Extract data, content, tables and images from any website with ease"
+---
+
+Function for extracting text from web pages. It sends a request to the Web Extraction AI Model and returns the extracted text. Key components such as headlines, paragraphs, images, and tables are identified, and the algorithm extracts them in a structured format like JSON. Additionally, the extracted data is cleaned and normalized to enhance its usability for analysis and processing purposes. Read more at: https://docs.worqhat.com/ai-models/text-extraction/web-extraction
+
+### Parameters
+
+
+| Parameter   | Type      | Description                                              | Default |
+| ----------- | --------- | -------------------------------------------------------- | ------- |
+| code_blocks | `boolean` | Indicates whether to extract code blocks.                | `false` |
+| headline    | `boolean` | Indicates whether to extract headlines.                  | `false` |
+| inline_code | `boolean` | Indicates whether to extract inline code.                | `false` |
+| references  | `boolean` | Indicates whether to extract references.                 | `false` |
+| url_path    | `string`  | Represents the URL of the web page to extract text from. | N/A     |
+
+### Example
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function extractTextFromWeb() {
+  try {
+    var result = await worqhat.textExtraction.web({
+      code_blocks: true,
+      headline: true,
+      inline_code: true,
+      references: true,
+      url_path: "https://www.your-website.com",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+extractTextFromWeb();
+```

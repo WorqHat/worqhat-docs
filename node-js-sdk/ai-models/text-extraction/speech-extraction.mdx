@@ -1,0 +1,40 @@
+---
+title: "Speech Extraction AI"
+description: "Extract Speech from Audio in Multiple Spoken Languages"
+---
+
+Function for extracting text from speech. It sends a request to the Speech Extraction AI Model and returns the extracted text. Read more about the Models and their use cases at: https://docs.worqhat.com/ai-models/speech-extraction
+
+### Parameters
+
+| Parameter | Type   | Description                      | Default |
+| --------- | ------ | -------------------------------- | ------- |
+| audio     | `file` | Audio file to extract text from. | -       |
+
+The audio file should be in one of the following formats: `wav`, `mp3`, `m4a`, `flac`, `ogg`, `opus`, `amr`, `webm`.
+
+### Example
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function extractSpeech() {
+  try {
+    var result = await worqhat.textExtraction.speech({
+      audio: "./path-to-your-audio-file.wav",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+extractSpeech();
+```

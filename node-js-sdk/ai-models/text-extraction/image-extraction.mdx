@@ -1,0 +1,40 @@
+---
+title: "Image Extraction AI"
+description: "Identifying and extracting text from images using machine learning"
+---
+
+Function for extracting text from images. It sends a request to the Image Extraction AI Model and returns the extracted text. Read more about the Models and their use cases at: https://docs.worqhat.com/ai-models/text-extraction/image-extraction
+
+### Parameters
+
+| Parameter     | Type               | Description                                                                                                                                 | Default |
+| ------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| image         | `File` or `string` | The existing image to extract data from. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+| output_format | `string`           | The output format of the extracted text. Can be `text` or `json`.                                                                           | `text`  |
+
+### Example
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function extractTextFromImage() {
+  try {
+    var result = await worqhat.textExtraction.image({
+      image: "./path-to-your-image.png",
+      output_format: "json",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+extractTextFromImage();
+```

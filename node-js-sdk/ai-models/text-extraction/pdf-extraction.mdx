@@ -1,0 +1,44 @@
+---
+title: "PDF Extraction AI"
+description: "Extract data, content and tables from any PDF with ease"
+---
+
+PDF Extract AI is a powerful tool that utilizes machine learning algorithms to extract content from PDF documents. PDFs, or Portable Document Format files, are widely used for storing and sharing various types of documents, including reports, contracts, articles, and forms. However, extracting information from PDFs can be a challenging task due to the complex structure and formatting of these files.
+
+PDF Extract AI addresses this challenge by employing machine learning techniques to understand the structure of a PDF and extract the desired content accurately.
+
+Read more at: https://docs.worqhat.com/ai-models/text-extraction/pdf-extraction
+
+### Parameters
+
+| Parameter     | Type     | Description                                                                 | Default |
+| ------------- | -------- | --------------------------------------------------------------------------- | ------- |
+| file          | `object` | An object representing the PDF file to extract text from. This is required. | N/A     |
+| output_format | `string` | The output format of the extracted text. Can be `text` or `json`.           | `text`  |
+
+### Examples
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function extractTextFromPdf() {
+  try {
+    var result = await worqhat.textExtraction.pdf({
+      file: "./path-to-your-pdf-file.pdf",
+      output_format: "text",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+extractTextFromPdf();
+```

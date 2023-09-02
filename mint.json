@@ -256,6 +256,15 @@
             "node-js-sdk/ai-models/image-analysis/face-analysis",
             "node-js-sdk/ai-models/image-analysis/face-comparison-v2"
           ]
+        },
+        {
+          "group": "Text Extraction",
+          "pages": [
+            "node-js-sdk/ai-models/text-extraction/pdf-extraction",
+            "node-js-sdk/ai-models/text-extraction/web-extraction",
+            "node-js-sdk/ai-models/text-extraction/image-extraction",
+            "node-js-sdk/ai-models/text-extraction/speech-extraction"
+          ]
                 }
       ]
     },
