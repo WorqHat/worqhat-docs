@@ -1,0 +1,47 @@
+---
+title: 'AiCon V2 Content Generation AI'
+description: 'Content Generation AI focused only on Business Content Generation Purpose.'
+---
+
+**AiCon V2 Content Generation AI** focused only on Business Content Generation Purpose. It can be used to generate content for a variety of business use cases where the content is not too creative or complex. Read more at https://docs.worqhat.com/ai-models/text-generation-ai/aicon-v2-textgen
+
+   ### Parameters
+
+      | Parameter | Type    | Description                                          | Default     |
+      | --------- | ------- | ---------------------------------------------------- | ----------- |
+      | history_object   | `Object`  | An object representing the history of the conversation. | `undefined`   |
+      | preserve_history | `boolean` | A boolean indicating whether to preserve the conversation history. | `false` |
+      | question         | `string`  | A string representing the question to generate content for. | `undefined` |
+      | training_data    | `string`  | A string representing the training data to use for generating content. | `undefined` |
+      | randomness       | `number`  | A number representing the level of randomness to use for generating content. | `0.2` |
+
+   ### Example
+
+   ```javascript
+   const worqhat = require('worqhat');
+
+   var config = new worqhat.Configuration({
+     apiKey: "your-api-key",
+     debug: true,
+   });
+
+   worqhat.initializeApp(config);
+
+   async function generateContent() {
+     try {
+       var result = await worqhat.contentGeneration.v2({
+         history_object: { "previous": "Previous conversation history" },
+         preserve_history: true,
+         question: "Your question here",
+         training_data: "your-training-data-id",
+         randomness: 0.3,
+       })
+       console.log(result);
+
+     } catch (error) {
+       console.error(error);
+     }
+   }
+
+   generateContent();
+   ```

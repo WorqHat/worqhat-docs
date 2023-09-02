@@ -1,6 +1,6 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Start building awesome applications in under 5 minutes'
 ---
 
 ## Base Endpoint for all API calls
@@ -90,43 +90,22 @@ Here's an example of what the API key & ORG key looks like:
 <CodeGroup>
 
   ```bash API Key
-  var myHeaders = new Headers();
-  myHeaders.append("x-org-key",
-  "U2FsdGVkX1+DMFucNFhZT7b3KTDTPLvjKkfWV0XY+jK2tA44wGn+M+KTC1V/eAOX");
-  ```
-  ```bash ORG Key
-  var myHeaders = new Headers();
-  myHeaders.append("x-api-key",
-  "U2FsdGVkX1/hx889OFajtqRp5TdESHHakovIb3Qq52kqqy/zFhA9MlNSjghXMUzbOHEr9QhoOAJKmKXKA6Ol8A==");
+  curl --request POST \
+  --url https://api.worqhat.com/authentication \
+  --header 'Authorization: Bearer <token>'
   ```
 </CodeGroup>
 
-<iframe
-  width="560"
-  height="315"
-  src="https://www.tella.tv/video/clizvoigw00k30fi4gq6i1bn9/embed?
-b=0&title=1&a=1&loop=1&autoPlay=true&t=0&muted=1"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
-
 If you're an Existing Customer but do not have access to the API Tokens screen, please contact
 our Support Assistance. You can visit https://help.worqhat.com or reach out to us at
-support@worqhat.com, and we will set you up with an Account. This is possible as we are slowly
-rolling out the API to our customers, so
-you may not have access to the Workspace Admin Panel yet. We are trying to make this process as
-seamless as possible.
+mailto:support@worqhat.com, and we will set you up with an Account.
 
 In order to use WorqHat's API, you will need to authenticate every request. We rely on
-``x-api-key`` and ``x-org-key`` tokens to authenticate API requests.
+``Authorization Bearer <YOUR_API_KEY>`` tokens to authenticate API requests.
 
 ````bash
 curl
   --location --request GET 'https://api.worqhat.com/$endpoint' \
-    --header 'x-api-key: $YOUR_API_KEY' \
-    --header 'x-org-key: $YOUR_ORG_KEY' \
 ````
 
 Tokens are scoped to an admin's permission settings and your workspace. Only workspace admins
@@ -140,6 +119,12 @@ you can use these API keys anywhere, including in your client-side code. We only
 requests from the endpoints listed in your App's whitelist. If you don't have any endpoints
 listed, requests to the API will fail.
 
-To ensure that your requests are authenticated and authorized to access our API, you must send both the ``x-api-key`` and ``x-org-key`` with every request that you send. Additionally, you have the option to set a per-request key, which is often useful for Connect applications that use multiple API keys during the lifetime of a process. Methods on the returned object reuse the same API key.
+<Warning>Please note that only code that sends a request from Client-Side requires authentication. If you are using our NodeSDKs or sending request from Server Code, it will not be restricted. In such scenarios you can add your API-Key to the `.env` file.</Warning>
+
+````env
+WORQHAT_API_KEY=<YOUR_API_KEY>
+````
+
+To ensure that your requests are authenticated and authorized to access our API, you must send the ``WORQHAT_API_KEY``  with every request that you send. Additionally, you have the option to set a per-request key, which is often useful for Connect applications that use multiple API keys during the lifetime of a process. Methods on the returned object reuse the same API key.
 
 Finally, it's important to note that all API requests must be made over HTTPS. Calls made over plain HTTP will fail, and API requests without authentication will also fail. By following these best practices, you can help keep your API requests secure and prevent unauthorized access to your data.
