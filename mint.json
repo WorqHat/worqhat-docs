@@ -223,9 +223,21 @@
             "node-js-sdk/ai-models/text-generation-ai/aicon-v2-textgen",
             "node-js-sdk/ai-models/text-generation-ai/aicon-v3-textgen",
             "node-js-sdk/ai-models/text-generation-ai/aicon-v2-large-beta",
-            "node-js-sdk/ai-models/text-generation-ai/aicon-v2-2023-alpha",
-            "node-js-sdk/ai-models/text-generation-ai/aicon-view-datasets",
-            "node-js-sdk/ai-models/text-generation-ai/aicon-delete-datasets"
+            "node-js-sdk/ai-models/text-generation-ai/aicon-v2-2023-alpha"
+          ]
+        },
+        {
+          "group": "AI for Search",
+          "pages": [
+            "node-js-sdk/ai-models/ai-for-search/search-v2",
+            "node-js-sdk/ai-models/ai-for-search/search-v3"
+          ]
+        },
+        {
+          "group": "Model Management",
+          "pages": [
+            "node-js-sdk/ai-models/model-management/view-datasets",
+            "node-js-sdk/ai-models/model-management/delete-datasets"
           ]
         }
       ]

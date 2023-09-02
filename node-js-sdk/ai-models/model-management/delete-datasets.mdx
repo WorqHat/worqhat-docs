@@ -1,0 +1,40 @@
+---
+title: "Delete Datasets"
+description: "View all your Trained Datasets that you have created for both Search and AI Models."
+---
+
+This function allows you to delete trained datasets. It interacts with the Datasets API to delete a dataset that you have trained for both AI and Search Interfaces. Please note that you will only be able to delete datasets that you have created or have access to.
+
+### Parameters:
+
+| Parameter   | Type   | Description                                                        |
+| ----------- | ------ | ------------------------------------------------------------------ |
+| `datasetId` | string | The ID of the dataset to be deleted. This is a required parameter. |
+
+Returns: A Promise that resolves to the deletion result.
+
+### Example
+
+```javascript
+const worqhat = require("worqhat");
+
+var config = new worqhat.Configuration({
+  apiKey: "your-api-key",
+  debug: true,
+});
+
+worqhat.initializeApp(config);
+
+async function deleteDataset() {
+  try {
+    var result = await worqhat.datasets.delete({
+      datasetId: "your-dataset-id",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+deleteDataset();
+```
