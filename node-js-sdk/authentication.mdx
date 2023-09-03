@@ -1,0 +1,30 @@
+---
+title: 'Authenticate API Calls'
+description: 'Easy to Check whether your SDK Integration is working or not'
+---
+
+The function checks if the app is initialized and returns an error if not, otherwise it authenticates using the app's API key and returns the response regarding your profile and organization.
+
+### Example
+```js
+ const worqhat = require('worqhat');
+
+ var config = new worqhat.Configuration({
+   apiKey: "your-api-key",
+   debug: true,
+ });
+
+ worqhat.initializeApp(config);
+
+ async function checkAuth() {
+   try {
+     var result = await worqhat.checkAuthentication();
+     console.log(result);
+
+   } catch (error) {
+     console.error(error);
+   }
+ }
+
+ checkAuth();
+ ```

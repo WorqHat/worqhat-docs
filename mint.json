@@ -210,7 +210,8 @@
     {
       "group": "Getting Started",
       "pages": [
-        "node-js-sdk/initialization"
+        "node-js-sdk/initialization",
+        "node-js-sdk/authenticate"
       ]
     },
     {
