@@ -437,7 +437,7 @@ paths:
                   description: Whether you want to stream the data or not. If you set this to true,
                     you will get a response as soon as the AI has something to say. If you set
                     this to false, you will get a response only when the AI has finished processing
-                    the data.
+                    the data in the form of a `JSON`. Note that if you set this to `true`, it will only return the content as a stream and it will not return the `id`, `status` and `timestamp` fields.It can be acessed using the Logs and the Usage Pages.
                 preserve_history:
                   type: boolean
                   description: Whether you want to preserve the history of the conversation or not.
@@ -523,7 +523,7 @@ paths:
                   description: Whether you want to stream the data or not. If you set this to true,
                     you will get a response as soon as the AI has something to say. If you set
                     this to false, you will get a response only when the AI has finished processing
-                    the data.
+                    the data in the form of a `JSON`. Note that if you set this to `true`, it will only return the content as a stream and it will not return the `id`, `status` and `timestamp` fields.It can be acessed using the Logs and the Usage Pages.
                 preserve_history:
                   type: boolean
                   description: Whether you want to preserve the history of the conversation or not.
@@ -1545,7 +1545,7 @@ paths:
                   description: Whether you want to stream the data or not. If you set this to true,
                     you will get a response as soon as the AI has something to say. If you set
                     this to false, you will get a response only when the AI has finished processing
-                    the data.
+                    the data in the form of a `JSON`. Note that if you set this to `true`, it will only return the content as a stream and it will not return the `id`, `status` and `timestamp` fields.It can be acessed using the Logs and the Usage Pages.
       responses:
         '200':
           description: Success
@@ -1824,7 +1824,7 @@ paths:
                   description: Whether you want to stream the data or not. If you set this to true,
                     you will get a response as soon as the AI has something to say. If you set
                     this to false, you will get a response only when the AI has finished processing
-                    the data.
+                    the data in the form of a `JSON`. Note that if you set this to `true`, it will only return the content as a stream and it will not return the `id`, `status` and `timestamp` fields.It can be acessed using the Logs and the Usage Pages.
                 datasetId:
                   type: "string"
                   description: The Id of the Fine-Tuned Training Models.
