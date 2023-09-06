@@ -306,6 +306,11 @@
       ]
     }
   ],
+  "feedback": {
+    "raiseIssue": true,
+    "suggestEdit": true,
+    "thumbsRating": true
+  },
   "footerSocials": {
     "twitter": "https://twitter.com/worqhat",
     "instagram": "https://instagram.com/worqhat",
