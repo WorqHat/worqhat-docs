@@ -1,34 +1,56 @@
-# Mintlify Starter Kit
+<!-- markdownlint-disable MD033 -->
+<h1 align="center"><img alt="worqhat logo" width=75% src="https://www.worqhat.com/resources/WorqHat%20TM%20Logo.png"/></h1>
+<!-- markdownlint-enable MD033 -->
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+WorqHat is a no-code platform builder that utilizes the power of Generative AI to produce brandable
+Custom Apps, Workflows, and Automation for businesses of all sizes, from solopreneurs and startups
+to medium-sized enterprises. By automating complex workflows, WorqHat streamlines team
+collaboration enables top-notch productivity, and ensures that your business thrives.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+At the core of WorqHat is our advanced deep learning model - AiCon (short for AI Content
+Optimization Network). This revolutionary language model has been trained on vast amounts of data to
+understand natural language with exceptional precision and unmatched speed, allowing for faster and
+easier platform building.
 
-### 👩‍💻 Development
+Whether you need to improve your sales and marketing strategy, optimize financial operations, or
+manage HR workflows, WorqHat offers the flexibility and adaptability necessary to meet your needs.
+With our intuitive drag-and-drop interface, you can easily design and deploy custom apps with zero
+coding experience required. Say goodbye to lengthy development cycles, limited functionality, and
+expensive developers - WorqHat empowers you to bring your vision to life, your way.
+Welcome to WorqHat's Public API documentation. This documentation was built to help you build your
+own custom integration with WorqHat's REST-based Application Programming Interface (API).
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+The **WorqHatAPI** can be applied to virtually any task that you want to perform on the WorqHat
+Applications but from your own codebases. This involves understanding or generating natural
+language, code, images and voices; adding in custom form data to the records and even making changes
+to the No-Code Applications.
 
-```
-npm i -g mintlify
-```
+The WorqHat AI API is a versatile tool that can be used for a wide range of tasks involving natural
+language, code, and images. Our API provides various models with varying power levels, suitable for
+different tasks, and can be trained on the fly while generating outputs. With the flexibility to
+handle content generation, semantic search, and classification, our API offers a comprehensive
+solution for your needs.
 
-Run the following command at the root of your documentation (where mint.json is)
+### Links
 
-```
-mintlify dev
-```
+- Homepage: https://worqhat.com
+- API Docs: https://docs.worqhat.com
+- Changelogs: https://updates.worqhat.com
+- Community: https://discord.com/invite/KHh9mguKBx
+- Status Page: https://worqhat-status.statuspage.io/
+- Get in touch: https://www.worqhat.com/contact-us
 
-### 😎 Publishing Changes
+## License
 
-Changes will be deployed to production automatically after pushing to the default branch.
+By contributing to WorqHat you agree that your contributions will be licensed as defined on the
+LICENSE file.
 
-You can also preview changes using PRs, which generates a preview link of the docs.
+## Hiring
 
-#### Troubleshooting
+If you are into NodeJS, TailwindCSS, Frontend Designing, Backend, Cloud, GCP, or AWS - ping us at
+[careers@worqhat.com](mailto:careers@worqhat.com)
 
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+## Contribution
+
+Feel free to open a pull request for small fixes and changes. For bigger changes and new plugins,
+Please open an issue first to prevent duplicated work and to have the relevant discussions first.
