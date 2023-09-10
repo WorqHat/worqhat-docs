@@ -2829,18 +2829,16 @@ components:
           type: integer
           description: The timestamp when the extraction request was processed.
         content:
-          oneOf:
-            - $ref: "#/components/schemas/PdfTextExtractContent"
+          type: string
           description: The extracted content from the PDF.
         processing_count:
           type: integer
           description: The number of times the content has been processed to create the final content.
       example:
-        value:
-          id: "15b01f2c-125c-4824-9b89-9b140be9e7f0"
-          status: success
-          timestamp: 1687776023750
-          content: "Est et lorem vero dolor gubergren lorem. Dolor ut conseletur labore amet et dolor sed erat"
+        id: "15b01f2c-125c-4824-9b89-9b140be9e7f0"
+        status: success
+        timestamp: 1687776023750
+        content: "Est et lorem vero dolor gubergren lorem. Dolor ut conseletur labore amet et dolor sed erat"
 
     PdfTextExtractContent:
       type: object
