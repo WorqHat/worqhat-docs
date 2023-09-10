@@ -2809,14 +2809,7 @@ components:
         file:
           type: string
           format: binary
-          description: The PDF file to extract content from.
-        output_format:
-          type: string
-          enum:
-            - text
-            - json
-          default: text
-          description: The desired output format. Defaults to "text".
+          description: The PDF file to extract content from. The file must be in PDF format.
       required:
         - file
       example:
@@ -2838,7 +2831,6 @@ components:
         content:
           oneOf:
             - $ref: "#/components/schemas/PdfTextExtractContent"
-            - $ref: "#/components/schemas/PdfJsonExtractContent"
           description: The extracted content from the PDF.
         processing_count:
           type: integer
@@ -2899,7 +2891,7 @@ components:
     PdfTextExtractContent:
       type: object
       properties:
-        text_content:
+        content:
           type: string
           description: The extracted text content from the PDF.
         tags:
