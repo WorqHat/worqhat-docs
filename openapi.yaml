@@ -2840,53 +2840,7 @@ components:
           id: "15b01f2c-125c-4824-9b89-9b140be9e7f0"
           status: success
           timestamp: 1687776023750
-          content:
-            - type: PAGE
-              position:
-                bounding_box:
-                  width: 1
-                  height: 1
-                  left: 0
-                  top: 0
-                polygon:
-                  - x: 0.000002764723831205629
-                    y: 0
-                  - x: 1
-                    y: 0.000004283267116989009
-                  - x: 1
-                    y: 1
-                  - x: 0
-                    y: 1
-              id: "d0d1ac22-3958-45ed-8bc6-c76eb637f5cc"
-              dependencies:
-                - type: CHILD
-                  ids:
-                    - "720f5d2c-c59d-4648-9722-0d6f7de4cbe3"
-                    - "bf135402-4ff0-4ae7-8c72-a0cec3559a91"
-            - type: LINE
-              position:
-                bounding_box:
-                  width: 0.6681150794029236
-                  height: 0.014788508415222168
-                  left: 0.15100932121276855
-                  top: 0.08366494625806808
-                polygon:
-                  - x: 0.15103518962860107
-                    y: 0.08366494625806808
-                  - x: 0.8191244006156921
-                    y: 0.08457615226507187
-                  - x: 0.8191033601760864
-                    y: 0.09845345467329025
-                  - x: 0.15100932121276855
-                    y: 0.09754297882318497
-              score: 80.1580581665039
-              id: "720f5d2c-c59d-4648-9722-0d6f7de4cbe3"
-              dependencies:
-                - type: CHILD
-                  ids:
-                    - "3723328f-8b27-4b6f-8c98-d79bb6ffde62"
-                    - "e73f4be1-e8f3-464a-8647-56a281facd0c"
-              content: "Est et lorem vero dolor gubergren lorem. Dolor ut conseletur labore amet et dolor sed erat"
+          content: "Est et lorem vero dolor gubergren lorem. Dolor ut conseletur labore amet et dolor sed erat"
 
     PdfTextExtractContent:
       type: object
@@ -2894,11 +2848,6 @@ components:
         content:
           type: string
           description: The extracted text content from the PDF.
-        tags:
-          type: array
-          items:
-            $ref: "#/components/schemas/PdfTag"
-          description: Additional tags associated with the extracted content.
 
     PdfJsonExtractContent:
       type: object
