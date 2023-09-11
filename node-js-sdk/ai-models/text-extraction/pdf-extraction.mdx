@@ -13,8 +13,7 @@ Read more at: https://docs.worqhat.com/ai-models/text-extraction/pdf-extraction
 
 | Parameter     | Type     | Description                                                                 | Default |
 | ------------- | -------- | --------------------------------------------------------------------------- | ------- |
-| file          | `object` | An object representing the PDF file to extract text from. This is required. | N/A     |
-| output_format | `string` | The output format of the extracted text. Can be `text` or `json`.           | `text`  |
+| file          | `object` | An object representing the PDF file to extract text from. It can be a `File object` or a `URL` or `base64` encoded image data. This is required. | N/A     |
 
 ### Examples
 
@@ -32,7 +31,6 @@ async function extractTextFromPdf() {
   try {
     var result = await worqhat.textExtraction.pdf({
       file: "./path-to-your-pdf-file.pdf",
-      output_format: "text",
     });
     console.log(result);
   } catch (error) {
