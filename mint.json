@@ -86,6 +86,7 @@
       "pages": [
         "introduction",
         "quickstart",
+        "postman-reference",
         "worqhat-ai",
         "rate-limits"
       ]
