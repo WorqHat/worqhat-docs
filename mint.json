@@ -297,6 +297,12 @@
       ]
     },
     {
+      "group": "Databases",
+      "pages": [
+        "databases/what-is-worqdb"
+      ]
+    },
+    {
       "group": "Policies",
       "pages": [
         "policies/terms-of-service",

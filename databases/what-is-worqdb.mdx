@@ -1,0 +1,54 @@
+---
+title: What is WorqDB?
+description: 'WorqDB is a high-performance, key-value NoSQL Databases for superfast analystical processes.'
+---
+
+### Why did we create WorqDB?
+
+We recognized that many Micro, Small and Medium Enterprises (MSMEs) as well as larger organizations have a pressing need for real-time `read` responses. These responses are crucial when dealing with large datasets and complex analytical queries. Here are some of the challenges these organizations often face:
+
+- They are dealing with massive datasets, often comprising billions or even trillions of rows.
+- Their data is organized in such a way that there could be numerous parameters to filter on.
+- Typically, only a select few keys or headers are needed to answer a specific query or question.
+- They need to be able to return vast amounts of results in a matter of milliseconds or seconds.
+
+In the modern business landscape, the importance of data has become increasingly clear. Companies that fail to leverage data often struggle to compete. Successful companies, on the other hand, adopt a data-driven approach, collecting and analyzing all potentially useful data to inform their business decisions. This is where the power of truly understanding your data becomes evident.
+
+From a business perspective, WorqDB empowers companies to consistently plan, analyze, and report on operational activities. This leads to maximized efficiency, reduced costs, and ultimately, a larger market share. WorqDB serves as a potent tool that aids companies in making faster, more informed decisions.
+
+Understanding these needs, we built WorqDB to provide a solution, the fastest Schemaless NoSQL Database, that returns responses in milliseconds. **One of the biggest examples of such kinds of Data Processes is SAP HANA.**
+
+### How we made it **FAST** !!
+
+It was designed to be _fast_. Query execution performance has always been a top priority during the development process, but other important characteristics like user-friendliness, scalability, and security were also considered so WorqDB could become a real production system.
+
+#### Architecture Choices
+
+ - WorqDB is a distributed database system that is designed to scale horizontally. It is a shared-nothing system, meaning that each node in the cluster is independent and self-sufficient, and there is no single point of failure. The system is designed to be deployed on commodity hardware, and it is capable of scaling to hundreds of nodes. The system is also designed to be self-healing, so if a node fails, the system will automatically recover without any downtime.
+
+ - Storing different values of the same key together often leads to better compression ratios (compared to row-oriented systems) because in real data a key often has the same, or not so many different, values for neighboring rows. In addition to general-purpose compression, WorqDB supports specialized codecs that can make data even more compact.
+
+ - Large queries are parallelized naturally, taking all the necessary resources available on the current server.
+
+ - In WorqDB, data can reside on different shards. Each shard can be a group of replicas used for fault tolerance. All shards are used to run a query in parallel, transparently for the user.
+
+### Choose Your Power: Server Configurations & Availability
+
+|  | **Free Tier** (Get Started) | **Pro Tier** (Scale Up) | **Enterprise Tier** (Unleash Power) |
+| --- | ------ | --- | --- |
+| **Storage** | 1GB (Perfect for Startups) | 20GB (Ideal for Growing Businesses) | Unlimited (For Data-Heavy Enterprises) |
+| **CPU** | 2 Core Shared (Efficient) | 4 Core Individual (Powerful) | 8+ Core Individual (Ultra-Powerful) |
+| **Compute** | 4GB Shared (Reliable) | 16GB Individual & Autoscale to 24GB (Robust) | 24+ GB Individual & Autoscale to 48GB (Unstoppable) |
+
+### Why Choose WorqDB?
+
+- **Fast time to value**: With WorqDB, you can start building your applications instantly. There's no need to spend time sizing and creating a structure for the database. Our system is designed to be intuitive and user-friendly, allowing you to focus on what matters most - your data.
+
+- **Seamless scaling**: WorqDB is built to adapt to your needs. Our automatic scaling feature adjusts to variable workloads, meaning you don't have to over-provision or create servers for peak usage. Whether your data grows or shrinks, WorqDB scales accordingly, providing consistent performance.
+
+- **Serverless operations**: We handle all the backend operations so you can focus on your business. From sizing and scaling to security, reliability, and upgrades, we've got you covered. With WorqDB, you can enjoy the benefits of a serverless database without the operational complexities.
+
+- **Transparent pricing**: We believe in fair and transparent pricing. With WorqDB, you only pay for what you use. Our resource reservations and scaling controls ensure that you're always in control of your costs.
+
+- **Total cost of ownership**: WorqDB offers the best price/performance ratio in the market. Our system is designed to minimize administrative overhead, reducing the total cost of ownership. Plus, with our high-performance, key-value NoSQL architecture, you get superfast analytical processes, making WorqDB a cost-effective solution for your data needs.
+
