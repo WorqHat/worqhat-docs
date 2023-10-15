@@ -1,0 +1,42 @@
+---
+title: Data Types
+description: 'The list of all the data types supported by WorqDB'
+---
+
+### Supported Data Types
+
+The following Table shows the list of all the data types supported by WorqDB. We will be adding more Data Types in the future.
+
+| Data Type | Description | Use Case |
+| --- | --- | --- |
+| `string` | This data type represents a sequence of characters, with a maximum size of 1MB. | Perfect for storing text-based data like user names, email addresses, or descriptions. |
+| `number` | This data type represents a numerical value, stored in up to 8 bytes. | Ideal for storing numerical data such as age, quantity of items, or any other numerical value. |
+| `float` | This data type represents a floating point number, also stored in up to 8 bytes. | Useful for storing decimal numbers, such as price, weight, or any other measurements that require precision. |
+| `boolean` | This data type represents a boolean value, which can be either true or false. | Useful for storing binary states such as whether a user is active/inactive, or a feature is enabled/disabled. |
+| `date` | This data type represents a date value. _Limited Support. Try using timestamp_ | Ideal for storing date-related information such as birth dates, event dates, or any other date-specific data. |
+| `timestamp` | This data type represents a timestamp value, indicating a specific point in time. It can store both the Date and Time and is often preferred over `date` for analysis use cases. Use any Timestamp function and round it off by 1000. Eg: `Math.floor(new Date().getTime() / 1000);`| Useful for tracking events with a precise time, such as log entries, transaction times, or any other time-stamped records. It can record times upto the nearest Micro-second and rounds off the rest of it to the nearest value.|
+| `json` | This data type represents a JSON object. | Ideal for storing complex, structured data that can be represented as a JSON object. |
+| `array` | This data type represents an array of values. | Useful for storing multiple values in a single field, such as a list of tags, categories, or any other multi-value data. |
+| `geopoint` | This data type represents a geographical point. You can store geopoint values as an array of `[lat, long]`. Alternatively you can also store it as separate Float fields as well. | Perfect for storing geographical data such as user locations, store locations, or any other latitude and longitude data.|
+| `uuid` | This data type represents a Universally Unique Identifier. | Ideal for storing unique identifiers for records, such as document IDs, user IDs, or any other unique identifiers. |
+| `ip` | This data type represents an IP Address value. | Useful for storing IP addresses for tracking user activity, security auditing, or any other IP-related data. |
+
+### Declaring Data Types during Collection Creation
+
+As we have proceeded ahead with a schemaless approach, we do not enforce any data types on the fields. However, you can still declare the data types for the fields during the collection creation. This will help you to keep track of the data types of the fields in your collection.
+
+Here is a list of the Data Types that are automatically identified and data types that you have to declare explicitly during document creation.
+
+| Data Type | Automatically Identified | Explicitly Declared |
+| --- | --- | --- |
+| `string` | ✅ | ✅ |
+| `number` | ✅ | ✅ |
+| `float` | ✅ | ✅ |
+| `boolean` | ✅ | ✅ |
+| `date` | ❌ (Identified as a String) | ✅ |
+| `timestamp` | ❌ (Identified as an Integer) | ✅ |
+| `json` | ✅ | ✅ |
+| `array` | ✅ | ✅ |
+| `geopoint` | ❌ (Identified as an Array) | ✅ |
+| `uuid` | ✅ | ✅ |
+| `ip` | ✅ | ✅ |

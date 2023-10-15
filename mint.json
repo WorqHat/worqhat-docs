@@ -147,6 +147,24 @@
       ]
     },
     {
+      "group": "Databases",
+      "pages": [
+        "databases/what-is-worqdb",
+        "databases/data-types",
+        "databases/creating-collections"
+      ]
+    },
+    {
+      "group": "Policies",
+      "pages": [
+        "policies/terms-of-service",
+        "policies/privacy-policy",
+        "policies/acceptable-use-policy",
+        "policies/data-usage-policy",
+        "policies/bugs-disclosure-policy"
+      ]
+    },
+    {
       "group": "API Reference",
       "pages": [
         "api-reference/authentication",
@@ -294,12 +312,6 @@
             "learner-academy/projects/mock-interview-simulator-with-ai"
           ]
         }
-      ]
-    },
-    {
-      "group": "Databases",
-      "pages": [
-        "databases/what-is-worqdb"
       ]
     },
     {
