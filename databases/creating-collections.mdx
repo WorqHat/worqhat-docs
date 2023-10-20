@@ -2,3 +2,11 @@
 title: Creating Collections
 description: 'Creating a Collection to Store Data in the Form of Documents/Key-Value Pairs'
 ---
+
+Like most databases WorqDB, logically groups data as collections. You can use the `createCollection` method to create a collection. The method takes in the name of the collection as the first argument, and several optional configuration options as the second and third arguments.
+
+The parameters that we can pass to the `createCollection` method are:
+
+- `name` - The name of the collection to create.
+- `structure` - An object containing the Schema of the collection. This is optional. If not provided, the collection will be created and the structure will be defined along the way.
+- `defaultSort` - An object containing the default sort order of the collection. This is optional. If not provided, the collection will be created and the default sort order will be defined along the way.

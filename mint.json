@@ -174,20 +174,22 @@
             "api-reference/text-generation-ai/aicon-v2-textgen",
             "api-reference/text-generation-ai/aicon-v3-textgen",
             "api-reference/text-generation-ai/aicon-v2-large-beta",
-            "api-reference/text-generation-ai/aicon-v2-2023-alpha",
-            "api-reference/text-generation-ai/aicon-train-datasets",
-            "api-reference/text-generation-ai/aicon-view-datasets",
-            "api-reference/text-generation-ai/aicon-delete-datasets"
+            "api-reference/text-generation-ai/aicon-v2-2023-alpha"
+          ]
+        },
+        {
+          "group": "Model Training",
+          "pages": [
+            "api-reference/model-training/view-datasets",
+            "api-reference/model-training/delete-datasets",
+            "api-reference/model-training/train-datasets"
           ]
         },
         {
           "group": "AI for Search",
           "pages": [
             "api-reference/ai-for-search/search-v2",
-            "api-reference/ai-for-search/search-v3",
-            "api-reference/ai-for-search/search-train-datasets",
-            "api-reference/ai-for-search/search-view-datasets",
-            "api-reference/ai-for-search/search-delete-datasets"
+            "api-reference/ai-for-search/search-v3"
           ]
         },
         {
@@ -213,10 +215,10 @@
           "pages": [
             "api-reference/text-extraction/pdf-extraction",
             "api-reference/text-extraction/web-extraction",
-            "api-reference/text-extraction/image-extraction"
+            "api-reference/text-extraction/image-extraction",
+            "api-reference/text-extraction/speech-extraction"
           ]
         },
-        "api-reference/speech-extraction",
         {
           "group": "Content Moderation",
           "pages": [
