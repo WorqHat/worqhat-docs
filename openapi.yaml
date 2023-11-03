@@ -2515,11 +2515,11 @@ paths:
                   type: object
                   description: >
                     The Schema of the Collection. This is used to validate the data that is being
-                    stored in the Collection. This is optional. You can pass in the variables on how you want to structure the data as. We currently support Data Types such as `string`, `number`, `float`, `boolean`, `date`, `timestamp`, `json`, `map`, `array`, `geopoint`, `uuid`, `ip`.
+                    stored in the Collection. **_This is optional_**. You can pass in the variables on how you want to structure the data as. We currently support Data Types such as `string`, `number`, `float`, `boolean`, `date`, `timestamp`, `json`, `map`, `array`, `geopoint`, `uuid`, `ip`.
                 collectionSortBy:
                   type: string
                   description: >
-                    The Field by which you want to sort the data in the Collection. This is optional. By default we will sort it by the Document Id of the data that you add.
+                    The Field by which you want to sort the data in the Collection. **_This is optional_**. By default we will sort it by the Document Creation Time of the data that you add.
               example:
                 collection: "Users"
                 collectionSchema:

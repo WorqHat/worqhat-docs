@@ -230,6 +230,12 @@
               ]
             }
           ]
+        },
+        {
+          "group": "Database Management",
+          "pages": [
+            "api-reference/databases/create-collection"
+          ]
         }
       ]
     },
