@@ -34,7 +34,7 @@
     {
       "name": "NodeJS SDK",
       "icon": "node-js",
-      "url": "https://docs.worqhat.com/api-reference/authentication"
+      "url": "https://docs.worqhat.com/node-js-sdk/initialization"
     },
     {
       "name": "Academy",
@@ -169,61 +169,66 @@
       "pages": [
         "api-reference/authentication",
         {
-          "group": "Text Generation AI",
+          "group": "AI Models",
           "pages": [
-            "api-reference/text-generation-ai/aicon-v2-textgen",
-            "api-reference/text-generation-ai/aicon-v3-textgen",
-            "api-reference/text-generation-ai/aicon-v2-large-beta",
-            "api-reference/text-generation-ai/aicon-v2-2023-alpha"
-          ]
-        },
-        {
-          "group": "Model Training",
-          "pages": [
-            "api-reference/model-training/view-datasets",
-            "api-reference/model-training/delete-datasets",
-            "api-reference/model-training/train-datasets"
-          ]
-        },
-        {
-          "group": "AI for Search",
-          "pages": [
-            "api-reference/ai-for-search/search-v2",
-            "api-reference/ai-for-search/search-v3"
-          ]
-        },
-        {
-          "group": "Image Generation",
-          "pages": [
-            "api-reference/image-generation/imagecon-v2",
-            "api-reference/image-generation/imagecon-v3",
-            "api-reference/image-generation/image-image-v2",
-            "api-reference/image-generation/image-image-v3",
-            "api-reference/image-generation/image-upscale"
-          ]
-        },
-        {
-          "group": "Image Analysis",
-          "pages": [
-            "api-reference/image-analysis/image-analysis-v2",
-            "api-reference/image-analysis/face-analysis",
-            "api-reference/image-analysis/face-comparison-v2"
-          ]
-        },
-        {
-          "group": "Text Extraction",
-          "pages": [
-            "api-reference/text-extraction/pdf-extraction",
-            "api-reference/text-extraction/web-extraction",
-            "api-reference/text-extraction/image-extraction",
-            "api-reference/text-extraction/speech-extraction"
-          ]
-        },
-        {
-          "group": "Content Moderation",
-          "pages": [
-            "api-reference/content-moderation/text-content-moderation",
-            "api-reference/content-moderation/image-moderation"
+            {
+              "group": "Text Generation AI",
+              "pages": [
+                "api-reference/ai-models/text-generation-ai/aicon-v2-textgen",
+                "api-reference/ai-models/text-generation-ai/aicon-v3-textgen",
+                "api-reference/ai-models/text-generation-ai/aicon-v2-large-beta",
+                "api-reference/ai-models/text-generation-ai/aicon-v2-2023-alpha"
+              ]
+            },
+            {
+              "group": "Model Training",
+              "pages": [
+                "api-reference/ai-models/model-training/view-datasets",
+                "api-reference/ai-models/model-training/delete-datasets",
+                "api-reference/ai-models/model-training/train-datasets"
+              ]
+            },
+            {
+              "group": "AI for Search",
+              "pages": [
+                "api-reference/ai-models/ai-for-search/search-v2",
+                "api-reference/ai-models/ai-for-search/search-v3"
+              ]
+            },
+            {
+              "group": "Image Generation",
+              "pages": [
+                "api-reference/ai-models/image-generation/imagecon-v2",
+                "api-reference/ai-models/image-generation/imagecon-v3",
+                "api-reference/ai-models/image-generation/image-image-v2",
+                "api-reference/ai-models/image-generation/image-image-v3",
+                "api-reference/ai-models/image-generation/image-upscale"
+              ]
+            },
+            {
+              "group": "Image Analysis",
+              "pages": [
+                "api-reference/ai-models/image-analysis/image-analysis-v2",
+                "api-reference/ai-models/image-analysis/face-analysis",
+                "api-reference/ai-models/image-analysis/face-comparison-v2"
+              ]
+            },
+            {
+              "group": "Text Extraction",
+              "pages": [
+                "api-reference/ai-models/text-extraction/pdf-extraction",
+                "api-reference/ai-models/text-extraction/web-extraction",
+                "api-reference/ai-models/text-extraction/image-extraction",
+                "api-reference/ai-models/text-extraction/speech-extraction"
+              ]
+            },
+            {
+              "group": "Content Moderation",
+              "pages": [
+                "api-reference/ai-models/content-moderation/text-content-moderation",
+                "api-reference/ai-models/content-moderation/image-moderation"
+              ]
+            }
           ]
         }
       ]
