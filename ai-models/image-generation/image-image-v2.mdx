@@ -21,6 +21,8 @@ When generating new images, the model takes an input image and passes it through
 
 It's important to note that the quality and realism of the generated images can vary depending on the complexity of the model, the size and diversity of the training dataset, and other factors. Additionally, the generated images may not always perfectly match the desired output, and post-processing techniques may be required to enhance the results. Nonetheless, image to image generation models offer a promising approach for creating new images based on existing ones, providing opportunities for artistic expression, style transfer, and creative exploration.
 
+<Warning>This mostly happens because of invalid image sizes. Neither `height` nor `width` of the image should be less than `128px`. Only one of the sides of the image should be greater than or equal to `512px`. (Eg: `512x512`, `512x768`, `768x512`). Maximum dimensions supported is `512x896` </Warning>
+
 ## Use Cases
 
 - **Style Transfer**: Image-to-image transformation can be used for style transfer, where the style of one image is applied to another. This technique is popular in art and design to create visually appealing and unique images.

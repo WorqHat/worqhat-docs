@@ -32,7 +32,7 @@ servers:
     description: Production server for WorqHat AI API
 
 security:
-  -  bearerAuth: [ ]
+  - bearerAuth: []
 
 paths:
   /authentication:
@@ -44,6 +44,8 @@ paths:
       operationId: authenticateUser
       tags:
         - Authentication
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: User authenticated successfully
@@ -370,7 +372,8 @@ paths:
                 existing_image:
                   type: string
                   format: binary
-                  description: The image to be modified or edited.
+                  description: >
+                    The image to be modified or edited. Neither `height` nor `width` of the image should be less than `128px`. Only one of the sides of the image should be greater than or equal to `512px`. (Eg: `512x512`, `512x768`, `768x512`). Maximum dimensions supported is `512x896`
                 output_type:
                   type: string
                   description: >
@@ -464,6 +467,114 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
+  /api/ai/images/upscale/v3:
+    post:
+      summary: Upscale an image using ImageCon V3
+      description: >
+        This endpoint is used to upscale an existing image using AI. It can take scale inputs of upto a combination of 4194304px.
+        It accepts a Form Data containing the image modification parameters and returns the
+        upscaled image.
+      operationId: upscaleImageV3
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited. Keep in mind that the File Object dimensions should not exceed `1024x1024`. Also, the resulting image dimensions will not exceed `2048x2048`.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`
+                    . `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+                scale:
+                  type: number
+                  description: >
+                    The scale to be applied to the image. It is a number between 1 and maximum of 5.
+                    The higher the number, the more the image will be upscaled.
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+              scale: 2
+
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
+                example:
+                  status: "success"
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
+        '400':
+          description: >
+            Bad Request. This mostly happens because of invalid image sizes.
+            Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
   /api/ai/images/modify/v3:
     post:
       summary: Modify existing image using ImageCon V3
@@ -486,7 +597,7 @@ paths:
                 existing_image:
                   type: string
                   format: binary
-                  description: The image to be modified or edited.
+                  description: The image to be modified or edited. Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
                 output_type:
                   type: string
                   description: >
@@ -1335,8 +1446,21 @@ paths:
                     type: string
                     description: Status indicating the success of the Audio Conversion Process.
                   data:
-                    type: string
-                    description: The converted text.
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        description: The Extracted Text from the Audio.
+                      speaker_labels:
+                        type: array
+                        properties:
+                          speaker:
+                            type: string
+                            description: The speaker label.
+                          text:
+                            type: string
+                            description: The text associated with the speaker.
+
                   processing_time:
                     type: integer
                     description: The time taken to process the request, in milliseconds.
@@ -1350,7 +1474,14 @@ paths:
                       the image is processed or the number of words that the server processes.
                 example:
                   status: "success"
-                  data: "This is a sample text to be converted."
+                  data:
+                    text: "This is a sample text to be converted to speech."
+                    speaker_labels: [
+                      {
+                        speaker: "A",
+                        text: "This is a sample text to be converted to speech."
+                      }
+                    ]
                   processing_time: 888
                   processing_id: "4b139bfe-1f71-4345-b539-fa6c1700f166"
                   processing_count: 12
@@ -1695,7 +1826,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the Audio Conversion Process.
+                    description: Status indicating the success of the Audio Conversion Process. In case you have an error for `multipart/form-data` requests, try removing the `Content-Type` header.
                   data:
                     type: string
                     description: The converted text.
@@ -4446,7 +4577,7 @@ paths:
 
 components:
   securitySchemes:
-    bearerAuth:            # arbitrary name for the security scheme
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: 'sk-<api_key>'
