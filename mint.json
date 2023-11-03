@@ -151,7 +151,15 @@
       "pages": [
         "databases/what-is-worqdb",
         "databases/data-types",
-        "databases/creating-collections"
+        "databases/creating-collections",
+        {
+          "group": "Add and Manage Data",
+          "pages": [
+            "databases/add-data",
+            "databases/update-data",
+            "databases/delete-data"
+          ]
+        }
       ]
     },
     {
@@ -234,7 +242,15 @@
         {
           "group": "Database Management",
           "pages": [
-            "api-reference/databases/create-collection"
+            "api-reference/databases/create-collection",
+            {
+              "group": "Add and Manage Data",
+              "pages": [
+                "api-reference/databases/add-data",
+                "api-reference/databases/update-data",
+                "api-reference/databases/delete-data"
+              ]
+            }
           ]
         }
       ]

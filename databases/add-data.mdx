@@ -1,0 +1,100 @@
+---
+title: Add Data to a Collection
+description: 'Adding Data as a Document to a Collection in WorqDB.'
+---
+
+There are three ways to add data to a WorqDB Collection:
+
+- Set the Data of a Document within a Collection, with an automatically generated document identifier or `docId`.
+- Add a Document with a custom `docId` to identify your document within a Collection.
+- Create an empty document with an automatically generated identifier, and assign data to it later. You can do this by using the `create` method and then the `update` method later on.
+
+<Tip>In this we have focused on the API Endpoints but you can also use our NodeJS Packages to integrate with your `Javasscript` and `Typescript` package.</Tip>
+
+## Before you begin
+
+See Get started with [Create Collections](/databases/create-collection) to create a Collection before you add data to it.
+
+## Set the Data of a Document within a Collection
+
+<Info>You can read more about Data Object Documents in the [Data Object Documents](/databases/data-types) section and how we identify the data types of the fields in the [Data Types](/databases/data-types) section.</Info>
+
+You can add data to a Collection by using the `add` method. This method will create a new document with an automatically generated document identifier or `docId`.
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/add \
+  --header 'Authorization: Bearer sk-12b0830ea8584f3b8719d45da316e876' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "data": {
+    "name": "John Doe",
+    "Company": "Acme Corp",
+    "Login": 1697359974
+  }
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/add-data)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/add-data">
+  Visit the API Reference to learn how to Add Documents in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>
+
+## Add a Document with a custom `docId`
+
+You can add data to a Collection by using the `add` method. This method will create a new document with a custom `docId` that you can use to identify your document within a Collection.
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/add \
+  --header 'Authorization: Bearer sk-12b0830ea8584f3b8719d45da316e876' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "sampleDocumentId",
+  "data": {
+    "name": "John Doe",
+    "Company": "Acme Corp",
+    "Login": 1697359974
+  }
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/add-data)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/add-data">
+  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>
+
+## Create an empty document with an automatically generated identifier, and assign data to it later
+
+You can create an empty document with an automatically generated identifier, and assign data to it later by using the `update` method. This method will create a new document with an automatically generated document identifier or `docId` and the Document Creation Timestamp.
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/add \
+  --header 'Authorization: Bearer sk-12b0830ea8584f3b8719d45da316e876' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "thisIsOptionalString",
+  "data": {}
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/add-data)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/add-data">
+  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>

@@ -3378,10 +3378,10 @@ paths:
                   description: The Name of the Collection or the Group where you want to store all your data.
                 docId:
                   type: string
-                  description: The ID of the Document that you want to add. This is optional. If you don't pass a Document ID, we will generate a random ID for you. *Make sure this is unique*.
+                  description: The ID of the Document that you want to add. **_This is optional_**. If you don't pass a Document ID, we will generate a random ID for you. *Make sure this is unique*. You can add `string` data types as the Document ID, we will convert it automatically.
                 data:
                   description: >
-                    The Data that you want to store in the Collection. You can add your documents to a Collection using this endpoint in the form of Json.
+                    The Data that you want to store in the Collection. You can add your documents to a Collection using this endpoint in the form of `JSON` objects in NoSQL.
                   type: object
                   properties:
                     sampleDbContent:
