@@ -3421,18 +3421,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"
@@ -3541,18 +3542,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"
@@ -3647,18 +3649,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"
@@ -3761,18 +3764,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"
@@ -3879,18 +3883,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"
@@ -3997,18 +4002,19 @@ paths:
                       the image is processed or the number of words that the server processes.
                   data:
                     type: object
-                  databaseId:
-                    type: string
-                    description: The ID of the Database where the data is stored.
-                  collection:
-                    type: string
-                    description: The Name of the Collection or the Group where you want to store all your data.
-                  elapsed_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  documentId:
-                    type: string
-                    description: The ID of the Document that you added to the Collection.
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      collection:
+                        type: string
+                        description: The Name of the Collection or the Group where you want to store all your data.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      documentId:
+                        type: string
+                        description: The ID of the Document that you added to the Collection.
 
                 example:
                   status: "success"

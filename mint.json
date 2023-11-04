@@ -157,6 +157,8 @@
           "pages": [
             "databases/add-data",
             "databases/update-data",
+            "databases/increment-numeric-fields",
+            "databases/update-array-fields",
             "databases/delete-data"
           ]
         }
@@ -248,6 +250,9 @@
               "pages": [
                 "api-reference/databases/add-data",
                 "api-reference/databases/update-data",
+                "api-reference/databases/increment-numeric-fields",
+                "api-reference/databases/update-array-fields-add",
+                "api-reference/databases/update-array-fields-remove",
                 "api-reference/databases/delete-data"
               ]
             }
