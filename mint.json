@@ -161,6 +161,17 @@
             "databases/update-array-fields",
             "databases/delete-data"
           ]
+        },
+        {
+          "group": "Read Data",
+          "pages": [
+            "databases/fetch-all-data",
+            "databases/fetch-document",
+            "databases/fetch-count",
+            "databases/fetch-unique",
+            "databases/fetch-query",
+            "databases/fetch-natural-language"
+          ]
         }
       ]
     },
@@ -254,6 +265,17 @@
                 "api-reference/databases/update-array-fields-add",
                 "api-reference/databases/update-array-fields-remove",
                 "api-reference/databases/delete-data"
+              ]
+            },
+            {
+              "group": "Read Data",
+              "pages": [
+                "api-reference/databases/fetch-all-data",
+                "api-reference/databases/fetch-document",
+                "api-reference/databases/fetch-count",
+                "api-reference/databases/fetch-unique",
+                "api-reference/databases/fetch-query",
+                "api-reference/databases/fetch-natural-language"
               ]
             }
           ]

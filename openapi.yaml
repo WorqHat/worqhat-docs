@@ -2950,7 +2950,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-  /api/collections/data/fetch/unique':
+  /api/collections/data/fetch/unique:
     post:
       summary: Fetch the Unique Values of a Field/Key in a Collection (Sortable)
       description: >
@@ -3111,6 +3111,10 @@ paths:
                         enum: ["<", "<=", "==", ">", ">=", "!=", "less than", "less than or equal to", "equal to", "greater than", "greater than or equal to", "not equal to"]
                         description: >
                           The Operator that you want to run the query with. This is optional. By default we will run the query with the `==` operator. If you add a `operator` Field/Key, we will run the query with that Operator.
+                      value:
+                        type: string
+                        description: >
+                          The Value that you want to run the query with. This is optional. By default we will run the query with the `==` operator. If you add a `value` Field/Key, we will run the query with that Value.
                 compounding:
                   type: string
                   enum: ["and", "or"]
