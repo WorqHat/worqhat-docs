@@ -172,6 +172,14 @@
             "databases/fetch-query",
             "databases/fetch-natural-language"
           ]
+        },
+        {
+          "group": "Usage & Limits",
+          "pages": [
+            "databases/usage-limits",
+            "databases/monitoring-usage",
+            "databases/storage-size"
+          ]
         }
       ]
     },
