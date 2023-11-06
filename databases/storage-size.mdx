@@ -1,100 +1,58 @@
 ---
-title: Add Data to a Collection
-description: 'Adding Data as a Document to a Collection in WorqDB.'
+title: Understanding Storage Size
+description: 'This page describes the storage size of documents, document names, fields, and index entries in WorqDB.'
 ---
 
-There are three ways to add data to a WorqDB Collection:
+## String Size
 
-- Set the Data of a Document within a Collection, with an automatically generated document identifier or `docId`.
-- Add a Document with a custom `docId` to identify your document within a Collection.
-- Create an empty document with an automatically generated identifier, and assign data to it later. You can do this by using the `create` method and then the `update` method later on.
+The size of a string is the number of bytes it takes to store the string in [UTF-8 encoding](https://en.wikipedia.org/wiki/UTF-8). In UTF-8, each ASCII character (like those in the English alphabet) takes 1 byte to store, while each Chinese character takes 3 bytes. For example, the string `hello` consists of 5 ASCII characters, so it takes 5 bytes to store. On the other hand, the string `你好` consists of 2 Chinese characters, so it takes 6 bytes (2 characters * 3 bytes/character) to store.
 
-<Tip>In this we have focused on the API Endpoints but you can also use our NodeJS Packages to integrate with your `Javascript` and `Typescript` package.</Tip>
+The following table shows the size of some common strings:
 
-## Before you begin
+| String | Size (bytes) |
+| :--- | :--- |
+| `hello` | 5 |
+| `你好` | 6 |
+| `hello 你好` | 11 |
+| `hello 你好 hello 你好` | 22 |
 
-See Get started with [Create Collections](/databases/create-collection) to create a Collection before you add data to it.
 
-## Set the Data of a Document within a Collection
+The following are stored as strings in WorqDB:
 
-<Info>You can read more about Data Object Documents in the [Data Object Documents](/databases/data-types) section and how we identify the data types of the fields in the [Data Types](/databases/data-types) section.</Info>
+* Document names
+* Field names
+* String Field values
+* Collection IDs
+* String Document IDs
 
-You can add data to a Collection by using the `add` method. This method will create a new document with an automatically generated document identifier or `docId`.
+## Field Value Size
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
-}'
-```
+The size of a field value is the number of bytes it takes to store the value in WorqDB. The following table shows the size of some common field values:
 
-Try it out in the [API Reference](/api-reference/databases/add-data)
+| Field Value | Size (bytes) |
+| :--- | :--- |
+| `array` | The size of the array is the sum of the sizes of its elements. |
+| `boolean` | 1 |
+| `null` | 0 |
+| `timestamp` | 8 |
+| `number` | 8 |
+| `float` | 8 |
+| `string` | The size of the string is the number of bytes it takes to store the string in [UTF-8 encoding](https://en.wikipedia.org/wiki/UTF-8). |
+| `json` | The size of the object is the sum of the sizes of its fields. |
+| `map` | The size of the map is the sum of the sizes of its fields. |
+| `geopoint` | 16 |
+| `uuid` | 16 |
+| `ip` | 4 |
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+For example, a boolean field named done would use 6 bytes:
 
-## Add a Document with a custom `docId`
+* 5 bytes for the `done` field name
+* 1 byte for the boolean value
 
-You can add data to a Collection by using the `add` method. This method will create a new document with a custom `docId` that you can use to identify your document within a Collection.
+## How we calculate
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
-}'
-```
+We charge you in two different ways:
 
-Try it out in the [API Reference](/api-reference/databases/add-data)
+* **Storage size**: The size of the data stored in WorqDB. We run a scan on the Partitioned Container Disc that is assigned to your workspace to identify the size of the data stored in WorqDB. It not only includes the storage for WorqDB, but it takes into account your complete usage of the Partitioned Container Disc. For example, if you have a 100GB Partitioned Container Disc and you are using 50GB for WorqDB and 50GB for other purposes, you will be charged for 100GB of storage.
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
-
-## Create an empty document with an automatically generated identifier, and assign data to it later
-
-You can create an empty document with an automatically generated identifier, and assign data to it later by using the `update` method. This method will create a new document with an automatically generated document identifier or `docId` and the Document Creation Timestamp.
-
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "thisIsOptionalString",
-  "data": {}
-}'
-```
-
-Try it out in the [API Reference](/api-reference/databases/add-data)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+* **Data Transfer**: The amount of data transferred to and from WorqDB. We keep track of the amount of data transferred to and from WorqDB. This includes the data transferred to and from WorqDB for all operations, including reads, writes, queries, and indexes. This is something that will be also visible in your Workspace Usage Dashboard and Activity Logs. This is generally tracked as the
