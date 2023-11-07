@@ -3133,6 +3133,10 @@ paths:
                   type: integer
                   description: >
                     The Limit of the number of Documents that you want to fetch. This is optional. By default we will fetch all the Documents that match the query. If you add a `limit` Field/Key, we will limit the response by that number.
+                startAfter:
+                  type: string
+                  description: >
+                    The number of documents to skip. This is optional. By default we will not skip any documents. If you add a `startAfter` value, we will skip the number of documents that you pass in.
               example:
                 collection: "Users"
                 queries:
@@ -3145,6 +3149,8 @@ paths:
                 compounding: "and"
                 orderBy: "age"
                 orderType: "desc"
+                limit: 10
+                startAfter: 5
 
       responses:
         '200':
