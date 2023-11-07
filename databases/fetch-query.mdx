@@ -46,3 +46,53 @@ WorqDB supports a variety of query operators:
 | `greater than` | Greater than |
 | `greater than or equal to` | Greater than or equal to |
 | `not equal to` | Not equal to |
+
+### Not Equal To Operator (`!=`)
+
+Use the not equal (!=) operator to return documents where the given field exists and does not match the comparison value. For example:
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "!=",
+      "value": "Mumbai"
+    }
+  ]
+}'
+```
+
+This query returns every city document where the `capital` field exists with a value other than `Mumbai`.
+
+<Warning>A != query clause might match many documents in a collection. To control the number of results returned, use a [limit clause](https://your-url-for-limit-clause.com) or [paginate your query](https://your-url-for-pagination.com).</Warning>
+
+## Compound Queries (AND)
+
+You can also chain multiple simple queries together using logical AND operators. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai`:
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "==",
+      "value": "Mumbai"
+    },
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ],
+  "compounding": "AND",
+}'
+```
