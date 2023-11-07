@@ -3,3 +3,37 @@ title: 'Fetch Unique Keys from a Document'
 sidebarTitle: 'Fetch Unique Keys'
 description: 'Fetch the Unique Values of a Field/Key in a Collection (Sortable) in WorqDB'
 ---
+
+## Fetch Unique Keys from a Document
+
+Fetch the Unique Values of a Field/Key in a Collection (Sortable) in WorqDB. This is useful when you want to fetch all the unique values of a field/key in a collection.
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/unique' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "key": "Sample Key",
+}'
+```
+
+This will return all the unique values of the key in the collection.
+
+## Sort the Unique Values by a Key
+
+You can also sort the unique values by a key. This is useful when you want to fetch all the unique values of a field/key in a collection and sort them by another field/key.
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/unique' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "key": "Sample Key",
+  "orderBy": "Sample Data",
+  "orderType": "asc"
+}'
+```
+
+This will return all the unique values of the key in the collection sorted by the `Sample Data` key in ascending order.
