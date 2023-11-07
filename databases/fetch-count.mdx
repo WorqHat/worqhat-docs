@@ -3,23 +3,9 @@ title: 'Count Documents in a Collection'
 description: 'Count the number of documents in a collection in your WorqDB Database.'
 ---
 
-There are three ways to add data to a WorqDB Collection:
+## Count Documents in a Collection
 
-- Set the Data of a Document within a Collection, with an automatically generated document identifier or `docId`.
-- Add a Document with a custom `docId` to identify your document within a Collection.
-- Create an empty document with an automatically generated identifier, and assign data to it later. You can do this by using the `create` method and then the `update` method later on.
-
-<Tip>In this we have focused on the API Endpoints but you can also use our NodeJS Packages to integrate with your `Javascript` and `Typescript` package.</Tip>
-
-## Before you begin
-
-See Get started with [Create Collections](/databases/create-collection) to create a Collection before you add data to it.
-
-## Set the Data of a Document within a Collection
-
-<Info>You can read more about Data Object Documents in the [Data Object Documents](/databases/data-types) section and how we identify the data types of the fields in the [Data Types](/databases/data-types) section.</Info>
-
-You can add data to a Collection by using the `add` method. This method will create a new document with an automatically generated document identifier or `docId`.
+You can count the number of documents in a collection in your WorqDB Database.
 
 ```shell
 curl --request POST \
@@ -27,27 +13,13 @@ curl --request POST \
   --header 'Authorization: Bearer <API KEY>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "collection": "Sample Collection",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
-}'
+    "collection": "Sample collection",
+  }'
 ```
 
-Try it out in the [API Reference](/api-reference/databases/add-data)
+## Count Documents in a Collection with a Key Value
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
-
-## Add a Document with a custom `docId`
-
-You can add data to a Collection by using the `add` method. This method will create a new document with a custom `docId` that you can use to identify your document within a Collection.
+You can count the number of documents in a collection in your WorqDB Database in which a key value is `Not Null`.
 
 ```shell
 curl --request POST \
@@ -55,46 +27,16 @@ curl --request POST \
   --header 'Authorization: Bearer <API KEY>' \
   --header 'Content-Type: application/json' \
   --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
-}'
+    "collection": "Sample collection",
+    "key": "Sample key",
+  }'
 ```
 
-Try it out in the [API Reference](/api-reference/databases/add-data)
+Try it out in the [API Reference](/api-reference/databases/fetch-count)
 
 <Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
-
-## Create an empty document with an automatically generated identifier, and assign data to it later
-
-You can create an empty document with an automatically generated identifier, and assign data to it later by using the `update` method. This method will create a new document with an automatically generated document identifier or `docId` and the Document Creation Timestamp.
-
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "thisIsOptionalString",
-  "data": {}
-}'
-```
-
-Try it out in the [API Reference](/api-reference/databases/add-data)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
+      href="/api-reference/databases/fetch-count">
+  Visit the API Reference to learn how to Run Counters in your projects. Get
   access to
   Sample Code, API Endpoints and run it right within the browser to test it out.
 </Card>
