@@ -1,0 +1,42 @@
+---
+title: 'Count Documents in a Collection'
+description: 'Count the number of documents in a collection in your WorqDB Database.'
+---
+
+## Count Documents in a Collection
+
+You can count the number of documents in a collection in your WorqDB Database.
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/add \
+  --header 'Authorization: Bearer <API KEY>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "collection": "Sample collection",
+  }'
+```
+
+## Count Documents in a Collection with a Key Value
+
+You can count the number of documents in a collection in your WorqDB Database in which a key value is `Not Null`.
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/add \
+  --header 'Authorization: Bearer <API KEY>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "collection": "Sample collection",
+    "key": "Sample key",
+  }'
+```
+
+Try it out in the [API Reference](/api-reference/databases/fetch-count)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/fetch-count">
+  Visit the API Reference to learn how to Run Counters in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>

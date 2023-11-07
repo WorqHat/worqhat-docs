@@ -360,7 +360,34 @@
         }
       ]
     },
-    {
+        {
+          "group": "Databases",
+          "pages": [
+            "node-js-sdk/databases/creating-collections",
+            {
+              "group": "Add and Manage Data",
+              "pages": [
+                "node-js-sdk/databases/add-data",
+                "node-js-sdk/databases/update-data",
+                "node-js-sdk/databases/increment-numeric-fields",
+                "node-js-sdk/databases/update-array-fields",
+                "node-js-sdk/databases/delete-data"
+              ]
+            },
+            {
+              "group": "Read Data",
+              "pages": [
+                "node-js-sdk/databases/fetch-all-data",
+                "node-js-sdk/databases/fetch-document",
+                "node-js-sdk/databases/fetch-count",
+                "node-js-sdk/databases/fetch-unique",
+                "node-js-sdk/databases/fetch-query",
+                "node-js-sdk/databases/fetch-natural-language"
+              ]
+            }
+          ]
+        },
+        {
       "group": "Learner Academy",
       "pages": [
         "learner-academy/introduction",
@@ -399,7 +426,8 @@
     "twitter": "https://twitter.com/worqhat",
     "instagram": "https://instagram.com/worqhat",
     "github": "https://github.com/worqhat",
-    "linkedin": "https://www.linkedin.com/company/worqhat"
+    "linkedin": "https://www.linkedin.com/company/worqhat",
+    "medium": "https://medium.com/worqhat"
   },
   "backgroundImage": "/images/gradient.png",
   "openapi": "/openapi.yaml",

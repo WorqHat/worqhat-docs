@@ -1,0 +1,61 @@
+---
+title: Update Elements in an Array
+description: 'Update Elements in an Array by adding new element or removing an existing element in the array.'
+---
+
+If your document contains an array field, you can use `arrayUnion()` and `arrayRemove()` to add and remove elements. `arrayUnion()` adds elements to an array but only elements not already present. `arrayRemove()` removes all instances of each given element.
+
+<Warning>The Array Update operation is only available for Array fields and will only work if the Field has either been declared during a `Add` operation or has been updated with a `Update` operation. If the Field doesn't exist, the Array Update operation will fail.</Warning>
+
+
+## Add Elements to an Array
+
+To add elements to an array field, use the `arrayUnion()` method:
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/array/update/add \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "sampleDocId",
+  "field": "sampleField",
+  "arrayUnion": "sampleData"
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/update-array-fields-add)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/update-array-fields-add">
+  Visit the API Reference to learn how to Update Array Elements in a Document with a Custom Document Id in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>
+
+## Remove Elements from an Array
+
+To remove elements from an array field, use the `arrayRemove()` method:
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/array/update/remove \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "sampleDocId",
+  "field": "sampleField",
+  "arrayRemove": "sampleData"
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/update-array-fields-remove)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/update-array-fields-remove">
+  Visit the API Reference to learn how to Update Array Elements in a Document with a Custom Document Id in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>
