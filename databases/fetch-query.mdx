@@ -96,3 +96,125 @@ curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
   "compounding": "AND",
 }'
 ```
+
+## Compound Queries (OR)
+
+You can also chain multiple simple queries together using logical OR operators. For example, the following query returns all documents where the `name` field exactly matches `John Doe` or the `capital` field exactly matches `Mumbai`:
+
+```shell
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "==",
+      "value": "Mumbai"
+    },
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ],
+  "compounding": "AND",
+}'
+```
+## Order data
+
+You can also order the data by a field. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field. By default, a query retrieves all documents that satisfy the query in ascending order by document ID.
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "==",
+      "value": "Mumbai"
+    },
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ],
+  "compounding": "AND",
+  "orderBy": "docCreatedAt",
+  "orderType": "desc",
+}'
+```
+
+* **`orderBy`** - The field to order the data by. Defaults to `docCreatedAt`.
+* **`orderType`** - The order type. Defaults to `asc`. You can select `asc` or `desc`.
+
+<Tip>An `orderBy()` clause also filters for existence of the given field. The result set will not include documents that do not contain the given field.</Tip>
+
+## Limit data
+
+You can also limit the data returned by a query. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field and the data is limited to 10 documents.
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "==",
+      "value": "Mumbai"
+    },
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ],
+  "compounding": "AND",
+  "orderBy": "docCreatedAt",
+  "orderType": "desc",
+  "limit": 10,
+}'
+```
+
+<Tip>You can combine where() filters with orderBy() and limit().</Tip>
+
+## Pagination (startAfter)
+
+You can also paginate the data returned by a query. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field and the data is limited to 10 documents and the data is paginated by the `startAfter` field. The `startAfter` field is an `integer` value that you can pass in to get the next set of data.
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "capital",
+      "operator": "==",
+      "value": "Mumbai"
+    },
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ],
+  "compounding": "AND",
+  "orderBy": "docCreatedAt",
+  "orderType": "desc",
+  "limit": 10,
+  "startAfter": 10,
+}'
+```
+
