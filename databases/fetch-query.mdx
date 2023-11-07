@@ -4,98 +4,45 @@ sidebarTitle: 'Perform Simple and Compound queries'
 description: 'Powerful query functionality for specifying which documents you want to retrieve from a Collection'
 ---
 
-There are three ways to add data to a WorqDB Collection:
+WorqDB provides powerful query functionality for specifying which documents you want to retrieve from a collection or collection group.
 
-- Set the Data of a Document within a Collection, with an automatically generated document identifier or `docId`.
-- Add a Document with a custom `docId` to identify your document within a Collection.
-- Create an empty document with an automatically generated identifier, and assign data to it later. You can do this by using the `create` method and then the `update` method later on.
+## Simple Queries
 
-<Tip>In this we have focused on the API Endpoints but you can also use our NodeJS Packages to integrate with your `Javascript` and `Typescript` package.</Tip>
+Simple queries are useful when you know the exact value you want to match for a specific field or fields.
 
-## Before you begin
-
-See Get started with [Create Collections](/databases/create-collection) to create a Collection before you add data to it.
-
-## Set the Data of a Document within a Collection
-
-<Info>You can read more about Data Object Documents in the [Data Object Documents](/databases/data-types) section and how we identify the data types of the fields in the [Data Types](/databases/data-types) section.</Info>
-
-You can add data to a Collection by using the `add` method. This method will create a new document with an automatically generated document identifier or `docId`.
+For example, the following query returns all documents where the `name` field exactly matches `John Doe`:
 
 ```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "queries": [
+    {
+      "field": "name",
+      "operator": "==",
+      "value": "John Doe"
+    }
+  ]
 }'
 ```
 
-Try it out in the [API Reference](/api-reference/databases/add-data)
+## Query Operators
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+WorqDB supports a variety of query operators:
 
-## Add a Document with a custom `docId`
-
-You can add data to a Collection by using the `add` method. This method will create a new document with a custom `docId` that you can use to identify your document within a Collection.
-
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "name": "John Doe",
-    "Company": "Acme Corp",
-    "Login": 1697359974
-  }
-}'
-```
-
-Try it out in the [API Reference](/api-reference/databases/add-data)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
-
-## Create an empty document with an automatically generated identifier, and assign data to it later
-
-You can create an empty document with an automatically generated identifier, and assign data to it later by using the `update` method. This method will create a new document with an automatically generated document identifier or `docId` and the Document Creation Timestamp.
-
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/add \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "thisIsOptionalString",
-  "data": {}
-}'
-```
-
-Try it out in the [API Reference](/api-reference/databases/add-data)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/add-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+| Operator | Description |
+| --- | --- |
+| `==` | Equal to |
+| `!=` | Not equal to |
+| `<` | Less than |
+| `<=` | Less than or equal to |
+| `>` | Greater than |
+| `>=` | Greater than or equal to |
+| `less than` | Less than |
+| `less than or equal to` | Less than or equal to |
+| `equal to` | Equal to |
+| `greater than` | Greater than |
+| `greater than or equal to` | Greater than or equal to |
+| `not equal to` | Not equal to |
