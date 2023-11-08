@@ -1,0 +1,29 @@
+---
+title: Monitoring Usage
+description: 'This page describes how you can monitor your WorqDB usage and spot potential problems in your application.'
+---
+
+## Usage Dashboards
+
+Use the usage dashboards in your Workspace Console to view document reads, writes, and deletes over time for yourself and for your entire organization as well.
+
+## Access Control
+
+The usage dashboards require certain permissions. `Account Admin` and `Team Leads` have access to the dashboards by default and can view Usage and Activity for the entire organization. `Developers` & `Team Members` can view Usage and Activity for themselves only.
+
+## Cloud Logging and Monitoring
+
+Cloud Monitoring collects metrics, events, and metadata from your Workspace. The usage dashboard in the WorqHat Workspace console reports the same metrics data.
+
+Monitoring includes the following metrics:
+
+|Metric Name|Description|
+|---|---|
+|`document_reads`|The number of successful document reads. This metric does not include reads from managed export operations.|
+|`document_writes`|The number of successful document writes. This metric does not include writes from managed import operations.|
+|`document_deletes`|The number of successful document deletes.|
+|`Active Connections`|The number of active connections to the database.|
+
+## Realtime Usage
+
+The WorqHat Workspace & Database Usages and logs are updated in Realtime and Sampled every 30 seconds. However, in certain overloaded conditions, the data may be delayed by up to 2 minutes.

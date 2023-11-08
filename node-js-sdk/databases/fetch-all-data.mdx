@@ -1,0 +1,27 @@
+---
+title: Fetch All Documents from a Collection
+description: 'Fetch All Documents from a Collection in WorqDB'
+---
+
+
+You can fetch all documents that are present in a Collection:
+
+```shell
+curl --location 'https://api.worqhat.com/api/collections/data/fetch/all' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+    "collection": "Sample collection"
+}'
+```
+
+You need to just pass in the `Collection` name from which you want to fetch all of the data and it's done.
+
+Try it out in the [API Reference](/api-reference/databases/fetch-all-data)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/fetch-all-data">
+  Visit the API Reference to learn how to Fetch all documents in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>

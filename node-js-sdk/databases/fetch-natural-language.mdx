@@ -1,0 +1,40 @@
+---
+title: 'Natural Language Query'
+description: 'Run the Most Complex Queries with Ease using Natural Language Descriptions'
+---
+
+We now let you run the most Complex Queries by just passing in your `Collection Name` and a `Natural Language Query` to fetch the data you need.
+
+Some examples of the queries you can run are:
+
+- Fetch all documents in a collection
+- Fetch all documents in a collection where a field is equal to a value (You can describe the field and value in any way you want)
+- Fetch all documents in a collection where a field is equal to a value and another field is equal to another value
+- Fetch all documents in a collection where a field is equal to a value and sort the results by another field
+- Fetch all documents in a collection where a field is equal to a value and sort the results by another field and limit the results to a certain number
+
+
+```shell
+curl
+--location 'https://api.worqhat.com/api/collections/data/fetch/natural-query' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>' \
+--data '{
+  "collection": "Sample collection",
+  "query": "Fetch all data that is available and created in the past 24 hours
+   and sort by descending order"
+}'
+```
+
+<Tip>The Query can be described in any manner you want.</Tip>
+
+<Warning>The Natural Language Queries can sometimes be slower. It takes somewhere less than ~2 Seconds to process a Query</Warning>
+
+Try it out in the [API Reference](/api-reference/databases/fetch-natural-language)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/fetch-natural-language">
+  Visit the API Reference to learn how to Run Queries by Natural Language in your projects. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>

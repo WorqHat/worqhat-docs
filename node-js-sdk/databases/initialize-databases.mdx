@@ -1,0 +1,23 @@
+---
+title: 'Initialize Databases'
+description: 'Initialize WorqDB to use the Fastest Database for your application'
+---
+
+
+Initialize WorqDB using the `worqhat` library in your application. It demonstrates how to create a configuration object with an API key and debug mode, initialize the `worqhat` app with the configuration, and access the AI functionality through the `worqhat.database()` method.
+
+You need to install the `worqhat` library to run the code in this file and initialize AI models using the `worqhat` library.
+
+### Example
+```js
+ const worqhat = require('worqhat');
+
+ var config = new worqhat.Configuration({
+   apiKey: "your-api-key",
+   debug: true,
+ });
+
+ worqhat.initializeApp(config);
+
+ let database = worqhat.database();
+ ```

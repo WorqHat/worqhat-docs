@@ -1,0 +1,50 @@
+---
+title: Increment Numeric Data
+description: 'Learn how to increment numeric data in your WorqDB Document'
+---
+
+You can increment or decrement a numeric field value as shown in the following example. An increment operation increases or decreases the current value of a field by the given amount.
+
+To increment a numeric field value, use a `POSITIVE` number. To decrement a numeric field value, use a `NEGATIVE` number.
+
+<Warning>The Increment operation is only available for numeric fields and will only work if the Field has either been declared during a `Add` operation or has been updated with a `Update` operation. If the Field doesn't exist, the Increment operation will fail.</Warning>
+
+### Increment Numeric Data
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/increment \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "sampleDocId",
+  "field": "Unit Count",
+  "increment": 10
+}'
+```
+
+### Decrement Numeric Data
+
+```shell
+curl --request POST \
+  --url https://api.worqhat.com/api/collections/data/increment \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "collection": "Sample Collection",
+  "docId": "sampleDocId",
+  "field": "Unit Count",
+  "increment": -10
+}'
+```
+
+Try it out in the [API Reference](/api-reference/databases/increment-numeric-fields)
+
+<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
+      href="/api-reference/databases/increment-numeric-fields">
+  Visit the API Reference to learn how to Increment Numeric Data in Documents from Collections. Get
+  access to
+  Sample Code, API Endpoints and run it right within the browser to test it out.
+</Card>
+
