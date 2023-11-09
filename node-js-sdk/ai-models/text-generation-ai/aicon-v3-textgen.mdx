@@ -9,43 +9,92 @@ Read more at https://docs.worqhat.com/ai-models/text-generation-ai/aicon-v3-text
 
 ### Parameters
 
-| Parameter        | Type      | Description                                                                  | Default     |
-| ---------------- | --------- | ---------------------------------------------------------------------------- | ----------- |
-| history_object   | `Object`  | An object representing the conversation history.                             | `undefined` |
-| preserve_history | `boolean` | A boolean indicating whether to preserve the conversation history.           | `false`     |
-| question         | `string`  | A string representing the question to generate content for.                  | `undefined` |
-| training_data    | `string`  | A string representing the training data to use for generating content.       | `undefined` |
-| randomness       | `number`  | A number representing the level of randomness for generating content.         | `0.2`       |
+| Parameter            | Type      | Description                                                  | Default     |
+|----------------------|-----------|--------------------------------------------------------------|-------------|
+| `conversation_history` | `Array`  | This parameter accepts an array of objects. Each object represents a previous interaction in the conversation. This is useful for context-aware content generation. If not provided, the default value is `undefined`, meaning no conversation history is considered. |
+| `preserve_history`   | `boolean` | This is a flag that indicates whether the conversation history should be preserved for future interactions. If set to `true`, the conversation history is preserved. If set to `false` or not provided, the default behavior is not to preserve the conversation history. |
+| `question`           | `string`  | This parameter represents the question or prompt for which the content is to be generated. It should be provided as a string. If not provided, the default value is `undefined`. |
+| `training_data`      | `string`  | This parameter represents the training data to be used for generating the content. It should be provided as a string. If not provided, the default value is `undefined`. |
+| `randomness`         | `number`  | This parameter controls the level of randomness in the generated content. It accepts a number between 0 and 1, where 0 means no randomness and 1 means maximum randomness. If not provided, the default value is `0.2`. |
+| `stream`             | `boolean` | This is a flag that indicates whether the response should be streamed or not. If set to `true`, the response is streamed. If set to `false` or not provided, the default behavior is not to stream the response. |
 
 
-### Example
-
-Here is an example of how to use AiCon V3 Advanced to generate content:
+### Initialize AI Modules
 
 ```javascript
-const worqhat = require("worqhat");
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
+
 
 worqhat.initializeApp(config);
 
-async function generateContent() {
-  try {
-    var result = await worqhat.contentGeneration.v3({
-      history_object: { previous: "Previous conversation history" },
-      preserve_history: true,
-      question: "Your question here",
-      training_data: "your-training-data",
-      randomness: 0.3,
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-generateContent();
+
+### Handle Non Stream Request
+
+```javascript
+ai.contentGeneration.v3({
+    "question": "What is your name?",
+    "preserve_history": true,
+    "training_data": "You are Sagnik the Tour guide of the world. Every answer should start with" +
+        " your name.",
+    "conversation_history" : [
+        {
+            "Hi who are you?": "I am Sagnik the Tour guide of the world."
+        },
+        {
+            "Can you tell me about Paris" : `Paris is the capital and most populous
+			city of France, with an estimated population of 2,175,601 residents as
+			of 2018, in an area of more than 105 square kilometres. Since the 17th
+			century, Paris has been one of Europe's major centres of finance,
+			diplomacy, commerce, fashion, science and arts.`
+        }
+    ],
+    randomness: 0.2,
+    stream : false
+}).then(function(response) {
+    console.log(response);
+}).catch(function(error) {
+    console.log(error);
+});
+```
+
+### Handle Stream Request
+
+```javascript
+ai.contentGeneration.v3({
+    "question": "What is your name?",
+    "preserve_history": true,
+    "training_data": `You are Sagnik the Tour guide of the world.
+	Every answer should start with your name.`,
+    "conversation_history" : [
+        {
+            "Hi who are you?": "I am Sagnik the Tour guide of the world."
+        },
+        {
+            "Can you tell me about Paris" : `Paris is the capital and most populous
+			city of France, with an estimated population of 2,175,601 residents as
+			of 2018, in an area of more than 105 square kilometres. Since the 17th
+			century, Paris has been one of Europe's major centres of finance,
+			diplomacy, commerce, fashion, science and arts.`
+        }
+    ],
+    randomness: 0.2,
+    stream : true
+})
+.then(function(response) {
+    response.on('data', function(data) {
+        console.log(data);
+    });
+}).catch(function(error) {
+    console.log(error);
+});
+
 ```
