@@ -9,39 +9,19 @@ description: "Content Generation AI focused only on Business Content Generation 
 
 | Parameter        | Type      | Description                                                  | Default     |
 |------------------|-----------|--------------------------------------------------------------|-------------|
-| history_object   | `Object`  | An object representing the history of the conversation.      | `undefined` |
+| conversation_history   | `Array`  | An array of object representing the history of the conversation.      | `undefined` |
 | preserve_history | `boolean` | A boolean indicating whether to preserve the conversation history. | `false`     |
 | question         | `string`  | A string representing the question to generate content for.  | `undefined` |
 | training_data    | `string`  | A string representing the training data to use for generating content. | `undefined` |
 | randomness       | `number`  | A number representing the level of randomness to use for generating content. | `0.2`       |
 
 
-### Example
+### Handle Non Stream Request
 
 ```javascript
-const worqhat = require("worqhat");
+```
 
-var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
-});
+### Handle Stream Request
 
-worqhat.initializeApp(config);
-
-async function generateContent() {
-  try {
-    var result = await worqhat.contentGeneration.v2({
-      history_object: { previous: "Previous conversation history" },
-      preserve_history: true,
-      question: "Your question here",
-      training_data: "your-training-data-that you want the model to learn",
-      randomness: 0.3,
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-generateContent();
+```javascript
 ```
