@@ -95,6 +95,7 @@
     {
       "group": "AI Models",
       "pages": [
+        "ai-models/worqhat-ai",
         {
           "group": "Text Generation AI",
           "pages": [
