@@ -5,26 +5,31 @@ description: "View all your Trained Datasets that you have created for both Sear
 
 The `list` function is a method for retrieving all trained datasets. This function communicates with the Datasets API to fetch a list of all datasets that have been trained for both AI and Search Interfaces. Please note that you will only be able to view datasets that you have created or have access to.
 
-### Example
+
+### Initialize AI Modules
 
 ```javascript
-const worqhat = require("worqhat");
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
+
 
 worqhat.initializeApp(config);
 
-async function listDatasets() {
-  try {
-    var datasets = await worqhat.datasets.list();
-    console.log(datasets);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-listDatasets();
+### Example
+
+```javascript
+ai.datasets.list().then(function(response) {
+    console.log(response);
+}).catch(function(error) {
+    console.log(error);
+});
+
 ```
