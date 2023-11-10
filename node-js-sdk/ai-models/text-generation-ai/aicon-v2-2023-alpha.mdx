@@ -11,35 +11,53 @@ However, the Alpha Nightly channel is our most recent API Release, and is curren
 
    The Alpha version of AiCon V2 is designed to generate current data-based content. It utilizes data up to 2023, making it relatively up to date and more accurate than previous versions of AiCon. The Alpha Channel of AiCon V2 is mostly dependent on the data up to May 2023.
 
-   ### Configuration
 
-   | Parameter  | Type     | Description                                      | Default    |
-   | ---------- | -------- | ------------------------------------------------ | ---------- |
-   | question   | `string`   | The question to generate content for.            | `undefined`  |
+| Parameter            | Type      | Description                                                  | Default     |
+|----------------------|-----------|--------------------------------------------------------------|-------------|
+| `question`           | `string`  | This parameter represents the question or prompt for which the content is to be generated. It should be provided as a string. If not provided, the default value is `undefined`. |
+| `conversation_history` | `Array`  | This parameter accepts an array of objects. Each object represents a previous interaction in the conversation. This is useful for context-aware content generation. If not provided, the default value is `undefined`, meaning no conversation history is considered. |
+| `training_data`      | `string`  | This parameter represents the training data to be used for generating the content. It should be provided as a string. If not provided, the default value is `undefined`. |
 
-   ### Example
 
-   ```javascript
-   const worqhat = require('worqhat');
+### Initialize AI Modules
 
-   var config = new worqhat.Configuration({
-     apiKey: "your-api-key",
-     debug: true,
-   });
+```javascript
+const worqhat = require('worqhat');
 
-   worqhat.initializeApp(config);
+var config = new worqhat.Configuration({
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
+});
 
-   async function generateAlphaContent() {
-     try {
-       var result = await worqhat.contentGeneration.alpha({
-         question: "Your question here",
-       })
-       console.log(result);
 
-     } catch (error) {
-       console.error(error);
-     }
-   }
+worqhat.initializeApp(config);
 
-   generateAlphaContent();
-   ```
+let ai = worqhat.ai();
+```
+
+
+### Implementing the Alpha Channel
+
+```javascript
+ai.contentGeneration.alpha({
+    "question": "Why did the SVB Collapse?",
+    "training_data": "Begin every answer with your name.",
+    "conversation_history" : [
+        {
+            "Hi who are you?": "I am Sagnik the Tour guide of the world."
+        },
+        {
+            "Can you tell me about Paris" : `Paris is the capital and most populous
+			city of France, with an estimated population of 2,175,601 residents as
+			of 2018, in an area of more than 105 square kilometres. Since the 17th
+			century, Paris has been one of Europe's major centres of finance,
+			diplomacy, commerce, fashion, science and arts.`
+        }
+    ],
+}).then(function(response) {
+    console.log(response);
+}).catch(function(error) {
+    console.log(error);
+});
+```
