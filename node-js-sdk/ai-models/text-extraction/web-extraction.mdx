@@ -10,10 +10,10 @@ Function for extracting text from web pages. It sends a request to the Web Extra
 
 | Parameter   | Type      | Description                                              | Default |
 | ----------- | --------- | -------------------------------------------------------- | ------- |
-| code_blocks | `boolean` | Indicates whether to extract code blocks.                | `false` |
-| headline    | `boolean` | Indicates whether to extract headlines.                  | `false` |
-| inline_code | `boolean` | Indicates whether to extract inline code.                | `false` |
-| references  | `boolean` | Indicates whether to extract references.                 | `false` |
+| code_blocks | `boolean` | Indicates whether to extract code blocks.                | `true` |
+| headline    | `boolean` | Indicates whether to extract headlines.                  | `true` |
+| inline_code | `boolean` | Indicates whether to extract inline code.                | `true` |
+| references  | `boolean` | Indicates whether to extract references.                 | `true` |
 | url_path    | `string`  | Represents the URL of the web page to extract text from. | N/A     |
 
 ### Initialize AI Modules
@@ -36,11 +36,15 @@ let ai = worqhat.ai();
 ### Implementation
 
 ```javascript
-ai.textExtraction.speech({
-    audio: "bark.wav"
-}).then(function(response) {
+ai.textExtraction.web({
+    url_path: "https://worqhat.com",
+    code_blocks: true,
+    headline: true,
+    inline_code: true,
+    references: true,
+}).then((response) => {
     console.log(response);
-}).catch(function(error) {
+}).catch((error) => {
     console.log(error);
 });
 ```
