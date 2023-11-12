@@ -11,32 +11,36 @@ Read more at https://docs.worqhat.com/ai-models/image-analysis/face-analysis
 
 | Parameter    | Type               | Description                                                                                                                           |
 | ------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| source_image | `File` or `string` | The existing image to be upscaled. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
-| target_image | `File` or `string` | The existing image to be upscaled. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+| source_image | `File` or `string` | The source image to be compared. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+| target_image | `File` or `string` | The target image to be compared. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
 
-### Examples
 
-```js
-const worqhat = require("worqhat");
+### Initialize AI Modules
+
+```javascript
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
 
 worqhat.initializeApp(config);
 
-async function compareFaces() {
-  try {
-    var result = await worqhat.analyseImages.compareFaces({
-      source_image: "./path-to-source-image.png",
-      target_image: "./path-to-target-image.png",
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-compareFaces();
+### Implementation
+
+```javascript
+ai.analyseImages.compareFaces({
+    target_image: "./image-2.jpeg",
+    source_image: "./image-3.JPG"
+}).then((response) => {
+    console.log(response);
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
