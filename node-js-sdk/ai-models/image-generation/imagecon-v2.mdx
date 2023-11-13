@@ -17,35 +17,39 @@ image_style | `String` | The style of the image. | "default" |
 output_type | `String` | The output type of the image. Options: `url`, `blob`. `url` returns the Cloud Hosted Link to the Image, `blob` returns the Base64 Image. | `url` |
 prompt | `Array`  | The prompts for the image generation. This is a required parameter. | - |
 
-### Example
 
- ```javascript
- const worqhat = require('worqhat');
+### Initialize AI Modules
 
- var config = new worqhat.Configuration({
-   apiKey: "your-api-key",
-   debug: true,
- });
+```javascript
+const worqhat = require('worqhat');
 
- worqhat.initializeApp(config);
+var config = new worqhat.Configuration({
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
+});
 
- async function generateImage() {
-   try {
-     var result = await worqhat.imageGeneration.v2({
-       orientation: "Square",
-       image_style: "default",
-       output_type: "url",
-       prompt: ["Your prompt here"]
-     })
-     console.log(result);
+worqhat.initializeApp(config);
 
-   } catch (error) {
-     console.error(error);
-   }
- }
+let ai = worqhat.ai();
+```
 
- generateImage();
- ```
+### Implementation
+
+```javascript
+ai.imageGeneration.v2({
+    orientation: "square",
+    image_style: "artistic",
+    output_type: "url",
+    prompt: [
+        "A dog walking in a beach"
+    ]
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```
 
 
 <Frame caption="Generate Images from Text using Image Gen Model V2">
