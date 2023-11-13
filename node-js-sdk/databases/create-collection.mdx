@@ -8,15 +8,7 @@ description: 'Create a collection with or without a structure to store Data Obje
 Like most databases, WorqDB, logically groups data as collections. You can use the `createCollection` method to create a collection. The method takes in the name of the collection as the first argument, and several optional configuration options as the second and third arguments. Read more about creating collections in the [WorqDB documentation](https://docs.worqhat.com/databases/creating-collections).
 
 
-### Parameters
-
-| Parameter     | Type     | Description                                                     | Default     |
-| ------------- | -------- | --------------------------------------------------------------- | ----------- |
-| question      | `string` | The search query string.                                        | `undefined` |
-| training_data | `string` | Contains the Referenced Dataset Id for the pre-trained dataset. | `undefined` |
-
-
-### Initialize AI Modules
+### Initialize Database Modules
 
 ```javascript
 const worqhat = require('worqhat');
