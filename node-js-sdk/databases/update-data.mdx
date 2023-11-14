@@ -15,74 +15,15 @@ To update some fields of a document without overwriting the entire document, use
 
 You can pass in the new data as a JSON object to the `update()` method. The `update()` method will merge the new data with the existing data in the document.
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/update \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "name": "Jane Doe",
-  }
-}'
-```
-
-Try it out in the [API Reference](/api-reference/databases/update-data)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/update-data">
-  Visit the API Reference to learn how to Add Documents with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
-
 ## Update Nested JSON Data in a Document
 
 ### To replace the entire nested JSON object
 
 To replace the entire nested JSON object, use the `update()` method and pass in the new nested JSON object as the value of the key you want to update.
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/update \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "nestedJSON": {
-            "keyName1": "Value",
-            "keyName2": "Value",
-        },
-  "name": "Jane Doe",
-  }
-}'
-```
 
 ### To update a specific key in the nested JSON object
 
 To update a specific key in the nested JSON object, use the `update()` method and pass in the new value of the key as a `dot notation object` you want to update.
 
 You can pass the specific key in the JSON and we will update the value of the key in the nested JSON object.
-
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/update \
-  --header 'Authorization: Bearer <API KEY>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocumentId",
-  "data": {
-    "nestedJSON": {
-            ".keyName1": "Value",
-        },
-  "name": "Jane Doe",
-  }
-}'
-```
-
-

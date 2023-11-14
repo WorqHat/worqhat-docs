@@ -9,21 +9,28 @@ You can get a Document using the Document Id:
 * The Document Id is automatically generated when a document is created.
 * OR, You can also manually define the Document Id while creating a document.
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/all' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-    "collection": "Sample collection",
-    "documentId": "Sample document id"
-}'
+### Initialize Database Modules
+
+```javascript
+const worqhat = require('worqhat');
+
+var config = new worqhat.Configuration({
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
+});
+
+worqhat.initializeApp(config);
+
+let db = worqhat.database();
 ```
 
-Try it out in the [API Reference](/api-reference/databases/fetch-document)
+### Example
 
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/fetch-document">
-  Visit the API Reference to learn how to Fetch A single documents in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
+```javascript
+db.collection('NodeJSDb1').doc('de79272c-2ed3-46d9-ae93-ff195364466e').get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
+```
