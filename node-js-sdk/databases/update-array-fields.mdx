@@ -12,50 +12,26 @@ If your document contains an array field, you can use `arrayUnion()` and `arrayR
 
 To add elements to an array field, use the `arrayUnion()` method:
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/array/update/add \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocId",
-  "field": "sampleField",
-  "arrayUnion": "sampleData"
-}'
+```js
+db.collection('NodeJSDb1').doc('de79272c-2ed3-46d9-ae93-ff195364466e').update({
+    array: db.arrayUnion(["a"])
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
 ```
-
-Try it out in the [API Reference](/api-reference/databases/update-array-fields-add)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/update-array-fields-add">
-  Visit the API Reference to learn how to Update Array Elements in a Document with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>
 
 ## Remove Elements from an Array
 
 To remove elements from an array field, use the `arrayRemove()` method:
 
-```shell
-curl --request POST \
-  --url https://api.worqhat.com/api/collections/data/array/update/remove \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "collection": "Sample Collection",
-  "docId": "sampleDocId",
-  "field": "sampleField",
-  "arrayRemove": "sampleData"
-}'
+```js
+db.collection('NodeJSDb1').doc('de79272c-2ed3-46d9-ae93-ff195364466e').update({
+    array: db.arrayRemove(["a"])
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
 ```
-
-Try it out in the [API Reference](/api-reference/databases/update-array-fields-remove)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/update-array-fields-remove">
-  Visit the API Reference to learn how to Update Array Elements in a Document with a Custom Document Id in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>

@@ -373,8 +373,7 @@
             "node-js-sdk/databases/add-data",
             "node-js-sdk/databases/update-data",
             "node-js-sdk/databases/increment-numeric-fields",
-            "node-js-sdk/databases/update-array-fields-add",
-            "node-js-sdk/databases/update-array-fields-remove",
+            "node-js-sdk/databases/update-array-fields",
             "node-js-sdk/databases/delete-data"
           ]
         },
