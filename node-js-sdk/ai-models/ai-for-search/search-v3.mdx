@@ -1,7 +1,7 @@
 ---
 title: "Search V3 (Search through Meanings and Context)"
-sidebarTitle: "Search V3"
-description: "Meaning and Context Based Search experience powered by AI"
+sidebarTitle: 'Search V3 / Recommendation Engine'
+description: "Meaning and Context Based Search experience and Recommendations powered by AI"
 ---
 
 Search V3 is a Meaning and Context Based Search experience powered by AI. It is suitable for use cases where you want to return the most relevant results. For more details, please visit [Search V3 Documentation](https://docs.worqhat.com/ai-models/ai-for-search/search-v3)
@@ -14,32 +14,36 @@ Search V3 is a Meaning and Context Based Search experience powered by AI. It is 
 | training_data | `string` | Contains the Referenced Dataset Id for the pre-trained dataset.                                                                                         | `undefined` |
 | search_count  | `number` | Returns the number of parameters we want to return. Default is 3. You can return as many as you want, but the more you return, the longer it will take. | `3`         |
 
-### Example
+
+### Initialize AI Modules
 
 ```javascript
-const worqhat = require("worqhat");
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
 
 worqhat.initializeApp(config);
 
-async function search() {
-  try {
-    var result = await worqhat.search.v3({
-      question: "Your search query here",
-      training_data: "your-training-data-id",
-      search_count: 5,
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-search();
+### Implementation
+
+```javascript
+ai.search.v3({
+    question: "What is Shreya's Id?",
+    training_data: "f8180381-f2a7-4464-a0a1-b601d56919a1",
+    search_count: 5,
+}).then(function(response) {
+    console.log(response);
+}).catch(function(error) {
+    console.log(error);
+});
+
 ```
 
 <Info>

@@ -17,31 +17,33 @@ Read more at https://docs.worqhat.com/ai-models/image-analysis/face-analysis
 
 | Parameter      | Type               | Description                                                                                                                                                                             |
 | -------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| image | `File` or `string` | The existing image to be upscaled. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter.                                                   |
+| image | `File` or `string` | The existing image to be analysed. This can be a local file path or a URL. |
 
-### Example
 
-```js
-   const worqhat = require('worqhat');
+### Initialize AI Modules
 
-   var config = new worqhat.Configuration({
-     apiKey: "your-api-key",
-     debug: true,
-   });
+```javascript
+const worqhat = require('worqhat');
 
-   worqhat.initializeApp(config);
+var config = new worqhat.Configuration({
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
+});
 
-   async function detectFaces() {
-     try {
-       var result = await worqhat.analyseImages.detectFaces({
-         image: "./path-to-your-image.png"
-       })
-       console.log(result);
+worqhat.initializeApp(config);
 
-     } catch (error) {
-       console.error(error);
-     }
-   }
+let ai = worqhat.ai();
+```
 
-   detectFaces();
+### Implementation
+
+```javascript
+ai.analyseImages.detectFaces({
+    image: "./image-2.jpeg",
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+})
 ```

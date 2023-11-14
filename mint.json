@@ -95,6 +95,7 @@
     {
       "group": "AI Models",
       "pages": [
+        "ai-models/worqhat-ai",
         {
           "group": "Text Generation AI",
           "pages": [
@@ -301,6 +302,7 @@
     {
       "group": "AI Models",
       "pages": [
+        "node-js-sdk/ai-models/initialize-ai",
         {
           "group": "Text Generation AI",
           "pages": [
@@ -356,6 +358,33 @@
           "pages": [
             "node-js-sdk/ai-models/content-moderation/text-content-moderation",
             "node-js-sdk/ai-models/content-moderation/image-moderation"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Databases",
+      "pages": [
+        "node-js-sdk/databases/initialize-databases",
+        {
+          "group": "Add and Manage Data",
+          "pages": [
+            "node-js-sdk/databases/create-collection",
+            "node-js-sdk/databases/add-data",
+            "node-js-sdk/databases/update-data",
+            "node-js-sdk/databases/increment-numeric-fields",
+            "node-js-sdk/databases/update-array-fields",
+            "node-js-sdk/databases/delete-data"
+          ]
+        },
+        {
+          "group": "Read Data",
+          "pages": [
+            "node-js-sdk/databases/fetch-all-data",
+            "node-js-sdk/databases/fetch-document",
+            "node-js-sdk/databases/fetch-count",
+            "node-js-sdk/databases/fetch-query",
+            "node-js-sdk/databases/fetch-natural-language"
           ]
         }
       ]

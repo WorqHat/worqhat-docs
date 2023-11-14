@@ -1,0 +1,37 @@
+---
+title: Update Elements in an Array
+description: 'Update Elements in an Array by adding new element or removing an existing element in the array.'
+---
+
+If your document contains an array field, you can use `arrayUnion()` and `arrayRemove()` to add and remove elements. `arrayUnion()` adds elements to an array but only elements not already present. `arrayRemove()` removes all instances of each given element.
+
+<Warning>The Array Update operation is only available for Array fields and will only work if the Field has either been declared during a `Add` operation or has been updated with a `Update` operation. If the Field doesn't exist, the Array Update operation will fail.</Warning>
+
+
+## Add Elements to an Array
+
+To add elements to an array field, use the `arrayUnion()` method:
+
+```js
+db.collection('NodeJSDb1').doc('de79272c-2ed3-46d9-ae93-ff195364466e').update({
+    array: db.arrayUnion(["a"])
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```
+
+## Remove Elements from an Array
+
+To remove elements from an array field, use the `arrayRemove()` method:
+
+```js
+db.collection('NodeJSDb1').doc('de79272c-2ed3-46d9-ae93-ff195364466e').update({
+    array: db.arrayRemove(["a"])
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```

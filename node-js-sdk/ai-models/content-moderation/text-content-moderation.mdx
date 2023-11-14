@@ -15,28 +15,34 @@ Content Moderation AI Models. A powerful AI Model that can be used to detect and
 | ------------ | -------- | --------------------------------- | ------- |
 | text_content | `string` | The text content to be moderated. | -       |
 
-### Example
+
+### Initialize AI Modules
 
 ```javascript
-const worqhat = require("worqhat");
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
+
 
 worqhat.initializeApp(config);
 
-async function moderateContent() {
-  try {
-    var result = await worqhat.moderation.content({
-      text_content: "Your text content here",
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-moderateContent();
+### Implementation
+
+```javascript
+ai.moderation.content({
+    text_content: "This is a sample text content to be moderated."
+}).then(function(response) {
+    console.log(response);
+}).catch(function(error) {
+    console.log(error);
+});
+
+
 ```

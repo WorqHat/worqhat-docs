@@ -1,0 +1,84 @@
+---
+title: 'Create a Collection'
+sidebarTitle: 'Create a Collection'
+description: 'Create a collection with or without a structure to store Data Objects.'
+---
+
+
+Like most databases, WorqDB, logically groups data as collections. You can use the `createCollection` method to create a collection. The method takes in the name of the collection as the first argument, and several optional configuration options as the second and third arguments. Read more about creating collections in the [WorqDB documentation](https://docs.worqhat.com/databases/creating-collections).
+
+
+### Initialize Database Modules
+
+```javascript
+const worqhat = require('worqhat');
+
+var config = new worqhat.Configuration({
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
+});
+
+worqhat.initializeApp(config);
+
+let db = worqhat.database();
+```
+
+### Create a Collection with a Schema
+
+
+In the `create` method, you can pass in the data schema as the first parameter and the order-by criteria as the second parameter.
+
+The data schema is an object that defines the structure of the data to be stored in the collection. Each key in the object represents a field in the data, and the value represents the type of that field.
+
+> In the example below, the data schema defines two fields: name and age, with types `string` and `number` respectively.
+
+The `order-by` criteria is a string that specifies the field by which the data in the collection should be sorted.
+>In the example below, the data is sorted by the age field.
+
+```javascript
+db.collection('NodeJSDb1').create({
+    name: "string",
+    age: "number",
+}, "age").then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```
+
+#### Allowed Data Types
+
+The following data types are allowed in the data schema:
+
+
+| Data Type | Description | Use Case |
+| --- | --- | --- |
+| `string` | This data type represents a sequence of characters, with a maximum size of 1MB. | Perfect for storing text-based data like user names, email addresses, or descriptions. |
+| `number` | This data type represents a numerical value, stored in up to 8 bytes. | Ideal for storing numerical data such as age, quantity of items, or any other numerical value. |
+| `float` | This data type represents a floating point number, also stored in up to 8 bytes. | Useful for storing decimal numbers, such as price, weight, or any other measurements that require precision. |
+| `boolean` | This data type represents a boolean value, which can be either true or false. | Useful for storing binary states such as whether a user is active/inactive, or a feature is enabled/disabled. |
+| `date` | This data type represents a date value. _Limited Support. Try using timestamp. You can set the time as 00:00:00 to save just the date._ | Ideal for storing date-related information such as birth dates, event dates, or any other date-specific data. |
+| `timestamp` | This data type represents a timestamp value, indicating a specific point in time. It can store both the Date and Time and is often preferred over `date` for analysis use cases. Use any Timestamp function and round it off by 1000. Eg: `Math.floor(new Date().getTime() / 1000);`| Useful for tracking events with a precise time, such as log entries, transaction times, or any other time-stamped records. It can record times upto the nearest Micro-second and rounds off the rest of it to the nearest value.|
+| `json` | This data type represents a JSON object. | Ideal for storing complex, structured data that can be represented as a JSON object. |
+| `array` | This data type represents an array of values. | Useful for storing multiple values in a single field, such as a list of tags, categories, or any other multi-value data. |
+| `geopoint` | This data type represents a geographical point. You can store geopoint values as an array of `[lat, long]`. Alternatively you can also store it as separate Float fields as well. | Perfect for storing geographical data such as user locations, store locations, or any other latitude and longitude data.|
+| `uuid` | This data type represents a Universally Unique Identifier. | Ideal for storing unique identifiers for records, such as document IDs, user IDs, or any other unique identifiers. |
+| `ip` | This data type represents an IP Address value. | Useful for storing IP addresses for tracking user activity, security auditing, or any other IP-related data. |
+
+
+Read more about data types in the [WorqDB documentation](https://docs.worqhat.com/databases/data-types).
+
+### Create a Collection without a Schema
+
+In some cases, you might want to create a collection without defining a schema. This can be useful when the structure of the data is not known in advance or when it may change over time.
+
+In the `create` method, if you do not pass any parameters, it will create a collection without a schema.
+
+```javascript
+db.collection('NodeJSDb2').create().then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```

@@ -1,0 +1,28 @@
+---
+title: 'Count Documents in a Collection'
+description: 'Count the number of documents in a collection in your WorqDB Database.'
+---
+
+## Count Documents in a Collection
+
+You can count the number of documents in a collection in your WorqDB Database.
+
+```js
+db.collection('NodeJSDb1').getCount().then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```
+
+## Count Documents in a Collection with a Key Value
+
+You can count the number of documents in a collection in your WorqDB Database in which a key value is `Not Null`.
+
+```js
+db.collection('NodeJSDb1').getCount("age").then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+```

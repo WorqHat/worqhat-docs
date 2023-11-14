@@ -14,31 +14,34 @@ Function for modifying images using version 2 of the API. It sends a request to 
 | outputType     | `url` `blob`       | The output type of the modified image. It can be either `url` or `blob`. This is an optional parameter.                              |
 | similarity     | `number`           | The similarity percentage for the image modification. This is a required parameter.                                                  |
 
-### Example
+### Initialize AI Modules
 
 ```javascript
-const worqhat = require("worqhat");
+const worqhat = require('worqhat');
 
 var config = new worqhat.Configuration({
-  apiKey: "your-api-key",
-  debug: true,
+    apiKey: "your-api-key",
+    debug: true,
+    max_retries: 3,
 });
 
 worqhat.initializeApp(config);
 
-async function modifyImage() {
-  try {
-    var result = await worqhat.imageVariations.v2({
-      existing_image: "./path-to-your-image.png",
-      modifications: "your modifications",
-      outputType: "url",
-      similarity: 80,
-    });
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
+let ai = worqhat.ai();
+```
 
-modifyImage();
+### Implementation
+
+```javascript
+ai.imageVariations.v3({
+    existing_image: '1692628607418.png',
+    outputType: 'url',
+    modification: 'change the background to yellow',
+    similarity: 70
+}).then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(error);
+});
+
 ```
