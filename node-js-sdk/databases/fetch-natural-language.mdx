@@ -14,7 +14,6 @@ Some examples of the queries you can run are:
 - Fetch all documents in a collection where a field is equal to a value and sort the results by another field and limit the results to a certain number
 
 
-
 ### Initialize Database Modules
 
 ```javascript
@@ -30,6 +29,7 @@ worqhat.initializeApp(config);
 
 let db = worqhat.database();
 ```
+### Example
 
 ```js
 db.collection('NodeJSDb1').language("get me the average age of all the people").get().then((response) => {
