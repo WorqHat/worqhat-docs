@@ -6,26 +6,20 @@ description: 'Powerful query functionality for specifying which documents you wa
 
 WorqDB provides powerful query functionality for specifying which documents you want to retrieve from a collection or collection group.
 
+<Tip>You can combine where() filters with orderBy(), limit() and startAfter(). Any combination of queries can work for all cases.</Tip>
+
 ## Simple Queries
 
 Simple queries are useful when you know the exact value you want to match for a specific field or fields.
 
 For example, the following query returns all documents where the `name` field exactly matches `John Doe`:
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ]
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16).get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 
 ## Query Operators
@@ -51,20 +45,12 @@ WorqDB supports a variety of query operators:
 
 Use the not equal (!=) operator to return documents where the given field exists and does not match the comparison value. For example:
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "!=",
-      "value": "Mumbai"
-    }
-  ]
-}'
+```js
+db.collection('NodeJSDb1').where("name", "!=", "Atharva").get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 
 This query returns every city document where the `capital` field exists with a value other than `Mumbai`.
@@ -75,81 +61,36 @@ This query returns every city document where the `capital` field exists with a v
 
 You can also chain multiple simple queries together using logical AND operators. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai`:
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "==",
-      "value": "Mumbai"
-    },
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ],
-  "compounding": "AND",
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16).where("age", "==", "Atharva").join("and").get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 
 ## Compound Queries (OR)
 
 You can also chain multiple simple queries together using logical OR operators. For example, the following query returns all documents where the `name` field exactly matches `John Doe` or the `capital` field exactly matches `Mumbai`:
 
-```shell
-
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "==",
-      "value": "Mumbai"
-    },
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ],
-  "compounding": "AND",
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16).where("age", "==", "Atharva").join("or").get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 ## Order data
 
 You can also order the data by a field. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field. By default, a query retrieves all documents that satisfy the query in ascending order by document ID.
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "==",
-      "value": "Mumbai"
-    },
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ],
-  "compounding": "AND",
-  "orderBy": "docCreatedAt",
-  "orderType": "desc",
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16).where("age", "==", "Atharva").join("or")
+.orderBy("age", "asc").get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 
 * **`orderBy`** - The field to order the data by. Defaults to `docCreatedAt`.
@@ -161,29 +102,15 @@ curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
 
 You can also limit the data returned by a query. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field and the data is limited to 10 documents.
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "==",
-      "value": "Mumbai"
-    },
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ],
-  "compounding": "AND",
-  "orderBy": "docCreatedAt",
-  "orderType": "desc",
-  "limit": 10,
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16)
+.where("age", "==", "Atharva").join("or")
+.orderBy("age", "asc")
+.limit(10).get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
 
 <Tip>You can combine where() filters with orderBy() and limit().</Tip>
@@ -192,37 +119,15 @@ curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
 
 You can also paginate the data returned by a query. For example, the following query returns all documents where the `name` field exactly matches `John Doe` and the `capital` field exactly matches `Mumbai` and the data is ordered by the `timestamp` field and the data is limited to 10 documents and the data is paginated by the `startAfter` field. The `startAfter` field is an `integer` value that you can pass in to get the next set of data.
 
-```shell
-curl --location 'https://api.worqhat.com/api/collections/data/fetch/query' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <token>' \
---data '{
-  "collection": "Sample collection",
-  "queries": [
-    {
-      "field": "capital",
-      "operator": "==",
-      "value": "Mumbai"
-    },
-    {
-      "field": "name",
-      "operator": "==",
-      "value": "John Doe"
-    }
-  ],
-  "compounding": "AND",
-  "orderBy": "docCreatedAt",
-  "orderType": "desc",
-  "limit": 10,
-  "startAfter": 10,
-}'
+```js
+db.collection('NodeJSDb1').where("age", ">", 16)
+.where("age", "==", "Atharva").join("or")
+.orderBy("age", "asc")
+.limit(10)
+.startAt(10)
+.get().then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 ```
-
-Try it out in the [API Reference](/api-reference/databases/fetch-query)
-
-<Card title="View API Reference to Implement" icon="link" iconType="duotone" color="#ea5a0c"
-      href="/api-reference/databases/fetch-query">
-  Visit the API Reference to learn how to Run Queries in your projects. Get
-  access to
-  Sample Code, API Endpoints and run it right within the browser to test it out.
-</Card>

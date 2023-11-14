@@ -383,7 +383,6 @@
             "node-js-sdk/databases/fetch-all-data",
             "node-js-sdk/databases/fetch-document",
             "node-js-sdk/databases/fetch-count",
-            "node-js-sdk/databases/fetch-unique",
             "node-js-sdk/databases/fetch-query",
             "node-js-sdk/databases/fetch-natural-language"
           ]
