@@ -862,7 +862,7 @@ paths:
                     description: The HTTP status code.
                   status:
                     type: string
-                    description: Status indicating the success of the response.
+                    description: Status indicating the success of the response. In case you have an error for `multipart/form-data` requests, try removing the `Content-Type` header.
                   data:
                     type: string
                     description: The response data.
@@ -1444,7 +1444,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the Audio Conversion Process.
+                    description: Status indicating the success of the Audio Conversion Process. In case you have an error for `multipart/form-data` requests, try removing the `Content-Type` header.
                   data:
                     type: object
                     properties:
@@ -1826,7 +1826,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the Audio Conversion Process. In case you have an error for `multipart/form-data` requests, try removing the `Content-Type` header.
+                    description: Status indicating the success of the PDF Extraction Process. In case you have an error for `multipart/form-data` requests, try removing the `Content-Type` header.
                   data:
                     type: string
                     description: The converted text.
