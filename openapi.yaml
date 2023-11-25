@@ -943,6 +943,21 @@ paths:
                   type: string
                   format: binary
                   description: The image to be sent as input.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `json` and `text`.
+                    `json` will return the text detection results as a JSON object with the scan
+                    words marked and positional information. `text` will return the text detection
+                    results as a plain text string with a proper description of the image and what it contains.
+                  enum:
+                    - json
+                    - text
+                question:
+                  type: string
+                  description: >
+                    The question to be answered by the AI. This is an optional parameter. If not
+                    provided, the AI will only send a description of the image and what it contains.
             example:
               image: "/path/to/image.jpg"
 
