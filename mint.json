@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "WorqHat Developers",
   "logo": {
-    "dark": "/logo/worqHat-logo.png",
-    "light": "/logo/worqHat-logo.png"
+    "dark": "/logo/wqht-chst.png",
+    "light": "/logo/wqht-chst.png"
   },
   "favicon": "/favicon.png",
   "colors": {
