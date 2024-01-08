@@ -2761,6 +2761,100 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
+  /api/collections/fetch-all:
+    post:
+      summary: Fetch All Collections from a Database
+      description: >
+        Fetch all the Collections from a Database. This is useful when you want to fetch all the Collections from a Database and perform some operations on it.
+      operationId: fetchAllCollections
+      tags:
+        - Database Management
+      security:
+        - bearerAuth: [ ]
+
+      responses:
+        '200':
+          description: Output from the Database Collection Fetch Process
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the text moderation.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
+                  data:
+                    type: object
+                    properties:
+                      databaseId:
+                        type: string
+                        description: The ID of the Database where the data is stored.
+                      elapsed_time:
+                        type: integer
+                        description: The time taken to process the request, in milliseconds.
+                      collections:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: The Name of the Collection or the Group where you want to store all your data.
+                example:
+                  status: "success"
+                  processing_time: 888
+                  processing_id: "4b139bfe-1f71-4345-b539-fa6c1700f166"
+                  processing_count: 6554
+                  data:
+                    databaseId: "1234567890"
+                    elapsed_time: 800
+                    collections:
+                      - name: "Users"
+                      - name: "Posts"
+
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
   /api/collections/data/fetch/document:
     post:
       summary: Fetch a Document from a Collection
