@@ -958,6 +958,10 @@ paths:
                   description: >
                     The question to be answered by the AI or any specific command you would like the Model to take into consideration while analysing the image.
                     This is an optional parameter. If not provided, the AI will only send a description of the image and what it contains.
+                stream_data:
+                  type: boolean
+                  description: >
+                    This is an optional parameter. If set to `true`, the AI will send the results as soon as it is ready. If set to `false`, the AI will wait for the entire image to be processed and then send the results.
             example:
               image: "/path/to/image.jpg"
 
