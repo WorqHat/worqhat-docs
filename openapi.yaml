@@ -4577,6 +4577,583 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
+  /api/ai/images/modify/v3/sketch-image:
+    post:
+      summary: Convert a Sketch Image to a Real Image
+      description: >
+        Convert a Sketch Image to a Real Image using this endpoint. You can pass in the Sketch Image and we will convert it to a Real Image for you. This is mostly used in cases where you want to convert a Sketch Image to a Real Image.
+        This is mostly used in cases where you want to build a recommendation engine or suggest people based on meaning and emotional ideas.
+      operationId: sketchImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited. Max image size in 1024px`.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`
+                    . `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+                description:
+                  type: string
+                  description: >
+                    The description of the modification to be applied to the image. You can add in the modification
+                    parameters as a string based description.
+
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+              description: "Add a cat to the image"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the request.
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          properties:
+                            sId:
+                              type: string
+                              description: The ID of the item.
+                            type:
+                              type: string
+                              description: The type of the item.
+                            name:
+                              type: string
+                              description: The name of the item.
+                            ppu:
+                              type: string
+                              description: The price per unit of the item.
+                          description: The detailed information about the item.
+                        distance:
+                          type: number
+                          description: The distance of the item.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                example:
+                  status: "success"
+                  result:
+                    - results:
+                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
+                        type: "donut"
+                        name: "Old Fashioned"
+                        ppu: "0.55"
+                      distance: 0.1902
+                    - results:
+                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
+                        type: "donut"
+                        name: "Cake"
+                        ppu: "0.55"
+                      distance: 0.2543
+                    - results:
+                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
+                        type: "donut"
+                        name: "Raised"
+                        ppu: "0.55"
+                      distance: 0.268
+                  processing_time: 3323
+                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
+                  processing_count: 4
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/extend-image:
+    post:
+      summary: Extend an Image's Composition
+      description: >
+        Extend an image's composition using this endpoint. You can pass in an existing image, and we will enhance or extend its composition based on the provided description. This feature is particularly useful for creative projects, design work, or when you need to add more context or elements to an existing image.
+      operationId: extendImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited.`.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`
+                    . `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+                leftExtend:
+                  type: integer
+                  format: int32
+                  description: Percentage to extend the image on the left side.
+                rightExtend:
+                  type: integer
+                  format: int32
+                  description: Percentage to extend the image on the right side.
+                topExtend:
+                  type: integer
+                  format: int32
+                  description: Percentage to extend the image on the top.
+                bottomExtend:
+                  type: integer
+                  format: int32
+                  description: Percentage to extend the image on the bottom.
+                description:
+                  type: string
+                  description: >
+                    The description of the modification to be applied to the image. You can add in the modification
+                    parameters as a string based description.
+
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+              leftExtend: 10
+              rightExtend: 10
+              topExtend: 5
+              bottomExtend: 5
+              description: "Extend the image's composition by adding more sky at the top and extending the landscape on the sides."
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the request.
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          properties:
+                            sId:
+                              type: string
+                              description: The ID of the item.
+                            type:
+                              type: string
+                              description: The type of the item.
+                            name:
+                              type: string
+                              description: The name of the item.
+                            ppu:
+                              type: string
+                              description: The price per unit of the item.
+                          description: The detailed information about the item.
+                        distance:
+                          type: number
+                          description: The distance of the item.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                example:
+                  status: "success"
+                  result:
+                    - results:
+                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
+                        type: "donut"
+                        name: "Old Fashioned"
+                        ppu: "0.55"
+                      distance: 0.1902
+                    - results:
+                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
+                        type: "donut"
+                        name: "Cake"
+                        ppu: "0.55"
+                      distance: 0.2543
+                    - results:
+                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
+                        type: "donut"
+                        name: "Raised"
+                        ppu: "0.55"
+                      distance: 0.268
+                  processing_time: 3323
+                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
+                  processing_count: 4
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/remove-background:
+    post:
+      summary: Remove Background from an Image
+      description: >
+        Remove the background from an image using this endpoint. You can pass in an existing image, and we will process it to remove the background. This feature is particularly useful for creating product images for e-commerce, profile pictures without distracting backgrounds, or any other application where a clean, background-free image is desired.
+      operationId: removeBg
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited. Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`
+                    . `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the request.
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          properties:
+                            sId:
+                              type: string
+                              description: The ID of the item.
+                            type:
+                              type: string
+                              description: The type of the item.
+                            name:
+                              type: string
+                              description: The name of the item.
+                            ppu:
+                              type: string
+                              description: The price per unit of the item.
+                          description: The detailed information about the item.
+                        distance:
+                          type: number
+                          description: The distance of the item.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                example:
+                  status: "success"
+                  result:
+                    - results:
+                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
+                        type: "donut"
+                        name: "Old Fashioned"
+                        ppu: "0.55"
+                      distance: 0.1902
+                    - results:
+                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
+                        type: "donut"
+                        name: "Cake"
+                        ppu: "0.55"
+                      distance: 0.2543
+                    - results:
+                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
+                        type: "donut"
+                        name: "Raised"
+                        ppu: "0.55"
+                      distance: 0.268
+                  processing_time: 3323
+                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
+                  processing_count: 4
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/replace-background:
+    post:
+      summary: Replace Background from an Image
+      description: >
+        Replace the background from an image using this endpoint. You can pass in an existing image, and we will process it to replace the background. This feature is particularly useful for creating product images for e-commerce, profile pictures without distracting backgrounds, or any other application where a clean, background-free image is desired.
+      operationId: replaceBg
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited. Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`.
+                    `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+                modification:
+                  type: string
+                  description: >
+                    The description of the modification to be applied to the image. This can include
+                    instructions or desired outcomes for the image modification process.
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+              modification: "Create Variation of the Image"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the request.
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        results:
+                          type: object
+                          properties:
+                            sId:
+                              type: string
+                              description: The ID of the item.
+                            type:
+                              type: string
+                              description: The type of the item.
+                            name:
+                              type: string
+                              description: The name of the item.
+                            ppu:
+                              type: string
+                              description: The price per unit of the item.
+                          description: The detailed information about the item.
+                        distance:
+                          type: number
+                          description: The distance of the item.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                example:
+                  status: "success"
+                  result:
+                    - results:
+                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
+                        type: "donut"
+                        name: "Old Fashioned"
+                        ppu: "0.55"
+                      distance: 0.1902
+                    - results:
+                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
+                        type: "donut"
+                        name: "Cake"
+                        ppu: "0.55"
+                      distance: 0.2543
+                    - results:
+                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
+                        type: "donut"
+                        name: "Raised"
+                        ppu: "0.55"
+                      distance: 0.268
+                  processing_time: 3323
+                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
+                  processing_count: 4
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
   /api/ai/content/v2-large/answering:
     post:
       summary: AiCon V2 Large (Based on Custom Trained Datasets) - Question Answering
