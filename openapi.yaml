@@ -2106,7 +2106,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-  /api/ai/content/v2/new/alpha:
+  /api/ai/content/v2/alpha:
     post:
       summary: Latest AI Model with Data upto July 23, (Unstable)
       description: >
