@@ -13,7 +13,16 @@ Our AiCon Alpha models are built on the innovative foundation of our AiCon v3 mo
 
 By integrating these elements, AiCon Alpha stands out as a dynamic, internet-aware model capable of addressing queries with up-to-the-minute accuracy, such as recent event outcomes or the latest developments in a given field. This positions AiCon Alpha as a cutting-edge tool for accessing and leveraging internet-based knowledge.
 
-<Tip>However, the Alpha Nightly channel is our most recent API Release, and is currently in active development. This channel is not recommended for production use, and is subject to change at any time.</Tip>
+<Tip>
+The API is capable of generating citations for the sources it uses as references in its responses. When the API draws information from the web, it not only provides the relevant content but also returns details about the sources, including:
+
+- **Title**: The title of the source (`source.title`), ensuring users can identify the origin of the information.
+- **URL**: The direct link to the source (`source.url`), allowing users to visit the original content for more detailed insights.
+- **Description**: A brief description of the source (`source.description`), offering a quick overview of what the source is about.
+- **Favicon**: The favicon of the source's website (`source.favicon`), helping users to visually recognize the site.
+
+These details are returned to enhance transparency and provide a pathway for users to explore the original information further.
+</Tip>
 
 <Warning>
   This API is currently in active development and is subject to change at any time. It is suggested
