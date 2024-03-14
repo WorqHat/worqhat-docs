@@ -102,7 +102,7 @@
             "ai-models/text-generation-ai/aicon-v2-textgen",
             "ai-models/text-generation-ai/aicon-v3-textgen",
             "ai-models/text-generation-ai/aicon-v2-large-beta",
-            "ai-models/text-generation-ai/aicon-v2-2023-alpha"
+            "ai-models/text-generation-ai/aicon-v3-alpha"
           ]
         },
         {
@@ -209,7 +209,7 @@
                 "api-reference/ai-models/text-generation-ai/aicon-v2-textgen",
                 "api-reference/ai-models/text-generation-ai/aicon-v3-textgen",
                 "api-reference/ai-models/text-generation-ai/aicon-v2-large-beta",
-                "api-reference/ai-models/text-generation-ai/aicon-v2-2023-alpha"
+                "api-reference/ai-models/text-generation-ai/aicon-v3-alpha"
               ]
             },
             {
@@ -311,7 +311,7 @@
             "node-js-sdk/ai-models/text-generation-ai/aicon-v2-textgen",
             "node-js-sdk/ai-models/text-generation-ai/aicon-v3-textgen",
             "node-js-sdk/ai-models/text-generation-ai/aicon-v2-large-beta",
-            "node-js-sdk/ai-models/text-generation-ai/aicon-v2-2023-alpha"
+            "node-js-sdk/ai-models/text-generation-ai/aicon-v3-alpha"
           ]
         },
         {
