@@ -939,10 +939,12 @@ paths:
             schema:
               type: object
               properties:
-                image:
-                  type: string
-                  format: binary
-                  description: The image to be sent as input.
+                images:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: The images to be sent as input. You can pass a maximum of 10 images.
                 output_type:
                   type: string
                   description: >
@@ -958,8 +960,24 @@ paths:
                   description: >
                     The question to be answered by the AI or any specific command you would like the Model to take into consideration while analysing the image.
                     This is an optional parameter. If not provided, the AI will only send a description of the image and what it contains.
+                training_data:
+                  type: string
+                  description: >
+                    The training data to be used for the AI. This is an optional parameter. If not provided, the AI will use the default training data. It is only applicable for Image Analysis process with Text as `output_type`.
+                stream_data:
+                    type: boolean
+                    description: >
+                        Whether to stream the data as it is being generated. If set to true, the
+                        response will be streamed as the data is being generated. This is useful
+                        when you want to generate a lot of content and want to save the data as it
+                        is being generated. You need to handle Server Sent Events for this use case.
+                    default: false
             example:
-              image: "/path/to/image.jpg"
+              images: ["/path/to/image.jpg", "/path/to/image.jpg"]
+              output_type: "text"
+              question: "What is the name of the person in the image?"
+              training_data: "You are a support for a Blind person. Please describe the image in detail."
+              stream_data: false
 
       responses:
         200:
@@ -2527,7 +2545,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500Response'
-
 
   /api/ai/content/v3/alpha:
     post:
