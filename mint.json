@@ -119,6 +119,12 @@
             "ai-models/image-generation/imagecon-v3",
             "ai-models/image-generation/image-image-v2",
             "ai-models/image-generation/image-image-v3",
+            "ai-models/image-generation/remove-text-image",
+            "ai-models/image-generation/remove-image-background",
+            "ai-models/image-generation/replace-image-background",
+            "ai-models/image-generation/search-to-replace-in-image",
+            "ai-models/image-generation/sketch-to-image",
+            "ai-models/image-generation/extend-image",
             "ai-models/image-generation/image-upscale"
           ]
         },
@@ -234,6 +240,12 @@
                 "api-reference/ai-models/image-generation/imagecon-v3",
                 "api-reference/ai-models/image-generation/image-image-v2",
                 "api-reference/ai-models/image-generation/image-image-v3",
+                "api-reference/ai-models/image-generation/remove-text-image",
+                "api-reference/ai-models/image-generation/remove-image-background",
+                "api-reference/ai-models/image-generation/replace-image-background",
+                "api-reference/ai-models/image-generation/search-to-replace-in-image",
+                "api-reference/ai-models/image-generation/sketch-to-image",
+                "api-reference/ai-models/image-generation/extend-image",
                 "api-reference/ai-models/image-generation/image-upscale"
               ]
             },

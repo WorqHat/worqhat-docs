@@ -2124,122 +2124,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
-  /api/ai/content/v2/alpha:
-    post:
-      summary: Latest AI Model with Data upto July 23, (Unstable)
-      description: >
-        Our latest AI model that can be used to generate content and has data upto July 2023.
-        However, this is only an information based model and it excels in Informational Based
-        tasks than Creative ones.
-      operationId: generateContentV2Alpha
-      tags:
-        - AI Services
-      security:
-        - bearerAuth: [ ]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The Text or Command to be processed.
-                conversation_history:
-                  type: array
-                  description: >
-                    The conversation history of the user as an array of objects. Each object
-                    should have a `question` and `answer` property as the key and value respectively.
-                  items:
-                    type: object
-                    properties:
-                      conversation:
-                        type: string
-                        description: The conversation between the user and the AI as a key value pair.
-                training_data:
-                  type: string
-                  description: >
-                    The training data to be used while generating the content. This can be used to
-                    pass in smaller content based on how you want the model to behave, and
-                    specific behavioural or restrictive traits you want to add. This is optional.
-            example:
-                question: "What is the capital of India?"
-                conversation_history: [
-                    {
-                        "What is the capital of India?": "New Delhi"
-                    },
-                    {
-                        "What is the capital of USA?": "Washington DC"
-                    }]
-                training_data: 'You are alex and you are one of the best Tour Guides.'
-
-      responses:
-        '200':
-          description: Text Content Generated Successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Status indicating the success of the text moderation.
-                  content:
-                    type: string
-                    description: The text content generated.
-                  processing_time:
-                    type: integer
-                    description: The time taken to process the request, in milliseconds.
-                  processing_id:
-                    type: string
-                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
-                  processing_count:
-                    type: integer
-                    description: The number of times the request has been processed. This is what
-                      is considered in the Billing Process. This is either the number of times
-                      the image is processed or the number of words that the server processes.
-                example:
-                  status: "success"
-                  processing_time: 888
-                  content: >
-                    "Hello! My name is Alex, and I am your tour guide. I am here to assist
-                    you and provide you with information about the places we will be visiting. If you have any questions or need any help during our tour, feel free to ask. I'm here to make your experience enjoyable and memorable. Let's have a great time exploring together"
-                  processing_id: "4b139bfe-1f71-4345-b539-fa6c1700f166"
-                  processing_count: 6554
-
-        '400':
-          description: >
-            Bad Request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error400Response'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Response'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404Response'
-        '406':
-          description: Not Acceptable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error406Response'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error500Response'
-
   /api/ai/content/v2:
     post:
       summary: AiCon V2 (Stable)
@@ -4816,7 +4700,7 @@ paths:
               description: "Add a cat to the image"
       responses:
         '200':
-          description: Successful response
+          description: Image generated successfully
           content:
             application/json:
               schema:
@@ -4824,31 +4708,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the request.
-                  result:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        results:
-                          type: object
-                          properties:
-                            sId:
-                              type: string
-                              description: The ID of the item.
-                            type:
-                              type: string
-                              description: The type of the item.
-                            name:
-                              type: string
-                              description: The name of the item.
-                            ppu:
-                              type: string
-                              description: The price per unit of the item.
-                          description: The detailed information about the item.
-                        distance:
-                          type: number
-                          description: The distance of the item.
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
                   processing_time:
                     type: integer
                     description: The time taken to process the request, in milliseconds.
@@ -4857,31 +4720,15 @@ paths:
                     description: A universally unique identifier for the request. This can be used to track the request in the logs.
                   processing_count:
                     type: integer
-                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
                 example:
                   status: "success"
-                  result:
-                    - results:
-                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
-                        type: "donut"
-                        name: "Old Fashioned"
-                        ppu: "0.55"
-                      distance: 0.1902
-                    - results:
-                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
-                        type: "donut"
-                        name: "Cake"
-                        ppu: "0.55"
-                      distance: 0.2543
-                    - results:
-                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
-                        type: "donut"
-                        name: "Raised"
-                        ppu: "0.55"
-                      distance: 0.268
-                  processing_time: 3323
-                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
-                  processing_count: 4
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
         '400':
           description: >
             Bad Request.
@@ -4977,7 +4824,7 @@ paths:
               description: "Extend the image's composition by adding more sky at the top and extending the landscape on the sides."
       responses:
         '200':
-          description: Successful response
+          description: Image generated successfully
           content:
             application/json:
               schema:
@@ -4985,31 +4832,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the request.
-                  result:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        results:
-                          type: object
-                          properties:
-                            sId:
-                              type: string
-                              description: The ID of the item.
-                            type:
-                              type: string
-                              description: The type of the item.
-                            name:
-                              type: string
-                              description: The name of the item.
-                            ppu:
-                              type: string
-                              description: The price per unit of the item.
-                          description: The detailed information about the item.
-                        distance:
-                          type: number
-                          description: The distance of the item.
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
                   processing_time:
                     type: integer
                     description: The time taken to process the request, in milliseconds.
@@ -5018,31 +4844,114 @@ paths:
                     description: A universally unique identifier for the request. This can be used to track the request in the logs.
                   processing_count:
                     type: integer
-                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
                 example:
                   status: "success"
-                  result:
-                    - results:
-                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
-                        type: "donut"
-                        name: "Old Fashioned"
-                        ppu: "0.55"
-                      distance: 0.1902
-                    - results:
-                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
-                        type: "donut"
-                        name: "Cake"
-                        ppu: "0.55"
-                      distance: 0.2543
-                    - results:
-                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
-                        type: "donut"
-                        name: "Raised"
-                        ppu: "0.55"
-                      distance: 0.268
-                  processing_time: 3323
-                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
-                  processing_count: 4
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/remove-text:
+    post:
+      summary: Remove Text from an Image
+      description: >
+        Remove text from an image using this endpoint. You can pass in an existing image, and we will process it to remove any textual content. This feature is particularly useful for creating images without distracting text, enhancing visual content for presentations, or any other application where a clean, text-free image is desired.
+      operationId: removeText
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`
+                    . `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
+                example:
+                  status: "success"
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
         '400':
           description: >
             Bad Request.
@@ -5111,7 +5020,7 @@ paths:
               output_type: "url"
       responses:
         '200':
-          description: Successful response
+          description: Image generated successfully
           content:
             application/json:
               schema:
@@ -5119,31 +5028,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the request.
-                  result:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        results:
-                          type: object
-                          properties:
-                            sId:
-                              type: string
-                              description: The ID of the item.
-                            type:
-                              type: string
-                              description: The type of the item.
-                            name:
-                              type: string
-                              description: The name of the item.
-                            ppu:
-                              type: string
-                              description: The price per unit of the item.
-                          description: The detailed information about the item.
-                        distance:
-                          type: number
-                          description: The distance of the item.
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
                   processing_time:
                     type: integer
                     description: The time taken to process the request, in milliseconds.
@@ -5152,31 +5040,16 @@ paths:
                     description: A universally unique identifier for the request. This can be used to track the request in the logs.
                   processing_count:
                     type: integer
-                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
                 example:
                   status: "success"
-                  result:
-                    - results:
-                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
-                        type: "donut"
-                        name: "Old Fashioned"
-                        ppu: "0.55"
-                      distance: 0.1902
-                    - results:
-                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
-                        type: "donut"
-                        name: "Cake"
-                        ppu: "0.55"
-                      distance: 0.2543
-                    - results:
-                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
-                        type: "donut"
-                        name: "Raised"
-                        ppu: "0.55"
-                      distance: 0.268
-                  processing_time: 3323
-                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
-                  processing_count: 4
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
         '400':
           description: >
             Bad Request.
@@ -5251,7 +5124,7 @@ paths:
               modification: "Create Variation of the Image"
       responses:
         '200':
-          description: Successful response
+          description: Image generated successfully
           content:
             application/json:
               schema:
@@ -5259,31 +5132,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status indicating the success of the request.
-                  result:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        results:
-                          type: object
-                          properties:
-                            sId:
-                              type: string
-                              description: The ID of the item.
-                            type:
-                              type: string
-                              description: The type of the item.
-                            name:
-                              type: string
-                              description: The name of the item.
-                            ppu:
-                              type: string
-                              description: The price per unit of the item.
-                          description: The detailed information about the item.
-                        distance:
-                          type: number
-                          description: The distance of the item.
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
                   processing_time:
                     type: integer
                     description: The time taken to process the request, in milliseconds.
@@ -5292,31 +5144,16 @@ paths:
                     description: A universally unique identifier for the request. This can be used to track the request in the logs.
                   processing_count:
                     type: integer
-                    description: The number of times the request has been processed. This is what is considered in the Billing Process.
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
                 example:
                   status: "success"
-                  result:
-                    - results:
-                        sId: "07743dc2-2c1f-4b15-919e-7f7aae66586c"
-                        type: "donut"
-                        name: "Old Fashioned"
-                        ppu: "0.55"
-                      distance: 0.1902
-                    - results:
-                        sId: "59183537-9324-44fd-a1e9-023f6acefc52"
-                        type: "donut"
-                        name: "Cake"
-                        ppu: "0.55"
-                      distance: 0.2543
-                    - results:
-                        sId: "b29b523e-f5c3-4402-8080-9f3416837a00"
-                        type: "donut"
-                        name: "Raised"
-                        ppu: "0.55"
-                      distance: 0.268
-                  processing_time: 3323
-                  processing_id: "4e553b00-1898-4337-8003-291cab2f8a2b"
-                  processing_count: 4
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
         '400':
           description: >
             Bad Request.
