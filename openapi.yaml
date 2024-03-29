@@ -5004,7 +5004,7 @@ paths:
                 existing_image:
                   type: string
                   format: binary
-                  description: The image to be modified or edited. Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
+                  description: The image to be modified or edited.
                 output_type:
                   type: string
                   description: >
@@ -5102,7 +5102,7 @@ paths:
                 existing_image:
                   type: string
                   format: binary
-                  description: The image to be modified or edited. Valid dimensions are `1024x1024`, `1152x896`, `1216x832`, `1344x768`, `1536x640`, `640x1536`, `768x1344`, `832x1216`, `896x1152`.
+                  description: The image to be modified or edited.
                 output_type:
                   type: string
                   description: >
