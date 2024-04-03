@@ -5186,6 +5186,114 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error500Response'
 
+  /api/ai/images/modify/v3/search-replace-image:
+    post:
+      summary: Search and Replace Objects in Image
+      description: >
+        Utilize this endpoint to search for specific objects within an image and replace them with alternative imagery. This powerful feature supports a wide range of applications, from updating product images in e-commerce settings to modifying elements in marketing materials or personal photos, allowing for creative and dynamic image transformations.
+      operationId: searchReplaceObjectsInImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image to be modified or edited.
+                output_type:
+                  type: string
+                  description: >
+                    The type of output to be generated. You can choose between `url` and `blob`.
+                    `URL` will return a cloud-hosted Temporary URL for the generated image, you
+                    need to handle the image download on your end. `blob` will return the image
+                    as a base64 encoded string.
+                  enum:
+                    - url
+                    - blob
+                modification:
+                  type: string
+                  description: >
+                    The description of the modification to be applied to the image. This can include
+                    instructions or desired outcomes for the image modification process.
+                search_object:
+                  type: string
+                  description: >
+                    The object or element you want to replace the searched object with.
+            example:
+              existing_image: "/path/to/image.jpg"
+              output_type: "url"
+              modification: "Create Variation of the Image"
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status indicating the success of the image generation.
+                  image:
+                    type: string
+                    description: The generated image.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request, in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request. This can be used to track the request in the logs.
+                  processing_count:
+                    type: integer
+                    description: The number of times the request has been processed. This is what
+                      is considered in the Billing Process. This is either the number of times
+                      the image is processed or the number of words that the server processes.
+                example:
+                  status: "success"
+                  image: "https://storage.googleapis.com/1fe0a9ac-617a-42e4-a376-37808b98fc99-worqhat/image-gen/MFl2oNxrMLYKvWbwoDkbQPpScWD3-1697226444718.png?GoogleAccessId=cloud-storage-upload%40worqhat-dev.iam.gserviceaccount.com&Expires=1697226626&Signature=DHlOeWd4QladLc6hsdoqp9lTbvMXs06B6hOkQPviFubszuLfahXXRv9aj%2FPTTlytlTClXHX0zGFr3Tsq9S%2Fs3hFjqBsy7lho%2BfuRFhPG4FrQoV2lxrZmB47X6nWc7TG6hbgLkyT3CvAOfwccmWHH1cbBiEDSI0iEKvx7kwUsgIrYu1ko9Szkul29fjVQ89WL6jyQQX1G9ejsQTNmXHFNRvhwRHkRfZJ5n3Y1uR7aqAyMZfQ2Me6i7bVb7smc0t5Ed2yk6%2BN1fdrz6zhbkc%2Fuh13vWhrT8EWMuCYKhsrzPakO%2B%2B229nlt5Y4D9zyFqevAmj43Vl76INIq29gcs39oQg%3D%3D"
+                  processing_time: 2311
+                  processing_id: "cd185dd4-fcfb-4b15-93de-db9eded23ade"
+                  processing_count: 2
+
+        '400':
+          description: >
+            Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404Response'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error406Response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
   /api/ai/content/v2-large/answering:
     post:
       summary: AiCon V2 Large (Based on Custom Trained Datasets) - Question Answering
