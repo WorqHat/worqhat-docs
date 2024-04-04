@@ -4795,19 +4795,19 @@ paths:
                 leftExtend:
                   type: integer
                   format: int32
-                  description: Percentage to extend the image on the left side.
+                  description: Percentage to extend the image on the left side. If the percentage value results in a number that is greater than `512px`, it will default to `512px`.
                 rightExtend:
                   type: integer
                   format: int32
-                  description: Percentage to extend the image on the right side.
+                  description: Percentage to extend the image on the right side. If the percentage value results in a number that is greater than `512px`, it will default to `512px`.
                 topExtend:
                   type: integer
                   format: int32
-                  description: Percentage to extend the image on the top.
+                  description: Percentage to extend the image on the top. If the percentage value results in a number that is greater than `512px`, it will default to `512px`.
                 bottomExtend:
                   type: integer
                   format: int32
-                  description: Percentage to extend the image on the bottom.
+                  description: Percentage to extend the image on the bottom. If the percentage value results in a number that is greater than `512px`, it will default to `512px`.
                 description:
                   type: string
                   description: >
