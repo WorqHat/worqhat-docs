@@ -2189,8 +2189,8 @@ paths:
                   type: string
                   description: >
                     The type of output to be generated. You can choose between `json` and `text`.
-                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text detection
-                    results as a plain text string with a proper description of the image and what it contains.
+                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text
+                    results as a plain text string.
                   enum:
                     - json
                     - text
@@ -2343,8 +2343,8 @@ paths:
                   type: string
                   description: >
                     The type of output to be generated. You can choose between `json` and `text`.
-                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text detection
-                    results as a plain text string with a proper description of the image and what it contains.
+                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text
+                    results as a plain text string.
                   enum:
                     - json
                     - text
@@ -2494,8 +2494,8 @@ paths:
                   type: string
                   description: >
                     The type of output to be generated. You can choose between `json` and `text`.
-                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text detection
-                    results as a plain text string with a proper description of the image and what it contains.
+                    `json` will return the text detection results as a JSON object that is parseable. `text` will return the text
+                    results as a plain text string.
                   enum:
                     - json
                     - text
@@ -2745,8 +2745,16 @@ paths:
                 collection:
                   type: string
                   description: The Name of the Collection or the Group where you want to store all your data.
+                outputType:
+                  type: string
+                  description: The type of output you want. `json` will return the data as a JSON object that is parseable. `stream` will return the data as a stream of data and `file` will return the data as a parseable CSV file.
+                  enum:
+                    - "json"
+                    - "stream"
+                    - "file"
               example:
                 collection: "Users"
+                outputType: "json"
 
       responses:
         '200':
@@ -3347,6 +3355,13 @@ paths:
                   type: string
                   description: >
                     The number of documents to skip. This is optional. By default we will not skip any documents. If you add a `startAfter` value, we will skip the number of documents that you pass in.
+                outputType:
+                  type: string
+                  description: The type of output you want. `json` will return the data as a JSON object that is parseable. `stream` will return the data as a stream of data and `file` will return the data as a parseable CSV file.
+                  enum:
+                    - "json"
+                    - "stream"
+                    - "file"
               example:
                 collection: "Users"
                 queries:
@@ -3361,6 +3376,7 @@ paths:
                 orderType: "desc"
                 limit: 10
                 startAfter: 5
+                outputType: "json"
 
       responses:
         '200':
@@ -3479,9 +3495,17 @@ paths:
                   type: string
                   description: >
                     The Query that you want to run on the Collection. Describe the data that you want to fetch from a Collection in a natural language format and we will run the query for you.
+                outputType:
+                  type: string
+                  description: The type of output you want. `json` will return the data as a JSON object that is parseable. `stream` will return the data as a stream of data and `file` will return the data as a parseable CSV file.
+                  enum:
+                    - "json"
+                    - "stream"
+                    - "file"
               example:
                 collection: "Users"
-                queries: "Fetch all the users with age greater than 18"
+                query: "Fetch all the users with age greater than 18"
+                outputType: "json"
 
       responses:
         '200':
