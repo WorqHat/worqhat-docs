@@ -1,5 +1,5 @@
 ---
-title: 'AiCon V2 2023 (Nightly Alpha)'
+title: 'AiCon V3 Alpha'
 description: 'Creative Content Generation AI based on Upto Date Data'
 ---
 
@@ -17,6 +17,7 @@ However, the Alpha Nightly channel is our most recent API Release, and is curren
 | `question`           | `string`  | This parameter represents the question or prompt for which the content is to be generated. It should be provided as a string. If not provided, the default value is `undefined`. |
 | `conversation_history` | `Array`  | This parameter accepts an array of objects. Each object represents a previous interaction in the conversation. This is useful for context-aware content generation. If not provided, the default value is `undefined`, meaning no conversation history is considered. |
 | `training_data`      | `string`  | This parameter represents the training data to be used for generating the content. It should be provided as a string. If not provided, the default value is `undefined`. |
+| `stream`             | `boolean` | This is a flag that indicates whether the response should be streamed or not. If set to `true`, the response is streamed. If set to `false` or not provided, the default behavior is not to stream the response. |
 
 
 ### Initialize AI Modules

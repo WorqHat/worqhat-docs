@@ -108,7 +108,6 @@
         {
           "group": "AI for Search",
           "pages": [
-            "ai-models/ai-for-search/search-v2",
             "ai-models/ai-for-search/search-v3"
           ]
         },
@@ -229,7 +228,6 @@
             {
               "group": "AI for Search",
               "pages": [
-                "api-reference/ai-models/ai-for-search/search-v2",
                 "api-reference/ai-models/ai-for-search/search-v3"
               ]
             },
@@ -328,7 +326,6 @@
         {
           "group": "AI for Search",
           "pages": [
-            "node-js-sdk/ai-models/ai-for-search/search-v2",
             "node-js-sdk/ai-models/ai-for-search/search-v3"
           ]
         },

@@ -18,6 +18,11 @@ Read more at https://docs.worqhat.com/ai-models/image-analysis/image-analysis-v2
 | Parameter | Type               | Description                                                                                                                           |
 | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | image     | `File` or `string` | The existing image to be analyzed. Can be a `File` object, a `Buffer` object, or a public URL string.                                 |
+| output_type   | `string`          | The format of the output data. Can be either 'json' or 'text'. Default is 'json'. If 'text' is chosen, additional parameters may apply. |
+| question      | `string`          | The specific question or query related to the image analysis. |
+| training_data | `string`          | Custom training data to tailor the analysis model. |
+| stream        | `boolean`         | Whether the output should be streamed. Default is false. |
+
 
 
 ### Initialize AI Modules
@@ -41,6 +46,10 @@ let ai = worqhat.ai();
 ```javascript
 ai.analyseImages.analyse({
     image: "./image.jpeg",
+    output_type: "text",
+    question: "What is the main object in this image?",
+    training_data: "custom-training-data",
+    stream: false,
 }).then((response) => {
     console.log(response);
 }).catch((error) => {
