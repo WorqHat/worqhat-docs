@@ -17,12 +17,12 @@ Function for modifying images using version 2 of the API. It sends a request to 
 ### Initialize AI Modules
 
 ```javascript
-const worqhat = require('worqhat');
+const worqhat = require("worqhat");
 
 var config = new worqhat.Configuration({
-    apiKey: "your-api-key",
-    debug: true,
-    max_retries: 3,
+  apiKey: "your-api-key",
+  debug: true,
+  max_retries: 3,
 });
 
 worqhat.initializeApp(config);
@@ -33,15 +33,17 @@ let ai = worqhat.ai();
 ### Implementation
 
 ```javascript
-ai.imageVariations.v3({
-    existing_image: '1692628607418.png',
-    outputType: 'url',
-    modification: 'change the background to yellow',
-    similarity: 70
-}).then((response) => {
+ai.imageVariations
+  .v2({
+    existing_image: "1692628607418.png",
+    outputType: "url",
+    modification: "change the background to yellow",
+    similarity: 70,
+  })
+  .then((response) => {
     console.log(response);
-}).catch((error) => {
+  })
+  .catch((error) => {
     console.log(error);
-});
-
+  });
 ```
