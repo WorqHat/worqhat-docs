@@ -1,0 +1,35 @@
+---
+title: "Search V2 (Search through Texts)"
+sidebarTitle: "Search V2"
+description: "Intuitive search experience powered by AI"
+---
+
+Search V2 is an AI-assisted Text Based Search Engine. It provides an intuitive search experience powered by AI. More details can be found at https://docs.worqhat.com/ai-models/ai-for-search/search-v2
+
+### Parameters
+
+| Parameter     | Type     | Description                                                     | Default     |
+| ------------- | -------- | --------------------------------------------------------------- | ----------- |
+| question      | `string` | The search query string.                                        | `undefined` |
+| training_data | `string` | Contains the Referenced Dataset Id for the pre-trained dataset. | `undefined` |
+| api_key       | `string` | Contains the WorqHat API Key. Not required if .env is made.     | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import search_ai_v2
+from dotenv import load_dotenv
+load_dotenv()
+
+r=search_ai_v2(question="Shreya",
+    training_data= "f8180381-f2a7-4464-a0a1-b601d56919a1",api_key="Your-api-key")
+print(r)
+```

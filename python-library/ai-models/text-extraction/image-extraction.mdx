@@ -1,0 +1,49 @@
+---
+title: "Image Extraction AI"
+description: "Identifying and extracting text from images using machine learning"
+---
+
+Function for extracting text from images. It sends a request to the Image Extraction AI Model and returns the extracted text. Read more about the Models and their use cases at: https://docs.worqhat.com/ai-models/text-extraction/image-extraction
+
+### Parameters
+
+| Parameter     | Type               | Description                                                                                                                                 | Default |
+| ------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| image         | `File` or `string` | The existing image to extract data from. It can be a `File object` or a `URL` or `base64` encoded image data. This is a required parameter. |
+| output_format | `string`           | The output format of the extracted text. Can be `text` or `json`.                                                                           | `text`  |
+| api_key       | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                                                                 |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the path to your image file
+image_path = "path-to-your-image"
+
+# Set the desired output type ("text" or "json")
+output_type = "text"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Detect text in image
+results = detect_image_text(image=image_path, output_type=output_type, api_key=api_key)
+
+# Print the detected text
+for result in results:
+    print(result)
+```

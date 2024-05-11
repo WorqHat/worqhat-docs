@@ -1,0 +1,50 @@
+---
+title: "Search V3 (Search through Meanings and Context)"
+sidebarTitle: "Search V3 / Recommendation Engine"
+description: "Meaning and Context Based Search experience and Recommendations powered by AI"
+---
+
+Search V3 is a Meaning and Context Based Search experience powered by AI. It is suitable for use cases where you want to return the most relevant results. For more details, please visit [Search V3 Documentation](https://docs.worqhat.com/ai-models/ai-for-search/search-v3)
+
+### Parameters
+
+| Parameter     | Type     | Description                                                                                                                                              | Default     |
+| ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| question      | `string` | The search query string.                                                                                                                                 | `undefined` |
+| training_data | `string` | Contains the Referenced Dataset Id for the pre-trained dataset.                                                                                          | `undefined` |
+| search_count  | `number` | Returns the number of parameters we want to return. Default is 10. You can return as many as you want, but the more you return, the longer it will take. | `10`        |
+| api_key       | `string` | Contains the WorqHat API Key. Not required if .env is made.                                                                                              | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import search_ai_v3
+from dotenv import load_dotenv
+load_dotenv()
+
+r=search_ai_v3(question="Shreya",
+    training_data= "f8180381-f2a7-4464-a0a1-b601d56919a1",search_count=10,api_key="Your-api-key")
+print(r)
+
+```
+
+<Info>
+  This model does not generate content on its own, but it is capable of understanding the
+  meaning of the content provided by the user. It also understands and provides priority scoring
+  to data that you have uploaded previously to the API. This means that if you have uploaded
+  data to the API, and you search for a query that is similar to the data you have uploaded
+  previously, the API will return the data that you have uploaded previously as the top result.
+  It will also return other relevant results that are similar to the question you have asked.
+
+PLEASE PROVIDE ACCURATE AND RELEVANT TRAINING DATA TO GET THE BEST RESULTS AS IT IS NOT A
+GENERATIVE MODEL.
+
+</Info>

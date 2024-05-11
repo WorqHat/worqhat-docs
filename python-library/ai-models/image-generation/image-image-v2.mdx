@@ -1,0 +1,36 @@
+---
+title: "Image to Image Generation V2"
+description: "Modify Images using Image to Image Generation V2"
+---
+
+Function for modifying images using version 2 of the API. It sends a request to the Image Modification V2 AI Model and returns the new image. Read more about the model here https://docs.worqhat.com/ai-models/image-generation/image-image-v2
+
+### Parameters
+
+| Parameter      | Type               | Description                                                                                                                          |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| existing_image | `File` or `string` | The existing image to be modified. It can be a `File object`, a `URL`, or `base64` encoded image data. This is a required parameter. |
+| modifications  | `string`           | The modifications to be made to the image. This is a required parameter.                                                             |
+| outputType     | `url` `blob`       | The output type of the modified image. It can be either `url` or `blob`. This is an optional parameter.                              |
+| similarity     | `number`           | The similarity percentage for the image modification. This is a required parameter.                                                  |
+| api_key        | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                                                          | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import modify_image_v2
+from dotenv import load_dotenv
+load_dotenv()
+image="path-to-image/URL-to-image"
+r=modify_image_v2(image=image,modification="changes",api_key="Your-api-key")
+print(r)
+
+```

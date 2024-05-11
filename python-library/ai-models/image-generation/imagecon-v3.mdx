@@ -1,0 +1,53 @@
+---
+title: "ImageCon V3 Beta"
+description: "Text to Image Generation API V3 (ImageCon V3) for more realistic images."
+---
+
+Version 3 Advanced Image Generation AI focused on more creative capabilities and complex realistic images. It is the larger image model with squares of max 1024px and rectangles of max 1344px on the longest side. It is slower and suitable for more complex use cases where more details are required. Read more at https://docs.worqhat.com/ai-models/image-generation/imagecon-v3
+
+### Parameters
+
+| Parameter   | Type     | Description                                                                                                                              | Default     |
+| ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| orientation | String   | The orientation of the image. Options: `Landscape`, `Portrait`, `Square`.                                                                | `Square`    |
+| image_style | String   | The style of the image.                                                                                                                  | `default`   |
+| output_type | String   | The output type of the image. Options: `url`, `blob`. `url` returns the Cloud Hosted Link to the Image, `blob` returns the Base64 Image. | `url`       |
+| prompt      | Array    | The prompts for the image generation. This is a required parameter.                                                                      | -           |
+| api_key     | `string` | Contains the WorqHat API Key. Not required if .env is made.                                                                              | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import generate_image_v3
+from dotenv import load_dotenv
+load_dotenv()
+r=generate_image_v3(prompt=["Red cat"],api_key="Your-api-key")
+print(r)
+```
+
+<Check>
+  The model is particularly well-tuned for vibrant and accurate colors, with
+  better contrast, lighting, and shadows than its predecessor, all in native
+  1024x1024 resolution, so you don't have to go through the Upscaling Process
+  every time after creating an image.
+</Check>
+
+<Frame caption="Generate Images from Text using Image Gen Model V3">
+  <img src="/images/1690642747120.png" />
+</Frame>
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692730250299.png" />
+</Frame>
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692730537659.png" />
+</Frame>

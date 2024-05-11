@@ -1,0 +1,57 @@
+---
+title: "Web Extraction AI"
+description: "Extract data, content, tables and images from any website with ease"
+---
+
+Function for extracting text from web pages. It sends a request to the Web Extraction AI Model and returns the extracted text. Key components such as headlines, paragraphs, images, and tables are identified, and the algorithm extracts them in a structured format like JSON. Additionally, the extracted data is cleaned and normalized to enhance its usability for analysis and processing purposes. Read more at: https://docs.worqhat.com/ai-models/text-extraction/web-extraction
+
+### Parameters
+
+| Parameter   | Type     | Description                                                   |
+| ----------- | -------- | ------------------------------------------------------------- |
+| url_search  | `string` | The URL of the web page from which content will be extracted. |
+| headline    | `bool`   | Whether to extract headlines from the web page.               |
+| inline_code | `bool`   | Whether to extract inline code snippets from the web page.    |
+| code_blocks | `bool`   | Whether to extract code blocks from the web page.             |
+| references  | `bool`   | Whether to extract references from the web page.              |
+| tables      | `bool`   | Whether to extract tables from the web page.                  |
+| api_key     | `string` | Contains the WorqHat API Key. Not required if .env is made.   |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the URL of the web page to extract content from
+url_search = "url-of-the-web-page"
+
+# Set the extraction options
+headline = True
+inline_code = True
+code_blocks = True
+references = True
+tables = True
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Extract content from web page
+result = web_extract(url_search=url_search, headline=headline, inline_code=inline_code, code_blocks=code_blocks, references=references, tables=tables, api_key=api_key)
+
+# Print the extracted content
+print(result)
+
+```

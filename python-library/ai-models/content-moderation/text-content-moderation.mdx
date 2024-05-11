@@ -1,0 +1,37 @@
+---
+title: "Text and Content Moderation AI"
+description: "Content Moderation AI is a powerful tool that can be used to detect and filter out inappropriate content from your website or app."
+---
+
+Introducing the new Moderation AI endpoint by WorqHat, powered by the advanced AiCon V2 model. This powerful tool is designed to support developers in safeguarding their applications by offering fast and accurate content moderation.
+
+With Moderation AI, developers can ensure that their platforms remain free from inappropriate content, such as sexual, violent, hateful, and self-harm promoting material that violates WorqHat's content policy. Leveraging LLM-based classifiers, the system efficiently identifies and filters out such content, providing a secure environment for users.
+
+Content Moderation AI Models. A powerful AI Model that can be used to detect and filter out inappropriate content from your website or app. Read more at https://docs.worqhat.com/ai-models/content-moderation/text-content-moderation
+
+### Configuration
+
+| Parameter    | Type     | Description                                                 | Default     |
+| ------------ | -------- | ----------------------------------------------------------- | ----------- |
+| text_content | `string` | The text content to be moderated.                           | -           |
+| api_key      | `string` | Contains the WorqHat API Key. Not required if .env is made. | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import content_moderation
+from dotenv import load_dotenv
+load_dotenv()
+
+r=content_moderation(text_content="Your-text-here",api_key="Your-api-key")
+print(r)
+
+```

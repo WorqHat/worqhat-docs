@@ -1,0 +1,46 @@
+---
+title: "View Datasets"
+description: "View all your Trained Datasets that you have created for both Search and AI Models."
+---
+
+The `list` function is a method for retrieving all trained datasets. This function communicates with the Datasets API to fetch a list of all datasets that have been trained for both AI and Search Interfaces. Please note that you will only be able to view datasets that you have created or have access to.
+
+### Parameters
+
+| Parameter | Type     | Description                                                 |
+| --------- | -------- | ----------------------------------------------------------- |
+| api_key   | `string` | Contains the WorqHat API Key. Not required if .env is made. |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+````
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# List datasets
+result = list_datasets(api_key=api_key)
+
+# Print the result (list of datasets)
+print(result)
+```
+
+
+
+````

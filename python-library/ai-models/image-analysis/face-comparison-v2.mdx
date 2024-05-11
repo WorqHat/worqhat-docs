@@ -1,0 +1,37 @@
+---
+title: "Comparing Faces with AI"
+description: "Detect faces in images and compare them with other faces in a Database or another image."
+---
+
+The Face Comparison AI Model by WorqHat, powered by ImageCon V2, is designed to determine if a face in one image matches a face in another image. This system compares faces regardless of variations in expression, facial hair, and age. It provides confidence level estimates for predictions using probabilities or confidence scores. Users should consider the confidence threshold appropriate for their specific use case to balance the trade-off between missed detections and false alarms. The Face Comparison AI Model by WorqHat, powered by ImageCon V2, offers the tools and capabilities to compare faces and determine potential matches.
+
+Read more at https://docs.worqhat.com/ai-models/image-analysis/face-analysis
+
+### Parameters
+
+| Parameter    | Type               | Description                                                                                         |
+| ------------ | ------------------ | --------------------------------------------------------------------------------------------------- | ----------- |
+| source_image | `File` or `string` | The source image to be compared. It can be a `File object` or a `URL` This is a required parameter. |
+| target_image | `File` or `string` | The target image to be compared. It can be a `File object` or a `URL` This is a required parameter. |
+| api_key      | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                         | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import compare_faces
+from dotenv import load_dotenv
+load_dotenv()
+source_image=["path-to-your-image/url-to-image"]
+target_image=["path-to-your-image/url-to-image"]
+r=compare_faces(source_image=source_image,target_image=target_image,api_key="Your-api-key")
+print(r)
+
+```

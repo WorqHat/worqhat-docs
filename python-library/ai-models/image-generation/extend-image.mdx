@@ -1,0 +1,64 @@
+---
+title: "Extend Image"
+description: "Extend image dimensions using the WorqHat API"
+---
+
+Function for extending image dimensions using the WorqHat API. It sends a request to the Extend Image AI Model and returns the modified image. Read more about the model at https://docs.worqhat.com/ai-models/image-generation/image-image-v3
+
+### Parameters
+
+| Parameter     | Type               | Description                                                                                   |
+| ------------- | ------------------ | --------------------------------------------------------------------------------------------- |
+| image         | `File` or `string` | The image to be extended. It can be a `File object`, a `URL`, or `base64` encoded image data. |
+| output_type   | `string`           | The output type of the modified image. It can be either `"URL"` or `"blob"`.                  |
+| left_extend   | `string`           | The amount of extension in pixels to the left side of the image.                              |
+| right_extend  | `string`           | The amount of extension in pixels to the right side of the image.                             |
+| top_extend    | `string`           | The amount of extension in pixels to the top side of the image.                               |
+| bottom_extend | `string`           | The amount of extension in pixels to the bottom side of the image.                            |
+| description   | `string`           | Optional description for the modification.                                                    |
+| api_key       | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                   |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the path to your image file
+image_path = "path-to-your-image"
+
+# Set the desired output type ("URL" or "blob")
+output_type = "URL"
+
+# Set the amount of extension in pixels
+left_extension = "100"
+right_extension = "100"
+top_extension = "50"
+bottom_extension = "50"
+
+# Optional description for the modification
+description = "Optional description for the modification"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Extend image
+result = extend_image(image=image_path, output_type=output_type, left_extend=left_extension, right_extend=right_extension, top_extend=top_extension, bottom_extend=bottom_extension, description=description, api_key=api_key)
+
+# Print the result (URL or binary data)
+print(result)
+```
+
+Remember to replace `"path-to-your-image"` with the path to your image file and adjust the extension parameters and description as needed.

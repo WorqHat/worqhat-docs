@@ -1,0 +1,41 @@
+---
+title: "Detecting and Analysing Faces with AI"
+description: "Detecting and Analysing Faces with AI using ImageCon V2"
+---
+
+ImageCon V2 by WorqHat AI offers robust face analysis capabilities for images and videos. With ImageCon V2, you can detect faces within an image, and obtain valuable information about those faces. This includes the location of detected faces, facial landmarks such as the position of eyes, and attributes such as emotions (e.g., happiness or sadness) and the presence of glasses or face occlusion.
+
+By submitting an image containing a face to ImageCon V2, the system will detect and analyze the facial attributes present. It provides a confidence score indicating the likelihood of a face being detected, along with detailed information about the facial attributes identified in the image.
+
+Additionally, ImageCon V2 enables face-to-face comparison by allowing you to compare a face in one image with faces detected in another image. This feature can be useful for applications such as identity verification or searching for similar faces in a database.
+
+ImageCon V2 by WorqHat AI empowers users to perform comprehensive face analysis, extracting key facial attributes and facilitating face-to-face comparisons. These capabilities have broad applications across industries, including security, identity verification, image search, and more.
+
+Read more at https://docs.worqhat.com/ai-models/image-analysis/face-analysis
+
+### Parameters
+
+| Parameter | Type               | Description                                                                |
+| --------- | ------------------ | -------------------------------------------------------------------------- | ----------- |
+| image     | `File` or `string` | The existing image to be analysed. This can be a local file path or a URL. |
+| api_key   | `string`           | Contains the WorqHat API Key. Not required if .env is made.                | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import detect_faces
+from dotenv import load_dotenv
+load_dotenv()
+image=["path-to-your-image/url-to-image"]
+r=detect_faces(image=image,api_key="Your-api-key")
+print(r)
+
+```
