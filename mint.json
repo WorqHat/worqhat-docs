@@ -100,7 +100,9 @@
           "group": "Text Generation AI",
           "pages": [
             "ai-models/text-generation-ai/aicon-v2-textgen",
+            "ai-models/text-generation-ai/aicon-v2-textgen-finetuned",
             "ai-models/text-generation-ai/aicon-v3-textgen",
+            "ai-models/text-generation-ai/aicon-v3-textgen-finetuned",
             "ai-models/text-generation-ai/aicon-v2-large-beta",
             "ai-models/text-generation-ai/aicon-v3-alpha"
           ]
@@ -212,7 +214,9 @@
               "group": "Text Generation AI",
               "pages": [
                 "api-reference/ai-models/text-generation-ai/aicon-v2-textgen",
+                "api-reference/ai-models/text-generation-ai/aicon-v2-textgen-fintetuned",
                 "api-reference/ai-models/text-generation-ai/aicon-v3-textgen",
+                "api-reference/ai-models/text-generation-ai/aicon-v3-textgen-fintetuned",
                 "api-reference/ai-models/text-generation-ai/aicon-v2-large-beta",
                 "api-reference/ai-models/text-generation-ai/aicon-v3-alpha"
               ]
