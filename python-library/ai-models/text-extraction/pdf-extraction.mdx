@@ -1,0 +1,48 @@
+---
+title: "PDF Extraction AI"
+description: "Extract data, content and tables from any PDF with ease"
+---
+
+PDF Extract AI is a powerful tool that utilizes machine learning algorithms to extract content from PDF documents. PDFs, or Portable Document Format files, are widely used for storing and sharing various types of documents, including reports, contracts, articles, and forms. However, extracting information from PDFs can be a challenging task due to the complex structure and formatting of these files.
+
+PDF Extract AI addresses this challenge by employing machine learning techniques to understand the structure of a PDF and extract the desired content accurately.
+
+Read more at: https://docs.worqhat.com/ai-models/text-extraction/pdf-extraction
+
+### Parameters
+
+| Parameter | Type     | Description                                                                                                                                      | Default |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| file      | `object` | An object representing the PDF file to extract text from. It can be a `File object` or a `URL` or `base64` encoded image data. This is required. | N/A     |
+| api_key   | `string` | Contains the WorqHat API Key. Not required if .env is made.                                                                                      |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the path to your PDF file
+pdf_file_path = "path-to-your-pdf-file"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Extract text from PDF
+result = extract_pdf_text(pdf_file=pdf_file_path, api_key=api_key)
+
+# Print the extracted text
+print(result)
+```

@@ -1,0 +1,36 @@
+---
+title: "Remove Text from Image"
+description: "Remove text from images using the WorqHat API"
+---
+
+Function for removing text from images using the WorqHat API. It sends a request to the Remove Text from Image AI Model and returns the modified image. Read more about the model at https://docs.worqhat.com/ai-models/image-generation/image-image-v3
+
+### Parameters
+
+| Parameter   | Type               | Description                                                                                                            |
+| ----------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| image       | `File` or `string` | The image from which the text needs to be removed. It can be a `File object`, a `URL`, or `base64` encoded image data. |
+| output_type | `string`           | The output type of the modified image. It can be either `"URL"` or `"blob"`.                                           |
+| api_key     | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                                            |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+load_dotenv()
+image_path = "path-to-your-image"
+output_type = "URL"
+api_key = os.getenv("API_KEY")
+result = remove_text_from_image(image=image_path, output_type=output_type, api_key=api_key)
+print(result)
+```

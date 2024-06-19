@@ -1,0 +1,39 @@
+---
+title: "Image Moderation AI (Powered by ImageCon V2)"
+description: "Moderate images for adult content, violence, spoof, medical content, etc."
+---
+
+The Image Moderation API developed by WorqHat, powered by the advanced ImageCon V2 model, offers a robust solution for detecting and filtering inappropriate, unwanted, or offensive content in images. This API is highly versatile and can be effectively utilized in various applications, including social media platforms, broadcast media, advertising, and e-commerce. Its primary goal is to ensure a safer user experience, provide brand safety assurances to advertisers, and ensure compliance with local and global regulations.
+
+Image Moderation AI Models. A powerful AI Model that can be used to detect and filter out inappropriate content from your website or app. Read more at https://docs.worqhat.com/ai-models/content-moderation/image-moderation
+
+### Parameters
+
+| Parameter | Type               | Description                                                    |
+| --------- | ------------------ | -------------------------------------------------------------- | ----------- |
+| image     | `File` or `string` | The image to be moderated. Can be a local file path, or a URL. | `undefined` |
+| api_key   | `string`           | Contains the WorqHat API Key. Not required if .env is made.    | `undefined` |
+
+You can pass in the image data in two ways:
+
+- **Local File Path**: Pass in the path to the image file on your local machine. The file must be in JPEG or PNG format.
+- **URL**: Pass in the URL of the image file. The file must be in JPEG or PNG format.
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import image_moderation
+from dotenv import load_dotenv
+load_dotenv()
+image=["path-to-image/URL-to-image"]
+r=image_moderation(image=image,api_key="Your-api-key")
+print(r)
+```

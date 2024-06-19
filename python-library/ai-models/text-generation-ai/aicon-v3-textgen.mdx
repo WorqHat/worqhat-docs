@@ -1,0 +1,65 @@
+---
+title: "AiCon V3 Advanced"
+description: "Advanced Generation AI focused for more creative and understanding capabilities."
+---
+
+The AiCon V3 Advanced is a generation AI model that is designed to be more creative and have a better understanding of complex content. It is suitable for a wide range of use cases where the content requires creativity and complexity. This model is capable of running complex situational analysis and understanding the context of commands.
+
+Read more at https://docs.worqhat.com/ai-models/text-generation-ai/aicon-v3-textgen
+
+### Parameters
+
+| Parameter            | Type     | Description                                                    |
+| -------------------- | -------- | -------------------------------------------------------------- |
+| question             | `string` | The question or input for which AI response is requested.      |
+| preserve_history     | `bool`   | Whether to preserve conversation history for context.          |
+| randomness           | `float`  | The level of randomness for generating AI response.            |
+| stream_data          | `bool`   | Whether to stream response data.                               |
+| conversation_history | `list`   | List containing conversation history for context preservation. |
+| training_data        | `string` | Training data for AI model.                                    |
+| response_type        | `string` | The type of response expected. It can be `"text"` or `"json"`. |
+| api_key              | `string` | Contains the WorqHat API Key. Not required if .env is made.    |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+
+```
+
+You can also provide the api_key as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+import json
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the parameters for the AI request
+question = "Your question or input here"
+preserve_history = False
+randomness = 0.5
+stream_data = False
+conversation_history = []  # If preserving conversation history
+training_data = ""  # Provide training data if required
+response_type = "text"  # Set the desired response type
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Get AI response
+get_ai_response_v3(question=question,
+                    preserve_history=preserve_history,
+                    randomness=randomness,
+                    stream_data=stream_data,
+                    conversation_history=conversation_history,
+                    training_data=training_data,
+                    response_type=response_type,
+                    api_key=api_key)
+
+```

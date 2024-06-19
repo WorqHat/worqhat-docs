@@ -1,0 +1,51 @@
+---
+title: "Delete Dataset"
+description: "Delete dataset using the WorqHat API"
+---
+
+Function for deleting a dataset using the WorqHat API. It sends a request to the Delete Dataset endpoint and deletes the specified dataset. Read more about the API at the WorqHat documentation.
+
+### Parameters
+
+| Parameter  | Type     | Description                                                 |
+| ---------- | -------- | ----------------------------------------------------------- |
+| dataset_id | `string` | The ID of the dataset to be deleted.                        |
+| api_key    | `string` | Contains the WorqHat API Key. Not required if .env is made. |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+````
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the dataset ID to be deleted
+dataset_id = "your-dataset-id"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Delete dataset
+result = delete_dataset(dataset_id=dataset_id, api_key=api_key)
+
+# Print the result (success message or error)
+print(result)
+```
+
+Remember to replace `"Your API Key"` with your actual API key and `"your-dataset-id"` with the ID of the dataset you want to delete.
+
+```
+````

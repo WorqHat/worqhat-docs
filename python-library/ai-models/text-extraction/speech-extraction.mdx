@@ -1,0 +1,46 @@
+---
+title: "Speech Extraction AI"
+description: "Extract Speech from Audio in Multiple Spoken Languages"
+---
+
+Function for extracting text from speech. It sends a request to the Speech Extraction AI Model and returns the extracted text. Read more about the Models and their use cases at: https://docs.worqhat.com/ai-models/speech-extraction
+
+### Parameters
+
+| Parameter | Type     | Description                                                 | Default |
+| --------- | -------- | ----------------------------------------------------------- | ------- |
+| audio     | `file`   | Audio file to extract text from.                            | -       |
+| api_key   | `string` | Contains the WorqHat API Key. Not required if .env is made. |
+
+The audio file should be in one of the following formats: `wav`, `mp3`, `m4a`, `flac`, `ogg`, `opus`, `amr`, `webm`.
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the path to your audio file
+audio_file_path = "path-to-your-audio-file"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Convert speech to text
+result = convert_speech_to_text(audio_file=audio_file_path, api_key=api_key)
+
+# Print the converted text
+print(result)
+```

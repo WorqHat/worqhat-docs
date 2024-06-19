@@ -1,0 +1,87 @@
+---
+title: "Initialize the Integration"
+description: "Initialize the Integration with the API key."
+---
+
+[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v1/monitor/trle.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
+[![NPM version](https://img.shields.io/npm/v/worqhat.svg)](https://npmjs.org/package/worqhat)
+![GitHub CI](https://github.com/worqhat/worqhat-node/actions/workflows/release.yml/badge.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/worqhat/worqhat-node/badge.svg)](https://snyk.io/test/github/worqhat/worqhat-node)
+
+<CardGroup cols={2}>
+  <Card
+    title="NPM Package for WorqHat-Node"
+    color="#dc2626"
+    icon="npm"
+    href="https://www.npmjs.com/package/worqhat"
+  ></Card>
+  <Card
+    title="GitHub Package for WorqHat-Node"
+    color="#ea5a0c"
+    icon="github"
+    href="https://github.com/WorqHat/worqhat-node"
+  ></Card>
+</CardGroup>
+
+The WorqHat Python library is a comprehensive library that allows developers to interact with the
+WorqHat API. It provides a simple and intuitive interface to access various AI services along with other Database, Chat, Email, Workflow and Document Management services.
+
+This library provides convenient access to the WorqHat AI Models from Python.
+
+To learn how to use the WorqHat APIs, check out our [API Reference](https://docs.worqhat.com/api-reference/ai-models/authentication) and [Documentation](https://docs.worqhat.com/introduction).
+
+### Installation
+
+You can install the WorqHat Python via pip:
+
+<CodeGroup>
+
+```bash npm
+pip install worqhat
+```
+
+</CodeGroup>
+
+### Usage
+
+First, you need to create a .env file for the api key which will look like:
+
+<CodeGroup>
+
+```
+API_KEY="Your api key "
+```
+
+To use a .env file you need to install python-dotenv
+
+```bash
+pip install python-dotenv
+```
+
+</CodeGroup>
+
+Then you need to import the OS,dotenv and worqhat library in your code
+
+<CodeGroup>
+```python
+from dotenv import load_dotenv
+import worqhat as wq
+
+load_dotenv()
+
+````
+</CodeGroup>
+
+### Alternative Initialization
+
+You can also pass the API_KEY as a parameter to the function you want to call using the worqhat library:
+
+```python
+from worqhat.ai_models import content_moderation
+r=content_moderation("Hello",api_key="your API_Key")
+````
+
+<Tip>
+  **Our Suggestion:** For the most Security, we suggest using ``ENV`` variables
+  and using it in the Initialization code
+</Tip>

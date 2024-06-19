@@ -1,0 +1,45 @@
+---
+title: 'ImageCon V2'
+description: 'Text to Image Generation API V2 (ImageCon V2) is a powerful tool that allows you to
+generate images from text.'
+---
+
+ImageCon V2 is a powerful AI model that generates images based on provided parameters. It is a smaller image model that can generate squares of up to 512px and rectangles of up to 768px on the longest side. It is faster and suitable for most use cases.
+
+For more details, visit the https://docs.worqhat.com/ai-models/image-generation/imagecon-v2.
+
+### Parameters
+
+| Parameter   | Type     | Description                                                                                                                              | Default     |
+| ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| orientation | `String` | The orientation of the image. Options: `Landscape`, `Portrait`, `Square`.                                                                | `Square`    |
+| image_style | `String` | The style of the image.                                                                                                                  | "default"   |
+| output_type | `String` | The output type of the image. Options: `url`, `blob`. `url` returns the Cloud Hosted Link to the Image, `blob` returns the Base64 Image. | `url`       |
+| prompt      | `Array`  | The prompts for the image generation. This is a required parameter.                                                                      | -           |
+| api_key     | `string` | Contains the WorqHat API Key. Not required if .env is made.                                                                              | `undefined` |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+you can also provide the api_key as a parameter to the function as shown in the implementation
+
+### Implementation
+
+```python
+from worqhat import generate_image_v2
+from dotenv import load_dotenv
+load_dotenv()
+r=generate_image_v2(prompt=["Red cat"],api_key="Your-api-key")
+print(r)
+```
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1690642342420.png" />
+</Frame>
+
+<Frame caption="Generate Images from Text using Image Gen Model V2">
+  <img src="/images/1692024029415.png" />
+</Frame>

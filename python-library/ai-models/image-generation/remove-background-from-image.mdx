@@ -1,0 +1,37 @@
+---
+title: "Remove Background from Image"
+description: "Remove background from images using the WorqHat API"
+---
+
+Function for removing the background from images using the WorqHat API. It sends a request to the Remove Background from Image AI Model and returns the modified image. Read more about the model at https://docs.worqhat.com/ai-models/image-generation/image-image-v3
+
+### Parameters
+
+| Parameter      | Type               | Description                                                                                                                           |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| existing_image | `File` or `string` | The existing image from which the background needs to be removed. It can be a `File object`, a `URL`, or `base64` encoded image data. |
+| output_type    | `string`           | The output type of the modified image. It can be either `"URL"` or `"blob"`.                                                          |
+| api_key        | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                                                           |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+load_dotenv()
+existing_image = "path-to-your-existing-image"
+output_type = "URL"
+result = remove_background_from_image(existing_image=existing_image, output_type=output_type, api_key=api_key)
+print(result)
+```
+
+Remember to replace `"path-to-your-existing-image"` with the path to your existing image file.

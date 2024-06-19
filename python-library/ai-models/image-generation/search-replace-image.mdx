@@ -1,0 +1,58 @@
+---
+title: "Search and Replace Image"
+description: "Search and replace images using the WorqHat API"
+---
+
+Function for searching and replacing images using the WorqHat API. It sends a request to the Search and Replace Image AI Model and returns the modified image. Read more about the model at https://docs.worqhat.com/ai-models/image-generation/image-image-v3
+
+### Parameters
+
+| Parameter     | Type               | Description                                                                                                                |
+| ------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| image         | `File` or `string` | The image in which the search object will be replaced. It can be a `File object`, a `URL`, or `base64` encoded image data. |
+| modification  | `string`           | The description of the modification for replacing the search object. This is a required parameter.                         |
+| output_type   | `string`           | The output type of the modified image. It can be either `"URL"` or `"blob"`.                                               |
+| search_object | `string`           | The description of the object to be searched and replaced in the image. This is a required parameter.                      |
+| api_key       | `string`           | Contains the WorqHat API Key. Not required if .env is made.                                                                |
+
+### Initialize the library
+
+```bash .env
+API_KEY="Your API Key"
+```
+
+You can also provide the `api_key` as a parameter to the function as shown in the implementation.
+
+### Implementation
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+
+# Load API Key from .env file
+load_dotenv()
+
+# Set the path to your image file
+image_path = "path-to-your-image"
+
+# Set the modification description
+modification_description = "Description of the modification for replacing the search object"
+
+# Set the search object description
+search_object_description = "Description of the object to be searched and replaced"
+
+# Set the desired output type ("URL" or "blob")
+output_type = "URL"
+
+# Get API key from environment variables
+api_key = os.getenv("API_KEY")
+
+# Search and replace image
+result = search_replace_image(image=image_path, modification=modification_description, output_type=output_type, search_object=search_object_description, api_key=api_key)
+
+# Print the result (URL or binary data)
+print(result)
+```
+
+Remember to replace `"path-to-your-image"` with the path to your image file, provide proper modification and search object descriptions.
