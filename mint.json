@@ -452,6 +452,9 @@
   "analytics": {
     "amplitude": {
       "apiKey": "57bf92c744f94ba67f70c09d0070accc"
+    },
+    "clearbit": {
+      "publicApiKey": "pk_f71323b94827021bed572bf5506441f5"
     }
   },
   "api": {
