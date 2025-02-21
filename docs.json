@@ -29,7 +29,13 @@
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",
-              "essentials/reusable-snippets"
+              "essentials/reusable-snippets",
+              "ai-models/image-generation/image-gen-v2",
+              "ai-models/image-generation/image-gen-v3",
+              "ai-models/image-generation/image-to-image",
+              "ai-models/image-generation/search-replace-content",
+              "ai-models/image-generation/recolor-image",
+              "ai-models/model-training/model-training"
             ]
           }
         ]
