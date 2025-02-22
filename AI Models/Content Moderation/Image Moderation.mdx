@@ -1,0 +1,53 @@
+---
+title: 'Image Moderation'
+---
+
+## Image Moderation AI (Powered by ImageCon V2)
+*Moderate images for adult content, violence, spoof, medical content, etc.*
+
+The Image Moderation API developed by WorqHat, powered by the advanced ImageCon V2 model, offers a robust solution for detecting and filtering inappropriate, unwanted, or offensive content in images. This API is highly versatile and can be effectively utilized in various applications, including social media platforms, broadcast media, advertising, and e-commerce. Its primary goal is to ensure a safer user experience, provide brand safety assurances to advertisers, and ensure compliance with local and global regulations.
+
+Traditionally, many companies heavily rely on human moderators to manually review third-party or user-generated content, which comes with limitations in terms of scalability, quality, and speed. This approach often leads to a subpar user experience, high costs associated with achieving scale, and potential damage to brand reputation. However, by integrating the Image Moderation API into their systems, companies can harness the power of machine learning to automatically flag a significant portion (typically 1-5%) of content that may require human review. This allows human moderators to focus their attention on a smaller set of content, engaging in more valuable tasks while ensuring comprehensive moderation coverage. As a result, companies can achieve efficient and cost-effective content moderation compared to their existing methods.
+
+To facilitate the setup of human workforces and streamline human review tasks, WorqHat's Image Moderation API seamlessly integrates with WorqHat AI Workspaces. This integration ensures a smooth transition between machine learning-based content flagging and human moderation, providing a comprehensive solution for content moderation needs. By leveraging this combined approach, companies can optimize their content moderation workflows, improve efficiency, and maintain a high standard of content quality, all while preserving brand integrity and user satisfaction.
+
+## How does it work?
+The Image Moderation AI developed by WorqHat utilizes a sophisticated deep learning algorithm based on the ImageCon V2 model to perform content analysis and classification of images. The AI model has been trained on a vast dataset consisting of images that cover a wide range of inappropriate or offensive content.
+
+1. Preprocessing: When an image is submitted to the Image Moderation API, it undergoes preprocessing to enhance its features and normalize its characteristics, ensuring consistent and reliable results during analysis.
+2. Deep Learning Algorithm: The image is then fed into a deep learning algorithm comprising multiple interconnected layers of artificial neurons. These neurons analyze the image at different levels of abstraction, extracting high-level visual features and patterns.
+3. Convolutional Neural Networks (CNNs): The deep learning model utilizes CNNs to capture spatial relationships and identify significant visual elements within the image. Convolutional filters are employed to detect edges, textures, and shapes, enabling effective understanding of the visual content.
+4. Recurrent Neural Networks (RNNs) and Attention Mechanisms: The model incorporates RNNs or attention mechanisms to capture contextual information and dependencies between different parts of the image. This enhances understanding of the content and context in which potentially inappropriate or offensive elements may occur.
+5. Model Training: The parameters of the neural network are adjusted during training to optimize its performance. Ground truth labels from the training dataset are used to compare the model's predictions, and the network's weights are updated through backpropagation.
+6. Inference: During inference, when a new image is processed, the trained model produces a probability distribution across predefined categories such as nudity, violence, hate symbols, or explicit language. A threshold can be set to determine if the image contains content that violates moderation guidelines or policies.
+7. Hierarchical Taxonomy: The Image Moderation API utilizes a hierarchical taxonomy system with top-level and second-level categories. The top-level categories provide broad classification labels, while the second-level categories offer more specific classification of inappropriate or offensive content.
+
+By leveraging deep learning techniques and extensive training on diverse datasets, the Image Moderation AI can accurately analyze and classify images, enabling platforms and applications to effectively identify and take appropriate actions on inappropriate or offensive content. This ensures a safer and more user-friendly environment while maintaining compliance with moderation guidelines and policies.
+
+|  Top-Level Category     | Second-Level Categories                                                                                                                           |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Explicit Nudity         | `Nudity` , `Graphic Male Nudity` , `Graphic Female Nudity` , `Sexual Activity` , `Illustrated Explicit Nudity` , `Adult Toys`                     |
+| Suggestive              | `Female Swimwear Or Underwear` , `Male Swimwear Or Underwear` , `Partial Nudity` , `Barechested Male` , `Revealing Clothes` , `Sexual Situations` |
+| Violence                | `Graphic Violence Or Gore` , `Physical Violence` , `Weapon Violence` , `Weapons` , `Self Injury`                                                  |
+| Visually Disturbing     | `Emaciated Bodies` , `Corpses` , `Hanging` , `Air Crash` , `Explosions And Blasts`                                                                |
+| Rude Gestures           | `Middle Finger`                                                                                                                                   |
+| Drugs                   | `Drug Products` , `Drug Use` , `Pills` , `Drug Paraphernalia`                                                                                     |
+| Tobacco                 | `Tobacco Products` , `Smoking`                                                                                                                    |
+| Alcohol                 | `Alcohol Products` , `Drinking` , `Alcoholic Beverages`                                                                                           |
+| Hate Symbols            | `Nazi Party` , `White Supremacy` , `Extremist`                                                                                                    |
+| Gambling                | `Gambling`                                                                                                                                        |
+
+> **Tip:** The Image Moderation API can be used to detect and flag inappropriate or offensive content in images, videos, and text.However, it isn't an authority on, and doesn't in any way claim to be an exhaustive filter of, inappropriate or offensive content. Additionally, the image moderation AI's don't detect whether an image includes illegal content, such as child pornography. If you believe that an image contains illegal content, please report it to the appropriate authorities.
+
+## Use Cases
+
+* Social Media Platforms: Image Moderation AI can be used by social media platforms to automatically detect and remove inappropriate or offensive content such as nudity, hate speech, violence, or graphic images, ensuring a safer and more positive user experience.
+* E-commerce Websites: Image Moderation AI can assist e-commerce platforms in screening and filtering product images to ensure that they comply with guidelines and do not contain inappropriate or misleading content, helping maintain a trustworthy and reputable marketplace.
+* Online Advertising Networks: Ad networks can leverage Image Moderation AI to automatically review and approve or reject image-based advertisements based on predefined guidelines. This ensures that ads displayed on websites and apps are appropriate and align with brand safety requirements.
+* Gaming and Virtual Environments: Image Moderation AI can help in online gaming and virtual environments by detecting and blocking inappropriate or offensive user-generated images, fostering a safe and inclusive environment for players.
+* Content Publishing Platforms: Image Moderation AI can be utilized by content publishing platforms to automatically screen and moderate user-submitted images before they are published. This helps prevent the dissemination of inappropriate or harmful content across various media outlets.
+* Chat Applications and Messaging Platforms: Image Moderation AI can assist chat applications and messaging platforms in identifying and blocking the sharing of inappropriate or explicit images, ensuring a respectful and secure communication environment.
+* Educational Platforms: Image Moderation AI can be applied to educational platforms to automatically filter and block images containing explicit or harmful content, creating a safe and suitable learning environment for students of all ages.
+* Brand Protection: Image Moderation AI can help protect brands by identifying and preventing the unauthorized or misleading use of their logos, trademarks, or copyrighted images, ensuring brand integrity and avoiding reputational damage.
+* User-Generated Content Platforms: Image Moderation AI can be implemented in user-generated content platforms such as forums or community-driven websites to automatically filter and remove inappropriate or offensive images shared by users, fostering a positive and respectful online community.
+* Dating and Social Networking Apps: Image Moderation AI can be integrated into dating and social networking platforms to automatically detect and filter out inappropriate or offensive images, ensuring a respectful and safe environment for users. This helps maintain the integrity of the platform and enhances user trust in the authenticity and quality of profiles.
