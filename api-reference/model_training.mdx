@@ -1,0 +1,29 @@
+#*Model training*
+
+---
+title: Model training
+description: API documentation for Model Training.
+---
+
+`POST https://api.worqhat.com/api/ai/train-data`
+>
+###Train your own model for Search and AI Models
+
+##Request
+
+### **Authorization:Bearer Token**
+
+Provide your bearer token in the `Authorization` header when making requests to protected resources.
+Example:` Authorization Bearer 2f68dbbf-519d-4f01-9636-e2421b68f37`
+
+### Body Parameters
+
+```table
+| Parameter    | Type          | Description                                                                
+|-------------|--------------|------------------------------------------------------------------------------------------|
+| `files`     | file         | The file to be uploaded (e.g., PDF, document)                                            | 
+| `type`      | enum<string> | Defines the type of operation. Allowed values: `search`, `content`. Example: `search`    | 
+| `modelType` | enum<string> | Specifies the model version. Allowed values: `v2`, `v3`. Example: `v3`                   | 
+| `name`      | string       | A name for the model to identify it later. Example: `Some name`                          | 
+| `modelId`   | string       | A custom model ID for retraining an existing model. Example: `sample id`                 | 
+
