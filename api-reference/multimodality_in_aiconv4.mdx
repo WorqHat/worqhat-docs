@@ -1,0 +1,104 @@
+---
+title: "Multimodality in AiConv4 Documentation"
+description: "Multimodality in AiConv4"
+---
+
+# *Multimodality in AiCon V4*
+
+### AiCon V4 models are designed to understand and interact with the world in a more human-like way. They are multimodal, meaning they can process information from multiple sources, including images, videos, and text. This allows them to grasp the context of a situation more fully, leading to more accurate and insightful responses.
+
+### *Here's what makes AiCon V4 truly exceptional:*
+
+
+### -Vast Contextual Understanding: With a token window of 750K tokens and a 90% recall rate, AiCon V4 can remember and process a massive amount of information. But that's not all. Our advanced retrieval mechanism effectively expands the context window to near-infinite capacity, ensuring that your conversations are always grounded in a comprehensive understanding of the topic at hand.
+
+### -Conversation First Design: We believe in making AI interactions seamless. That's why AiCon V4 automatically keeps track of your past conversations, eliminating the need for you to constantly re-explain yourself. This allows you to focus on the conversation, not the technicalities.
+
+import Image from 'next/image'
+## Example 1:  
+### How to improve this design to market it
+
+<div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+  <Image 
+    src="worqhat-docs\api-reference\endpoint\image.png" 
+    alt="Design Example" 
+    width={400} 
+    height={250} 
+    style={{ borderRadius: "8px", flexShrink: 0 }} 
+  />
+  
+  <div>
+    <p>To improve the design for marketing purposes, consider these aspects:</p>
+
+
+
+### Visual Appeal:  
+- **Color Palette:** Choose colors that evoke trust, professionalism, and care, such as calming blues, greens, and whites.  
+- **Lighting:** Ensure the image is well-lit to highlight details and create a welcoming atmosphere.  
+- **Composition:** Use a balanced layout to draw the viewer’s eye to key elements like the beds, staff, and technology.  
+- **Details:** Add realistic details like medical equipment, plants, and artwork to create a more immersive experience.  
+- **Perspective:** Play with perspective to make the image more dynamic and interesting.  
+
+### Marketing Considerations:  
+- **Target Audience:** Who are you marketing to? Tailor the design to appeal to your target audience, whether it’s patients, doctors, or investors.  
+- **Messaging:** What message do you want to convey? Use the design to highlight your key selling points, such as quality care, advanced technology, or compassionate staff.  
+- **Call to Action:** Include a clear call to action to encourage viewers to learn more, book an appointment, or visit your website.  
+- **Brand Consistency:** Ensure the design aligns with your brand’s visual identity.  
+
+Remember, a good design should be both visually appealing and informative, conveying your brand’s message effectively to your target audience.  
+
+
+## Allowed Inputs
+
+|                  | AiCon V4 Nano | AiCon V4 Large | AiCon V4 Alpha | AiCon V4 Finetuned |
+|-----------------|--------------|---------------|---------------|------------------|
+| **Text**       | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+| **Code**       | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+| **Image**      | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+| **PDF**        | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+| **Video**      | <Icon icon="xmark" iconType="solid" /> | <Icon icon="xmark" iconType="solid" /> | <Icon icon="xmark" iconType="solid" /> | <Icon icon="xmark" iconType="solid" /> |
+| **Audio**      | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="xmark" iconType="solid" /> | <Icon icon="xmark" iconType="solid" /> |
+
+## Outputs
+
+|                  | AiCon V4 Nano | AiCon V4 Large | AiCon V4 Alpha | AiCon V4 Finetuned |
+|-----------------|--------------|---------------|---------------|------------------|
+| **Text**       | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+| **Code**       | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> | <Icon icon="check" iconType="solid" /> |
+
+
+
+
+## Supported File Types
+
+### Image
+- **PNG** - `image/png`
+- **JPEG** - `image/jpeg`
+- **WebP** - `image/webp`
+
+### Videos
+- **MOV** - `video/quicktime`
+- **MPEG** - `video/mpeg`
+- **MP4** - `video/mp4`
+- **WEBM** - `video/webm`
+
+### Audio
+- **MP3** - `audio/mp3`
+- **MPA** - `audio/m4a`
+- **MPEG** - `audio/mpeg`
+- **MP4** - `audio/mp4`
+- **WAV** - `audio/wav`
+- **WEBM** - `audio/webm`
+
+### Files
+- **Text**
+- **PDF**
+- **CSV**
+
+## Supported Capabilities of Models
+
+- **Text generation** from text-only prompts
+- **Text generation and QnAs** based on PDF, Image, Video, and Audio Inputs
+- **Structured Output Formatting**
+- **Conversation Maintenance** using Specific Conversation IDs
+- **Training Data / System Instructions**
