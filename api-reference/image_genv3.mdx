@@ -1,0 +1,74 @@
+---
+title: Image Generation V3
+description: API documentation for the Image Generation V3 endpoint.
+---
+
+# Image Generation V3
+
+`POST /api/ai/images/generate/v3`
+
+# ImageCon V3
+
+###*Text to Image Generation API V3 (ImageCon V3) for more realistic images.*
+
+>##ImageCon V3 is our most advanced and cutting-edge image generation model yet, with over 150 times better image quality compared to our previous models. It is still in beta, but we are continuously working on improving it further to enhance its capabilities. This model offers the ability to create stunning and realistic visuals with enhanced image composition and face generation. The photorealism capabilities of this model are truly next-level, with a significant advancement in generating legible text within images, making it easier to produce descriptive imagery with shorter prompts. ImageCon V3 offers rich visuals and jaw-dropping aesthetics that will make your images stand out. Overall, this model is a game-changer in the field of image generation, and we are excited to see what users will create with it. 
+>
+>##ImageCon V3 generates images of high quality in virtually any art style and is the best open model for photorealism. Distinct images can be prompted without having any particular ‘feel’ imparted by the model, ensuring absolute freedom of style. The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution.
+>
+>##In addition, ImageCon V3 can generate concepts that are notoriously difficult for image models to render, such as hands and text or spatially arranged compositions (e.g., show a rabbit as a Universe Wave).
+>
+>##*The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution, so you don't have to go through the Upscaling Process every time after creating an image.*
+
+>
+##*How does it work?*
+>
+>##The ImageCon AI from WorqHat utilizes a sophisticated process involving text encoding, image encoding, and image decoding to generate images based on textual prompts. Here's a breakdown of how it works:
+>
+### 1. *Text Encoding * 
+The input text prompt is fed into a text encoder, which maps the textual information into a latent representation space. This encoding captures the semantic meaning and characteristics of the text prompt.  
+
+### 2.* Prior to Model*
+The text encoding is then passed through a model known as the prior. The prior model maps the text encoding to an image encoding that captures the essential information and context of the prompt in a semantic image representation.  
+
+### 3. *Image Decoding* 
+The image encoding is further processed by an image decoder. The image decoder generates a stochastic image based on the information contained in the image encoding. This process involves generating pixel values and assembling them to form a coherent and visually meaningful image.  
+>
+>###It's important to note that the AI Image Generator involves complex neural network architectures and training processes that enable it to learn the relationships between textual prompts and corresponding image representations. The models are trained on large datasets containing pairs of text prompts and corresponding images to learn the mapping between the two modalities.
+>
+>###The AI Image Generator has a wide range of potential applications. For instance, in e-commerce, it can be used to automatically generate product images based on textual descriptions, providing a visual representation for products that may not have actual images available. It can also be employed in data visualization, where textual data can be transformed into visual representations for better understanding and analysis.
+>
+>###While this high-level overview provides a general understanding of how the AI Image Generator works, the implementation details and specific model architectures may vary. The AI Image Generator showcases the power of combining text and image processing techniques to generate meaningful and visually appealing images based on textual input.
+>
+>
+>##* Use Cases*
+>
+>
+- Fashion and Apparel: The AI Image Generator can be utilized in the fashion industry to generate virtual clothing items and outfit combinations, allowing customers to visualize how different pieces would look together before making a purchase.
+- Artistic Creations: The AI Image Generator can be used by artists and creatives to generate unique and imaginative artworks based on textual prompts, providing inspiration and expanding creative possibilities.
+- Prototype and Concept Visualization: The AI Image Generator can assist in visualizing prototypes and concepts for various industries, including industrial design, automotive, and product development. It allows stakeholders to have a visual representation of ideas and concepts before investing resources in physical prototypes.
+- Augmented Reality (AR) Applications: The AI Image Generator can generate images for AR applications, overlaying virtual objects or enhancements onto real-world environments based on textual descriptions or prompts.
+- Virtual Environments and Simulations: The AI Image Generator can be used to generate realistic images for virtual environments and simulations, providing immersive and visually appealing experiences for training, gaming, and architectural walkthroughs.
+- Storytelling and Illustration: The AI Image Generator can aid in storytelling and illustration by generating images that complement written narratives, enhancing the visual aspect of books, comics, and other storytelling media.
+- Interior Design Customization: The AI Image Generator can create customized interior design options by generating images that showcase different furniture arrangements, color schemes, and decor choices based on textual preferences provided by customers.
+>
+###These use cases demonstrate the versatility and potential of the AI Image Generator in various industries and creative endeavors, where it can streamline workflows, spark innovation, and provide visual solutions based on textual prompts.
+>
+>
+##Request
+
+### **Authorization:Bearer Token**
+
+Provide your bearer token in the `Authorization` header when making requests to protected resources.
+Example:` Authorization Bearer 2f68dbbf-519d-4f01-9636-e2421b68f37`
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+|## Body Params `application/json`  |  **Example:**                              |  
+| _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
+|- `image_style` (string, required) |   ```json                                  |
+|- `orientation` (string, optional) |{                                           |
+|  - `Square`                       |"prompt": ["A cat floating on the clouds"], |
+|   - `Portrait`                    | "image_style": "Anime",                    |
+|- `output_type` (string, optional) |"orientation": "Square",                    |
+|  - `url`                          | "output_type": "url"                       |
+|  - `Base64`                       |}                                           |
+|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
