@@ -1,0 +1,76 @@
+---
+title: Image to Image Generation
+description: API documentation for the Image to image generation.
+---
+
+# Image To Image Generation 
+
+`POST https://api.worqhat.com/api/ai/images/modify/v3`
+
+
+# Image to Image Generation V3
+
+## Modify Images using Image to Image Generation V3
+
+ImageCon V3 is our most advanced and cutting-edge image generation model yet, with over 150 times better image quality compared to our previous models. It is still in beta, but we are continuously working on improving it further to enhance its capabilities. This model offers the ability to create stunning and realistic visuals with enhanced image composition and face generation. The photorealism capabilities of this model are truly next-level, with a significant advancement in generating legible text within images, making it easier to produce descriptive imagery with shorter prompts. ImageCon V3 offers rich visuals and jaw-dropping aesthetics that will make your images stand out.
+
+Now you can use these same models to modify existing images, creating new variations of the original image. You can either choose to guide the model by providing a textual description of the image you want to create, or you can let the model generate a random image based on the original image.
+
+ImageCon V3 generates images of high quality in virtually any art style and is the best open model for photorealism. Distinct images can be prompted without having any particular ‘feel’ imparted by the model, ensuring absolute freedom of style. The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution.
+
+In addition, ImageCon V3 can generate concepts that are notoriously difficult for image models to render, such as hands and text or spatially arranged compositions (e.g., show a rabbit as a Universe Wave).
+
+The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution, so you don't have to go through the Upscaling Process every time after creating an image.
+
+## How does it work?
+
+Image to image generation models typically rely on deep learning techniques, specifically generative adversarial networks (GANs) or variational autoencoders (VAEs), to generate new images based on existing ones. The process involves two main components: an encoder and a decoder.
+
+The encoder component takes the input image and maps it to a latent representation or code that captures the underlying features and style of the image. This encoding process extracts meaningful information from the input image, compressing it into a lower-dimensional representation.
+
+The decoder component takes the encoded representation and synthesizes it back into an image. This decoder network aims to generate an output image that closely resembles the original input image. The generator network, which includes the encoder and decoder, is trained using a large dataset of paired images, where the model learns to capture the mapping between the input and output images.
+
+During training, the model optimizes its parameters to minimize the difference between the generated image and the ground truth target image. This training process allows the model to learn the visual patterns, textures, and styles present in the dataset.
+
+When generating new images, the model takes an input image and passes it through the encoder to obtain its latent representation. This latent code is then fed into the decoder, which generates a new image based on the learned mapping. The resulting image can exhibit variations or transformations of the original image, depending on the specific model and its training.
+
+It's important to note that the quality and realism of the generated images can vary depending on the complexity of the model, the size and diversity of the training dataset, and other factors. Additionally, the generated images may not always perfectly match the desired output, and post-processing techniques may be required to enhance the results. Nonetheless, image to image generation models offer a promising approach for creating new images based on existing ones, providing opportunities for artistic expression, style transfer, and creative exploration.
+
+## Use Cases
+
+### -Style Transfer
+Image-to-image transformation can be used for style transfer, where the style of one image is applied to another. This technique is popular in art and design to create visually appealing and unique images.
+
+### -Image Colorization
+Image-to-image transformation can be used to automatically colorize grayscale or black-and-white images. This can be useful for restoring old photographs or adding color to digital artworks.
+
+### -Image Super-Resolution
+Image-to-image transformation can be used to enhance the resolution and quality of low-resolution images. This is beneficial for improving the visual clarity of images in various applications, such as medical imaging, surveillance, and digital photography.
+
+### -Image Reconstruction
+Image-to-image transformation can be used to reconstruct missing or damaged parts of an image. This is particularly useful in scenarios where images have been corrupted or incomplete, allowing for image restoration and recovery.
+
+### -Image Inpainting
+Image-to-image transformation can be used for inpainting, where missing or unwanted portions of an image are filled in with plausible content. This technique is useful for removing objects, repairing image defects, or filling in gaps in panoramic images.
+
+### -Image-to-Sketch Conversion
+Image-to-image transformation can be used to convert photographs or digital images into artistic sketches or line drawings. This is popular in digital art, illustration, and graphic design.
+
+### -Image-to-Emoji Generation
+Image-to-image transformation can be used to generate emojis or emoji-like representations of facial expressions from human faces. This can be applied in messaging applications, social media, and digital communication to enhance expression and convey emotions.
+
+### -Virtual Reality and Augmented Reality
+Image-to-image transformation can be used to generate realistic textures and visual effects in virtual reality (VR) and augmented reality (AR) environments. This enhances the immersive experience and realism of virtual worlds and digital overlays on the real world.
+
+### -Image Morphing
+Image-to-image transformation can be used to create smooth transitions or morphing effects between two or more images. This technique is commonly used in entertainment, special effects, and animation to create captivating visual sequences.
+
+These use cases highlight the versatility and creative applications of image-to-image transformation. By leveraging AI-powered techniques, businesses, artists, and researchers can transform images in innovative and visually compelling ways.
+
+
+##Request
+
+### **Authorization:Bearer Token**
+
+Provide your bearer token in the `Authorization` header when making requests to protected resources.
+Example:` Authorization Bearer 2f68dbbf-519d-4f01-9636-e2421b68f379`
