@@ -1,0 +1,129 @@
+---
+title: "Multimodal Input"
+description: "Documentation for multimodal input"
+---
+
+# Text Only Input
+
+`POST https://api.worqhat.com/api/ai/content/v4`
+
+<collapsible header="Before You Begin">
+
+1. **Set up a new or existing WorqHat Workspace**: When you start, we'll add a $5 credit to your account, valid for the next 14 days, to help you get started with your experimentation.
+
+2. **Create a New API Key**: Head to the AI Studio Page and generate a new API key. Remember to whitelist your Localhost or production domain for security purposes.
+
+3. **Add the API Key Reference**: Include your API key in your application file. For detailed instructions and guidance, visit the [Quickstart](#) page.
+
+</collapsible>
+
+# *Multimodal Input*
+
+## *Generate from Multimodal Inputs*
+
+### WorqHat AiCon V4 API allows you to generate text using only text input. You can choose from a variety of models, each with its own strengths:
+ 
+### `*aion-v4-nano-160824*`
+### *(finetuned included)*: Ideal for quick and efficient text generation, especially when resources are limited.
+
+### `*aion-v4-large-160824*`
+### *(finetuned included)*: Our smartest and highest accuracy model, suitable for a wide range of text generation tasks, complex thought and reasoning along with mathematical solutions.
+
+### `*aion-v4-alpha-160824*`
+### A better version of the `aion-v4-nano-160824` model which is trained on live data, providing up-to-date insights and knowledge. It's ideal for tasks that require real-time information, such as news analysis, market research, or staying informed on current events.
+
+### *Choose Your Response Style:*
+You have the option to either stream the response `(stream_data = true)` or wait for the entire result to be generated `(stream_data = false)`.
+
+<Tabs>
+  <Tab title="Streaming">
+    <script>
+      var files = document.querySelector('input[type="file"]').files;
+      var myHeaders = new Headers();
+      myHeaders.append('Authorization', 'Bearer sk-02e44************');
+
+      var formdata = new FormData();
+      formdata.append('question', 'what are the images about');
+      formdata.append(
+        'training_data',
+        'You are Alex and you are one of the best Tour Guides. Answer everything while starting with your name.'
+      );
+
+      for (const file of files) {
+        formdata.append('files', file);
+      }
+
+      formdata.append('model', 'aicon-v4-nano-160824');
+      formdata.append('stream_data', 'true');
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch('https://api.worqhat.com/api/ai/content/v4', requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          alert('Response received: ' + result);
+        })
+        .catch(error => {
+          console.log('error', error);
+          alert('Error: ' + error);
+        });
+    </script>
+  </Tab>
+  
+  <Tab title="Without Streaming">
+    <script>
+      var files = document.querySelector('input[type="file"]').files;
+      var myHeaders = new Headers();
+      myHeaders.append('Authorization', 'Bearer sk-02e44************');
+
+      var formdata = new FormData();
+      formdata.append('question', 'what are the images about');
+      formdata.append(
+        'training_data',
+        'You are Alex and you are one of the best Tour Guides. Answer everything while starting with your name.'
+      );
+
+      for (const file of files) {
+        formdata.append('files', file);
+      }
+
+      formdata.append('model', 'aicon-v4-nano-160824');
+      formdata.append('stream_data', 'false');
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch('https://api.worqhat.com/api/ai/content/v4', requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          alert('Response received: ' + result);
+        })
+        .catch(error => {
+          console.log('error', error);
+          alert('Error: ' + error);
+        });
+    </script>
+  </Tab>
+</Tabs>
+
+### *Key Points:*
+
+- Replace `YOUR_API_KEY` with your actual WorqHat AiCon V4 API key.
+- Adjust the `model` parameter to select the desired model.
+- Modify the `prompt` to provide your text input.
+
+### *Try out other Capabilities of the WorqHat API*
+
+- Build Multiturn Conversations or Chat Applications by having the model maintain history by default Text Only Conversational.
+- Fetch real-world information and data using the Alpha Models (Text Only).
