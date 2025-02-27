@@ -1,0 +1,68 @@
+---
+title: 'Search V3'
+---
+
+## Search V3 (Search through Meanings and Context)'
+
+**Meaning and Context Based Search experience and Recommendations powered by AI**
+
+The Search V3 API is a powerful and advanced AI-driven solution designed to enhance the search experience by providing meaning-based search capabilities. With its cutting-edge natural language processing techniques, this API goes beyond traditional keyword matching to understand the context, intent, and semantic meaning behind user queries.
+
+By analyzing user content and leveraging sophisticated algorithms, the Search V3 model extracts key concepts and relationships to deliver highly relevant search results. It takes into account the nuances of language, including synonyms, word variations, and even typos, ensuring robust search accuracy and comprehensiveness.
+
+With its content analysis and user intent recognition capabilities, the Search V3 API provides intelligent search capabilities that adapt and learn from user interactions. This enables personalized search experiences, empowering users to find the most relevant information quickly and effortlessly.
+
+Whether it's searching through vast databases, e-commerce catalogs, or knowledge bases, the Search V3 API excels at understanding the meaning behind user queries and retrieving the most valuable results. It can be seamlessly integrated into various applications and platforms, enabling businesses to deliver highly efficient and user-friendly search experiences that drive engagement, satisfaction, and conversion.
+
+## How does it work?
+The Search V3 API uses advanced techniques to provide accurate and relevant search results. Here's a simplified explanation of how it works:
+
+1. Understanding User Queries: The API understands the meaning and context of user queries by analyzing the uploaded data and extracting important information. It comprehends concepts and relationships within the text.
+2. Numeric Representation: The API converts the uploaded data and user queries into numerical representations. These representations capture the meaning of the text in a mathematical format.
+3. Similarity Calculation: The API calculates how similar the uploaded data is to the user's query using a similarity measure. It determines how closely the data matches the query.
+4. Ranking and Retrieval: Based on the similarity calculation, the API ranks and retrieves the most relevant results. It identifies the data that closely matches the user's query, even if the exact question is not in the database.
+
+<Warning>
+**Info:** With the Search V3, it is still necessary for the user to provide the data to be searched. The Search V3 will find the closest possible match to the user's query from the provided data. It is not a content generation model and will not generate content on its own.
+</Warning>
+
+## Training Data
+To begin training your data with the Search V3 AI, you must access the WorqHat AI Console. This platform provides the necessary tools and interfaces to upload and manage your datasets. Training your data is crucial as it allows the AI to learn and adapt to your specific content, enhancing its ability to understand and process user queries effectively.
+
+Here are the steps to start training your data:
+1. Access the WorqHat AI Console: Navigate to the console through the provided link or by logging into your WorqHat account.
+2. Upload Your Data: Use the console's user-friendly interface to upload the datasets you want the AI to learn from. Ensure that your data is well-organized and relevant to the contexts in which the AI will operate.
+3. Manage Your Datasets: The console allows you to view, update, or delete your previously uploaded datasets. Proper management of your datasets ensures that the AI always has the most accurate and up-to-date information.
+4. Initiate Training: Once your data is uploaded, you can initiate the training process. The AI will analyze and learn from your data, optimizing its algorithms to better understand and interpret future queries.
+
+By following these steps and providing high-quality, relevant training data, you empower the Search V3 AI to deliver more precise and contextually appropriate search results, tailored to the specific needs and nuances of your application.
+
+<img height="200" src="/images/worqhat-text gen-searchv3.png" />
+
+## Use Cases
+* E-commerce Product Discovery: Semantic search can greatly enhance the product discovery process in e-commerce platforms. By understanding the meaning and intent behind user queries, semantic search can provide more relevant and accurate search results, improving the overall shopping experience.
+* Content Management and Knowledge Base: Semantic search can be used to power content management systems and knowledge bases, allowing users to search and retrieve information based on their intended meaning rather than relying solely on keyword matching. This enables users to find the most relevant and contextually accurate content.
+* Customer Support and Help Desk: Semantic search can assist in customer support and help desk systems by understanding user queries and providing precise and tailored responses. It can analyze the intent of customer inquiries and retrieve relevant information or suggest solutions based on past interactions or known knowledge.
+* Research and Information Retrieval: Semantic search can be valuable in research applications, enabling users to find relevant research papers, articles, and documents based on their intended meaning rather than relying on exact keyword matches. This enhances the efficiency and accuracy of information retrieval in academic and scientific domains.
+* Enterprise Search: In large organizations, semantic search can improve enterprise search capabilities by understanding user queries and retrieving the most relevant and contextually accurate information from various internal data sources. This enhances knowledge sharing, decision-making, and collaboration within the organization.
+* Job Search and Recruitment: Semantic search can enhance job search platforms by understanding the job requirements and candidate profiles, enabling more accurate matching between job seekers and job postings. It can take into account factors such as skills, experience, and qualifications to provide more targeted and relevant job recommendations.
+* Legal and Compliance Search: Semantic search can assist in legal research and compliance-related tasks by understanding the legal language and identifying relevant case laws, statutes, and regulations. This can streamline legal research processes and improve the accuracy and efficiency of compliance-related tasks.
+* Personalized Recommendations: Semantic search can power recommendation engines in various domains, such as e-commerce, media, and entertainment. By understanding user preferences, behavior, and context, semantic search can provide personalized recommendations for products, movies, music, and more, enhancing the user experience and driving engagement.
+* Healthcare Information Retrieval: Semantic search can be used in healthcare applications to retrieve relevant medical information, research papers, and patient records based on their intended meaning. This can support clinical decision-making, medical research, and patient care by providing accurate and contextually appropriate information.
+* Data Exploration and Analytics: Semantic search can enable users to explore and analyze large datasets by understanding the context and meaning of the data. It can help users discover insights, patterns, and relationships in complex data, facilitating data-driven decision-making and exploratory data analysis.
+
+## How to use Search V3 AI
+You can use the following Endpoints on any Codebase, including client side codebases as long as you are able to send the Headers and the Request Body to the API Endpoint. It's that easy! Just send a POST Request to the API Endpoint with the Headers and the Request Body, and you are good to go!
+
+## Train Your Own Data
+
+The Search V3 AI is a large model that is trained on a large dataset to understand the meanings of word and to understand how words relate with each other.
+
+However, this model is mostly focused on Optimising Time and give quicker responses based on the meaning of what the
+user has asked. That is why, this model is completely dependent on the training data provided by the user. The more training data you provide, the better the model will perform and return a better response on search queries.
+
+<Note>
+This model does not generate content on its own, but it is capable of understanding the meaning of the content provided by the user. It also understands and provides priority scoring to data that you have uploaded previously to the API. This means that if you have uploaded data to the API, and you search for a query that is similar to the data you have uploaded previously, the API will return the data that you have uploaded previously as the top result. It will also return other relevant results that are similar to the question you have asked.
+
+PLEASE PROVIDE ACCURATE AND RELEVANT TRAINING DATA TO GET THE BEST RESULTS AS IT IS NOT A GENERATIVE MODEL.
+</Note>
