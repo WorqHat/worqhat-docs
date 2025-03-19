@@ -10,8 +10,8 @@ title: 'Finetuned Models (Multimodal Input)'
   </Accordion>
 </AccordionGroup>
 
-## Generate from Text-Only Input
-WorqHat AiCon V4 Custom Model API allows you to generate text using only text input. You can choose from a variety of base models, each with its own strengths:
+## Generate from Multimodal Input
+WorqHat AiCon V4 Custom Model API allows you to generate text using multimodal inputs. You can choose from several base models, each with its own strengths:
 
 * `aicon-v4-nano-160824` **(finetuned included):** Ideal for quick and efficient text generation, especially when resources are limited.
 * `aicon-v4-large-160824` **(finetuned included):**  Our smartest and highest accuracy model, suitable for a wide range of text generation tasks, complex thoughts and reasoning along with mathematical solutions.
@@ -59,7 +59,7 @@ You have the option to either stream the response (`stream_data = true`) or wait
           console.log('error', error);
           alert('Error: ' + error);
       });
-});
+
     ```
   </Tab>
   <Tab title="Without Streaming">
@@ -110,7 +110,6 @@ You have the option to either stream the response (`stream_data = true`) or wait
 * Replace `YOUR_API_KEY` with your actual WorqHat AiCon V4 API key.
 * Adjust the `model` parameter to select the desired model.
 * Modify the `prompt` to provide your text input.
-
 **Try out other Capabilities of the WorqHat API**
-* Build Multiturn Conversations or Chat Applications by having the model maintain history by default Text Only Conversational
-* Fetch real world information and data using the Alpha Models Alpha Models(Text Only)
+* Build Multiturn Conversations or Chat Applications by having the model maintain history by default
+* Fetch real world information and data using the Alpha Models
