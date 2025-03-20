@@ -20,7 +20,13 @@
               {
                 "group":"Text Generation",
                 "pages":[
+                  "ai-models/text-generation/aiconv4_latest",
                   "ai-models/text-generation/alpha-models-(text-only)",
+                  "ai-models/text-generation/available-endpoints",
+                  "ai-models/text-generation/supported-file-types",
+                  "ai-models/text-generation/multimodality-in-aicon",
+                  "ai-models/text-generation/text-only-input",
+                  "ai-models/text-generation/multimodal-input",
                   "ai-models/text-generation/finetuned-model-(text-only)",
                   "ai-models/text-generation/finetuned-models-(multimodal-input)",
                   "ai-models/text-generation/multimodal-input-conversational",
