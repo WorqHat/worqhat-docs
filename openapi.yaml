@@ -4,14 +4,12 @@ info:
   description: >
     Different API endpoints and their parameters have been described here.
   version: 2.1.2
-
 components:
   securitySchemes:
-    bearerAuth:
+    bearerAuth: 
       type: http
       scheme: bearer
       bearerFormat: JWT
-
 paths:
   /api/ai/content/v4:
     post:
@@ -54,7 +52,7 @@ paths:
                 conversation_id:
                   type: string
                   description: >
-                    Unique identifier for the conversation.
+                    Used as per requirement.
                 preserve_history:
                   type: boolean
                   description: >
@@ -75,21 +73,20 @@ paths:
                 - stream_data
                 - training_data
                 - response_type
-                - conversation_id
                 - preserve_history
                 - conversation_history
             example:
-              question: "What are the pricing plans?"
-              model: "aicon-v4-large-160824"
-              randomness: 0.7
-              stream_data: true
-              training_data: "Customer service queries classification."
-              response_type: "json"
-              conversation_id: "conv_12345"
+              question: "hiii there"
+              model: "aicon-v4-nano-160824"
+              randomness: 0.5
+              stream_data: false
+              training_data: "You are alex and you are one of the best Tour Guides. answer everything while starting with your name"
+              response_type: "text"
+              conversation_id: "conv_1724236791746"
               preserve_history: true
               conversation_history:
-                - question: "What is the subscription cost?"
-                  answer: "The subscription cost is $9.99 per month."
+                - "What is the capital of India?: New Delhi"
+                - "What is the capital of USA?: Washington DC"
           multipart/form-data:
             schema:
               type: object
@@ -99,8 +96,7 @@ paths:
                   description: The message or question you want to pass to the model.
                 model:
                   type: string
-                  description: > 
-                    ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
+                  description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
                   enum:
                     - con-v4-nano-160824
                     - aicon-v4-large-160824
@@ -152,8 +148,8 @@ paths:
                   processing_id:
                     type: string
                     description: A unique identifier for the server process. This helps us track support requests and complaints.
-                  processingCount:
-                    type: string
+                  processing_count:
+                    type: integer
                     description: Usage statistics for the request. This is what is used for the billing.
                   conversation_id:
                     type: string
@@ -162,15 +158,56 @@ paths:
                     type: string
                     description: The model used for the process.
               example:
-                content: "The subscription cost is $9.99 per month."
-                processing_time: 15938
-                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
- 
+                Text Output:
+                  value:
+                    content: "Hi there!  My name is Alex, and I'm happy to help you with anything you need for your tour.  What can I do for you today?"
+                    processingTime: 3105.397454
+                    processingId: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
+                    processing_count: 84
+                    conversation_id: "conv_1724236791746"
+                    model: "aicon-v4-nano-160824"
+                JSON Structured Output:
+                  value:
+                    content: "{\"response\": \"Hi there!  My name is Alex, and I'm delighted to assist you with your travel needs. What can I help you with today\"}"
+                    processingTime: 2946.176112
+                    processingId: "5944ab45-8bd7-4151-853d-da6cf315d617"
+                    processing_count: 90
+                    conversation_id: "conv_1724237541817"
+                    model: "aicon-v4-nano-160824"
+                Streaming Data:
+                  value:
+                    data:
+                      - content: "Hi"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278523
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: " there! My name is Alex, and I'm excited to be your tour"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278630
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: " guide today. What can I help you with? \n"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278708
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: ""
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278712
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: ""
+                        model: "aicon-v4-nano-160824"
+                        finishReason: "stop"
+                        timestamp: 1724240278716
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                        wordCount: 77
   /api/ai/content/v4/{modelType}/{modelId}:
     post:
       summary: Finetuned Models 
-      description: >
-        WorqHat AiCon V4 Custom Model API allows you to generate text using only text input.
+      description: WorqHat AiCon V4 Custom Model API allows you to generate text using only text input.
       operationId: FinetunedModels
       tags:
         - AI Services
@@ -193,7 +230,6 @@ paths:
           description: The unique ID of the custom model that has been created.
           schema:
             type: string
-
       requestBody:
         content:
           application/json:
@@ -220,8 +256,7 @@ paths:
                     Tokens will be streamed as data-only server-sent events, terminating with `[DONE]`.
                 training_data:
                   type: string
-                  description: >
-                    Allows passing system messages or training data to influence model responses.
+                  description: Allows passing system messages or training data to influence model responses.
                     Supports up to 750K fixed context window without limitations on input.
                 response_type:
                   type: string
@@ -231,8 +266,7 @@ paths:
                     may generate an unending whitespace stream.
                 conversation_id:
                   type: string
-                  description: >
-                    A unique identifier for each conversation. If omitted, the model generates one.
+                  description: A unique identifier for each conversation. If omitted, the model generates one.
                     Recommended to use the conversation ID returned in the first response.
                 preserve_history:
                   type: boolean
@@ -257,10 +291,8 @@ paths:
                 - stream_data
                 - training_data
                 - response_type
-                - conversation_id
                 - preserve_history
                 - conversation_history
-
             example:
               training_data: >
                 You will be provided with customer service queries. Classify each query into a 
@@ -289,14 +321,13 @@ paths:
                     - "false"
                 training_data:
                   type: string
-                  description: >
-                    Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data ir system messages that you want the model to follow when answering to your questions.
+                  description: Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data ir system messages that you want the model to follow when answering to your questions.
                 files:
                   type: array
                   items:
                     type: string
                   description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
-                  minimum: 50
+                  minItems: 50  
                 response_type:
                   type: string
                   description: >
@@ -321,7 +352,6 @@ paths:
               conversation_history:
                 - user_prompt: "I need help with my bill."
                   model_response: "Sure! Can you clarify what specific issue you're facing?"
-
       responses:
         '200':
           description: Text Generated Successfully
@@ -333,7 +363,7 @@ paths:
                   content:
                     type: string
                     description: The generated response text.
-                  processingCount:
+                  processing_count:
                     type: integer
                     description: Usage count for billing.
                   processing_time:
@@ -349,199 +379,49 @@ paths:
                     type: string
                     description: The model used for processing.
               example:
-                content: "Hi there! How can I assist you today?"
-                processing_time: 3105.397454
-                processing_id: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
-                processingCount: 84
-                conversation_id: "conv_1724236791746"
-                model: "aicon-v4-nano-160824"
-  
-  /api/ai/content/v4:
-    post:
-      summary: Text Only Input & Multimodal Input
-      description: >
-        API allows you to generate text using only text input.
-      operationId: TextInput
-      tags:
-        - AI Services
-      security:
-        - bearerAuth: []   
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The message or question you want to pass to the model.
-                model:
-                  type: string
-                  description: >
-                    ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
-                  enum: 
-                    - aicon-v4-nano-160824
-                    - aicon-v4-large-160824
-                    - aicon-v4-alpha-160824
-                randomness:
-                  type: number
-                  description: >
-                    Model prediction randomness between 0 and 1. Higher values (e.g., 0.8) make the output more random,
-                    while lower values (e.g., 0.2) make it more deterministic.
-                  minimum: 0
-                  maximum: 1
-                stream_data:
-                  type: boolean
-                  description: >
-                    If set, partial message deltas will be sent, to reduce the waiting time. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message.
-                training_data:
-                  type: string
-                  description: >
-                    Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data or system messages that you want the model to follow when answering to your questions.
-                  example: >
-                    You will be provided with customer service queries. Classify each query into a primary category and a secondary category. Provide your output in JSON format with the keys: primary and secondary.
-
-                    **Primary categories**: Billing, Technical Support, Account Management, or General Inquiry.
-
-                    **Billing secondary categories**:
-                      - Unsubscribe or upgrade
-                      - Add a payment method
-                      - Explanation for charge
-                      - Dispute a charge
-
-                    **Technical Support secondary categories**:
-                      - Troubleshooting
-                      - Device compatibility
-                      - Software updates
-
-                    **Account Management secondary categories**:
-                      - Password reset
-                      - Update personal information
-                      - Close account
-                      - Account security
-
-                    **General Inquiry secondary categories**:
-                      - Product information
-                      - Pricing
-                      - Feedback
-                      - Speak to a human
-                response_type:
-                  type: string
-                  description: >
-                    An object specifying the format that the model must output. Compatible with all AiCon V4 models.
-                    Setting to `"json"` will enable the model to send back structured outputs which ensures the model will match your supplied JSON schema in the message.
-                    Important: when using JSON mode, you must also instruct the model to produce JSON yourself via the `training_data` or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="DONE"`, which indicates the generation exceeded maximum tokens or the conversation exceeded the max context length and you will be billed for the whitespace.
-                  enum: 
-                    - text
-                    - json
-              required:
-                - question
-                - model
-              example:
-                question: "Hi there"
-                model: "aicon-v4-nano-160824"
-                randomness: 0.5
-                stream_data: false
-                training_data: "You are Alex and you are one of the best Tour Guides. Answer everything while starting with your name."
-                response_type: "text"
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                question:
-                  type: string
-                  description: The message or question you want to pass to the model.
-                model:
-                  type: string
-                  description: >
-                    ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
-                  enum: 
-                    - aicon-v4-nano-160824
-                    - aicon-v4-large-160824
-                    - aicon-v4-alpha-160824
-                stream_data:
-                  type: boolean
-                  description: >
-                    If set, partial message deltas will be sent, to reduce the waiting time. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message.
-                training_data:
-                  type: string
-                  description: >
-                    Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data or system messages that you want the model to follow when answering to your questions.
-                  example: >
-                    You will be provided with customer service queries. Classify each query into a primary category and a secondary category. Provide your output in JSON format with the keys: primary and secondary.
-
-                    **Primary categories**: Billing, Technical Support, Account Management, or General Inquiry.
-
-                    **Billing secondary categories**:
-                      - Unsubscribe or upgrade
-                      - Add a payment method
-                      - Explanation for charge
-                      - Dispute a charge
-
-                    **Technical Support secondary categories**:
-                      - Troubleshooting
-                      - Device compatibility
-                      - Software updates
-
-                    **Account Management secondary categories**:
-                      - Password reset
-                      - Update personal information
-                      - Close account
-                      - Account security
-
-                    **General Inquiry secondary categories**:
-                      - Product information
-                      - Pricing
-                      - Feedback
-                      - Speak to a human
-                response_type:
-                  type: string
-                  description: >
-                    An object specifying the format that the model must output. Compatible with all AiCon V4 models.
-                    Setting to `"json"` will enable the model to send back structured outputs which ensures the model will match your supplied JSON schema in the message.
-                    Important: when using JSON mode, you must also instruct the model to produce JSON yourself via the `training_data` or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="DONE"`, which indicates the generation exceeded maximum tokens or the conversation exceeded the max context length and you will be billed for the whitespace.
-                  enum: 
-                    - text
-                    - json
-                files:
-                  type: array
-                  items:
-                    type: string
-                  description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
-                  minimum: 50
-      responses:
-        '200':
-          description: Text Generated Successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  content:
-                    type: string
-                    description: The generated response text.
-                  processingCount:
-                    type: integer
-                    description: Usage count for billing.
-                  processing_time:
-                    type: number
-                    description: Time taken (in milliseconds) to process the request.
-                  processing_id:
-                    type: string
-                    description: Unique identifier for the process (for tracking support requests).
-                  conversation_id:
-                    type: string
-                    description: The conversation ID for multi-turn chat applications.
-                  model:
-                    type: string
-                    description: The model used for processing.
-              example:
-                content: "Hi there!  My name is Alex, and I'm happy to help you with anything you need for your tour.  What can I do for you today? \n"
-                processingTime: 3105.397454
-                processingId: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
-                processingCount: 84,
-                conversation_id: "conv_1724236791746"
-                model: "aicon-v4-nano-160824"  
-          
-      
-        
+                Text Output:
+                  value:
+                    content: "Hi there!  My name is Alex, and I'm happy to help you with anything you need for your tour.  What can I do for you today?"
+                    processingTime: 3105.397454
+                    processingId: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
+                    processingCount: 84
+                    conversation_id: "conv_1724236791746"
+                    model: "aicon-v4-alpha-160824"
+                JSON Structured Output:
+                  value:
+                    content: {"response": "Hi there!  My name is Alex, and I'm delighted to assist you with your travel needs. What can I help you with today?"}
+                    processingTime: 2946.176112
+                    processingId: "5944ab45-8bd7-4151-853d-da6cf315d617"
+                    processingCount: 90
+                    conversation_id: "conv_1724237541817"
+                    model: "aicon-v4-alpha-160824"
+                Streaming Data:
+                  value:
+                    data:
+                      - content: "Hi"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278523
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: " there! My name is Alex, and I'm excited to be your tour"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278630
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: " guide today. What can I help you with? \n"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278708
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"               
+                      - content: ""
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278712
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: ""
+                        model: "aicon-v4-alpha-160824"
+                        finishReason: "stop"
+                        timestamp: 1724240278716
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                        wordCount: 77
