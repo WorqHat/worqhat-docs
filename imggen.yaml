@@ -1,0 +1,796 @@
+openapi: 3.0.1
+info:
+  title: API endpoints
+  description: >
+    Different API endpoints and their parameters have been described here.
+  version: 2.1.2
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error400Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+        processing_id:
+          type: string
+          description: A universally unique identifier for the request.
+        processing_time:
+          type: number
+          description: The time taken to process the request.
+      example:
+        status: "400"
+        message: "Bad Request"
+        processing_id: "123e4567-e89b-12d3-a456-426614174000"
+        processing_time: 343
+
+    Error500Response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code indicating the error.
+        message:
+          type: string
+          description: A message describing the error.
+        processing_id:
+          type: string
+          description: A universally unique identifier for the request.
+        processing_time:
+          type: number
+          description: The time taken to process the request.
+      example:
+        status: "500"
+        message: "Internal Server Error"
+        processing_id: "123e4567-e89b-12d3-a456-426614174001"
+        processing_time: 500
+
+    
+
+
+
+paths:
+  /api/ai/images/generate/v2:
+    post:
+      summary: Image Generation using V2
+      description: >
+        AI model of version 2 has been used to create images. It is the fastest and basic model to create images.
+      operationId: generateImageV2
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: array
+                  description: Prompt is used for generating images.
+                  items:
+                    type: string
+                image_style:
+                  type: string
+                  description: The style of the image to be generated.
+                  example: "realistic"
+                orientation:
+                  type: string
+                  description: The orientation of the image.
+                  enum: 
+                    - square
+                    - portrait
+                    - landscape
+                output_type:
+                  type: string
+                  description: >
+                    The format of the generated image. 
+                    'url' returns a direct image link, and 'Base64' returns an encoded string.
+                  enum:
+                    - url
+                    - Base64
+            example:
+              prompt: ["A cat floating on the clouds"]
+              image_style: "realistic"
+              output_type: "url"
+              orientation: "square"
+
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request (in milliseconds).
+                  processing_id:
+                    type: string
+                    description: Unique request identifier for tracking.
+              example:
+                image: "https://storage.googleapis.com/example-image-url"
+                processing_time: 15938
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '400':
+          description: Bad Request
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+
+
+
+  /api/ai/images/generate/v3:
+    post:
+      summary: Image Generation using V3
+      description: >
+        This endpoint is used to generate an image using AI model V3.
+        It accepts a JSON object containing the image generation parameters and returns the generated image.
+      operationId: generateImageV3
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: array
+                  description: Prompt is used for generating images.
+                  items:
+                    type: string
+                image_style:
+                  type: string
+                  description: The style of the image to be generated.
+                  example: "Anime"
+                orientation:
+                  type: string
+                  description: The orientation of the image.
+                  enum: 
+                    - square
+                    - portrait
+                    - landscape
+                output_type:
+                  type: string
+                  description: >
+                    The format of the generated image. 
+                    'url' returns a direct image link, and 'Base64' returns an encoded string.
+                  enum:
+                    - url
+                    - Base64
+            example:
+              prompt: ["A cat floating on the clouds"]
+              image_style: "Anime"
+              orientation: "square"
+              output_type: "url"
+
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL.
+                  processing_time:
+                    type: integer
+                    description: The time taken to process the request (in milliseconds).
+                  processing_id:
+                    type: string
+                    description: Unique request identifier for tracking.
+              example:
+                image: "https://storage.googleapis.com/example-image-url"
+                processing_time: 15938
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3:
+    post:
+      summary: Modify an existing image using AI.
+      description: >
+        The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution. This removes the need for an additional Upscaling Process after creating an image.
+      operationId: imagetoimage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The existing image to be modified.
+                similarity:
+                  type: number
+                  description: The percentage similarity to maintain with the original image.
+                modification:
+                  type: string
+                  description: The textual description of how the image should be modified.
+                output_type:
+                  type: string
+                  description: The output type of the image to be generated.
+                  enum:
+                    - url
+                    - Base64
+                control_function:
+                  type: string
+                  description: The control function for image modification.
+                  enum:
+                    - none
+                    - structure_transfer
+                    - style_transfer
+            example:
+              similarity: 40
+              modification: "Change this into a night scenery"
+              output_type: "url"
+              control_function: "none"
+
+      responses:
+        '200':
+          description: Image modified successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request.
+              example:
+                image: "https://storage.googleapis.com/.../modified-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+
+  /api/ai/images/modify/v3/search-replace-image:
+    post:
+      summary: Search-Replace Content
+      description: >
+        Enable creative transformations by identifying and replacing specific objects within an image through a single API call.
+      operationId: SearchReplaceContent
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The existing image that contains the object to be replaced.
+                search_object:
+                  type: string
+                  description: The object in the image that you want to replace.
+                modification:
+                  type: string
+                  description: The new object that will replace the existing one.
+                output_type:
+                  type: string
+                  description: The format of the generated image.
+                  enum:
+                    - url
+                    - Base64
+            example:
+              search_object: cat
+              modification: "Change this into a white-colored husky"
+              output_type: url
+      responses:
+        '200':
+          description: Image modified successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL or Base64 string.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request.
+                  processing_id:
+                    type: string
+                    description: A unique identifier for the request.
+              example:
+                image: "https://storage.googleapis.com/.../modified-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/recolor-image:
+    post:
+      summary: Recolor Image
+      description: >
+        Enable creative transformations by recoloring objects within an image through a single API call.
+      operationId: RecolorImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The existing image containing the object to be recolored.
+                search_object:
+                  type: string
+                  description: The object in the image that you want to recolor.
+                modification:
+                  type: string
+                  description: The new color or style for the identified object.
+                output_type:
+                  type: string
+                  description: The format of the generated image.
+                  enum:
+                    - url
+                    - Base64
+            example:
+              search_object: cat
+              modification: "Change this into a white-colored husky"
+              output_type: url
+      responses:
+        '200':
+          description: Image modified successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL or Base64 string.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request.
+                  processing_id:
+                    type: string
+                    description: A unique identifier for the request.
+              example:
+                image: "https://storage.googleapis.com/.../modified-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+  
+  /api/ai/images/modify/v3/replace-background:
+    post:
+      summary: Replace Background
+      description: >
+        Enables creative transformations by replacing the background through a single API call.
+      operationId: ReplaceBackground
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The existing image for which the background should be replaced.
+                background_image:
+                  type: string
+                  format: binary
+                  description: The image that will be used as the new background.
+                modification:
+                  type: string
+                  description: >
+                    A textual description of the desired background scene. Either `modification` or `background_image` must be provided.
+                output_type:
+                  type: string
+                  description: Specifies the format of the output image.
+            example:
+              existing_image: cat.jpg
+              modification: "Change this into a night scenery"
+              output_type: "url"
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier (UUID) for the request.
+              example:
+                image: "https://storage.googleapis.com/sample-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/remove-background:
+    post:
+      summary: Remove Image Background
+      description: >
+        Removes the background from an image, isolating the foreground subject while eliminating the original backdrop.
+      operationId: RemoveImgBgd
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image from which the background will be removed.
+                output_type:
+                  type: string
+                  description: Specifies the format of the output image.
+            example:
+              existing_image: person.jpg
+              output_type: "url"
+      responses:
+        '200':
+          description: Image processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier (UUID) for the request.
+              example:
+                image: "https://storage.googleapis.com/sample-removed-bg-image.png"
+                processing_time: 10238.123456
+                processing_id: "b2a1d5f0-9c67-4a21-995b-5c543a98f7d3"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+
+  
+  /api/ai/images/modify/v3/remove-text:
+    post:
+      summary: Remove Text from Image
+      description: >
+        This API removes all textual content from an image through a single API call, providing a clean and text-free version of the original image.
+      operationId: RemoveText
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image file from which text will be removed.
+                output_type:
+                  type: string
+                  description: Specifies the output format of the processed image (e.g., URL or base64 encoded image).
+            example:
+              existing_image: (binary file)
+              output_type: url
+
+      responses:
+          '200':
+            description: Image processed successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    image:
+                      type: string
+                      description: URL of the processed image.
+                    processing_time:
+                      type: number
+                      description: Time taken to process the request in milliseconds.
+                    processing_id:
+                      type: string
+                      description: A universally unique identifier for the request.
+                example:
+                  image: "https://example.com/processed-image.png"
+                  processing_time: 15938.768708
+                  processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/extend-image:
+    post:
+      summary: Extend Image Boundaries
+      description: >
+        This API extends the boundaries of an image by inserting additional content while minimizing artifacts and maintaining the quality of the original image.
+      operationId: ExtendImageBoundaries
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The image file to be extended.
+                output_type:
+                  type: string
+                  description: Specifies the output format of the processed image (e.g., URL or base64 encoded image).
+                leftExtend:
+                  type: integer
+                  description: Percentage of the original image width to extend on the left side.
+                rightExtend:
+                  type: integer
+                  description: Percentage of the original image width to extend on the right side.
+                topExtend:
+                  type: integer
+                  description: Percentage of the original image height to extend on the top side.
+                bottomExtend:
+                  type: integer
+                  description: Percentage of the original image height to extend on the bottom side.
+                description:
+                  type: string
+                  description: A description of the background and desired content for the extended image.
+            example:
+              existing_image: (binary file)
+              output_type: url
+              leftExtend: 0
+              rightExtend: 0
+              topExtend: 0
+              bottomExtend: 100
+              description: "Show a white field"
+
+      responses:
+        '200':
+          description: Image processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: URL of the processed image.
+                  processing_time:
+                    type: number
+                    description: Time taken to process the request in milliseconds.
+                  processing_id:
+                    type: string
+                    description: A universally unique identifier for the request.
+              example:
+                image: "https://example.com/processed-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'   
+
+
+  /api/ai/images/modify/v3/sketch-image:
+    post:
+      summary: Convert Sketch to Image
+      description: >
+        This API converts a sketch into a realistic image, enabling creative and dynamic transformations.
+      operationId: SketchToImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  description: The sketch image to be transformed.
+                description:
+                  type: string
+                  description: A textual description of the desired output image.
+                output_type:
+                  type: string
+                  description: Specifies the format of the generated image (e.g., URL).
+            example:
+              output_type: url
+              description: "An owl sitting on a branch."
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request.
+                  processing_id:
+                    type: string
+                    description: A unique identifier for the request.
+              example:
+                image: "https://example.com/generated-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+  /api/ai/images/modify/v3/recreate:
+    post:
+      summary: Recreate Image
+      description: >
+        This API recreates an image based on an existing image and description.
+      operationId: RecreateImage
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                existing_image:
+                  type: string
+                  format: binary
+                  
+                  description: The original image to be recreated.
+                description:
+                  type: string
+                  description: A textual description of modifications or improvements.
+                output_type:
+                  type: string
+                  description: Specifies the format of the generated image (e.g., URL).
+            example:
+              output_type: url
+              description: "An owl sitting on a branch with enhanced details."
+      responses:
+        '200':
+          description: Image generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    description: The generated image URL.
+                  processing_time:
+                    type: number
+                    description: The time taken to process the request.
+                  processing_id:
+                    type: string
+                    description: A unique identifier for the request.
+              example:
+                image: "https://example.com/recreated-image.png"
+                processing_time: 15938.768708
+                processing_id: "1e01b632-2d8f-4f71-8a27-36e219d67be5"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error500Response'
+
+                
+
+  
