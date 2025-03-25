@@ -1,0 +1,488 @@
+openapi: 3.0.1
+info:
+  title: API endpoints
+  description: >
+    Different API endpoints and their parameters have been described here.
+  version: 2.1.2
+components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /api/ai/content/v4:
+    post:
+      summary: Text Only Conversational text generation
+      description: >
+        WorqHat AiCon V4 API allows you to generate text using only text input.
+      operationId: TextOnlyConversational
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The message or question you want to pass to the model.
+                model:
+                  type: string
+                  description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
+                randomness:
+                  type: number
+                  description: >
+                    What model prediction randomness to use, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+                stream_data:
+                  type: boolean
+                  description: >
+                    If set, partial message deltas will be sent as data-only server-sent events, with the stream terminated by a data [DONE] message.
+                training_data:
+                  type: string
+                  description: >
+                    You can pass any sort of training data or system messages that you want the model to follow when answering your questions.
+                response_type:
+                  type: string
+                  description: >
+                    Specifies the format that the model must output.
+                conversation_id:
+                  type: string
+                  description: >
+                    Used as per requirement.
+                preserve_history:
+                  type: boolean
+                  description: >
+                    Set to true to maintain conversation history.
+                conversation_history:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      question:
+                        type: string
+                      answer:
+                        type: string
+              required:
+                - question
+                - model
+                - randomness
+                - stream_data
+                - training_data
+                - response_type
+                - preserve_history
+                - conversation_history
+            example:
+              question: "hiii there"
+              model: "aicon-v4-nano-160824"
+              randomness: 0.5
+              stream_data: false
+              training_data: "You are alex and you are one of the best Tour Guides. answer everything while starting with your name"
+              response_type: "text"
+              conversation_id: "conv_1724236791746"
+              preserve_history: true
+              conversation_history:
+                - "What is the capital of India?: New Delhi"
+                - "What is the capital of USA?: Washington DC"
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The message or question you want to pass to the model.
+                model:
+                  type: string
+                  description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
+                  enum:
+                    - con-v4-nano-160824
+                    - aicon-v4-large-160824
+                    - aicon-v4-alpha-160824
+                files:
+                  type: array
+                  items:
+                    type: string
+                  description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
+                stream_data:
+                  type: string
+                  enum:
+                    - "true"
+                    - "false"
+                training_data:
+                  type: string
+                  description: If set, partial message deltas will be sent, to reduce the waiting time. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data:` [DONE] message.
+                response_type:
+                  type: string
+                  description: An object specifying the format that the model must output. Compatible with all AiCon V4 models.Setting to { `"response_type":` `"json"` } will enable the model to send back structured outputs which ensures the model will match your supplied JSON schema in the message. `Important:` when using JSON mode, you must also instruct the model to produce JSON yourself via the training_data or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly `"stuck"` request. Also note that the message content may be partially cut off if finish_reason=`"DONE"`, which indicates the generation exceeded maximum tokens or the conversation exceeded the max context length and you will be billed for the whitespace.
+                conversation_id:
+                  type: string
+                  description: Every interaction with the Language Model is associated with a Conversation Id. To let the model maintain a history of your conversations by default, you can pass the conversation id. You can define a conversation id on your own or you can just use the conversation id that is returned as a response in the first conversation itself. Since you will be dealing with files here, we don't allow you to pass a conversation history on your own.
+              required:
+                - question
+                - model
+            example:
+              question: "Can you explain this image?"
+              model: "aicon-v4-nano-160824"
+              files: ["file1.png", "file2.pdf"]
+              stream_data: "false"
+              response_type: "json"
+              conversation_id: "conv_1724236791746"
+              training_data: "Explain customer service queries."
+      responses:
+        '200':
+          description: Text generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                    description: The response output of the processing.
+                  processing_time:
+                    type: number
+                    description: The amount of time in miliseconds it took to complete the request.
+                  processing_id:
+                    type: string
+                    description: A unique identifier for the server process. This helps us track support requests and complaints.
+                  processing_count:
+                    type: integer
+                    description: Usage statistics for the request. This is what is used for the billing.
+                  conversation_id:
+                    type: string
+                    description: A unique identifier for the Message. You can use this conversation id later when building multiturn chat applications. This conversation id is what keeps a track of your past conversation. You can use this to keep continuing your requests one after the other without the hassle of maintaining the conversation history on your own.
+                  model:
+                    type: string
+                    description: The model used for the process.
+              example:
+                Text Output:
+                  value:
+                    content: "Hi there!  My name is Alex, and I'm happy to help you with anything you need for your tour.  What can I do for you today?"
+                    processingTime: 3105.397454
+                    processingId: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
+                    processing_count: 84
+                    conversation_id: "conv_1724236791746"
+                    model: "aicon-v4-nano-160824"
+                JSON Structured Output:
+                  value:
+                    content: "{\"response\": \"Hi there!  My name is Alex, and I'm delighted to assist you with your travel needs. What can I help you with today\"}"
+                    processingTime: 2946.176112
+                    processingId: "5944ab45-8bd7-4151-853d-da6cf315d617"
+                    processing_count: 90
+                    conversation_id: "conv_1724237541817"
+                    model: "aicon-v4-nano-160824"
+                Streaming Data:
+                  value:
+                    data:
+                      - content: "Hi"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278523
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: " there! My name is Alex, and I'm excited to be your tour"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278630
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: " guide today. What can I help you with? \n"
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278708
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: ""
+                        model: "aicon-v4-nano-160824"
+                        timestamp: 1724240278712
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                      - content: ""
+                        model: "aicon-v4-nano-160824"
+                        finishReason: "stop"
+                        timestamp: 1724240278716
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                        wordCount: 77
+  /api/ai/content/v4/{modelType}/{modelId}:
+    post:
+      summary: Finetuned Models 
+      description: WorqHat AiCon V4 Custom Model API allows you to generate text using only text input.
+      operationId: FinetunedModels
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: modelType
+          in: path
+          required: true
+          description: The type of the base model that you have used to train the data.
+          schema:
+            type: string
+            enum:
+              - nano
+              - large
+            default: nano
+        - name: modelId
+          in: path
+          required: true
+          description: The unique ID of the custom model that has been created.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The message or question you want to pass to the model.
+                model:
+                  type: string
+                  description: ID of the model to use. See the model endpoint compatibility table for details.
+                randomness:
+                  type: number
+                  description: >
+                    What model prediction randomness to use, between 0 and 1. Higher values (e.g., 0.8) make 
+                    the output more random, while lower values (e.g., 0.2) make it more deterministic.
+                  minimum: 0
+                  maximum: 1
+                stream_data:
+                  type: boolean
+                  description: >
+                    If set to `true`, partial message deltas will be sent to reduce waiting time.
+                    Tokens will be streamed as data-only server-sent events, terminating with `[DONE]`.
+                training_data:
+                  type: string
+                  description: Allows passing system messages or training data to influence model responses.
+                    Supports up to 750K fixed context window without limitations on input.
+                response_type:
+                  type: string
+                  description: >
+                    Specifies the output format. Setting `response_type: json` ensures the model
+                    adheres to JSON format. Without proper instruction in `training_data`, the model 
+                    may generate an unending whitespace stream.
+                conversation_id:
+                  type: string
+                  description: A unique identifier for each conversation. If omitted, the model generates one.
+                    Recommended to use the conversation ID returned in the first response.
+                preserve_history:
+                  type: boolean
+                  description: >
+                    Enables manually maintaining conversation history instead of using `conversation_id`.
+                conversation_history:
+                  type: array
+                  description: Manually maintain past conversation records.
+                  items:
+                    type: object
+                    properties:
+                      Input Prompt 1:
+                        type: string
+                        description: Model Output 1
+                      Input Prompt 2:
+                        type: string
+                        description: Model Output 2
+              required:
+                - question
+                - model
+                - randomness
+                - stream_data
+                - training_data
+                - response_type
+                - preserve_history
+                - conversation_history
+            example:
+              training_data: >
+                You will be provided with customer service queries. Classify each query into a 
+                primary and secondary category. Provide JSON output with keys: `primary` and `secondary`.
+              response_type: "json"
+              question: "How do I reset my password?"
+              conversation_id: "conv_1724236791746"
+              preserve_history: false
+              conversation_history:
+                - user_prompt: "I need help with my bill."
+                  model_response: "Sure! Can you clarify what specific issue you're facing?"
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The message or question you want to pass to the model.
+                stream_data:
+                  type: string
+                  description: >
+                    If set to `true`, partial message deltas will be sent to reduce waiting time.
+                    Tokens will be streamed as data-only server-sent events, terminating with `[DONE]`.
+                  enum: 
+                    - "true"
+                    - "false"
+                training_data:
+                  type: string
+                  description: Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data ir system messages that you want the model to follow when answering to your questions.
+                files:
+                  type: array
+                  items:
+                    type: string
+                  description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
+                  minItems: 50  
+                response_type:
+                  type: string
+                  description: >
+                    An object specifying the format that the model must output. Compatible with all AiCon V4 models.Setting to { "response_type": "json" } will enable the model to send back structured outputs which ensures the model will match your supplied JSON schema in the message. Important: when using JSON mode, you must also instruct the model to produce JSON yourself via the training_data or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="DONE", which indicates the generation exceeded maximum tokens or the conversation exceeded the max context length and you will be billed for the whitespace.
+                  enum:
+                    - text
+                    - json
+                conversation_id:
+                  type: string
+                  description: >
+                    Every interaction with the Language Model is associated with a Conversation Id. To let the model maintain a history of your conversations by default, you can pass the conversation id. You can define a conversation id on your own or you can just use the conversation id that is returned as a response in the first conversation itself. Since you will be dealing with files here, we don't allow you to pass a conversation history on your own.
+              required: 
+                - question
+            example:
+              training_data: >
+                You will be provided with customer service queries. Classify each query into a
+                primary and secondary category. Provide JSON output with keys: `primary` and `secondary`.
+              response_type: "json"
+              question: "How do I reset my password?"
+              conversation_id: "conv_1724236791746"
+              preserve_history: false
+              conversation_history:
+                - user_prompt: "I need help with my bill."
+                  model_response: "Sure! Can you clarify what specific issue you're facing?"
+      responses:
+        '200':
+          description: Text Generated Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                    description: The generated response text.
+                  processing_count:
+                    type: integer
+                    description: Usage count for billing.
+                  processing_time:
+                    type: number
+                    description: Time taken (in milliseconds) to process the request.
+                  processing_id:
+                    type: string
+                    description: Unique identifier for the process (for tracking support requests).
+                  conversation_id:
+                    type: string
+                    description: The conversation ID for multi-turn chat applications.
+                  model:
+                    type: string
+                    description: The model used for processing.
+              example:
+                Text Output:
+                  value:
+                    content: "Hi there!  My name is Alex, and I'm happy to help you with anything you need for your tour.  What can I do for you today?"
+                    processingTime: 3105.397454
+                    processingId: "8aa97481-20f9-48f4-a12d-d02eb6c1d62a"
+                    processingCount: 84
+                    conversation_id: "conv_1724236791746"
+                    model: "aicon-v4-alpha-160824"
+                JSON Structured Output:
+                  value:
+                    content: {"response": "Hi there!  My name is Alex, and I'm delighted to assist you with your travel needs. What can I help you with today?"}
+                    processingTime: 2946.176112
+                    processingId: "5944ab45-8bd7-4151-853d-da6cf315d617"
+                    processingCount: 90
+                    conversation_id: "conv_1724237541817"
+                    model: "aicon-v4-alpha-160824"
+                Streaming Data:
+                  value:
+                    data:
+                      - content: "Hi"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278523
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: " there! My name is Alex, and I'm excited to be your tour"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278630
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: " guide today. What can I help you with? \n"
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278708
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"               
+                      - content: ""
+                        model: "aicon-v4-alpha-160824"
+                        timestamp: 1724240278712
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"                
+                      - content: ""
+                        model: "aicon-v4-alpha-160824"
+                        finishReason: "stop"
+                        timestamp: 1724240278716
+                        processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
+                        conversation_id: "conv_1724240276193"
+                        wordCount: 77
+  /api/ai/search/v3/{modelId}:
+    post:
+      summary: Search V3 
+      description: Meaning and Context Based Search experience and Recommendations powered by AI
+      operationId: SearchV3
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: modelId
+          in: path
+          required: true
+          description: The Custom Trained Model ID. You can get this Model ID from your Model Training Dashboard.
+          example: 8fa1b230-917b-4d83-8d56-4760b3537e71
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask.
+                search_count:
+                  type: integer
+                  description: The number of respoonses you want in output
+              required:
+                - question
+      responses:
+        '200':
+          description: Text Generated Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        source:
+                          type: string
+                        content:
+                          type: string
+                        page:
+                          type: integer
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+              example:
+                data:
+                  - source: "string"
+                    content: "string"
+                    page: 0
+                processingTime: 0
+                processingId: "string"
