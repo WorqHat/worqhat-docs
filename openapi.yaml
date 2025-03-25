@@ -1740,5 +1740,360 @@ paths:
                 processing_id: "4b139bfe-1f71-4345-b539-fa6c1700f166"
                 processing_count: 3
                 data: "The AI model training process has been successfully initiated."
+  /api/ai/images/v2/face-detection:
+    post:
+      summary: Identify Faces and Characteristics in an Image
+      description: >
+        This endpoint is used to identify faces and characteristics in an image.
+        It accepts a Form Data containing the image and returns the
+        the face detection results.
+      operationId: detectFacesInImageV2
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          multi-part/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: The image to be sent as input.
+            example:
+              image: "/path/to/image.jpg"
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      analysed_data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            age_range:
+                              type: object
+                              properties:
+                                high:
+                                  type: integer
+                                  example: 26
+                                low:
+                                  type: integer
+                                  example: 18
+                            beard:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                  example: 73.7099380493164
+                                value:
+                                  type: boolean
+                                  example: false
+                            bounding_box:
+                              type: object
+                              properties:
+                                height:
+                                  type: number
+                                  example: 0.22712668776512146
+                                left:
+                                  type: number
+                                  example: 0.3961663544178009
+                                top:
+                                  type: number
+                                  example: 0.2599637806415558
+                                width:
+                                  type: number
+                                  example: 0.22138258814811707
+                            confidence:
+                              type: number
+                              example: 99.99722290039062
+                            emotions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  confidence:
+                                    type: number
+                                  type:
+                                    type: string
+                            eye_direction:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                pitch:
+                                  type: number
+                                yaw:
+                                  type: number
+                            eyeglasses:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            eyes_open:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            face_occluded:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            gender:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: string
+                            landmarks:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  x:
+                                    type: number
+                                  y:
+                                    type: number
+                            mouth_open:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            mustache:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            pose:
+                              type: object
+                              properties:
+                                pitch:
+                                  type: number
+                                roll:
+                                  type: number
+                                yaw:
+                                  type: number
+                            quality:
+                              type: object
+                              properties:
+                                brightness:
+                                  type: number
+                                sharpness:
+                                  type: number
+                            smile:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                            sunglasses:
+                              type: object
+                              properties:
+                                confidence:
+                                  type: number
+                                value:
+                                  type: boolean
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+                  processing_count:
+                    type: integer
+  /api/ai/images/v2/facial-comparison:
+    post:
+      summary: Facial Comparison
+      description: Compare two images to identify and match faces.
+      operationId: FacialComparison
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                source_image:
+                  type: string
+                  format: binary
+                target_image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      matched_faces_count:
+                        type: integer
+                      unmatched_faces_count:
+                        type: integer
+                      matched_faces:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            similarity:
+                              type: number
+                            confidence:
+                              type: number
+                            quality:
+                              type: object
+                              properties:
+                                brightness:
+                                  type: number
+                                sharpness:
+                                  type: number
+                      unmatched_faces:
+                        type: array
+                        items:
+                          type: string
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+                  processing_count:
+                    type: integer
+  /api/ai/images/v2/image-analysis:
+    post:
+      summary: Image Text Detection 
+      description: Identifying and extracting text from images using machine learning
+      operationId: ImageTextDetection
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                output_type:
+                 type: string
+                training_data:
+                  type: string
+                question:
+                  type: string
+                randomness:
+                  type: string
+                images:
+                  type: string
+                  format: binary
+                stream_data:
+                  type: string
+      responses:
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: string
+                  message:
+                    type: string
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+              example: 
+                status: "Error"
+                message: "Something went wrong. We were unable to detect the text."
+                processing_time: 315.648042
+                processing_id: "9f7803c3-2098-46af-a4d3-3db94128d932"
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+                  processing_count:
+                    type:  integer
+              example:
+                data: "This image depicts a serene and romantic scene of two people sitting together watching a sunset. The silhouettes of a boy and a girl are shown from behind, sitting in tall grass or wheat fields. They appear to be gazing at a beautiful orange and pink sky as the sun sets on the horizon.\n\nThe artwork has a soft, dreamlike quality with pastel colors and a warm glow. Fluffy clouds frame the sky, and there are small white dots that could represent stars or fireflies beginning to appear. In the top left corner, there are some small red heart shapes, adding to the romantic atmosphere.\n\nThe overall mood of the image is peaceful and intimate, suggesting a quiet moment shared between two people enjoying nature's beauty together. The style appears to be digital art or illustration, with a painterly quality that enhances the emotional impact of the scene."
+                processing_time: 6240.1868269999995
+                processing_id: "12935919-fd9f-47a2-8c53-57f231c6bf9a"
+                processing_count: 1
+  /api/ai/images/v2/image-text-detection:
+    post:
+      summary: Image Text Detection 
+      description: Identifying and extracting text from images using machine learning
+      operationId: imageTextDetection
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                output_type:
+                  type: string
+                  enum:
+                    - json
+                    - text
+      responses:
+        '200':
+          description: Text Extracted Successfully from image
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
 
   

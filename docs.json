@@ -10,33 +10,54 @@
   "favicon": "/W.svg",
   "navigation": {
     "tabs": [
-      {
+        {
         "tab": "Documentation",
         "groups": [
-  
+
           {
             "group": "AI Models",
             "pages": [
               {
                 "group":"Text Generation",
                 "pages":[
+                  "ai-models/text-generation/aiconv4_latest",
+                  "ai-models/text-generation/multimodality-in-aicon",
+                  "ai-models/text-generation/available-endpoints",
+                  "ai-models/text-generation/supported-file-types",
+                  "ai-models/text-generation/text-only-input",
+                  "ai-models/text-generation/multimodal-input",
+                  "ai-models/text-generation/text-only-conversational",
+                  "ai-models/text-generation/multimodal-input-conversational",
                   "ai-models/text-generation/alpha-models-(text-only)",
                   "ai-models/text-generation/finetuned-model-(text-only)",
                   "ai-models/text-generation/finetuned-models-(multimodal-input)",
-                  "ai-models/text-generation/multimodal-input-conversational",
-                  "ai-models/text-generation/search-v3",
-                  "ai-models/text-generation/text-only-conversational"
-                
+                  "ai-models/text-generation/search-v3" 
                 ]
               },
-            
+              {
+                "group":"Image Generation",
+                "pages":[
+                  "ai-models/image-generation/image_genv2",
+                  "ai-models/image-generation/image_genv3",
+                  "ai-models/image-generation/image_to_image",
+                  "ai-models/image-generation/search_replace_content",
+                  "ai-models/image-generation/recolor_image",
+                  "ai-models/image-generation/replace-background",
+                  "ai-models/image-generation/remove-background",
+                  "ai-models/image-generation/remove-text",
+                  "ai-models/image-generation/extend-image",
+                  "ai-models/image-generation/sketches-to-image",
+                  "ai-models/image-generation/recreate-image"
+                  
+                ]
+              },
               {
                 "group":"Image Analysis",
                 "pages":[
+                  "ai-models/image-analysis/image-text-detection",
                   "ai-models/image-analysis/face-detection",
                   "ai-models/image-analysis/compare-faces",
-                  "ai-models/image-analysis/image-analysis",
-                  "ai-models/image-analysis/image-text-detection"
+                  "ai-models/image-analysis/image-analysis"
                 ]
               },
               {
@@ -54,29 +75,37 @@
                   "ai-models/content-moderation/text-moderation"
                 ]
               },
-              "Model Training"
+              {
+                "group": "Model Training",
+                "pages": [
+                  "ai-models/model-training/model-training"
+                ]
+              },
+              {
+                "group":"Policies",
+                "pages":[
+                  "ai-models/policies/terms-of-services",
+                  "ai-models/policies/privacy-policy",
+                  "ai-models/policies/acceptable-use-policy",
+                  "ai-models/policies/data-usage-policy",
+                  "ai-models/policies/bugs-disclosure-policy"
+                ]
+              }
             ]
           }
         ]
       },
+    
       {
         "tab": "API Reference",
         "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
-            ]
+        {
+          "group": "Endpoints",
+          "openapi": {
+            "source": "openapi.yaml"
           }
-        ]
+        }
+      ]
       }
     ],
     "global": {
