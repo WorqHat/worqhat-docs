@@ -425,3 +425,64 @@ paths:
                         processing_id: "bc4cc3b9-d000-4866-83ad-ad71abf10c8f"
                         conversation_id: "conv_1724240276193"
                         wordCount: 77
+  /api/ai/search/v3/{modelId}:
+    post:
+      summary: Search V3 
+      description: Meaning and Context Based Search experience and Recommendations powered by AI
+      operationId: SearchV3
+      tags:
+        - AI Services
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: modelId
+          in: path
+          required: true
+          description: The Custom Trained Model ID. You can get this Model ID from your Model Training Dashboard.
+          example: 8fa1b230-917b-4d83-8d56-4760b3537e71
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question you want to ask.
+                search_count:
+                  type: integer
+                  description: The number of respoonses you want in output
+              required:
+                - question
+      responses:
+        '200':
+          description: Text Generated Successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        source:
+                          type: string
+                        content:
+                          type: string
+                        page:
+                          type: integer
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+              example:
+                data:
+                  - source: "string"
+                    content: "string"
+                    page: 0
+                processingTime: 0
+                processingId: "string"
