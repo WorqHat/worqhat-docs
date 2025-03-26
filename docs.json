@@ -10,16 +10,19 @@
   "favicon": "/W.svg",
   "navigation": {
     "tabs": [
-        {
+      {
         "tab": "Documentation",
         "groups": [
-
+          {
+            "group": "Introduction",
+            "pages": ["get-started", "quickstart", "rate-limit"]
+          },
           {
             "group": "AI Models",
             "pages": [
               {
-                "group":"Text Generation",
-                "pages":[
+                "group": "Text Generation",
+                "pages": [
                   "ai-models/text-generation/aiconv4_latest",
                   "ai-models/text-generation/multimodality-in-aicon",
                   "ai-models/text-generation/available-endpoints",
@@ -31,12 +34,12 @@
                   "ai-models/text-generation/alpha-models-(text-only)",
                   "ai-models/text-generation/finetuned-model-(text-only)",
                   "ai-models/text-generation/finetuned-models-(multimodal-input)",
-                  "ai-models/text-generation/search-v3" 
+                  "ai-models/text-generation/search-v3"
                 ]
               },
               {
-                "group":"Image Generation",
-                "pages":[
+                "group": "Image Generation",
+                "pages": [
                   "ai-models/image-generation/image_genv2",
                   "ai-models/image-generation/image_genv3",
                   "ai-models/image-generation/image_to_image",
@@ -48,12 +51,11 @@
                   "ai-models/image-generation/extend-image",
                   "ai-models/image-generation/sketches-to-image",
                   "ai-models/image-generation/recreate-image"
-                  
                 ]
               },
               {
-                "group":"Image Analysis",
-                "pages":[
+                "group": "Image Analysis",
+                "pages": [
                   "ai-models/image-analysis/image-text-detection",
                   "ai-models/image-analysis/face-detection",
                   "ai-models/image-analysis/compare-faces",
@@ -61,61 +63,57 @@
                 ]
               },
               {
-                "group":"Text Extraction",
-                "pages":[
+                "group": "Text Extraction",
+                "pages": [
                   "ai-models/text-extraction/speech-text-extraction",
                   "ai-models/text-extraction/pdf-extraction",
                   "ai-models/text-extraction/web-extraction"
                 ]
               },
               {
-                "group":"Content Moderation",
-                "pages":[
+                "group": "Content Moderation",
+                "pages": [
                   "ai-models/content-moderation/image-moderation",
                   "ai-models/content-moderation/text-moderation"
                 ]
               },
               {
                 "group": "Model Training",
-                "pages": [
-                  "ai-models/model-training/model-training"
-                ]
-              },
-              {
-                "group":"Policies",
-                "pages":[
-                  "ai-models/policies/terms-of-services",
-                  "ai-models/policies/privacy-policy",
-                  "ai-models/policies/acceptable-use-policy",
-                  "ai-models/policies/data-usage-policy",
-                  "ai-models/policies/bugs-disclosure-policy"
-                ]
-              },
-               {
-                "group":"Authorization check",
-                "pages": ["ai-models/authorization-check"]
-              },
-              {
-                "group":"Server Status",
-                "pages": ["ai-models/server-status"]
+                "pages": ["ai-models/model-training/model-training"]
               }
-               
+            ]
+          },
+          {
+            "group": "Authorization check",
+            "pages": ["ai-models/authorization-check"]
+          },
+          {
+            "group": "Server Status",
+            "pages": ["ai-models/server-status"]
+          },
+          {
+            "group": "Policies",
+            "pages": [
+              "ai-models/policies/terms-of-services",
+              "ai-models/policies/privacy-policy",
+              "ai-models/policies/acceptable-use-policy",
+              "ai-models/policies/data-usage-policy",
+              "ai-models/policies/bugs-disclosure-policy"
             ]
           }
         ]
       },
-    
       {
         "tab": "API Reference",
         "openapi": "openapi.yaml",
         "groups": [
-        {
-          "group": "Endpoints",
-          "openapi": {
-            "source": "openapi.yaml"
+          {
+            "group": "Endpoints",
+            "openapi": {
+              "source": "openapi.yaml"
+            }
           }
-        }
-      ]
+        ]
       }
     ],
     "global": {
@@ -125,7 +123,7 @@
           "icon": "terminal",
           "href": "https://docs.worqhat.com/api-reference/authentication"
         },
-        
+
         {
           "anchor": "Contact us",
           "icon": "envelope",
