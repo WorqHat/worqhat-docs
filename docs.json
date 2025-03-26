@@ -90,7 +90,16 @@
                   "ai-models/policies/data-usage-policy",
                   "ai-models/policies/bugs-disclosure-policy"
                 ]
+              },
+               {
+                "group":"Authorization check",
+                "pages": ["ai-models/authorization-check"]
+              },
+              {
+                "group":"Server Status",
+                "pages": ["ai-models/server-status"]
               }
+               
             ]
           }
         ]
@@ -98,6 +107,7 @@
     
       {
         "tab": "API Reference",
+        "openapi": "openapi.yaml",
         "groups": [
         {
           "group": "Endpoints",
