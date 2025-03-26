@@ -1,0 +1,135 @@
+---
+title: 'Supported File Types'
+---
+This document is your guide to understanding and utilizing WorqHat AiCon's powerful multimodal capabilities. We'll break down the supported input formats, best practices, and limitations to help you get the most out of your interactions with our AI.
+
+## Images: Bringing Visual Context to Your Prompts
+WorqHat AiCon can understand and process images, adding a whole new dimension to your prompts.
+
+**Supported Image Types**:
+- **PNG (image/png)**: The go-to format for lossless image compression, perfect for crisp graphics and detailed visuals.
+- **JPEG (image/jpeg)**: A widely used format known for its efficient compression, ideal for photographs and images with smooth gradients.
+
+**Limits**:
+- **Image Count**: You can include up to 100 images in a single request.
+- **Image Size**: There's no limit on the size of individual images, so feel free to use high-resolution visuals.
+
+**Tokenization**:
+- **Image Representation**: Each image is represented by 290 tokens, assuming a square image of 500 x 500 pixels. This helps the AI understand the visual information within the image.
+
+**Best Practices for Image Input**:
+- **High Resolution is Key**: Use high-resolution images for the best results. The more detail the AI can see, the better it can understand your prompt.
+- **Provide Examples**: Include a few example images in your prompt to give the AI a clear understanding of what you're looking for.
+- **Proper Orientation**: Rotate images to their correct orientation before sending them to the API. This ensures the AI interprets the image correctly.
+- **Avoid Blurry Images**: Blurry images can make it difficult for the AI to understand the content.
+- **Indexing for Multiple Images**: If you're using multiple images, assign each one an index (e.g., "image 1", "image 2"). This makes it easier to refer to specific images within your prompt and response.
+
+```
+image 1 
+image 2 
+image 3 
+
+Write a Announcement post about the features using image 1 and image 2. Then, give me ideas for a new presentation based on image 3.
+```
+**Limitations**:
+- **Content Moderation**: WorqHat AiCon adheres to strict safety policies. The AI will refuse to process images that violate these policies.
+- **Spatial Reasoning**: While the AI can understand the general content of an image, it's not precise at locating specific text or objects. It may only provide approximate counts.
+- **Medical Images**: The AI is not designed for interpreting medical images (e.g., X-rays, CT scans) or providing medical advice.
+- **People Recognition**: The AI is not meant for identifying individuals in images, unless they are celebrities.
+- **Accuracy with Low-Quality Images**: The AI may hallucinate or make mistakes when interpreting low-quality, rotated, or extremely low-resolution images. It may also struggle with handwritten text in images.
+
+## Videos: Bringing Motion and Sound to Your Prompts
+WorqHat AiCon can also understand and process videos, allowing you to incorporate dynamic content into your prompts.
+
+**Supported Video Types**:
+- **FLV (video/x-flv)**: A popular format for streaming video, often used for online content.
+- **MOV (video/mov)**: A versatile format known for its high quality and support for various codecs.
+- **MPEG (video/mpeg)**: A widely used format for video compression, offering good quality at a reasonable file size.
+- **MPEGPS (video/mpegps)**: A format designed for streaming video over networks.
+- **MPG (video/mpg)**: A common format for video files, often used for DVDs.
+- **MP4 (video/mp4)**: A highly versatile format that supports both video and audio, making it a popular choice for online content.
+- **WEBM (video/webm)**: A format optimized for web browsing, known for its efficient compression.
+- **WMV (video/wmv)**: A format developed by Microsoft, often used for Windows-based media.
+- **3GPP (video/3gpp)**: A format designed for mobile devices, commonly used for videos captured on smartphones.
+
+**Limits**:
+- **Video Count**: You can include up to 4 videos in a single request.
+- **Video Size**: There's no limit on the size of individual videos.
+
+**Tokenization**:
+- **Frame Representation**: Each frame in a video is represented by 100 tokens.
+- **Frame Duration**: One frame is considered to be 1 to 3 seconds long.
+
+**Best Practices for Video Input**:
+- **Timestamp Format**: For timestamps, use the MM:SS format (e.g., 01:23). This helps the AI understand specific moments within the video.
+- **Consistent Timestamp Format**: Use the same MM:SS format for questions that ask about a timestamp.
+
+**Limitations**:
+- **Content Moderation**: WorqHat AiCon adheres to strict safety policies. The AI will refuse to process videos that violate these policies.
+- **Non-Speech Sound Recognition**: The AI may struggle with recognizing sounds that are not speech.
+- **High-Speed Motion**: The AI may have difficulty understanding high-speed motion due to the fixed minimum 1 frame per second (fps) sampling rate.
+- **Transcription Punctuation**: The AI may return transcriptions without punctuation.
+
+## Audio: Adding Sound to Your Prompts
+WorqHat AiCon can also understand and process audio, allowing you to incorporate sound into your prompts.
+
+**Supported Audio Types**:
+- **AAC (audio/aac)**: A popular format for high-quality audio compression, often used for music and podcasts.
+- **FLAC (audio/flac)**: A lossless audio format known for its high fidelity, ideal for preserving the original sound quality.
+- **MP3 (audio/mp3)**: A widely used format for audio compression, offering a good balance between quality and file size.
+- **MPA (audio/m4a)**: A format often used for audio files associated with Apple devices.
+- **MPEG (audio/mpeg)**: A format commonly used for audio compression, offering good quality at a reasonable file size.
+- **MPGA (audio/mpga)**: A format used for audio files encoded with the MP3 codec.
+- **MP4 (audio/mp4)**: A versatile format that supports both audio and video, making it a popular choice for online content.
+- **OPUS (audio/opus)**: A format designed for high-quality audio compression, often used for internet calls and streaming.
+- **PCM (audio/pcm)**: A raw audio format that represents sound as a series of digital samples.
+- **WAV (audio/wav)**: A widely used format for uncompressed audio, known for its high fidelity.
+- **WEBM (audio/webm)**: A format optimized for web browsing, known for its efficient compression.
+
+**Limitations**:
+- **Non-Speech Sound Recognition**: The AI may struggle with recognizing sounds that are not speech.
+- **Audio-Only Timestamps**: The AI cannot accurately generate timestamps for requests with audio files only. Timestamps can be generated accurately if the input includes a video that contains audio.
+- **Transcription Punctuation**: The AI may return transcriptions without punctuation.
+
+## PDFs: Working with Documents
+WorqHat AiCon can also understand and process PDFs, allowing you to incorporate documents into your prompts.
+
+**Limits**:
+- **Page Count**: You can include PDFs with a maximum of 250 pages.
+- **Tokenization**: Each page in a PDF is counted as 290 tokens.
+
+**Best Practices for PDF Input**:
+- **Splitting Long Documents**: For long documents, consider splitting them into multiple PDFs to improve processing time.
+- **Text-Based PDFs**: Use PDFs with text rendered as text, not scanned images. This ensures text is machine-readable for optimal results.
+
+**Limitations**:
+- **Spatial Reasoning**: The AI is not precise at locating text or objects in PDFs. It may only provide approximate counts.
+- **Handwritten Text**: The AI may struggle with interpreting handwritten text in PDF documents.
+
+**WorqHat AiCon: Your Multimodal AI Partner**
+
+By understanding these input formats, best practices, and limitations, you'll be well-equipped to leverage WorqHat AiCon's multimodal capabilities for creative and informative interactions.
+
+## Supported File Format
+This is how the server expects the file to be sent when you are sending a file. The file inputs need to sent as an array of multiple files.
+
+```
+[
+  {
+    fieldname: 'files',
+    originalname: '1.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    buffer: <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 07 08 00 00 04 b0 08 06 00 00 00 ef e2 1e 03 00 00 00 09 70 48 59 73 00 00 2e 23 00 00 2e 23 01 ... 3331408 more bytes>,
+    size: 3331458
+  },
+  {
+    fieldname: 'files',
+    originalname: '2.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    buffer: <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 07 08 00 00 04 b0 08 06 00 00 00 ef e2 1e 03 00 00 00 09 70 48 59 73 00 00 2e 23 00 00 2e 23 01 ... 3033473 more bytes>,
+    size: 3033523
+  }
+]
+```
