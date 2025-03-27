@@ -182,7 +182,7 @@
         "groups": [
           {
             "group": "Workflow Examples",
-            "pages": ["examples/product-tracking-tool"]
+            "pages": ["example/product-tracking-tool"]
           }
         ]
       }
