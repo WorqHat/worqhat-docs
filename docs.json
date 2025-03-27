@@ -109,7 +109,7 @@
       },
       {
         "tab": "API Reference",
-        
+
         "groups": [
           {
             "group": "Text Generation",
@@ -137,35 +137,31 @@
           },
           {
             "group": "Image Analysis",
-            "pages":[
+            "pages": [
               "api-reference/ai-services/identify-faces-and-characteristics-in-an-image",
               "api-reference/ai-services/facial-comparison",
               "api-reference/ai-services/image-text-detection",
               "api-reference/ai-services/image-text-detection-1"
             ]
-
           },
           {
             "group": "Web Extraction",
             "pages": [
               "api-reference/speech-recognition/convert-speech-to-text",
               "api-reference/ai-services/extract-text-from-a-pdf",
-              "api-reference/web-extraction/extract-web-page-content"     
-          ]
+              "api-reference/web-extraction/extract-web-page-content"
+            ]
           },
           {
             "group": "Model Training",
-            "pages": [
-              "api-reference/ai-services/train-ai-model"
-            ]
+            "pages": ["api-reference/ai-services/train-ai-model"]
           },
           {
             "group": "Content Moderation",
-            "pages":[
+            "pages": [
               "api-reference/ai-services/moderate-text-content-using-ai",
               "api-reference/ai-services/moderate-an-image-using-ai"
             ]
-
           },
           {
             "group": "Authentication",
@@ -173,11 +169,11 @@
           },
           {
             "group": "Server Status",
-            "pages":["api-reference/worqhat-api-endpoint"]
+            "pages": ["api-reference/worqhat-api-endpoint"]
           }
         ]
       },
-            {
+      {
         "tab": "Examples",
         "groups": [
           {
