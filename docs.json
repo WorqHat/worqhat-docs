@@ -179,7 +179,7 @@
       },
             {
         "tab": "Examples",
-        "pages": ["examples/Product-Tracking-Tool"]
+        "pages": ["examples/product-tracking-tool"]
       }
     ],
     "global": {
