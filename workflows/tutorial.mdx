@@ -1,0 +1,141 @@
+---
+title: 'WorqHat Workflows Tutorial'
+---
+
+# WorqHat Workflows Tutorial
+
+This hands-on tutorial will guide you through creating your first WorqHat workflow. You'll build a workflow that monitors GitHub releases for a repository and sends you an AI-generated summary of new features via email.
+
+## 1. Create a new workflow
+
+Sign in to your WorqHat dashboard, navigate to the Workflows tab in the navigation bar, then click **Create New Workflow**.
+
+A workflow's name is initially set to "My First Workflow". Click the name in the toolbar and rename it to "GitHub Release Notes Monitor".
+
+## 2. Configure triggers
+
+You can trigger workflows on a schedule, by sending a webhook event, or by polling a service. This workflow uses two types of triggers:
+- A schedule trigger to run every week
+- A webhook trigger to manually run the workflow at any time
+
+Click **Edit Triggers** in the startTrigger block to open the Triggers tab.
+
+### Create schedule
+
+First, enable the Schedule trigger. Configure it to run every Friday at 5 PM, then click **Save Changes**.
+
+### Configure webhooks
+
+Next, enable the Webhook trigger. This will generate a unique URL that you can use to trigger your workflow manually.
+
+## 3. Fetch release notes
+
+Workflows are comprised of blocks that perform specific actions, such as interacting with data or performing custom logic. You connect blocks together to define their control flow, which represents the order in which they run.
+
+This workflow uses the Resource Query block. You'll primarily use this to query resources—data sources you've connected to WorqHat—but you can also use it to interact with APIs and fetch JSON data.
+
+Click and drag from the startTrigger block to create a new block, then select the Resource Query block type. Click on the block name and change it to "fetchReleases".
+
+This block defaults to the REST API resource with a GET action type. Specify the GitHub API endpoint in the URL field to fetch releases for a repository:
+
+```
+https://api.github.com/repos/OWNER/REPO/releases
+```
+
+Replace `OWNER` and `REPO` with the appropriate GitHub username/organization and repository name.
+
+Click **Run** to retrieve the release data. The response contains an array of objects with information about each release.
+
+Next, add a JavaScript Code block that gets the most recent release. Click or drag to create a new Code block. Name this block "fetchLatest", and add the following code to return the most recent release:
+
+```javascript
+return _.first(fetchReleases.data);
+```
+
+## 4. Check for new features
+
+Use the Branch block to perform different actions based on whether the input value meets a condition. Branch blocks allow you to create two different paths for a workflow to take.
+
+In this case, the workflow needs to check if the most recent release contains any new features in its body.
+
+Click or drag from fetchLatest to add a Branch block, then rename it to "containsFeatures". In the If statement, specify the following condition: 
+
+```javascript
+fetchLatest.data.body && fetchLatest.data.body.includes("feature")
+```
+
+This condition evaluates to true if the release notes contain the word "feature".
+
+## 5. Summarize changes using AI
+
+You can leverage WorqHat's AI capabilities in workflows to perform actions, such as summarizing text or generating insights.
+
+Click and drag from the If statement in containsFeatures to add an AI action block, then rename it to "summarizeChanges". Select the Generate Text action and instruct the AI model to generate a summary.
+
+In the prompt field, enter:
+
+```
+{{ fetchLatest.data.body }} contains the release notes for the latest version. Write me a concise summary of the new features and improvements. Include a link to the full release at {{ fetchLatest.data.html_url }} for more information.
+```
+
+## 6. Send an email notification
+
+You can connect many communication platforms and services to WorqHat, such as email, Slack, Microsoft Teams, and more.
+
+The workflow must send an email with:
+- The repository and version number
+- The AI-generated summary
+
+Click and drag from the AI action block to add a new Resource Query block, then rename it to "sendEmail". Configure the block with the following values:
+
+- Resource: Email Service
+- To: Your email address
+- Subject: `New release for {{ fetchReleases.data[0].name }}`
+- Body: Set to Markdown mode, and include the summary:
+
+```
+{{ summarizeChanges.data }}
+```
+
+Next, create a new Email block that sends an email if there are no new features in the release. Click and drag from the Else branch of the containsFeatures block. Set the same To and Subject fields, and include a message stating that a new release is available but no new features were highlighted:
+
+```
+A new release {{ fetchLatest.data.name }} is available, but no new features were highlighted in the release notes. Check the full release at {{ fetchLatest.data.html_url }} for more information.
+```
+
+## 7. Add an error handler
+
+If an error occurs at any point in the workflow, it will fail and you won't receive your update email. Set up a global error handler that sends you an email if something goes wrong.
+
+Open the Blocks menu and drag the Resource Query block onto the canvas. The block does not need to be connected to other blocks. Rename the block "errorHandler".
+
+Click the menu and select **Add Global Error Handler**. Next, change the resource type to Email Service, and configure the block to send an email that tells the recipient that the workflow failed:
+
+- To: Your email address
+- Subject: `Workflow Error: GitHub Release Monitor`
+- Body: `The GitHub Release Monitor workflow failed with the following error: {{ error.message }}`
+
+## 8. Test and deploy the workflow
+
+Now that the workflow is complete, you can manually run it to test. Click **Run** in the toolbar to run the workflow. You can also test the workflow by calling the webhook trigger. To do so, open the Triggers tab and select the Webhook trigger. Copy the webhook URL to use in your API client or command line.
+
+Run a curl command to trigger the workflow:
+
+```bash
+curl -X POST --url "https://api.worqhat.com/workflows/[workflow-id]/trigger" \
+-H 'Content-Type: application/json' \
+-H 'X-Workflow-Api-Key: your_api_key'
+```
+
+Workflows run automatically once deployed. If you want to test the schedule trigger and receive notifications automatically, click **Deploy** in the toolbar.
+
+## Wrap up
+
+Congratulations! You've created a workflow that:
+
+1. Monitors GitHub releases for a repository
+2. Uses AI to summarize new features
+3. Sends you email notifications
+4. Handles errors gracefully
+
+This is just the beginning of what you can do with WorqHat Workflows. You can extend this workflow to monitor multiple repositories, post updates to Slack, create tasks in your project management tool, and much more.
