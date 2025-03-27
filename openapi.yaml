@@ -81,7 +81,7 @@ components:
 paths:
   /api/ai/content/v4:
     post:
-      summary: Text Only Conversational text generation
+      summary: Text Generation V4 
       description: >
         WorqHat AiCon V4 API allows you to generate text using only text input.
       operationId: TextOnlyConversational
@@ -592,7 +592,7 @@ paths:
                 $ref: "#/components/schemas/Error500Response"
   /api/ai/images/generate/v2:
     post:
-      summary: Image Generation using V2
+      summary: Image Generation V2
       description: >
         AI model of version 2 has been used to create images. It is the fastest and basic model to create images.
       operationId: generateImageV2
@@ -680,7 +680,7 @@ paths:
 
   /api/ai/images/generate/v3:
     post:
-      summary: Image Generation using V3
+      summary: Image Generation V3
       description: >
         This endpoint is used to generate an image using AI model V3.
         It accepts a JSON object containing the image generation parameters and returns the generated image.
@@ -769,7 +769,7 @@ paths:
 
   /api/ai/images/modify/v3:
     post:
-      summary: Modify an existing image using AI.
+      summary: Image-to-Image
       description: >
         The model is particularly well-tuned for vibrant and accurate colors, with better contrast, lighting, and shadows than its predecessor, all in native 1024x1024 resolution. This removes the need for an additional Upscaling Process after creating an image.
       operationId: imagetoimage
@@ -859,7 +859,7 @@ paths:
 
   /api/ai/images/modify/v3/search-replace-image:
     post:
-      summary: Search-Replace Content
+      summary: Search Replace Content
       description: >
         Enable creative transformations by identifying and replacing specific objects within an image through a single API call.
       operationId: SearchReplaceContent
@@ -1093,7 +1093,7 @@ paths:
 
   /api/ai/images/modify/v3/remove-background:
     post:
-      summary: Remove Image Background
+      summary: Remove Background
       description: >
         Removes the background from an image, isolating the foreground subject while eliminating the original backdrop.
       operationId: RemoveImgBgd
@@ -1161,7 +1161,7 @@ paths:
 
   /api/ai/images/modify/v3/remove-text:
     post:
-      summary: Remove Text from Image
+      summary: Remove Text
       description: >
         This API removes all textual content from an image through a single API call, providing a clean and text-free version of the original image.
       operationId: RemoveText
@@ -1230,7 +1230,7 @@ paths:
 
   /api/ai/images/modify/v3/extend-image:
     post:
-      summary: Extend Image Boundaries
+      summary: Extend Image
       description: >
         This API extends the boundaries of an image by inserting additional content while minimizing artifacts and maintaining the quality of the original image.
       operationId: ExtendImageBoundaries
@@ -1324,7 +1324,7 @@ paths:
 
   /api/ai/images/modify/v3/sketch-image:
     post:
-      summary: Convert Sketch to Image
+      summary: Sketches to Image
       description: >
         This API converts a sketch into a realistic image, enabling creative and dynamic transformations.
       operationId: SketchToImage
@@ -1468,7 +1468,7 @@ paths:
                 $ref: "#/components/schemas/Error500Response"
   /api/ai/v2/web-extract:
     post:
-      summary: Extract Web Page Content
+      summary: Web Extraction
       description: This endpoint is used to extract text from a web page using AI. It can take into account all the features such as metadata, inline code, codeblocks, image & html references and other links as well.
       operationId: extractTextFromWebPageV2
       tags:
@@ -1616,7 +1616,7 @@ paths:
 
   /api/ai/v2/pdf-extract:
     post:
-      summary: Extract Text from a PDF
+      summary: PDF Extration
       description: >
         This endpoint is used to extract text from a PDF using AI. Scanning simultaneously across all pages and with the capability to understand human handwriting, this endpoint can extract text from any PDF.
       operationId: extractTextFromPDFV2
@@ -1684,7 +1684,7 @@ paths:
 
   /api/ai/speech-text:
     post:
-      summary: Convert Speech to Text
+      summary: Speed Text Extraction
       description: This endpoint is used to convert speech to text using AI. It accepts a Form Data containing the audio file and returns the speech-to-text conversion results.
       operationId: speechToText
       tags:
@@ -1804,7 +1804,7 @@ paths:
 
   /api/ai/moderation:
     post:
-      summary: Moderate Text Content using AI
+      summary: Text Moderation
       description: >
         This endpoint is used to moderate text content using AI.
         It accepts a JSON object containing the text moderation parameters and returns moderation results.
@@ -1917,7 +1917,7 @@ paths:
                 $ref: "#/components/schemas/Error500Response"
   /api/ai/images/v2/image-moderation:
     post:
-      summary: Moderate an Image using AI
+      summary: Image Moderation
       description: >
         This endpoint is used to moderate an image using AI.
         It accepts a Form Data containing the image and returns the moderation results.
@@ -2005,7 +2005,7 @@ paths:
                 $ref: "#/components/schemas/Error500Response"
   /api/ai/train-data:
     post:
-      summary: Train AI Model
+      summary: Model Training
       description: >
         This endpoint allows users to train custom AI models for search and content processing. Users can upload files, specify model parameters, and initiate training for different model versions.
       operationId: trainAIModel
@@ -2092,7 +2092,7 @@ paths:
                 $ref: "#/components/schemas/Error500Response"
   /api/ai/images/v2/face-detection:
     post:
-      summary: Identify Faces and Characteristics in an Image
+      summary: Face Detection
       description: >
         This endpoint is used to identify faces and characteristics in an image.
         It accepts a Form Data containing the image and returns the
@@ -2392,9 +2392,9 @@ paths:
 
   /api/ai/images/v2/image-analysis:
     post:
-      summary: Image Text Detection
+      summary: Image Analysis
       description: Identifying and extracting text from images using machine learning
-      operationId: ImageTextDetection
+      operationId: ImageAnalysis
       tags:
         - AI Services
       security:
@@ -2479,9 +2479,9 @@ paths:
                 $ref: "#/components/schemas/Error400Response"
   /api/ai/images/v2/image-text-detection:
     post:
-      summary: Image Text Detection
+      summary: Image Text Detection 
       description: Identifying and extracting text from images using machine learning
-      operationId: imageTextDetection
+      operationId: ImageTextDetection
       tags:
         - AI Services
       security:
@@ -2492,17 +2492,38 @@ paths:
             schema:
               type: object
               properties:
+                output_type:
+                 type: string
                 image:
                   type: string
                   format: binary
-                output_type:
-                  type: string
-                  enum:
-                    - json
-                    - text
+              required:
+                - output_type
+                - image
+                
       responses:
-        "200":
-          description: Text Extracted Successfully from image
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: string
+                  message:
+                    type: string
+                  processing_time:
+                    type: number
+                  processing_id:
+                    type: string
+              example: 
+                status: "Error"
+                message: "Something went wrong. We were unable to detect the text."
+                processing_time: 315.648042
+                processing_id: "9f7803c3-2098-46af-a4d3-3db94128d932"
+        '200':
+          description: OK
           content:
             application/json:
               schema:
@@ -2510,21 +2531,162 @@ paths:
                 properties:
                   data:
                     type: object
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error400Response"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error500Response"
+                    properties:
+                      lines:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            detected_text:
+                              type: string
+                            confidence:
+                              type: number
+                            geometry:
+                              type: object
+                              properties:
+                                bounding_box:
+                                  type: object
+                                  properties:
+                                    height:
+                                      type: number
+                                    left:
+                                      type: number
+                                    top:
+                                      type: number
+                                    width:
+                                      type: number
+                                polygon:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      x:
+                                        type: number
+                                      y:
+                                        type: number
+                      words:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            detected_text:
+                              type: string
+                            confidence:
+                              type: number
+                            geometry:
+                              type: object
+                              properties:
+                                bounding_box:
+                                  type: object
+                                  properties:
+                                    height:
+                                      type: number
+                                    left:
+                                      type: number
+                                    top:
+                                      type: number
+                                    width:
+                                      type: number
+                                polygon:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      x:
+                                        type: number
+                                      y:
+                                        type: number
+                      processingTime:
+                        type: number
+                      processingId:
+                        type: string
+                      processingCount:
+                        type: integer
+              example:
+                data:
+                  lines:
+                    - detected_text: veniam in proident laboris id
+                      confidence: -30895365.34443526
+                      geometry:
+                        bounding_box:
+                          height: -31206125.179928318
+                          left: -96637320.12569612
+                          top: 72105085.85295844
+                          width: -21593577.009167224
+                        polygon:
+                          - x: 63376361.36601299
+                            'y': -77803673.34713829
+                          - x: -74521114.12606373
+                            'y': -26135173.209431574
+                    - detected_text: Excepteur pariatur ullamco Duis consequat
+                      confidence: -4261648
+                      geometry:
+                        bounding_box:
+                          height: -28190953.19340624
+                          left: 89239545.47935206
+                          top: -71673093.96241266
+                          width: 32407390.979280755
+                        polygon:
+                          - x: -31253958.583303064
+                            'y': -84851443.30001076
+                          - x: -84473196.48598465
+                            'y': 89028023.30285352
+                          - x: -27443724.96811551
+                            'y': -48401381.156853415
+                    - detected_text: velit magna nisi proident cupidatat
+                      confidence: 8906688.849750921
+                      geometry:
+                        bounding_box:
+                          height: 75834347.91818768
+                          left: -11821339.03140232
+                          top: -56033619.35002953
+                          width: 76017443.26157764
+                        polygon:
+                          - x: -77358190.00776175
+                            'y': 14847286.609454796
+                          - x: -67689260.22278014
+                            'y': 77141078.64575005
+                          - x: -67744233.95401081
+                            'y': 57326317.07390183
+                  words:
+                    - detected_text: id
+                      confidence: -39853875
+                      geometry:
+                        bounding_box:
+                          height: -45470979.08876139
+                          left: -47060244.255420305
+                          top: 71232768.62651542
+                          width: -8867599.416114032
+                        polygon:
+                          - x: 46436426.86077446
+                            'y': -55724084.958356544
+                          - x: -64429934.47571213
+                            'y': -78355501.72030827
+                          - x: -85404678.74940693
+                            'y': 54295701.94300091
+                    - detected_text: do
+                      confidence: -92029197.6418579
+                      geometry:
+                        bounding_box:
+                          height: 91937297.73557901
+                          left: 8812557.612716526
+                          top: -48544210.269565366
+                          width: -59430361.40269524
+                        polygon:
+                          - x: -9339996.09998338
+                            'y': 10790946.627500102
+                          - x: 22327456.373290613
+                            'y': -79893445.13945813
+                          - x: 61168081.628799826
+                            'y': -74684930.63338909
+                processingTime: 62100747.350598514
+                processingId: in quis consectetur aute
+                processingCount: 89795562
+        
+
   /authentication:
     post:
-      summary: Authenticate User
+      summary: Authorization Check
       description: >
         This endpoint is used to check API request validity by authenticating the user profile.
       operationId: authenticateUser
@@ -2643,7 +2805,7 @@ paths:
                 processingId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
   /:
     get:
-      summary: WorqHat API Endpoint
+      summary: Server Status
       description: Returns server readiness status or an error message
       responses:
         "200":
