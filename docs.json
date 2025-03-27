@@ -109,15 +109,20 @@
       },
       {
         "tab": "API Reference",
-        "openapi": "openapi.yaml",
+        
         "groups": [
           {
-            "group": "AI Services",
+            "group": "Text Generation",
             "pages": [
               "api-reference/ai-services/text-only-conversational-text-generation",
               "api-reference/ai-services/finetuned-models",
-              "api-reference/ai-services/search-v3",
-              "api-reference/ai-services/image-generation-using-v2",
+              "api-reference/ai-services/search-v3"
+            ]
+          },
+          {
+            "group": "Image Generation",
+            "pages": [
+              "api-reference/ai-services/image-generation-v2",
               "api-reference/ai-services/image-generation-using-v3",
               "api-reference/ai-services/modify-an-existing-image-using-ai",
               "api-reference/ai-services/search-replace-content",
@@ -127,32 +132,48 @@
               "api-reference/ai-services/remove-text-from-image",
               "api-reference/ai-services/extend-image-boundaries",
               "api-reference/ai-services/convert-sketch-to-image",
-              "api-reference/ai-services/recreate-image",
-              "api-reference/ai-services/extract-text-from-a-pdf",
-              "api-reference/ai-services/moderate-text-content-using-ai",
-              "api-reference/ai-services/moderate-an-image-using-ai",
-              "api-reference/ai-services/train-ai-model",
+              "api-reference/ai-services/recreate-image"
+            ]
+          },
+          {
+            "group": "Image Analysis",
+            "pages":[
               "api-reference/ai-services/identify-faces-and-characteristics-in-an-image",
               "api-reference/ai-services/facial-comparison",
               "api-reference/ai-services/image-text-detection",
               "api-reference/ai-services/image-text-detection-1"
             ]
+
           },
           {
             "group": "Web Extraction",
-            "pages": ["api-reference/web-extraction/extract-web-page-content"]
+            "pages": [
+              "api-reference/speech-recognition/convert-speech-to-text",
+              "api-reference/ai-services/extract-text-from-a-pdf",
+              "api-reference/web-extraction/extract-web-page-content"     
+          ]
           },
           {
-            "group": "Speech Recognition",
-            "pages": ["api-reference/speech-recognition/convert-speech-to-text"]
+            "group": "Model Training",
+            "pages": [
+              "api-reference/ai-services/train-ai-model"
+            ]
+          },
+          {
+            "group": "Content Moderation",
+            "pages":[
+              "api-reference/ai-services/moderate-text-content-using-ai",
+              "api-reference/ai-services/moderate-an-image-using-ai"
+            ]
+
           },
           {
             "group": "Authentication",
             "pages": ["api-reference/authentication/authenticate-user"]
           },
           {
-            "group": "API Reference",
-            "pages": ["api-reference/worqhat-api-endpoint"]
+            "group": "Server Status",
+            "pages":["api-reference/worqhat-api-endpoint"]
           }
         ]
       },
@@ -166,13 +187,13 @@
         {
           "anchor": "API Reference",
           "icon": "terminal",
-          "href": "https://docs.worqhat.com/api-reference/worqhat-api-endpoint"
+          "href": "https://docs.worqhat.com"
         },
 
         {
           "anchor": "Contact us",
           "icon": "envelope",
-          "href": "https://worqhat.com/contact-us"
+          "href": "https://worqhat.com/demo"
         }
       ]
     }
