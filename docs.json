@@ -155,6 +155,10 @@
             "pages": ["api-reference/worqhat-api-endpoint"]
           }
         ]
+      },
+            {
+        "tab": "Examples",
+        "pages": ["examples/first-workflow"]
       }
     ],
     "global": {
