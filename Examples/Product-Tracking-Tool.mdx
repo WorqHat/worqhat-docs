@@ -1,0 +1,318 @@
+---
+title: 'Build Your Own Product Error Tracking Tool'
+---
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/7PG-Gv01FnM?si=rSODyhvTCzFHXEa4"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+<CardGroup cols={2}>
+  <Card
+    title="Join our Discord Community"
+    icon="discord"
+    href="https://discord.gg/worqhat"
+  >
+    Get help, share your projects, and connect with other developers
+  </Card>
+  <Card
+    title="WhatsApp Community"
+    icon="whatsapp"
+    href="https://whatsapp.com/channel/worqhat"
+  >
+    Stay updated with the latest features and announcements
+  </Card>
+</CardGroup>
+
+## Introduction
+
+In this tutorial, we'll build a proactive error tracking system for your product. Instead of waiting for customers to report issues, this system automatically detects errors, identifies the affected user, determines which team member should handle the issue, and sends appropriate notifications.
+
+### What We'll Build
+
+- A system that listens for errors on both frontend and backend
+- Logic to identify which product line, user, and type of error occurred
+- Automatic assignment to the appropriate developer based on the error source
+- Immediate alert emails to both the support team and affected customer
+- Database tracking for all issues with their resolution status
+
+## Prerequisites
+
+- A WorqHat account (sign up at [worqhat.com](https://worqhat.com))
+- Basic understanding of API requests
+- A frontend application to integrate with (we'll provide sample code)
+
+## Step 1: Create a Database Table
+
+1. Sign in to your WorqHat account and select your workspace
+2. Navigate to the Database section
+3. Create a new table called "user_issue_data" with the following columns:
+   - Document ID (automatically generated as primary key)
+   - user_id (string, not nullable)
+   - user_email (string, not nullable)
+   - description (string, nullable)
+   - issue_date (date, not nullable)
+   - issue_priority (string, not nullable)
+   - assigned_person (string, nullable)
+   - resolved_status (boolean, default: false)
+
+## Step 2: Create the Workflow
+
+1. Navigate to the Workflows section and click "Create Workflow"
+2. Name your workflow "Error Tracker"
+3. Select "URL based request" as the trigger type
+
+### Configure Workflow Input Parameters
+
+The workflow will receive the following parameters from your application:
+- user_id
+- user_email
+- error_name
+- issue_id
+- code_segment (identifies where the error occurred: 'workflows', 'AI', or 'no_code')
+
+### Step 2.1: Store Data in Database
+
+1. Add a "Store Data" action
+2. Configure it to store in your "user_issue_data" collection
+3. Map the input fields to your database columns by clicking on each field and selecting the appropriate variable from the dropdown list:
+   - Document ID: Click the field and select `issue_id` from the input variables
+   - user_id: Click the field and select `userId` from the input variables
+   - user_email: Click the field and select `userEmail` from the input variables
+   - description: Click the field and select `errorName` from the input variables
+   - issue_priority: Type "high" or click to create logic to determine priority
+   - resolved_status: Select "false" from the boolean options
+
+### Step 2.2: Send Email to Customer
+
+1. Add a "Send Email" action
+2. Configure the email by clicking on each field and selecting variables where appropriate:
+   - From: Click and select errors@worqhat.com (or your custom domain)
+   - To: Click the field and select `userEmail` from the input variables
+   - CC: Click and enter support@worqhat.com
+   - Subject: Click and enter "We noticed an error while you were using our product"
+   - Body: Click the text editor and draft a message notifying the customer that you've detected an error and are actively working to resolve it. You can include variables by clicking the `+` button and selecting from available variables.
+
+### Step 2.3: Create Switch Case for Error Source
+
+1. Add a "Switch Case" action
+2. Click the condition field and select `codeSegment` from the input variables
+3. Create three cases by clicking "Add Case":
+   - Case 1: Enter 'workflows'
+   - Case 2: Enter 'AI'
+   - Case 3: Enter 'no_code'
+4. Add a default case by clicking "Add Default Case"
+
+### Step 2.4: Configure Team Notifications
+
+For each case in the switch statement:
+
+1. Click the "Add Action" button within the case and select "Send Email"
+2. Configure the email to go to the appropriate team member:
+   - For 'workflows' errors: Click and enter workflows_team@yourdomain.com
+   - For 'AI' errors: Click and enter ai_team@yourdomain.com
+   - For 'no_code' errors: Click and enter nocode_team@yourdomain.com
+3. For the subject, click and enter "Error Alert: [Error Type] Error"
+4. For the body, click the text editor and include relevant details by clicking the `+` button to add variables:
+   - User ID: Select `userId` from input variables
+   - User email: Select `userEmail` from input variables
+   - Error name: Select `errorName` from input variables
+   - Issue ID: Select `issueId` from input variables
+
+### Step 2.5: Configure Return Value
+
+For each case:
+
+1. Click the "Add Action" button and select "Return"
+2. Click the return value field and select `issueId` from input variables to confirm successful processing
+
+## Step 3: Test the Workflow
+
+1. Click the "Test" button in the workflow editor
+2. In the test panel, enter sample values for all required parameters:
+   - userId: "user123"
+   - userEmail: "test@example.com"
+   - errorName: "NullPointerException"
+   - issueId: "issue456"
+   - codeSegment: "workflows"
+3. Toggle on "Developer Mode" to see detailed execution steps
+4. Click "Run Test" and verify that emails are sent and data is stored correctly
+
+## Step 4: Integrate with Your Application
+
+### Create an API Key
+
+1. Navigate to API Keys in your WorqHat dashboard
+2. Create a new API key
+3. Whitelist the domains that will be calling your workflow
+
+### Frontend Integration
+
+<CodeGroup>
+```bash cURL
+curl -X POST \
+  'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "userId": "user123",
+    "userEmail": "user@example.com",
+    "errorName": "NullPointerException",
+    "issueId": "issue456",
+    "codeSegment": "workflows"
+  }'
+```
+
+```javascript JavaScript
+async function trackError(errorType) {
+  const issueId = 'issue_' + Math.random().toString(36).substr(2, 9);
+  
+  const response = await fetch('https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: 'user123',
+      userEmail: 'user@example.com',
+      errorName: 'Error in ' + errorType,
+      issueId: issueId,
+      codeSegment: errorType
+    })
+  });
+  
+  const data = await response.json();
+  console.log('Response:', data);
+  return data;
+}
+
+// Usage examples
+document.getElementById('aiErrorBtn').addEventListener('click', () => trackError('AI'));
+document.getElementById('workflowsErrorBtn').addEventListener('click', () => trackError('workflows'));
+document.getElementById('noCodeErrorBtn').addEventListener('click', () => trackError('no_code'));
+```
+
+```python Python
+import requests
+import uuid
+
+def track_error(error_type, user_id, user_email, error_name):
+    issue_id = f"issue_{uuid.uuid4().hex[:8]}"
+    
+    url = "https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID"
+    headers = {
+        "Authorization": "Bearer YOUR_API_KEY",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "userId": user_id,
+        "userEmail": user_email,
+        "errorName": error_name,
+        "issueId": issue_id,
+        "codeSegment": error_type
+    }
+    
+    response = requests.post(url, json=payload, headers=headers)
+    return response.json()
+
+# Example usage
+result = track_error(
+    error_type="workflows",
+    user_id="user123",
+    user_email="user@example.com",
+    error_name="Database Connection Error"
+)
+print(result)
+```
+
+```php PHP
+<?php
+
+function trackError($errorType, $userId, $userEmail, $errorName) {
+    $issueId = 'issue_' . bin2hex(random_bytes(4));
+    
+    $url = 'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID';
+    $payload = array(
+        'userId' => $userId,
+        'userEmail' => $userEmail,
+        'errorName' => $errorName,
+        'issueId' => $issueId,
+        'codeSegment' => $errorType
+    );
+    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer YOUR_API_KEY',
+        'Content-Type: application/json'
+    ));
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return json_decode($response, true);
+}
+
+// Example usage
+$result = trackError(
+    'AI',
+    'user123',
+    'user@example.com',
+    'Model Training Failed'
+);
+print_r($result);
+```
+</CodeGroup>
+
+Add buttons to your HTML to trigger these functions:
+
+```html
+<button id="aiErrorBtn">Track AI Issue</button>
+<button id="workflowsErrorBtn">Track Workflow Issue</button>
+<button id="noCodeErrorBtn">Track No-Code Issue</button>
+```
+
+## Important Notes
+
+### Security
+
+- Always whitelist domains that will be calling your workflow
+- Use API keys with appropriate permissions
+- Consider implementing additional authentication for sensitive operations
+
+### Scalability
+
+WorqHat workflows run in separate containers, providing:
+- High scalability for handling multiple parallel requests
+- Enhanced security through isolation
+- Improved performance
+
+## Extending the System
+
+You can enhance this error tracking system by:
+
+1. Adding severity levels to prioritize issues
+2. Implementing automatic issue assignment based on team member availability
+3. Creating a dashboard to visualize error trends
+4. Setting up automatic follow-ups for unresolved issues
+5. Integrating with other communication channels like Slack or Microsoft Teams
+
+## Conclusion
+
+You've built a proactive error tracking system that helps you identify and resolve issues before they significantly impact your users. This approach transforms support from reactive to proactive, improving customer satisfaction and product reliability.
+
+<Note>
+This tutorial demonstrates just one of many ways to use WorqHat Workflows. The platform's flexibility allows you to build complex automation systems without writing extensive backend code.
+</Note>
+
+<Check>
+Remember to secure your API keys and only whitelist domains that need access to your workflows.
+</Check>
+---
