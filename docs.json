@@ -179,7 +179,12 @@
       },
             {
         "tab": "Examples",
-        "pages": ["examples/product-tracking-tool"]
+        "groups": [
+          {
+            "group": "Workflow Examples",
+            "pages": ["examples/product-tracking-tool"]
+          }
+        ]
       }
     ],
     "global": {
