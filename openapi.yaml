@@ -99,32 +99,42 @@ paths:
                   type: string
                   description: The message or question you want to pass to the model.
                 model:
-                  type: string
+                  type: enum
                   description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
+                  enum:
+                    - aicon-v4-nano-160824
+                    - aicon-v4-large-160824
+                    - aicon-v4-alpha-160824
                 randomness:
                   type: number
                   description: >
                     What model prediction randomness to use, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+                  default: 0.5
                 stream_data:
                   type: boolean
                   description: >
                     If set, partial message deltas will be sent as data-only server-sent events, with the stream terminated by a data [DONE] message.
+                  default: false
                 training_data:
                   type: string
                   description: >
                     You can pass any sort of training data or system messages that you want the model to follow when answering your questions.
+                  default: You are alex and you are one of the best Tour Guides. answer everything while starting with your name.
                 response_type:
                   type: string
                   description: >
                     Specifies the format that the model must output.
+                  default: text
                 conversation_id:
                   type: string
                   description: >
                     Used as per requirement.
+                  default: conv_1724236791746
                 preserve_history:
                   type: boolean
                   description: >
                     Set to true to maintain conversation history.
+                  default: true
                 conversation_history:
                   type: array
                   items:
@@ -134,6 +144,8 @@ paths:
                         type: string
                       answer:
                         type: string
+                  default: [ "What is the capital of India?: New Delhi",
+                            "What is the capital of USA?: Washington DC"]
               required:
                 - question
                 - model
@@ -169,20 +181,25 @@ paths:
                   items:
                     type: string
                   description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
+                  default: ["file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png","file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png"]
                 stream_data:
                   type: string
                   enum:
                     - "true"
                     - "false"
+                  default: false
                 training_data:
                   type: string
                   description: If set, partial message deltas will be sent, to reduce the waiting time. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data:` [DONE] message.
+                  default: Explain customer service queries. 
                 response_type:
                   type: string
                   description: An object specifying the format that the model must output. Compatible with all AiCon V4 models.Setting to { `"response_type":` `"json"` } will enable the model to send back structured outputs which ensures the model will match your supplied JSON schema in the message. `Important:` when using JSON mode, you must also instruct the model to produce JSON yourself via the training_data or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly `"stuck"` request. Also note that the message content may be partially cut off if finish_reason=`"DONE"`, which indicates the generation exceeded maximum tokens or the conversation exceeded the max context length and you will be billed for the whitespace.
+                  default: json
                 conversation_id:
                   type: string
                   description: Every interaction with the Language Model is associated with a Conversation Id. To let the model maintain a history of your conversations by default, you can pass the conversation id. You can define a conversation id on your own or you can just use the conversation id that is returned as a response in the first conversation itself. Since you will be dealing with files here, we don't allow you to pass a conversation history on your own.
+                  default: conv_1724236791746
               required:
                 - question
                 - model
@@ -345,6 +362,7 @@ paths:
                   description:
                     A unique identifier for each conversation. If omitted, the model generates one.
                     Recommended to use the conversation ID returned in the first response.
+                  default: conv_1724236791746           
                 preserve_history:
                   type: boolean
                   description: >
@@ -396,15 +414,18 @@ paths:
                   enum:
                     - "true"
                     - "false"
+                  default: false
                 training_data:
                   type: string
                   description: Having a 750K fixed context window and with no limitations on the input, you can pass any sort of training data ir system messages that you want the model to follow when answering to your questions.
+                default: Explain customer service queries.
                 files:
                   type: array
                   items:
                     type: string
                   description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
                   minItems: 50
+                  default: ["file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png","file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png"]
                 response_type:
                   type: string
                   description: >
@@ -412,10 +433,12 @@ paths:
                   enum:
                     - text
                     - json
+                  default: json
                 conversation_id:
                   type: string
                   description: >
                     Every interaction with the Language Model is associated with a Conversation Id. To let the model maintain a history of your conversations by default, you can pass the conversation id. You can define a conversation id on your own or you can just use the conversation id that is returned as a response in the first conversation itself. Since you will be dealing with files here, we don't allow you to pass a conversation history on your own.
+                  default: conv_1724236791746
               required:
                 - question
             example:
@@ -546,6 +569,7 @@ paths:
                 search_count:
                   type: integer
                   description: The number of respoonses you want in output
+                default: 123
               required:
                 - question
       responses:
@@ -623,6 +647,7 @@ paths:
                     - square
                     - portrait
                     - landscape
+                  default: Square
                 output_type:
                   type: string
                   description: >
@@ -631,6 +656,7 @@ paths:
                   enum:
                     - url
                     - Base64
+                  default: url
               required:
                 - prompt
                 - image_style
@@ -712,6 +738,7 @@ paths:
                     - square
                     - portrait
                     - landscape
+                  default: Square
                 output_type:
                   type: string
                   description: >
@@ -720,6 +747,7 @@ paths:
                   enum:
                     - url
                     - Base64
+                  default: url 
               required:
                 - prompt
                 - image_style
@@ -807,6 +835,7 @@ paths:
                     - none
                     - structure_transfer
                     - style_transfer
+                  default: none
               required:
                 - existing_image
                 - similarity
@@ -1023,8 +1052,7 @@ paths:
         - AI Services
       security:
         - bearerAuth: []
-      requestBody:
-        required: true
+      requestBody:        
         content:
           multipart/form-data:
             schema:
@@ -1038,6 +1066,7 @@ paths:
                   type: string
                   format: binary
                   description: The image that will be used as the new background.
+                  default: https://storage.googleapis.com/sample-image.png
                 modification:
                   type: string
                   description: >
@@ -1937,6 +1966,8 @@ paths:
                   type: string
                   format: binary
                   description: The image to be sent as input.
+              required:
+                -image
             example:
               image: "/path/to/image.jpg"
       responses:
@@ -2038,6 +2069,7 @@ paths:
                 modelId:
                   type: string
                   description: Custom model ID for retraining an existing model.
+                  default: sample id
               required:
                 - files
                 - type
@@ -2453,18 +2485,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
+                  status:
                     type: string
                   processing_time:
                     type: number
                   processing_id:
                     type: string
-                  processing_count:
-                    type: integer
+                  messsage: 
+                    type: string
                 required:
-                  - data
+                  - status
                   - processing_time
-                  - processing_count
+                  - message
                   - processing_id
               example:
                 data: "This image depicts a serene and romantic scene of two people sitting together watching a sunset. The silhouettes of a boy and a girl are shown from behind, sitting in tall grass or wheat fields. They appear to be gazing at a beautiful orange and pink sky as the sun sets on the horizon.\n\nThe artwork has a soft, dreamlike quality with pastel colors and a warm glow. Fluffy clouds frame the sky, and there are small white dots that could represent stars or fireflies beginning to appear. In the top left corner, there are some small red heart shapes, adding to the romantic atmosphere.\n\nThe overall mood of the image is peaceful and intimate, suggesting a quiet moment shared between two people enjoying nature's beauty together. The style appears to be digital art or illustration, with a painterly quality that enhances the emotional impact of the scene."
