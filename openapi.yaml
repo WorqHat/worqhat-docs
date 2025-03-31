@@ -2491,7 +2491,7 @@ paths:
                     type: number
                   processing_id:
                     type: string
-                  messsage: 
+                  message: 
                     type: string
                 required:
                   - status
