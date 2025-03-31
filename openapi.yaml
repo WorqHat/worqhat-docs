@@ -99,7 +99,7 @@ paths:
                   type: string
                   description: The message or question you want to pass to the model.
                 model:
-                  type: enum
+                  type: string
                   description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
                   enum:
                     - aicon-v4-nano-160824
@@ -144,8 +144,7 @@ paths:
                         type: string
                       answer:
                         type: string
-                  default: [ "What is the capital of India?: New Delhi",
-                            "What is the capital of USA?: Washington DC"]
+                  default:  "What is the capital of India?: New Delhi"
               required:
                 - question
                 - model
@@ -181,7 +180,9 @@ paths:
                   items:
                     type: string
                   description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
-                  default: ["file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png","file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png"]
+                  default: 
+                          - "file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png"
+                          - "file:///Users/sagnikghosh/Downloads/udGHXFe1zAfB3k31dbwYLdfAc2Y2.png"
                 stream_data:
                   type: string
                   enum:
@@ -2499,7 +2500,8 @@ paths:
                   - message
                   - processing_id
               example:
-                data: "This image depicts a serene and romantic scene of two people sitting together watching a sunset. The silhouettes of a boy and a girl are shown from behind, sitting in tall grass or wheat fields. They appear to be gazing at a beautiful orange and pink sky as the sun sets on the horizon.\n\nThe artwork has a soft, dreamlike quality with pastel colors and a warm glow. Fluffy clouds frame the sky, and there are small white dots that could represent stars or fireflies beginning to appear. In the top left corner, there are some small red heart shapes, adding to the romantic atmosphere.\n\nThe overall mood of the image is peaceful and intimate, suggesting a quiet moment shared between two people enjoying nature's beauty together. The style appears to be digital art or illustration, with a painterly quality that enhances the emotional impact of the scene."
+                status: "Error"
+                message: "Something went wrong. We were unable to detect the text."
                 processing_time: 6240.1868269999995
                 processing_id: "12935919-fd9f-47a2-8c53-57f231c6bf9a"
                 processing_count: 1
