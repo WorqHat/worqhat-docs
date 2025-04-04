@@ -1646,7 +1646,7 @@ paths:
 
   /api/ai/v2/pdf-extract:
     post:
-      summary: PDF Extration
+      summary: PDF Extraction
       description: >
         This endpoint is used to extract text from a PDF using AI. Scanning simultaneously across all pages and with the capability to understand human handwriting, this endpoint can extract text from any PDF.
       operationId: extractTextFromPDFV2
