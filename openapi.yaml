@@ -158,9 +158,16 @@ paths:
               response_type: "text"
               conversation_id: "conv_1724236791746"
               preserve_history: true
-              conversation_history:
-                - "What is the capital of India?: New Delhi"
-                - "What is the capital of USA?: Washington DC"
+              conversation_history: [
+                {
+                  "question": "What is the capital of India?",
+                  "answer": "New Delhi"
+                },
+                {
+                  "question": "What is the capital of USA?",
+                  "answer": "Washington DC"
+                }
+              ]
           multipart/form-data:
             schema:
               type: object
@@ -172,11 +179,12 @@ paths:
                   type: string
                   description: ID of the model to use. See the model endpoint compatibility table for details on which models work and are currently supported.
                   enum:
-                    - con-v4-nano-160824
+                    - aicon-v4-nano-160824
                     - aicon-v4-large-160824
                     - aicon-v4-alpha-160824
                 files:
                   type: array
+                  format: binary
                   items:
                     type: string
                   description: Files that you want to upload. You can send Images, Videos, PDFs, and Audio files. It has to be sent as an array.
@@ -394,8 +402,11 @@ paths:
                 You will be provided with customer service queries. Classify each query into a 
                 primary and secondary category. Provide JSON output with keys: `primary` and `secondary`.
               response_type: "json"
+              model: "aicon-v4-nano-160824"
               question: "How do I reset my password?"
+              randomness: 0.5
               conversation_id: "conv_1724236791746"
+              stream_data: false
               preserve_history: false
               conversation_history:
                 - user_prompt: "I need help with my bill."
@@ -848,6 +859,7 @@ paths:
               modification: "Change this into a night scenery"
               output_type: "url"
               control_function: "none"
+              existing_image: cat.png
 
       responses:
         "200":
@@ -929,6 +941,7 @@ paths:
               search_object: cat
               modification: "Change this into a white-colored husky"
               output_type: url
+              existing_image: cat.png
       responses:
         "200":
           description: Image modified successfully.
@@ -1005,6 +1018,7 @@ paths:
               search_object: cat
               modification: "Change this into a white-colored husky"
               output_type: url
+              existing_image: cat.png
       responses:
         "200":
           description: Image modified successfully.
@@ -1386,6 +1400,7 @@ paths:
             example:
               output_type: url
               description: "An owl sitting on a branch."
+              existing_image: cat.png
       responses:
         "200":
           description: Image generated successfully
@@ -1459,6 +1474,7 @@ paths:
             example:
               output_type: url
               description: "An owl sitting on a branch with enhanced details."
+              existing_image: cat.png
       responses:
         "200":
           description: Image generated successfully
@@ -1751,6 +1767,7 @@ paths:
               keep_fillers: false
               enable_formatting: true
               enable_profanity_filters: true
+              audio: ring.MP3
 
       responses:
         "200":
@@ -1968,7 +1985,7 @@ paths:
                   format: binary
                   description: The image to be sent as input.
               required:
-                -image
+                - image
             example:
               image: "/path/to/image.jpg"
       responses:
@@ -2013,16 +2030,14 @@ paths:
                     type: integer
                     description: Usage statistics for the request. This is what is used for the billing.
                 example:
-                  summary: Example response with moderation data
-                  value:
-                    data:
-                      - Confidence: 85.734561
-                        Name: Explicit Nudity
-                        ParentName: Adult Content
-                        TaxonomyLevel: 3
-                    processingTime: 888
-                    processingId: "4b139bfe-1f71-4345-b539-fa6c1700f166"
-                    processingCount: 3
+                  data:
+                  - Confidence: 85.734561
+                    Name: Explicit Nudity
+                    ParentName: Adult Content
+                    TaxonomyLevel: 3
+                  processingTime: 888
+                  processingId: "4b139bfe-1f71-4345-b539-fa6c1700f166"
+                  processingCount: 3
         "400":
           description: Bad Request
           content:
