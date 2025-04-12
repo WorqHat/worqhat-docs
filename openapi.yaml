@@ -816,7 +816,7 @@ paths:
       tags:
         - AI Services
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       requestBody:
         required: true
         content:
@@ -826,7 +826,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The existing image to be modified.
                 similarity:
                   type: number
@@ -918,7 +918,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The existing image that contains the object to be replaced.
                 search_object:
                   type: string
@@ -995,7 +995,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The existing image containing the object to be recolored.
                 search_object:
                   type: string
@@ -1075,11 +1075,11 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The existing image for which the background should be replaced.
                 background_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image that will be used as the new background.
                   default: https://storage.googleapis.com/sample-image.png
                 modification:
@@ -1154,7 +1154,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image from which the background will be removed.
                 output_type:
                   type: string
@@ -1222,7 +1222,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image file from which text will be removed.
                 output_type:
                   type: string
@@ -1291,7 +1291,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image file to be extended.
                 output_type:
                   type: string
@@ -1385,7 +1385,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The sketch image to be transformed.
                 description:
                   type: string
@@ -1458,7 +1458,7 @@ paths:
               properties:
                 existing_image:
                   type: string
-                  format: binary
+                  format: byte
 
                   description: The original image to be recreated.
                 description:
@@ -1679,7 +1679,7 @@ paths:
               properties:
                 file:
                   type: string
-                  format: binary
+                  format: byte
                   description: The PDF file to be extracted.
               required:
                 - file
@@ -1749,7 +1749,7 @@ paths:
               properties:
                 audio:
                   type: string
-                  format: binary
+                  format: byte
                   description: The audio file to be transcribed.
                 keep_fillers:
                   type: boolean
@@ -1982,7 +1982,7 @@ paths:
               properties:
                 image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image to be sent as input.
               required:
                 - image
@@ -2069,7 +2069,7 @@ paths:
               properties:
                 files:
                   type: string
-                  format: binary
+                  format: byte
                   description: The file to be used for training the model.
                 type:
                   type: string
@@ -2159,13 +2159,13 @@ paths:
               properties:
                 image:
                   type: string
-                  format: binary
+                  format: byte
                   description: The image to be sent as input.
               required:
                 - image
 
             example:
-              image: "/path/to/image.jpg"
+              image: "file:///Users/sagnikghosh/Downloads/WhatsApp Image 2023-09-21 at 10.45.35 AM.jpeg"
 
       responses:
         "200":
@@ -2367,10 +2367,10 @@ paths:
               properties:
                 source_image:
                   type: string
-                  format: binary
+                  format: byte
                 target_image:
                   type: string
-                  format: binary
+                  format: byte
               required:
                 - source_image
                 - target_image
@@ -2463,7 +2463,7 @@ paths:
                   type: string
                 images:
                   type: string
-                  format: binary
+                  format: byte
                 stream_data:
                   type: string
               required:
@@ -2543,9 +2543,12 @@ paths:
               properties:
                 output_type:
                  type: string
+                 enum:
+                  - json
+                  - text
                 image:
                   type: string
-                  format: binary
+                  format: byte
               required:
                 - output_type
                 - image
