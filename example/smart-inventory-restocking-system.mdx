@@ -1,4 +1,3 @@
-````plain
 ---
 title: "Build Your Own Smart Inventory Restocking System"
 ---
@@ -44,6 +43,7 @@ In this tutorial, we’ll build a smart inventory restocking system that automat
 1. Sign in to your WorqHat account and go to your workspace.
 2. Navigate to the **Database** section.
 3. Create a new table called `restock_requests` with these columns:
+
    - Document ID (auto-generated)
    - product_id (string, not nullable)
    - product_name (string, not nullable)
@@ -67,8 +67,8 @@ In this tutorial, we’ll build a smart inventory restocking system that automat
 
 1. Add a **Fetch Data** action.
 2. Map the inputs to your table:
-   - Select Action Type to Fetch All Documents
-   - Collection Name to restock_requests
+   - Select Action Type to _Fetch All Documents_
+   - Collection Name to `restock_requests`
 
 ### Step 2.2: Add a Loop action
 
@@ -76,9 +76,11 @@ In this tutorial, we’ll build a smart inventory restocking system that automat
 
 ### Step 2.2.1: Add a Text Generation Node
 
-1. Set the model type to AiCon V4 Nano.
-2. Add a prompt according to your need. We have used:
-   `You are given product inventory data with the following fields:
+1. Set the model type to `AiCon V4 Nano`.
+2. Add a prompt:
+
+```
+You are given product inventory data with the following fields:
 - {{fetch-data-3.output.data[].product_id}}: ID of the product
 - {{fetch-data-3.output.data[].product_name}}: Name of the product
 - {{fetch-data-3.output.data[].category}}: Category of the product
@@ -93,9 +95,13 @@ Use the following logic to decide whether the item needs to be restocked:
 2. Else if current_stock < (avg_daily_sales * 3) → return 1
 3. Else → return 0
 
-For each product, return only 1 (restock needed) or 0 (no restock needed). Do not explain. Just return the result for each item.`
-3. Provide Training Data so that the results are more accurate and not generalized. We have used:
-   `You are an expert inventory assistant. Your job is to read product data and apply the restock logic strictly:
+For each product, return only 1 (restock needed) or 0 (no restock needed). Do not explain. Just return the result for each item.
+```
+
+3. Add Training Data:
+
+```
+You are an expert inventory assistant. Your job is to read product data and apply the restock logic strictly:
 
 1. If current_stock < min_threshold → return 1
 2. Else if current_stock < (avg_daily_sales * 3) → return 1
@@ -123,62 +129,65 @@ Output: 0
 .current_stock: 3
 .min_threshold: 2
 .avg_daily_sales: 2
-Output: 1`
-4. Change the Output Type to `JSON` and in JSON Prompt add this:
-   ```json
-   {
-     "product_id": "1234",
-     "restock": 1
-   }
-````
+Output: 1
+```
+
+4. Change the Output Type to `JSON` and use this JSON template:
+
+```json
+{
+  "product_id": "1234",
+  "restock": 1
+}
+```
 
 ### Step 2.2.2: Add an If/Else Condition Node
 
-1. In the source node, add Loop:Text Generation.
-2. In parameter, add the output of the text node that is the restock value either 1 or 0.
+1. In the source node, add `Loop:Text Generation`.
+2. In parameter, use the restock value (1 or 0).
 
-### Step 2.2.2.1: If the Value is 0 then add an Update Data Node
+### Step 2.2.2.1: If the Value is 0 → Update Data Node
 
-1. Set the collection Name to `Smart Restock Trigger`.
-2. In the Document Id, select the id of the product.
-3. In restock_status, update it to No restock Needed.
+- Collection Name: `restock_requests`
+- Document ID: Select the product's ID
+- restock_status: `No restock Needed`
 
-### Step 2.2.2.2: If the Value is 1 then add an Update Data Node
+### Step 2.2.2.2: If the Value is 1 → Update Data Node
 
-1. Set the collection Name to `Smart Restock Trigger`.
-2. In the document id, select the id of the product.
-3. In the restock_status, set to Restocking.
+- Collection Name: `restock_requests`
+- Document ID: Select the product's ID
+- restock_status: `Restocking`
 
-### Step 2.2.2.2.1: Add an If/Else Condition Node
+### Step 2.2.2.2.1: Add Another If/Else Node
 
-1. Keep the Source Node to Fetch Data.
-2. Set the parameter to supplier_contact.
-3. In the Operator, add Contains.
-4. In the value, Add .com
+- Source Node: `Fetch Data`
+- Parameter: `supplier_contact`
+- Operator: `Contains`
+- Value: `.com`
 
-### 2.2.2.2.1.1 if True Add a Send Mail Node
+#### If True → Send Mail Node
 
-1. Send an appropriate mail to the Supplier.
+- Send an appropriate mail to the supplier.
 
-### 2.2.2.2.1.2 if False Add a Send SMS using Plivo Node
+#### If False → Send SMS using Plivo Node
 
-1. Send an appropriate SMS to the Supplier.
+- Send an appropriate SMS to the supplier.
 
 ## Step 3: Test the Workflow
 
 1. Use the Test panel in the workflow editor.
-2. Check if emails or SMS are sent and data is stored.
+2. Check if emails or SMS are sent and data is updated correctly.
 
 ## Step 4: Integrate with Your Application
 
 ### Create an API Key
 
-1. Go to API Keys in WorqHat.
+1. Go to **API Keys** in WorqHat.
 2. Create a new key and whitelist your domain.
 
 ### Frontend Integration
 
-&lt;CodeGroup&gt;
+<CodeGroup>
 
 ```bash
 curl -X POST \
@@ -203,7 +212,7 @@ async function triggerWorkflow() {
     const response = await fetch(url, {
       method: "POST",
       headers: headers,
-      body: JSON.stringify({}), // Empty payload, fetching from DB
+      body: JSON.stringify({}),
     });
 
     if (!response.ok) {
@@ -233,11 +242,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-payload = {}  # Empty payload, fetching from DB
+payload = {}
 
 try:
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+    response.raise_for_status()
     data = response.json()
     print('Workflow triggered successfully:', data)
 except requests.exceptions.HTTPError as errh:
@@ -250,7 +259,7 @@ except requests.exceptions.RequestException as err:
     print('Request Error:', err)
 ```
 
-&lt;/CodeGroup&gt;
+</CodeGroup>
 
 Add buttons to your HTML to trigger these functions:
 
@@ -278,7 +287,7 @@ WorqHat workflows run in separate containers, providing:
 
 ## Extending the System
 
-You can enhance this error tracking system by:
+You can enhance this system by:
 
 1. Vendor response tracking and delivery ETA
 2. Auto-generate purchase orders or restock requests
@@ -293,12 +302,10 @@ You've now built a smart inventory restocking system that keeps your shelves sto
 <Note>
   This tutorial demonstrates how WorqHat Workflows can simplify even complex
   inventory operations. Use it to power any logic without building full backend
-  services.{" "}
+  services.
 </Note>
 
 <Check>
   Always test workflows with sample data and secure your API keys before
-  deploying to production.{" "}
+  deploying to production.
 </Check>
-
----
