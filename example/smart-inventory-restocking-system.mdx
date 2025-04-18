@@ -179,34 +179,31 @@ Output: 1`
 ### Frontend Integration
 
 &lt;CodeGroup&gt;
-\`\`\`bash cURL
-curl -X POST \\
-'https://api.worqhat.com/flows/trigger/9e5ea25e-dcf5-4796-9cde-0d5b353b20c4' \\
--H 'Authorization: Bearer wh_m98i5sr8Dh2c0W7fj3t8z8E13mKs8l5xfPtiNAhm' \\
--H 'Content-Type: application/json' \\
--d '{}'
-\`\`\`
+
+```bash
+curl -X POST \
+  'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{}'
+```
 
 ```javascript
-async function triggerWorkflow() {
-  const apiKey = "wh_m98i5sr8Dh2c0W7fj3t8z8E13mKs8l5xfPtiNAhm";
-  const url =
-    "https://api.worqhat.com/flows/trigger/9e5ea25e-dcf5-4796-9cde-0d5b353b20c4";
+async function triggerTutoringWorkflow() {
+  const apiKey = "YOUR_API_KEY";
+  const workflowId = "YOUR_WORKFLOW_ID";
+  const url = `https://api.worqhat.com/flows/trigger/${workflowId}`;
 
   const headers = {
     Authorization: `Bearer ${apiKey}`,
     "Content-Type": "application/json",
   };
 
-  const body = JSON.stringify({
-    // Add your JSON payload here if needed
-  });
-
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: headers,
-      body: body,
+      body: JSON.stringify({}), // Empty payload, fetching from DB
     });
 
     if (!response.ok) {
@@ -220,22 +217,23 @@ async function triggerWorkflow() {
   }
 }
 
-triggerWorkflow();
+triggerTutoringWorkflow();
 ```
 
 ```python
 import requests
 import json
 
-url = 'https://api.worqhat.com/flows/trigger/9e5ea25e-dcf5-4796-9cde-0d5b353b20c4'
-api_key = 'wh_m98i5sr8Dh2c0W7fj3t8z8E13mKs8l5xfPtiNAhm'
+workflow_id = 'YOUR_WORKFLOW_ID'
+api_key = 'YOUR_API_KEY'
+url = f'https://api.worqhat.com/flows/trigger/{workflow_id}'
 
 headers = {
     'Authorization': f'Bearer {api_key}',
     'Content-Type': 'application/json'
 }
 
-payload = {}
+payload = {}  # Empty payload, fetching from DB
 
 try:
     response = requests.post(url, headers=headers, data=json.dumps(payload))
