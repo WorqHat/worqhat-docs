@@ -1,0 +1,166 @@
+---
+title: "Build Your Own AI Tutoring System for Class 9"
+---
+
+![title](/images/ai-tutoring-workflow-class9.png)
+
+<CardGroup cols={2}>
+  <Card
+    title="Join our Discord Community"
+    icon="discord"
+    href="https://discord.com/invite/KHh9mguKBx"
+  >
+    Get help, share your projects, and connect with other developers
+  </Card>
+  <Card
+    title="WhatsApp Community"
+    icon="whatsapp"
+    href="https://chat.whatsapp.com/EYwDPo9vEnaF4IMT8V2Uxt"
+  >
+    Stay updated with the latest features and announcements
+  </Card>
+</CardGroup>
+
+## Introduction
+
+In this tutorial, you'll learn to build an AI Tutoring System for Class 9 students. This tool automatically analyzes academic performance and delivers subject-specific feedback and study advice using AiCon V4. It’s great for helping students understand where they need improvement in Maths, Science, and English.
+
+### What We'll Build
+
+- A no-code workflow that gets triggered by a simple API call.
+- It fetches student performance data from the WorqHat database.
+- It uses AiCon V4 to generate tailored study suggestions.
+- Sends feedback directly to the student's email address.
+
+## Prerequisites
+
+- WorqHat account ([sign up here](https://worqhat.com))
+- Familiarity with using workflows and API keys
+- Basic knowledge of AI prompting
+
+## Step 1: Create a Database Table
+
+1. Log in to your WorqHat workspace.
+2. Go to **Database** > **New Table**
+3. Name it `class9_marks` with these columns:
+   - `documentId` (auto-generated)
+   - `Name` (string, required)
+   - `emailId` (string, required)
+   - `maths_marks` (number, required)
+   - `science_marks` (number, required)
+   - `english_marks` (number, required)
+
+## Step 2: Build the Workflow
+
+1. Navigate to **Workflows** > **Create Workflow**
+2. Name it `Class 9 AI Feedback System`
+3. Set trigger type to "URL Based Request"
+
+### Step 2.1: Fetch Student Data
+
+- Add a **Fetch Data** node
+- Choose `Fetch All Documents`
+- Collection: `class9_marks`
+
+### Step 2.2: Loop Through Students
+
+- Add a **Loop Node**
+- Set data source to the Fetch Data node’s output
+
+### Step 2.2.1: Add Text Generation (Inside Loop)
+
+- Model: `AiCon V4 Nano`
+- Prompt:
+
+  ```text
+  You are a helpful AI tutor for Class 9. Given a student's marks, identify their weakest subject and provide 2-3 simple tips to improve. Encourage them with a positive message.
+
+  Student Name: {{loop.item.Name}}
+  Maths: {{loop.item.maths_marks}}
+  Science: {{loop.item.science_marks}}
+  English: {{loop.item.english_marks}}
+
+  Response format:
+  1. Weak subject(s):
+  2. Improvement Tips:
+  3. Encouragement message
+  ```
+
+- Output type: `Text`
+
+### Step 2.2.2: Send Email (Inside Loop)
+
+- To: `{{loop.item.emailId}}`
+- From: `aitutor@yourdomain.com`
+- Subject: "Your Personalized Study Advice - Class 9"
+- Body: `{{text-generation-node.output}}`
+
+### Step 2.3: Add Final Return Node
+
+- Message: `Feedback emails sent to Class 9 students.`
+
+## Step 3: Test Your Workflow
+
+- Use the "Test" button
+- Add some mock data to `class9_marks`
+- Check that emails are received
+
+## Step 4: Trigger It From Your App
+
+Use your `API_KEY` and `WORKFLOW_ID` to call the workflow.
+
+```bash
+curl -X POST \
+  'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{}'
+```
+
+Or JavaScript:
+
+```js
+await fetch(`https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID`, {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({}),
+});
+```
+
+Or Python:
+
+```python
+import requests
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+requests.post(
+    'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID',
+    headers=headers,
+    json={}
+)
+```
+
+## Ideas for Extension
+
+- Add support for more subjects
+- Track students' progress monthly
+- Notify parents via SMS
+- Use charts to visualize performance
+
+## Conclusion
+
+You’ve built a fully functional, no-code AI tutoring system for Class 9 students. By combining WorqHat with LLMs, personalized education is now just a few clicks away.
+
+<Note>
+  This no-code workflow showcases how AI can enhance personalized learning for
+  school students.
+</Note>
+
+<Check>
+  Keep testing with diverse student inputs and ensure your API key is secured.
+</Check>
