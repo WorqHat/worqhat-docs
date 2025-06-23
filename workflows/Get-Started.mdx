@@ -1,13 +1,9 @@
 ---
-title: Getting Started with WorqHat Workflows
-description: A step-by-step guide for beginners to create, configure, and deploy automation workflows on WorqHat.
+title: 🚀 Getting Started with WorqHat Workflows
+description: Welcome to WorqHat Workflows! This guide will walk you through the process of creating, configuring, and launching your first automated workflow — no coding experience required.
 ---
 
 import { Alert } from "components/Alert";
-
-# 🚀 Getting Started with WorqHat Workflows
-
-Welcome to WorqHat Workflows! This guide will walk you through the process of creating, configuring, and launching your first automated workflow — no coding experience required.
 
 ---
 
@@ -29,6 +25,8 @@ Welcome to WorqHat Workflows! This guide will walk you through the process of cr
 
 ## ⚡ Step 3: Choose a Trigger
 
+![Triggers](/images/triggers.png)
+
 A **Trigger** is how your workflow is started. Select one of the following:
 
 ### ✅ Supported Trigger Types:
@@ -43,6 +41,7 @@ A **Trigger** is how your workflow is started. Select one of the following:
 
 ## ✍️ Step 4: Describe Your Workflow (Optional)
 
+![AiAissist](/images/aiassist.png)
 You’ll now see an optional modal to **describe your workflow**, which helps WorqHat’s AI assistant generate the first draft:
 
 ### 🧠 AI Description Fields:
@@ -64,6 +63,7 @@ You can also add:
 
 ## 🎨 Step 5: Canvas — Build Your Workflow
 
+![workflow canvas](/images/workflow.png)
 Whether you used the AI or not, you’ll be taken to the **Workflow Canvas**:
 
 - Use the **right-hand sidebar** to **drag and drop nodes**.
@@ -106,10 +106,37 @@ Use the built-in **"Test Flow"** button to test your workflow — no website or 
 
 ## 📦 Variables and Storage
 
-You can set variables across your workflow to store temporary data or transfer values between steps.
+You can define **variables** in your workflow to store and reuse information between steps — just like memory cells in a program.
 
-- Access variables using **`{}`** inside any node’s configuration.
-- Helpful for reusing outputs or conditional flows.
+These are extremely helpful when:
+
+- You want to pass values (like user input or file content) from one node to another.
+- You need conditional branching or custom logic.
+- You want to reduce hardcoding and make your workflows dynamic.
+
+### 🔧 How to Access Variables
+
+Use the **`{}`** button inside any node’s input field to reference a variable.
+
+### 💡 Example: Setting a Limit
+
+Suppose you're checking whether a submitted number exceeds a **limit of 50**.
+
+1. **Variable Node**  
+   Set a variable called `limit` with value: 50
+
+2. **Condition Node**  
+   Use an expression like: inputNumber > limit
+
+3. **Message Node (If True)**  
+   Message: The value exceeds the limit of limit.
+
+This keeps your workflow clean, reusable, and easily adjustable later.
+
+<Alert title="Tip">
+  Use variables to avoid hardcoding values like limits, API keys, thresholds, or
+  dynamic messages.
+</Alert>
 
 ---
 
@@ -142,24 +169,32 @@ You can set variables across your workflow to store temporary data or transfer v
 
 ## 🙋 Need Help?
 
-Check out our [Docs Page](https://worqhat.app/docs) or reach out to our community for support.
+Check out our [Docs Page](https://docs.worqhat.com/get-started) or reach out to our community for support.
 
 ---
 
 ```js
 // Example: Trigger a URL-based Workflow using fetch
-fetch("https://api.worqhat.app/v1/workflow/trigger", {
+fetch("https://api.worqhat.com/flows/trigger/FlowId", {
   method: "POST",
   headers: {
-    Authorization: "Bearer YOUR_API_KEY",
+    Authorization: "Bearer Token",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    input: {
-      message: "Hello WorqHat!",
-    },
+    text: "Your input text here",
   }),
 })
-  .then((res) => res.json())
-  .then(console.log);
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 ```
