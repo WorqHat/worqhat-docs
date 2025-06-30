@@ -1,0 +1,311 @@
+---
+title: "Build Your Own Smart Inventory Restocking System"
+---
+
+![title](/images/inventory-restocking-workflow.png)
+
+<CardGroup cols={2}>
+  <Card
+    title="Join our Discord Community"
+    icon="discord"
+    href="https://discord.com/invite/KHh9mguKBx"
+  >
+    Get help, share your projects, and connect with other developers
+  </Card>
+  <Card
+    title="WhatsApp Community"
+    icon="whatsapp"
+    href="https://chat.whatsapp.com/EYwDPo9vEnaF4IMT8V2Uxt"
+  >
+    Stay updated with the latest features and announcements
+  </Card>
+</CardGroup>
+
+## Introduction
+
+In this tutorial, we’ll build a smart inventory restocking system that automates low-stock detection and triggers replenishment workflows. This ensures your inventory never runs out, reducing manual monitoring and improving supply chain efficiency.
+
+### What We'll Build
+
+- A system that detects low stock levels in real-time
+- Logic to identify which product needs restocking and its current threshold
+- Automatic assignment to vendors or purchasing teams
+- A database to track restocking events and their fulfillment status
+
+## Prerequisites
+
+- A WorqHat account (sign up at [worqhat.com](https://worqhat.com))
+- Basic understanding of API requests
+- Access to inventory data from your frontend or database
+
+## Step 1: Create a Database Table
+
+1. Sign in to your WorqHat account and go to your workspace.
+2. Navigate to the **Database** section.
+3. Create a new table called `restock_requests` with these columns:
+
+   - Document ID (auto-generated)
+   - product_id (string, not nullable)
+   - product_name (string, not nullable)
+   - category (string, not nullable)
+   - current_stock (number, not nullable)
+   - min_threshold (number, not nullable)
+   - avg_daily_sales (number, not nullable)
+   - recommended_order_qty (number, not nullable)
+   - last_restock_date (Date, not nullable)
+   - supplier_name (string, not nullable)
+   - supplier_contact (string, not nullable)
+   - restock_status (string, not nullable)
+
+## Step 2: Create the Workflow
+
+1. Go to the **Workflows** section and click "Create Workflow."
+2. Name it `Smart Restock Trigger`.
+3. Choose "Time Based request" as the trigger.
+
+### Step 2.1: Fetch Data from Database
+
+1. Add a **Fetch Data** action.
+2. Map the inputs to your table:
+   - Select Action Type to _Fetch All Documents_
+   - Collection Name to `restock_requests`
+
+### Step 2.2: Add a Loop action
+
+1. Set the loop variable to the data fetched from the above node so that the loop iterates over each item.
+
+### Step 2.2.1: Add a Text Generation Node
+
+1. Set the model type to `AiCon V4 Nano`.
+2. Add a prompt:
+
+```
+You are given product inventory data with the following fields:
+- {{fetch-data-3.output.data[].product_id}}: ID of the product
+- {{fetch-data-3.output.data[].product_name}}: Name of the product
+- {{fetch-data-3.output.data[].category}}: Category of the product
+- {{fetch-data-3.output.data[].current_stock}}: Current stock level
+- {{fetch-data-3.output.data[].min_threshold}}: Minimum threshold stock level
+- {{fetch-data-3.output.data[].avg_daily_sales}}: Average daily sales
+- {{fetch-data-3.output.data[].recommended_order_qty}}: Recommended quantity to order
+- {{fetch-data-3.output.data[].last_restock_date}}: Date when last restocked
+
+Use the following logic to decide whether the item needs to be restocked:
+1. If current_stock < min_threshold → return 1
+2. Else if current_stock < (avg_daily_sales * 3) → return 1
+3. Else → return 0
+
+For each product, return only 1 (restock needed) or 0 (no restock needed). Do not explain. Just return the result for each item.
+```
+
+3. Add Training Data:
+
+```
+You are an expert inventory assistant. Your job is to read product data and apply the restock logic strictly:
+
+1. If current_stock < min_threshold → return 1
+2. Else if current_stock < (avg_daily_sales * 3) → return 1
+3. Else → return 0
+
+Return only 1 or 0. Do not explain. No formatting. Just the number.
+
+Examples:
+.product_id: 001
+.product_name: Marker Pen
+.current_stock: 4
+.min_threshold: 5
+.avg_daily_sales: 2
+Output: 1
+
+.product_id: 002
+.product_name: Notebook
+.current_stock: 10
+.min_threshold: 5
+.avg_daily_sales: 1
+Output: 0
+
+.product_id: 003
+.product_name: Eraser
+.current_stock: 3
+.min_threshold: 2
+.avg_daily_sales: 2
+Output: 1
+```
+
+4. Change the Output Type to `JSON` and use this JSON template:
+
+```json
+{
+  "product_id": "1234",
+  "restock": 1
+}
+```
+
+### Step 2.2.2: Add an If/Else Condition Node
+
+1. In the source node, add `Loop:Text Generation`.
+2. In parameter, use the restock value (1 or 0).
+
+### Step 2.2.2.1: If the Value is 0 → Update Data Node
+
+- Collection Name: `restock_requests`
+- Document ID: Select the product's ID
+- restock_status: `No restock Needed`
+
+### Step 2.2.2.2: If the Value is 1 → Update Data Node
+
+- Collection Name: `restock_requests`
+- Document ID: Select the product's ID
+- restock_status: `Restocking`
+
+### Step 2.2.2.2.1: Add Another If/Else Node
+
+- Source Node: `Fetch Data`
+- Parameter: `supplier_contact`
+- Operator: `Contains`
+- Value: `.com`
+
+#### If True → Send Mail Node
+
+- Send an appropriate mail to the supplier.
+
+#### If False → Send SMS using Plivo Node
+
+- Send an appropriate SMS to the supplier.
+
+## Step 3: Test the Workflow
+
+1. Use the Test panel in the workflow editor.
+2. Check if emails or SMS are sent and data is updated correctly.
+
+## Step 4: Integrate with Your Application
+
+### Create an API Key
+
+1. Go to **API Keys** in WorqHat.
+2. Create a new key and whitelist your domain.
+
+### Frontend Integration
+
+<CodeGroup>
+
+```bash
+curl -X POST \
+  'https://api.worqhat.com/flows/trigger/YOUR_WORKFLOW_ID' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{}'
+```
+
+```javascript
+async function triggerWorkflow() {
+  const apiKey = "YOUR_API_KEY";
+  const workflowId = "YOUR_WORKFLOW_ID";
+  const url = `https://api.worqhat.com/flows/trigger/${workflowId}`;
+
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Workflow triggered successfully:", data);
+  } catch (error) {
+    console.error("Failed to trigger workflow:", error);
+  }
+}
+
+triggerWorkflow();
+```
+
+```python
+import requests
+import json
+
+workflow_id = 'YOUR_WORKFLOW_ID'
+api_key = 'YOUR_API_KEY'
+url = f'https://api.worqhat.com/flows/trigger/{workflow_id}'
+
+headers = {
+    'Authorization': f'Bearer {api_key}',
+    'Content-Type': 'application/json'
+}
+
+payload = {}
+
+try:
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    response.raise_for_status()
+    data = response.json()
+    print('Workflow triggered successfully:', data)
+except requests.exceptions.HTTPError as errh:
+    print('HTTP Error:', errh)
+except requests.exceptions.ConnectionError as errc:
+    print('Connection Error:', errc)
+except requests.exceptions.Timeout as errt:
+    print('Timeout Error:', errt)
+except requests.exceptions.RequestException as err:
+    print('Request Error:', err)
+```
+
+</CodeGroup>
+
+Add buttons to your HTML to trigger these functions:
+
+```html
+<button id="aiErrorBtn">Track AI Issue</button>
+<button id="workflowsErrorBtn">Track Workflow Issue</button>
+<button id="noCodeErrorBtn">Track No-Code Issue</button>
+```
+
+## Important Notes
+
+### Security
+
+- Always whitelist domains that will be calling your workflow.
+- Use API keys with appropriate permissions.
+- Consider implementing additional authentication for sensitive operations.
+
+### Scalability
+
+WorqHat workflows run in separate containers, providing:
+
+- High scalability for handling multiple parallel requests
+- Enhanced security through isolation
+- Improved performance
+
+## Extending the System
+
+You can enhance this system by:
+
+1. Vendor response tracking and delivery ETA
+2. Auto-generate purchase orders or restock requests
+3. Real-time dashboard with product stock analytics
+4. Integration with WhatsApp/Slack for faster alerts
+5. Adding multi-location warehouse support
+
+## Conclusion
+
+You've now built a smart inventory restocking system that keeps your shelves stocked and your business running smoothly. By automating restocking alerts and vendor notifications, you improve efficiency and reduce human error.
+
+<Note>
+  This tutorial demonstrates how WorqHat Workflows can simplify even complex
+  inventory operations. Use it to power any logic without building full backend
+  services.
+</Note>
+
+<Check>
+  Always test workflows with sample data and secure your API keys before
+  deploying to production.
+</Check>
