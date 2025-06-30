@@ -87,7 +87,6 @@
             "group": "Workflows",
             "pages": [
               "workflows/workflows",
-              "workflows/tutorial",
               "workflows/Get-Started"
             ]
           },
