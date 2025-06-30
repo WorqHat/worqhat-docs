@@ -1,0 +1,227 @@
+````mdx
+---
+title: "Build Your Own AI Exam Evaluator"
+---
+
+![title](/images/ai-evaluator-workflow.png)
+
+<CardGroup cols={2}>
+  <Card
+    title="Join our Discord Community"
+    icon="discord"
+    href="https://discord.com/invite/KHh9mguKBx"
+  >
+    Get help, share your projects, and connect with other developers
+  </Card>
+  <Card
+    title="WhatsApp Community"
+    icon="whatsapp"
+    href="https://chat.whatsapp.com/EYwDPo9vEnaF4IMT8V2Uxt"
+  >
+    Stay updated with the latest features and announcements
+  </Card>
+</CardGroup>
+
+## Introduction
+
+In this tutorial, we'll build an AI Exam Evaluator that automatically grades student answers and provides feedback. This system will use a file upload trigger, allowing students to submit answers in various formats, and then leverage an LLM to evaluate the answers and generate helpful feedback.
+
+### What We'll Build
+
+- A system triggered by a file upload that includes the student's answer (either as text or in a file).
+- Logic to use an LLM to evaluate the student's answer and generate a score and feedback.
+- Storage of evaluation results in a database.
+
+## Prerequisites
+
+- A WorqHat account (sign up at [worqhat.com](https://worqhat.com))
+- Basic understanding of API requests
+- Familiarity with LLM prompting concepts
+
+## Step 1: Create a Database Table
+
+1.  Sign in to your WorqHat account and navigate to your workspace.
+2.  Go to the **Database** section.
+3.  Create a new table called `Evaluation` with the following columns:
+    - `documentId` (auto-generated, primary key)
+    - `Student_prn` (string, not nullable)
+    - `Exam_name` (string, not nullable)
+    - `Answer` (string, nullable)
+    - `Marks` (number, nullable)
+    - `Feedback` (string, nullable)
+
+## Step 2: Create the Workflow
+
+1.  Navigate to the **Workflows** section and click "Create Workflow."
+2.  Name your workflow "AI Exam Evaluator".
+3.  Choose "File upload Trigger" as the trigger.
+
+### Step 2.1: Configure the File Upload Trigger
+
+The file upload trigger will receive the following parameters:
+
+- `Answer` (string, optional): The student's answer as text.
+- `file` (file, optional): The student's answer as a file.
+- `student_id` (string, not nullable): The student's ID or PRN.
+- `exam_name` (string, not nullable): The name of the exam.
+
+### Step 2.2: Add a Text Generation Node
+
+This is where we use AiCon to evaluate the answer.
+
+1.  Set the model type to `AiCon V4 Nano` (or your preferred AiCon model).
+2.  **Prompt:**
+
+    ```text
+    You are given a student’s answer here {{file-upload-trigger-123.input.Answer}}. or in the attachment if any. Evaluate the student’s answer intelligently and return only:
+    1. Marks out of 5
+    2. A short, polite feedback on the quality of the answer
+
+    Be accurate but encouraging. Do not repeat the question or expected answer. Focus only on evaluation.
+    ```
+
+3.  **Training Data:**
+
+    ```text
+    You are GradeAI, an intelligent and fair evaluator. You evaluate student answers based on understanding and correctness, not just word matching You are given the answer in the attachment or in the prompt . Always return:
+
+    Marks: [0 to 5]
+    Feedback: [Short feedback on the answer’s quality]
+    ```
+
+4.  Output Type: JSON
+5.  JSON Prompt:
+
+    ```json
+    {
+      "marks": 0,
+      "feedback": "Need to be more detailed"
+    }
+    ```
+
+6.  Attach the file from the upload trigger: `{{file-upload-trigger-123.input.file}}`
+
+### Step 2.3: Add a New Data Node
+
+This node stores the evaluation results in the database.
+
+1.  Action Type: Store Data
+2.  Collection Name: `Evaluation`
+3.  Data Parameters:
+    - `Student_prn`: `{{file-upload-trigger-123.input.student_id}}`
+    - `Exam_name`: `{{file-upload-trigger-123.input.exam_name}}`
+    - `Answer`: `{{file-upload-trigger-123.input.Answer}}`
+    - `Marks`: `{{text-generation-2.output.content.marks}}`
+    - `Feedback`: `{{text-generation-2.output.content.feedback}}`
+
+### Step 2.4: Add a Return Node
+
+1.  Add a "Return" action after the "New Data" node.
+2.  Return a success message, like "Evaluation Complete."
+
+## Step 3: Test the Workflow
+
+1.  Click the "Test" button in the workflow editor.
+2.  Upload a sample answer file or enter text in the "Answer" field.
+3.  Provide values for `student_id` and `exam_name`.
+4.  Toggle on "Developer Mode" to see detailed execution steps
+5.  Click "Run Test" and verify that the marks and feedback are generated correctly and stored in the database.
+
+## Step 4: Integrate with Your Application
+
+This workflow is triggered by a file upload, so the integration will depend on how you are handling file uploads in your application. You'll need to configure your file upload form to send the file and other parameters to the WorqHat workflow endpoint.
+
+### Create an API Key
+
+1.  Navigate to API Keys in your WorqHat dashboard
+2.  Create a new API key
+3.  Whitelist the domains that will be calling your workflow
+
+You'll need to refer to the WorqHat documentation for specific instructions on how to handle file uploads with API requests. Here’s a general outline of how it works:
+
+1.  **Frontend:** Use a standard HTML form with `enctype="multipart/form-data"` to allow file uploads.
+2.  **JavaScript (Example using Fetch API):**
+
+```javascript
+async function uploadAnswer() {
+  const formData = new FormData(document.getElementById("uploadForm")); // Replace 'uploadForm' with your form ID
+  const apiKey = "YOUR_API_KEY";
+  const workflowId = "YOUR_WORKFLOW_ID";
+  const url = `https://api.worqhat.com/flows/trigger/${workflowId}`;
+
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    //'Content-Type': 'multipart/form-data' //Browser usually sets this automatically
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Upload successful:", data);
+  } catch (error) {
+    console.error("Upload failed:", error);
+  }
+}
+```
+````
+
+3. HTML Form:
+
+```html
+<form id="uploadForm">
+  <input type="text" name="student_id" placeholder="Student ID" required />
+  <input type="text" name="exam_name" placeholder="Exam Name" required />
+  <textarea
+    name="Answer"
+    placeholder="Enter your answer here (or upload a file)"
+  ></textarea>
+  <input type="file" name="file" />
+  <button type="button" onclick="uploadAnswer()">Submit</button>
+</form>
+```
+
+## Important Notes
+
+### Security
+
+- Always whitelist domains that will be calling your workflow.
+- Use API keys with appropriate permissions.
+- Validate file uploads to prevent malicious content.
+
+### Scalability
+
+WorqHat workflows are designed for scalability.
+
+## Extending the System
+
+You can enhance this system by:
+
+1.  Providing more detailed training data to improve the accuracy of the LLM.
+2.  Adding support for different file types (e.g., images, PDFs).
+3.  Integrating with a learning management system (LMS).
+4.  Sending the evaluation results to the student via email.
+5.  Adding a review process for contested grades.
+
+## Conclusion
+
+You've successfully built an AI Exam Evaluator that automates the grading process and provides valuable feedback to students. This can save educators time and provide students with more personalized learning experiences.
+
+<Note>
+  This tutorial demonstrates how WorqHat Workflows can simplify even complex
+  AI-driven applications.
+</Note>
+
+<Check>
+  Always test workflows thoroughly with various types of student answers, secure
+  your API keys, and monitor the accuracy of the LLM.
+</Check>
+```
