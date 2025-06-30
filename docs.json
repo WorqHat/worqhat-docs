@@ -85,7 +85,11 @@
           },
           {
             "group": "Workflows",
-            "pages": ["workflows/workflows", "workflows/tutorial"]
+            "pages": [
+              "workflows/workflows",
+              "workflows/tutorial",
+              "workflows/Get-Started"
+            ]
           },
           {
             "group": "Authorization check",
